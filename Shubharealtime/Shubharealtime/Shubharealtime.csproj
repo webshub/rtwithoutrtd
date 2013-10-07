@@ -33,7 +33,7 @@
     <PublisherName>shubhalabha</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>33</ApplicationRevision>
+    <ApplicationRevision>34</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -153,6 +153,10 @@
     </Reference>
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="PresentationFramework.Classic" />
+    <Reference Include="ProceedureDialog, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\shantesh\wizarddialog_src\ProceedureDialog\ProceedureDialog\bin\Debug\ProceedureDialog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -183,6 +187,7 @@
     <Compile Include="datadownload.cs" />
     <Compile Include="Dataitem.cs" />
     <Compile Include="Dataitemforsymbol.cs" />
+    <Compile Include="EntryPoint.cs" />
     <Compile Include="Google.cs" />
     <Compile Include="Listviewdata.cs" />
     <Compile Include="Mouse.cs" />

@@ -303,11 +303,20 @@ namespace Shubharealtime
 
 
 
-                 if(terminalname=="NEST")
+
+                var terminalfromwizart = regKey.GetValue("terminal");
+                var Chartingappfromwizart = regKey.GetValue("chart");
+                if (Chartingappfromwizart == "Amibroker")
+                {
+                    
+
+                }
+
+                if (terminalfromwizart == "NEST")
                  {
                      RTD_server_name.SelectedIndex = 0;
                  }
-                 if (terminalname == "NOW")
+                if (terminalfromwizart == "NOW")
                  {
                      RTD_server_name.SelectedIndex = 1;
                  }

@@ -1724,7 +1724,7 @@ namespace Shubharealtime
                     startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                     startInfo.FileName = "cmd.exe";
                     //startInfo.Arguments = "/C  C:\\asc2ms.exe -f C:\\data\\Metastock\\M.csv -r r -o C:\\data\\Metastock\\google\\e";
-                    startInfo.Arguments = "/C  " + targetpath + "\\asc2ms.exe -f " + filename + " -r r -o " + targetpath + "\\Intraday\\Metastock\\realtimemetastock";
+                    startInfo.Arguments = "/C  " + targetpath + "\\asc2ms.exe -f " + filename + " -r r -o " + targetpath + "\\Intraday\\Metastock\\realtimemetastock  --forceWrite=yes --verbosity high";
                     // startInfo.Arguments = @"/C  C:\asc2ms.exe -f C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod -r r -o C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod\Metastock\a" ;
 
 
