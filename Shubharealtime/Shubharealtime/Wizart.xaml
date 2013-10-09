@@ -1,0 +1,88 @@
+﻿<Window x:Class="Shubharealtime.Wizart"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Wizart" Height="474" Width="678" Loaded="Window_Loaded" Background="#FFB3B8F2">
+    <Grid Background="#FFB3B8F2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="195"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Name="buttonBorder" Grid.Row="2" Grid.Column="1" BorderThickness="4,2,0,0" BorderBrush="White" Background="Transparent">
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
+                <Grid Width="458" Background="#FFB3B8F2">
+                <Button Height="23" Name="cancelButton" Width="75" Margin="12,20,0,20" Click="cancelButton_Click" HorizontalAlignment="Left">
+                    Cancel
+                </Button>
+                    <Button Height="23" Name="nextButtonforterminal" Width="75" Margin="258,20,125,20" Click="nextButtonforterminal_Click">
+                    Next
+                </Button>
+                <Button Height="23" Name="backButton" Width="75" IsEnabled="False" Margin="364,20,20,20" Click="backButton_Click">
+                    Back
+                </Button>
+                    <Button Content="Finish" Height="23" HorizontalAlignment="Left" Margin="133,20,0,0" Name="finish" VerticalAlignment="Top" Width="75" Click="finish_Click" />
+                </Grid>
+            </StackPanel>
+        </Border>
+        <Border Name="contentBorder" Grid.Row="1" Grid.Column="1" BorderThickness="4,2,0,0" BorderBrush="White" Background="WhiteSmoke">
+            <Grid Name="contentGrid">
+                <StackPanel Height="247" HorizontalAlignment="Left" Margin="6,5,0,0" Name="stackcontainer" VerticalAlignment="Top" Width="455">
+                </StackPanel>
+                <Label Content="" Height="28" Name="Rsult_lbl" Margin="3,258,11,6" Foreground="#FFF51616" />
+
+            </Grid>
+        </Border>
+
+        <Grid Name="headerGrid" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="#FFB3B8F2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="90"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Image Name="imageIcon" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Left" Stretch="Fill" Margin="20,5,5,5" Opacity="128" />
+            <Label FontSize="24" Name="headingLabel" FontWeight="Bold" Margin="10,-10,15,10" Content="Welcome to Shubha Real Time CoMbo !!" Foreground="Black" Grid.Column="1"></Label>
+            <Label Grid.Column="1" Name="summaryLabel" Margin="37,29,28,0" VerticalAlignment="Top" Content="This Wizard will help you in configuring Shubha Real Time Combo..." Grid.RowSpan="2" Foreground="Black" FontSize="13" FontWeight="SemiBold"></Label>
+            <Label Content="So Lets Get Started....." Height="28" HorizontalAlignment="Left" Margin="145,6,0,0" Name="label1" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Foreground="Black" FontSize="13" FontWeight="SemiBold" />
+        </Grid>
+        <Border Name="keyBorder" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Background="WhiteSmoke" BorderThickness="0,2,0,0" BorderBrush="White">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="350"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <!--<my:VistaCanvasControl Grid.Row="1">
+
+                </my:VistaCanvasControl>-->
+
+                <StackPanel Orientation="Vertical" Width="195" Grid.Row="0" Grid.RowSpan="2" Background="#FFB3B8F2">
+                    <Expander Name="introductionExpander" Header="Introduction" Margin="5" IsExpanded="True">
+                        <Label Height="28" Name="introductionLabel" Margin="30,0,0,0" Foreground="Black">
+                            Introduction
+                        </Label>
+                    </Expander>
+                    <Expander Header="TerminalConfiguration " Margin="5" Name="configurationExpander" IsExpanded="False">
+                        <Label Height="28" Name="terminallabel" Margin="30,0,0,0">Terminal</Label>
+
+                    </Expander>
+                    <Expander Header="Charting Application" Margin="5" Name="confirmationExpander">
+                        <Label Height="28" Name="confirmationLabel" Margin="30,0,0,0">Charting application</Label>
+                    </Expander>
+                    <Expander Header="Finish" Margin="5" Name="progressExpander">
+                        <Label Height="28" Name="progressLabel" Margin="30,0,0,0">Finish</Label>
+                    </Expander>
+                    <Expander Header="Results" Margin="5" Name="resultsExpander">
+                        <Label Height="28" Name="resultsLabel" Margin="30,0,0,0" >Results</Label>
+                    </Expander>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

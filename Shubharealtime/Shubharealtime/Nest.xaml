@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="Shubharealtime.Nest"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="317" d:DesignWidth="532">
+    <Grid Height="315" Width="528">
+
+
+            <Grid Margin="0,1,0,-1">
+                <Label Content="Important steps to be followed for Nest Configuration " Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label2" VerticalAlignment="Top" FontWeight="SemiBold" />
+                <Label Content="1.Please start Nest as Run as Administrator " Height="28" HorizontalAlignment="Left" Margin="41,36,0,0" Name="label3" VerticalAlignment="Top" />
+                <Label Content="2.Following are the fields required in nest terminal" Height="28" HorizontalAlignment="Left" Margin="41,55,0,0" Name="label4" VerticalAlignment="Top" />
+                <Label Content="->Trading symbol , LTT , LUT , LTP , Volume Traded Today ,Open Interest" Height="28" HorizontalAlignment="Left" Margin="36,76,0,0" Name="label5" VerticalAlignment="Top" />
+            <Label Content="3.Symbol name has should be followed by LTT field " Height="28" HorizontalAlignment="Left" Margin="43,98,0,0" Name="label6" VerticalAlignment="Top" />
+            <Label Content="CLICK on NEXT if you have successfully configured the NEST terminal. " Height="28" HorizontalAlignment="Left" Margin="0,151,0,0" Name="label7" VerticalAlignment="Top" FontWeight="SemiBold" FontFamily="Times New Roman" />
+        </Grid>
+    </Grid>
+</UserControl>

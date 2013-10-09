@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="Shubharealtime.terminal"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="302" d:DesignWidth="456" Loaded="UserControl_Loaded">
+    <Grid Height="295" Width="455">
+        <Grid Margin="0,0,0,232">
+            <RadioButton Content="NEST" Height="16" HorizontalAlignment="Left" Margin="167,12,0,0" Name="nest" VerticalAlignment="Top" Checked="nest_Checked" />
+            <RadioButton Content="NOW" Height="16" HorizontalAlignment="Left" Margin="227,12,0,0" Name="now" VerticalAlignment="Top" Checked="now_Checked" />
+            <Label Content="Please select your terminal:" Height="28" Margin="11,6,0,0" Name="label1" VerticalAlignment="Top" HorizontalAlignment="Left" Width="155" />
+            <StackPanel Height="235" HorizontalAlignment="Left" Margin="0,60,0,0" Name="stackPanel1" VerticalAlignment="Top" Width="455" />
+            <RadioButton Content="Trade Tiger" Height="16" HorizontalAlignment="Left" Margin="293,12,0,0" Name="tradetiger" VerticalAlignment="Top" Checked="tradetiger_Checked_1" />
+            <RadioButton Content="Odin" Height="16" HorizontalAlignment="Left" Margin="385,12,0,0" Name="odin" VerticalAlignment="Top" Checked="odin_Checked_1" />
+            <CheckBox Content="Nest/Now" Height="16" HorizontalAlignment="Left" Margin="227,38,0,0" Name="plusbackfill" VerticalAlignment="Top" Checked="plusbackfill_Checked" Click="plusbackfill_Click" />
+            <Label Content="Select the Check box for backfill option:" Height="28" HorizontalAlignment="Left" Margin="11,32,0,0" Name="label2" VerticalAlignment="Top" />
+        </Grid>
+        <StackPanel Height="226" HorizontalAlignment="Left" Margin="0,69,0,0" Name="stackPanel2" VerticalAlignment="Top" Width="455"></StackPanel>
+        <Border BorderBrush="Silver" BorderThickness="1" Height="0" HorizontalAlignment="Left" Margin="4,60,0,0" Name="border1" VerticalAlignment="Top" Width="451" />
+    </Grid>
+</UserControl>

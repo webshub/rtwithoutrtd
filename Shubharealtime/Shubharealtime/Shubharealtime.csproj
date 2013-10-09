@@ -8,15 +8,16 @@
     <ProjectGuid>{6A1491AF-0DAD-4342-9DC9-36B2D4085CCB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Shubharealtime</RootNamespace>
-    <AssemblyName>Shubharealtime</AssemblyName>
+    <RootNamespace>Shubhalabha123</RootNamespace>
+    <AssemblyName>Shubhalabha123</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>ftp://www.shubhalabha.in/testrealtime1/</PublishUrl>
+    <PublishUrl>ftp://www.shubhalabha.in/dev2/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -26,14 +27,14 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://shubhalabha.in/testrealtime1/</InstallUrl>
-    <UpdateUrl>http://shubhalabha.in/testrealtime1/</UpdateUrl>
+    <InstallUrl>http://shubhalabha.in/dev2/</InstallUrl>
+    <UpdateUrl>http://shubhalabha.in/dev2/</UpdateUrl>
     <SupportUrl>http://shubhalabha.in/</SupportUrl>
     <ProductName>shubha real time</ProductName>
     <PublisherName>shubhalabha</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>34</ApplicationRevision>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -62,10 +63,10 @@
     <ApplicationIcon>logo iconp.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>F07AE41025934D7869A462166100EB1623BE2796</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>1258C596C2D68EA5DCDCFCF70BE9B4EB56D5B9A0</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Shubharealtime_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>Shubharealtime_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -138,15 +139,18 @@
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;c:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules;e:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Shubharealtime_1_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="FileHelpers">
       <HintPath>..\..\work\Shubha RT\bin\Debug\FileHelpers.dll</HintPath>
     </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\..\..\My Documents\GitHub\shubanet\RTDFINAL\RTDFINAL\bin\Debug\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="ManagedWinapi">
-      <HintPath>..\..\Shubha RT\bin\Debug\ManagedWinapi.dll</HintPath>
+      <HintPath>..\..\work\Shubha RT\bin\Debug\ManagedWinapi.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -156,6 +160,9 @@
     <Reference Include="ProceedureDialog, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\shantesh\wizarddialog_src\ProceedureDialog\ProceedureDialog\bin\Debug\ProceedureDialog.dll</HintPath>
+    </Reference>
+    <Reference Include="Shubharealtime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <ExecutableExtension>.exe</ExecutableExtension>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -171,9 +178,7 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="TA-Lib-Core">
-      <HintPath>..\..\..\..\..\scanner imp data\ta-lib-0.4.0-msvc\ta-lib\dotnet\src\Debug\TA-Lib-Core.dll</HintPath>
-    </Reference>
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -184,20 +189,62 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Backfill.cs" />
+    <Compile Include="Chartingapllication.xaml.cs">
+      <DependentUpon>Chartingapllication.xaml</DependentUpon>
+    </Compile>
     <Compile Include="datadownload.cs" />
     <Compile Include="Dataitem.cs" />
     <Compile Include="Dataitemforsymbol.cs" />
-    <Compile Include="EntryPoint.cs" />
+    <Compile Include="EndRT.xaml.cs">
+      <DependentUpon>EndRT.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Google.cs" />
+    <Compile Include="Introduction.xaml.cs">
+      <DependentUpon>Introduction.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Listviewdata.cs" />
     <Compile Include="Mouse.cs" />
     <Compile Include="mydata.cs" />
+    <Compile Include="Nest.xaml.cs">
+      <DependentUpon>Nest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Nowterminal.xaml.cs">
+      <DependentUpon>Nowterminal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ODIN.xaml.cs">
+      <DependentUpon>ODIN.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Result.xaml.cs">
+      <DependentUpon>Result.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ShubhaRT.xaml.cs">
       <DependentUpon>ShubhaRT.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="terminal.xaml.cs">
+      <DependentUpon>terminal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tradetiger.xaml.cs">
+      <DependentUpon>Tradetiger.xaml</DependentUpon>
     </Compile>
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Wizart.xaml.cs">
+      <DependentUpon>Wizart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wizartchecking.cs" />
+    <Page Include="Chartingapllication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EndRT.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Introduction.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Login.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -210,11 +257,39 @@
       <DependentUpon>Login.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Nest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Nowterminal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ODIN.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Result.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ShubhaRT.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="terminal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tradetiger.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Window1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wizart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -238,6 +313,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Nest-NowBackfil.xlsm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -280,6 +356,10 @@
     <Content Include="realtimemetastock.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="RT.format">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Shubharealtime_1_TemporaryKey.pfx" />
     <None Include="Shubharealtime_TemporaryKey.pfx" />
     <Content Include="Shubhasharekhan.format">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -298,11 +378,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
@@ -348,15 +423,6 @@
       <Guid>{2C8549BA-64C7-4EEC-9FE5-CAB9ACD78FF2}</Guid>
       <VersionMajor>5</VersionMajor>
       <VersionMinor>1</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="TradeScriptLib">
-      <Guid>{67BFF05D-5B2C-4E33-AFE4-D6CE2BDD3121}</Guid>
-      <VersionMajor>2008</VersionMajor>
-      <VersionMinor>0</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>

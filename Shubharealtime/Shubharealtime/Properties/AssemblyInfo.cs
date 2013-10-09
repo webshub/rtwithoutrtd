@@ -7,11 +7,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Shubharealtime")]
+[assembly: AssemblyTitle("Shubhalabha123")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Shubhalabha.in")]
-[assembly: AssemblyProduct("Shubharealtime")]
+[assembly: AssemblyProduct("Shubha1")]
 [assembly: AssemblyCopyright("Copyright © mk 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

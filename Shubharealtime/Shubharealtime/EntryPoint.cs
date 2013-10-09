@@ -55,7 +55,7 @@ namespace Shubharealtime
         {
 
 #line 4 "..\..\App.xaml"
-            this.StartupUri = new System.Uri("ShubhaRT.xaml", System.UriKind.Relative);
+            this.StartupUri = new System.Uri("Wizart.xaml", System.UriKind.Relative);
 
 #line default
 #line hidden
@@ -70,29 +70,49 @@ namespace Shubharealtime
         public static void Main()
         {
 
-           
-            RegistryKey regKey = Registry.CurrentUser;
-            regKey = regKey.CreateSubKey(@"Windows-temp\");
-            var terminalfromwizart = regKey.GetValue("wizart");
-            string wizart = terminalfromwizart.ToString();
-            if (wizart == "notdone")
+            try
             {
-                List<IProceedureComponent> configs = new List<IProceedureComponent>();
-                configs.Add(new DefaultConfiguration1());
-                ProceedureDialog g = new ProceedureDialog("Shubharealtime  Wizard", new DefaultIntroduction(), configs, new DefaultConfirmation(),
-           
-                                                                    new DefaultProgress(), new DefaultResults());
-               
-                 Application app = new Application();
-                app.Run(g);
+                RegistryKey regKey = Registry.CurrentUser;
+                regKey = regKey.CreateSubKey(@"Windows-temp\");
+                var terminalfromwizart = regKey.GetValue("wizart");
+                string wizart = terminalfromwizart.ToString();
+                if (wizart == "notdone")
+                {
+
+                    Shubharealtime.App app = new Shubharealtime.App();
+                    app.InitializeComponent();
+                    app.Run();
+                    //List<IProceedureComponent> configs = new List<IProceedureComponent>();
+                    //configs.Add(new DefaultConfiguration1());
+                    //ProceedureDialog g = new ProceedureDialog("Shubharealtime  Wizard", new DefaultIntroduction(), configs, new DefaultConfirmation(),
+
+                    //                                                    new DefaultProgress(), new DefaultResults());
+
+                    //Application app = new Application();
+                    //app.Run(g);
+                }
+                if (wizart == "done")
+                {
+
+                    Shubharealtime.App app = new Shubharealtime.App();
+                    app.InitializeComponent();
+                    app.Run();
+
+                }
             }
-             if (wizart == "done")
+            catch
             {
+                RegistryKey regKey = Registry.CurrentUser;
+                regKey = regKey.CreateSubKey(@"Windows-temp\");
+               // regKey.SetValue("sd", DateTime.Today.Date.ToString());
+                regKey.SetValue("sp", "Key for xp");
+                regKey.SetValue("ApplicationID", "1");
+                regKey.SetValue("Wizart", "notdone");
 
-                Shubharealtime.App app = new Shubharealtime.App();
-                app.InitializeComponent();
-                app.Run();
+                regKey.SetValue("Applicationpath", System.Reflection.Assembly.GetExecutingAssembly().Location.ToString());
+                System.Windows.Forms.Application.Restart();
 
+                System.Windows.Application.Current.Shutdown();
             }
         }
     }
