@@ -20,7 +20,7 @@
                     <TextBox Height="23" HorizontalAlignment="Right"  Margin="0,136,136,0" Name="txtTargetFolder" VerticalAlignment="Top" Width="113" Grid.Column="1" Text="C:\myshubhalabha" IsReadOnly="True" Visibility="Hidden" />
                     <ComboBox Height="23" HorizontalAlignment="Left" Margin="492,16,0,0" Name="timetoRT" VerticalAlignment="Top" Width="49" SelectedIndex="0" Grid.Column="1" />
                     <Label Content="refresh rate in sec  " Height="28" HorizontalAlignment="Left" Margin="376,11,0,0" Name="label5" VerticalAlignment="Top" Grid.Column="1" />
-                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="300,14,0,0" Name="RTD_server_name" VerticalAlignment="Top" Width="70" SelectedIndex="0" Grid.Column="1" IsReadOnly="True" />
+                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="300,14,0,0" Name="RTD_server_name" VerticalAlignment="Top" Width="70" SelectedIndex="0" Grid.Column="1" IsReadOnly="True" IsEnabled="False" />
                     <Label Content="Terminal " Height="28" HorizontalAlignment="Left" Margin="242,11,0,0" Name="label8" VerticalAlignment="Top" Width="58" Grid.Column="1" />
                     <Label Content="Charting application" Height="28" HorizontalAlignment="Left" Margin="0,11,0,0" Name="label9" VerticalAlignment="Top" Grid.ColumnSpan="2" />
                     <ComboBox Height="23" HorizontalAlignment="Left" Margin="106,14,0,0" Name="Format_cb" VerticalAlignment="Top" Width="130" Grid.Column="1" />
@@ -38,8 +38,7 @@
                     <TextBox Height="23" HorizontalAlignment="Left" Margin="559,-31,0,0" Name="moterboard" VerticalAlignment="Top" Width="130" Grid.Column="1" IsReadOnly="True" />
                     <Label Content="Your registartion ID " Height="28" HorizontalAlignment="Left" Margin="437,-32,0,0" VerticalAlignment="Top" Grid.Column="1" />
                     <WebBrowser Height="39" HorizontalAlignment="Left" Margin="496,55,0,0" Name="piwik" VerticalAlignment="Top" Width="56" Grid.Column="1" Visibility="Hidden" />
-                    <Button Content="Start" Height="34" Name="Startrealtimeonly" Width="133" Click="Startrealtimeonly_Click" Grid.Column="1" Margin="103,60,452,440" />
-                    <StackPanel Height="34" HorizontalAlignment="Right" Margin="0,60,284,0" Name="stackPanel1" VerticalAlignment="Top" Width="154" Grid.Column="1" Visibility="Hidden" />
+                    <Button Content="Start" Height="34" Name="Startrealtimeonly" Width="133" Click="Startrealtimeonly_Click" Grid.Column="1" Margin="196,60,359,440" />
                 </Grid>
             </TabItem>
             <TabItem Header="Backfill "  Name="Advancesetting" >
@@ -52,10 +51,10 @@
                     <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="130,10,0,0" Name="db_path" Text="C:\myshubhalabha\amirealtime" VerticalAlignment="Top" Width="318" />
                     <Label Content="Ami database path:" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label1" VerticalAlignment="Top" />
                     <Button Content="Import symbol" Height="23" HorizontalAlignment="Left" Margin="109,500,0,0" Name="Import_symbol" VerticalAlignment="Top" Width="108" Click="Import_symbol_Click" />
-                    <ListView Canvas.Left="12" Canvas.Top="68" Name="listView1" SelectionChanged="listView1_SelectionChanged" SelectionMode="Single" Margin="12,222,191,57">
+                    <ListView Canvas.Left="12" Canvas.Top="68" Name="listView1" SelectionChanged="listView1_SelectionChanged" SelectionMode="Single" Margin="10,222,191,57">
                         <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Symbol" Width="200" DisplayMemberBinding="{Binding Col1}" ></GridViewColumn>
+                            <GridView AllowsColumnReorder="True">
+                                <GridViewColumn  Header="Trading Symbol" Width="200" DisplayMemberBinding="{Binding Col1}" ></GridViewColumn>
                                 <GridViewColumn Header="Google Symbol" Width="150" DisplayMemberBinding="{Binding Col2}"></GridViewColumn>
                                 <GridViewColumn Header="Mapping Symbol" Width="150" DisplayMemberBinding="{Binding Col3}"></GridViewColumn>
 
@@ -71,7 +70,7 @@
                     <RadioButton Content="Google backfill" Height="16" HorizontalAlignment="Left" Margin="232,71,0,0" Name="googlebackfill" VerticalAlignment="Top" />
                     <RadioButton Content="With out backfill" Height="16" HorizontalAlignment="Left" Margin="478,71,0,0" Name="withoutbackfill" VerticalAlignment="Top" Visibility="Hidden" />
                     <RadioButton Content="Trade Tiger Backfile " Height="16" HorizontalAlignment="Right" Margin="0,71,236,0" Name="tradetiger" VerticalAlignment="Top" />
-                    <Label Content="Your data saved in :- C:\myshubhalabha" Height="28" HorizontalAlignment="Left" Margin="10,33,0,0" Name="label17" VerticalAlignment="Top" Width="215" />
+                    <Label Content="Your data saved in :- C:\myshubhalabha" Height="28" HorizontalAlignment="Left" Margin="10,33,0,0" Name="label17" VerticalAlignment="Top" Width="226" />
                     <Border BorderBrush="Silver" BorderThickness="0.5" Height="2" HorizontalAlignment="Left" Margin="-3,59,0,0" Name="border2" VerticalAlignment="Top" Width="714"></Border>
                     <Label Content="Select backfill option:" Height="28" HorizontalAlignment="Left" Margin="3,65,0,0" Name="label23" VerticalAlignment="Top" />
                 </Grid> 

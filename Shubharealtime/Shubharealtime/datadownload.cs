@@ -279,13 +279,13 @@ namespace Shubharealtime
 
         }
         public  void startdownload()
-        { 
-
-            
-           
+        {
 
 
 
+
+            if (nestback == "True")
+            {
 
             Process[] processes = null ;
 
@@ -371,15 +371,14 @@ namespace Shubharealtime
            
 
             f = sao.Children[3];
-            if (nestback == "True")
-            {
+           
 
             if (!Directory.Exists(targetpath + "\\NESTbackfill"))
             {
                 Directory.CreateDirectory(targetpath + "\\NESTbackfill");
             }
 
-            for (int i = 0; i < f.Children.Count()-1; i++)
+            for (int i = 0; i < 15; i++)
             {
                 SetForegroundWindow(windowHandle);
                // SendMessage(windowHandle, WM_SCROLL, IntPtr.Zero, IntPtr.Zero);
@@ -576,6 +575,7 @@ namespace Shubharealtime
 
 
 
+                getsymbolname();
 
                 googlebackfill();
 
@@ -751,13 +751,15 @@ namespace Shubharealtime
 
             for (int i = 0; i < googlesymbol.Count(); i++)
             {
-                if (googlesymbol[i] != "NOTBACKFILL")
+                string[] words = googlesymbol[i].Split(':');
+
+                if (words[1] != "NOTBACKFILL")
                 {
 
 
 
-                    strYearDir = targetpath + "\\Downloads\\Googleeod\\" + googlesymbol[i] + ".csv";
-                    string baseurl = "http://www.google.com/finance/getprices?q=" + googlesymbol[i] + "&x=NSE&i=60&p=5d&f=d,o,h,l,c,v&df=cpct&auto=1&ts=1266701290218";
+                    strYearDir = targetpath + "\\Downloads\\Googleeod\\" + words[1] + ".csv";
+                    string baseurl = "http://www.google.com/finance/getprices?q=" + words[1] + "&x=" + words[0] + "&i=60&p=5d&f=d,o,h,l,c,v&df=cpct&auto=1&ts=1266701290218";
                     // "http://www.google.com/finance/getprices?q=LICHSGFIN&x=LICHSGFIN&i=d&p=15d&f=d,o,h,l,c,v"
                     //http://www.google.com/finance/getprices?q=RELIANCE&x=NSE&i=60&p=5d&f=d,c,o,h,l&df=cpct&auto=1&ts=1266701290218 [^]
 
@@ -769,14 +771,17 @@ namespace Shubharealtime
                     try
                     {
                         string[] csvFileNames = new string[1] { "" };
-                        csvFileNames[0] = targetpath + "\\Downloads\\Googleeod\\" + googlesymbol[i] + ".csv";
+                        csvFileNames[0] = targetpath + "\\Downloads\\Googleeod\\" + words[1] + ".csv";
 
 
 
 
                         string datetostore = "";
 
-                      
+                        if (mappingsymbol[i]=="NO")
+                      {
+                          mappingsymbol[i] = words[1];
+                      }
                         ExecuteYAHOOProcessing(csvFileNames, datetostore, "GOOGLEEOD", i, mappingsymbol[i]);
                         if (!Directory.Exists(targetpath + "\\STD_CSV\\\\GoogleEod"))
                         {

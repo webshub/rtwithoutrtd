@@ -119,7 +119,7 @@ namespace Shubharealtime
             regKey.SetValue("sd", DateTime.Today.Date.ToString());
             regKey.SetValue("sp", "Key for xp");
             regKey.SetValue("ApplicationID", "1");
-            regKey.SetValue("Wizart", "notdone");
+           // regKey.SetValue("Wizart", "notdone");
 
             regKey.SetValue("Applicationpath", System.Reflection.Assembly.GetExecutingAssembly().Location.ToString());
 

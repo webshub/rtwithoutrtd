@@ -6,6 +6,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="311" d:DesignWidth="450">
     <Grid>
-        <Label Content="ODIN setting " Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label1" VerticalAlignment="Top" />
+        <Label Content="ODIN  " Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="lae" VerticalAlignment="Top" />
+        <Label Content="Add a trusted location in Microsoft excel sheet steps as given below " Height="28" HorizontalAlignment="Left" Margin="10,31,0,0" Name="label1" VerticalAlignment="Top" />
+        <Label Content="1.Click File &gt; Options." Height="28" HorizontalAlignment="Left" Margin="10,60,0,0" Name="label2" VerticalAlignment="Top" />
+        <Label Content="2.Click Trust Center &gt; Trust Center Settings &gt; Trusted Locations." Height="28" HorizontalAlignment="Left" Margin="10,81,0,0" Name="label3" VerticalAlignment="Top" />
+        <Label Content="3.Click Add new location." Height="28" HorizontalAlignment="Left" Margin="10,103,0,0" Name="label4" VerticalAlignment="Top" />
+        <Label Content="4.Click Browse and find the C:\myshubhalabha folder, select a folder," Height="28" HorizontalAlignment="Left" Margin="10,127,0,0" Name="label5" VerticalAlignment="Top" />
+        <Label Content=" and then click OK." Height="28" HorizontalAlignment="Left" Margin="21,146,0,0" Name="label6" VerticalAlignment="Top" />
     </Grid>
 </UserControl>

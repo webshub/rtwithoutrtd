@@ -1506,8 +1506,7 @@ namespace Shubharealtime
 
 
             f = sao.Children[3];
-            if (nestback == "True")
-            {
+           
 
                 if (!Directory.Exists(targetpath + "\\NESTbackfill"))
                 {
@@ -1649,7 +1648,7 @@ namespace Shubharealtime
 
 
 
-            }
+            
             return 1;
         }
         public void closeallprocess()

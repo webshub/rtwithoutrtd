@@ -395,32 +395,35 @@ namespace Shubharealtime
                 if (nextcount == 2)
                 {
                     ///for checking amibroker database path
-                   
-                     Type ExcelType;
-                    object ExcelInst;
-                    object[] args = new object[3];
-                    RegistryKey regKey = Registry.CurrentUser;
-                    regKey = regKey.CreateSubKey(@"Windows-temp\");
-                    var terminalname = regKey.GetValue("terminal");
-                    var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
+                    try
+                    {
+                        Type ExcelType;
+                        object ExcelInst;
+                        object[] args = new object[3];
+                        RegistryKey regKey = Registry.CurrentUser;
+                        regKey = regKey.CreateSubKey(@"Windows-temp\");
+                        var terminalname = regKey.GetValue("terminal");
+                        var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
 
-                    ExcelType = Type.GetTypeFromProgID("Broker.Application");
-                    ExcelInst = Activator.CreateInstance(ExcelType);
-                    ExcelType.InvokeMember("Visible", BindingFlags.SetProperty, null,
-                              ExcelInst, new object[1] { true });
+                        ExcelType = Type.GetTypeFromProgID("Broker.Application");
+                        ExcelInst = Activator.CreateInstance(ExcelType);
+                        ExcelType.InvokeMember("Visible", BindingFlags.SetProperty, null,
+                                  ExcelInst, new object[1] { true });
 
-                    ExcelType.InvokeMember("LoadDatabase", BindingFlags.InvokeMethod | BindingFlags.Public, null,
-                        ExcelInst, new string[1] { Amibrokerdatapath.ToString() });
-
-
-
-                    args[0] = Convert.ToInt16(0);
-                    args[1] =  "C:\\myshubhalabha\\Realtimeamibrokerdata.txt";
-                    args[2] = "RT.format";
-                    ExcelType.InvokeMember("Import", BindingFlags.InvokeMethod | BindingFlags.Public, null,
-                         ExcelInst, args);
+                        ExcelType.InvokeMember("LoadDatabase", BindingFlags.InvokeMethod | BindingFlags.Public, null,
+                            ExcelInst, new string[1] { Amibrokerdatapath.ToString() });
 
 
+
+                        args[0] = Convert.ToInt16(0);
+                        args[1] = "C:\\myshubhalabha\\Realtimeamibrokerdata.txt";
+                        args[2] = "RT.format";
+                        ExcelType.InvokeMember("Import", BindingFlags.InvokeMethod | BindingFlags.Public, null,
+                             ExcelInst, args);
+
+                    }catch
+                    {
+                        }
                     try
                     {
                         stackcontainer.Children.RemoveAt(0);

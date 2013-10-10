@@ -231,8 +231,7 @@ namespace Shubharealtime
 
 
 
-            Shubhalabha123.EndRT end = new Shubhalabha123.EndRT();
-            stackPanel1.Children.Add(end);
+           
 
             /////////////////////////////
             string targetpath = ConfigurationManager.AppSettings["targetpathforcombo"];
@@ -887,97 +886,118 @@ namespace Shubharealtime
             string terminalname = ConfigurationManager.AppSettings["terminalname"];
             Process[] processes = null;
 
-            if (terminalname == "NEST")
+
+            if (nestbackfill.IsChecked == true)
             {
+
+                if (terminalname == "NEST")
+                {
+                    try
+                    {
+                        type = Type.GetTypeFromProgID("nest.scriprtd");
+
+                        m_server = (IRtdServer)Activator.CreateInstance(type);
+                        processes = Process.GetProcessesByName("NestTrader");
+
+
+                    }
+                    catch
+                    {
+                        System.Windows.MessageBox.Show(" Please start Nest as Run as Administrator and again start Realtime combo");
+                        closeallprocess();
+                        return;
+                    }
+                }
+                if (terminalname == "NOW")
+                {
+                    try
+                    {
+                        type = Type.GetTypeFromProgID("now.scriprtd");
+
+                        m_server = (IRtdServer)Activator.CreateInstance(type);
+                        processes = Process.GetProcessesByName("NOW");
+
+                    }
+                    catch
+                    {
+                        System.Windows.MessageBox.Show(" Please start Nest as Run as Administrator and again start Realtime combo");
+                        closeallprocess();
+                        return;
+                    }
+                } IntPtr abcd = new IntPtr();
+                IntPtr abcd1 = new IntPtr();
+                IntPtr abcd2 = new IntPtr();
+                IntPtr windowHandle = new IntPtr();
+
+
+
+                List<Thread> processtostartback = new List<Thread>();
+                SystemAccessibleObject sao, f;
+
+                foreach (Process p in processes)
+                {
+                    windowHandle = p.MainWindowHandle;
+
+                    //System.Windows.Forms.MessageBox.Show(p.HandleCount.ToString());
+
+                    abcd = FindChildWindow(windowHandle, IntPtr.Zero, "#32770", "");
+                    abcd1 = FindChildWindow(abcd, IntPtr.Zero, "SysListView32", "");
+
+
+                    // do something with windowHandle
+                }
+
+                SystemWindow a = new SystemWindow(abcd1);
+
+
+                // sao = SystemAccessibleObject.FromPoint(4, 200);
                 try
                 {
-                    type = Type.GetTypeFromProgID("nest.scriprtd");
+                    string marketwatch = abcd1.ToString();
+                    if (marketwatch == "0")
+                    {
+                        System.Windows.MessageBox.Show("Nest is not running or Market Watch not present check out and run real time combo again \n     thank you  ");
+                        closeallprocess();
 
-                    m_server = (IRtdServer)Activator.CreateInstance(type);
-                    processes = Process.GetProcessesByName("NestTrader");
-
-
+                    }
+                    sao = SystemAccessibleObject.FromWindow(a, AccessibleObjectID.OBJID_WINDOW);
                 }
                 catch
                 {
-                    System.Windows.MessageBox.Show(" Please start Nest as Run as Administrator and again start Realtime combo");
-                    closeallprocess();
+                    System.Windows.MessageBox.Show("Market Watch not found ");
                     return;
                 }
-            }
-            if (terminalname == "NOW")
-            {
-                try
-                {
-                    type = Type.GetTypeFromProgID("now.scriprtd");
 
-                    m_server = (IRtdServer)Activator.CreateInstance(type);
-                    processes = Process.GetProcessesByName("NOW");
+
+
+                f = sao.Children[3];
+
+                for (int i = 0; i < f.Children.Count() - 1; i++)
+                {
+                    listView1.Items.Add(new ListViewData(f.Children[i].Name, "NOTBACKFILL", f.Children[i].Name));
+              
+                }
+
+              
+
+            }
+            else if (googlebackfill.IsChecked == true)
+            {
+                for (int i = 0; i < 15; i++)
+                {
+                    listView1.Items.Add(new ListViewData("", ":NOTBACKFILL", "NO" ));
 
                 }
-                catch
-                {
-                    System.Windows.MessageBox.Show(" Please start Nest as Run as Administrator and again start Realtime combo");
-                    closeallprocess();
-                    return;
-                }
-            }         IntPtr abcd = new IntPtr();
-            IntPtr abcd1 = new IntPtr();
-            IntPtr abcd2 = new IntPtr();
-            IntPtr windowHandle = new IntPtr();
 
-
-
-            List<Thread> processtostartback = new List<Thread>();
-            SystemAccessibleObject sao,f;
-
-            foreach (Process p in processes)
-            {
-                windowHandle = p.MainWindowHandle;
-
-                //System.Windows.Forms.MessageBox.Show(p.HandleCount.ToString());
-
-                abcd = FindChildWindow(windowHandle, IntPtr.Zero, "#32770", "");
-                abcd1 = FindChildWindow(abcd, IntPtr.Zero, "SysListView32", "");
-
-
-                // do something with windowHandle
-            }
-
-            SystemWindow a = new SystemWindow(abcd1);
-
-
-            // sao = SystemAccessibleObject.FromPoint(4, 200);
-            try
-            {
-                string marketwatch = abcd1.ToString();
-                if (marketwatch == "0")
-                {
-                    System.Windows.MessageBox.Show("Nest is not running or Market Watch not present check out and run real time combo again \n     thank you  ");
-                    closeallprocess();
-
-                }
-                sao = SystemAccessibleObject.FromWindow(a, AccessibleObjectID.OBJID_WINDOW);
-            }
-            catch
-            {
-                System.Windows.MessageBox.Show("Market Watch not found ");
-                return;
-            }
+                
            
-
-
-            f = sao.Children[3];
-
-            for (int i = 0; i < f.Children.Count() - 1; i++)
-            {
-                listView1.Items.Add(new ListViewData(f.Children[i].Name, "NOTBACKFILL", f.Children[i].Name));
-
+               
             }
-            
-            
-            
-          
+            else
+            {
+                System.Windows.MessageBox.Show("Please select atleast one checkbox option  form backfill ");
+            }
+
 
         }
 
@@ -1008,6 +1028,7 @@ namespace Shubharealtime
                 textBox2.Text = lvc.Col2;
                 textBox3.Text = lvc.Col3;
                 stopRefreshControls = false;
+              
             }
         }
 
@@ -1359,60 +1380,61 @@ namespace Shubharealtime
 
             }
 
-
-            Shubharealtime.datadownload s1 = new datadownload();
-            if (RTD_server_name.SelectedItem == "NEST")
+            if (nestbackfill.IsChecked == true)
             {
-                try
+                Shubharealtime.datadownload s1 = new datadownload();
+                if (RTD_server_name.SelectedItem == "NEST")
                 {
-                    type = Type.GetTypeFromProgID("nest.scriprtd");
+                    try
+                    {
+                        type = Type.GetTypeFromProgID("nest.scriprtd");
 
-                    m_server = (IRtdServer)Activator.CreateInstance(type);
-                    m_server.ServerTerminate();
+                        m_server = (IRtdServer)Activator.CreateInstance(type);
+                        m_server.ServerTerminate();
+                    }
+                    catch
+                    {
+                        System.Windows.MessageBox.Show("Please start Nest as Run as Administrator and again start Realtime combo");
+                        s1.closeallprocess();
+
+                        return;
+                    }
                 }
-                catch
+                if (RTD_server_name.SelectedItem == "NOW")
                 {
-                    System.Windows.MessageBox.Show("Please start Nest as Run as Administrator and again start Realtime combo");
-                    s1.closeallprocess();
+                    try
+                    {
+                        type = Type.GetTypeFromProgID("now.scriprtd");
 
+                        m_server = (IRtdServer)Activator.CreateInstance(type);
+                        m_server.ServerTerminate();
+                    }
+                    catch
+                    {
+                        System.Windows.MessageBox.Show("Please start Nest as 'Run as Administrator' and again start Realtime combo");
+                        s1.closeallprocess();
+
+                        return;
+                    }
+                }
+
+                if (txtTargetFolder.Text == "")
+                {
+                    System.Windows.MessageBox.Show("Set Target Path.");
+                    txtTargetFolder.Focus();
                     return;
+
                 }
+
+
+
+                System.Windows.MessageBox.Show(System.Windows.Application.Current.MainWindow, "Application is pulling backfill data and processing files,please wait for some time.");
+
+
+
+
+                CommandManager.InvalidateRequerySuggested();
             }
-            if (RTD_server_name.SelectedItem == "NOW")
-            {
-                try
-                {
-                    type = Type.GetTypeFromProgID("now.scriprtd");
-
-                    m_server = (IRtdServer)Activator.CreateInstance(type);
-                    m_server.ServerTerminate();
-                }
-                catch
-                {
-                    System.Windows.MessageBox.Show("Please start Nest as 'Run as Administrator' and again start Realtime combo");
-                    s1.closeallprocess();
-
-                    return;
-                }
-            }
-
-            if (txtTargetFolder.Text == "")
-            {
-                System.Windows.MessageBox.Show("Set Target Path.");
-                txtTargetFolder.Focus();
-                return;
-
-            }
-
-
-
-            System.Windows.MessageBox.Show(System.Windows.Application.Current.MainWindow, "Application is pulling backfill data and processing files,please wait for some time.");
-
-
-
-
-            CommandManager.InvalidateRequerySuggested();
-
             try
             {
 
@@ -1476,8 +1498,10 @@ namespace Shubharealtime
             string path = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
             string pathtostartprocess = path.Substring(0, path.Length - 18);
            // System.Diagnostics.Process.Start(pathtostartprocess + "Endrt.exe");
-
             Shubharealtime.datadownload s = new datadownload();
+
+            if(nestbackfill.IsChecked==true )
+            {
             if (RTD_server_name.SelectedItem == "NEST")
             {
                 s.checknestfiled();
@@ -1485,6 +1509,7 @@ namespace Shubharealtime
             if (RTD_server_name.SelectedItem == "NOW")
             {
                 s.checknowfiled();
+            }
             }
             Task.Factory.StartNew(s.startdownload);
            // this.Hide();
