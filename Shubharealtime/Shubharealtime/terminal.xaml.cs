@@ -42,7 +42,7 @@ namespace Shubharealtime
             Nowterminal n = new Nowterminal();
             stackPanel2.Children.Add(n);
             RegistryKey regKey = Registry.CurrentUser;
-            regKey = regKey.CreateSubKey(@"Windows-temp\");
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
             regKey.SetValue("terminal", "NOW");
         }
 
@@ -73,7 +73,7 @@ namespace Shubharealtime
             {
             }
             RegistryKey regKey = Registry.CurrentUser;
-            regKey = regKey.CreateSubKey(@"Windows-temp\");
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
             ODIN o = new ODIN();
             stackPanel2.Children.Add(o);
             regKey.SetValue("terminal", "NOW");
@@ -95,7 +95,7 @@ namespace Shubharealtime
             stackPanel2.Children.Add(n);
 
             RegistryKey regKey = Registry.CurrentUser;
-            regKey = regKey.CreateSubKey(@"Windows-temp\");
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
             regKey.SetValue("terminal", "NEST");
 
 
@@ -115,7 +115,7 @@ namespace Shubharealtime
             Tradetiger t = new Tradetiger();
             stackPanel2.Children.Add(t );
             RegistryKey regKey = Registry.CurrentUser;
-            regKey = regKey.CreateSubKey(@"Windows-temp\");
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
             regKey.SetValue("terminal", "Tradetiger");
             regKey.SetValue("backfill", "no");
 
@@ -138,7 +138,7 @@ namespace Shubharealtime
             ODIN o = new ODIN();
             stackPanel2.Children.Add(o);
             RegistryKey regKey = Registry.CurrentUser;
-            regKey = regKey.CreateSubKey(@"Windows-temp\");
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
             regKey.SetValue("terminal", "Odin");
             regKey.SetValue("backfill", "no");
 
@@ -151,7 +151,7 @@ namespace Shubharealtime
             try
             {
                 RegistryKey regKey = Registry.CurrentUser;
-                regKey = regKey.CreateSubKey(@"Windows-temp\");
+                regKey = regKey.CreateSubKey(@"Windows-xpRT\");
                 var terminalname = regKey.GetValue("terminal");
                 string terminal = terminalname.ToString();
                 var backfill1 = regKey.GetValue("backfill");
@@ -165,17 +165,22 @@ namespace Shubharealtime
                 {
                     nest.IsChecked = true;
                 }
-                if (terminal == "NOW")
+                else if (terminal == "NOW")
                 {
                     now.IsChecked = true;
                 }
-                if (terminal == "Odin")
+                else if (terminal == "Odin")
                 {
                     odin.IsChecked = true;
                 }
-                if (terminal == "Tradetiger")
+                else if (terminal == "Tradetiger")
                 {
                     tradetiger.IsChecked = true;
+                }
+                else
+                {
+                    nest.IsChecked = true;
+
                 }
             }
             catch
@@ -186,7 +191,7 @@ namespace Shubharealtime
         private void plusbackfill_Checked(object sender, RoutedEventArgs e)
         {
             RegistryKey regKey = Registry.CurrentUser;
-            regKey = regKey.CreateSubKey(@"Windows-temp\");
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
             regKey.SetValue("backfill", "yes");
 
         }
@@ -196,7 +201,7 @@ namespace Shubharealtime
             if(plusbackfill.IsChecked==false )
             {
             RegistryKey regKey = Registry.CurrentUser;
-            regKey = regKey.CreateSubKey(@"Windows-temp\");
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
             regKey.SetValue("backfill", "no");
             }
         }

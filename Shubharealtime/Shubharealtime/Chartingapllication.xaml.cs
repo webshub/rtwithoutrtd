@@ -24,7 +24,7 @@ namespace Shubharealtime
                 string chartingapp = "";
         public Chartingapllication()
         {
-            regKey = regKey.CreateSubKey(@"Windows-temp\");
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
 
             InitializeComponent();
         }
@@ -118,6 +118,12 @@ namespace Shubharealtime
 
 
             regKey.SetValue("Chartingapplication", chartingapp);
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            ami_chk.IsChecked = true;
+
         }
     }
 }

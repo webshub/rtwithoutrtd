@@ -22,7 +22,7 @@
                     <Label Content="refresh rate in sec  " Height="28" HorizontalAlignment="Left" Margin="376,11,0,0" Name="label5" VerticalAlignment="Top" Grid.Column="1" />
                     <ComboBox Height="23" HorizontalAlignment="Left" Margin="300,14,0,0" Name="RTD_server_name" VerticalAlignment="Top" Width="70" SelectedIndex="0" Grid.Column="1" IsReadOnly="True" IsEnabled="False" />
                     <Label Content="Terminal " Height="28" HorizontalAlignment="Left" Margin="242,11,0,0" Name="label8" VerticalAlignment="Top" Width="58" Grid.Column="1" />
-                    <Label Content="Charting application" Height="28" HorizontalAlignment="Left" Margin="0,11,0,0" Name="label9" VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                    <Label Content="Charting application" Height="28" HorizontalAlignment="Left" Margin="4,11,0,0" Name="label9" VerticalAlignment="Top" Grid.ColumnSpan="2" />
                     <ComboBox Height="23" HorizontalAlignment="Left" Margin="106,14,0,0" Name="Format_cb" VerticalAlignment="Top" Width="130" Grid.Column="1" />
                     <Label Content="Hours" Height="28" HorizontalAlignment="Left" Margin="5,472,0,0" Name="lbl_GHours" VerticalAlignment="Top" Visibility="Hidden" Grid.ColumnSpan="2" />
                     <Label Content="Minutes" Height="28" HorizontalAlignment="Left" Margin="196,472,0,0" Name="lbl_GMinutes" VerticalAlignment="Top" Visibility="Hidden" Grid.Column="1" />
@@ -39,22 +39,22 @@
                     <Label Content="Your registartion ID " Height="28" HorizontalAlignment="Left" Margin="437,-32,0,0" VerticalAlignment="Top" Grid.Column="1" />
                     <WebBrowser Height="39" HorizontalAlignment="Left" Margin="496,55,0,0" Name="piwik" VerticalAlignment="Top" Width="56" Grid.Column="1" Visibility="Hidden" />
                     <Button Content="Start" Height="34" Name="Startrealtimeonly" Width="133" Click="Startrealtimeonly_Click" Grid.Column="1" Margin="196,60,359,440" />
+                    <Border BorderBrush="Silver" BorderThickness="1" Height="43" HorizontalAlignment="Left" Margin="4,6,0,0" Name="border1" VerticalAlignment="Top" Width="565" Grid.ColumnSpan="2" />
                 </Grid>
             </TabItem>
             <TabItem Header="Backfill "  Name="Advancesetting" >
                 <Grid Background="#FFE9E9F5">
 <TextBox Height="23" HorizontalAlignment="Left" Margin="12,193,0,0" Name="textBox1" VerticalAlignment="Top" Width="205" IsReadOnly="True" TextChanged="textBox1_TextChanged" />
-                    <TextBox Height="23" HorizontalAlignment="Left" Margin="223,193,0,0" Name="textBox2" VerticalAlignment="Top" Width="145" TextChanged="textBox2_TextChanged" />
-                    <TextBox Height="23" HorizontalAlignment="Right" Margin="0,193,191,0" Name="textBox3" VerticalAlignment="Top" Width="145" TextChanged="textBox3_TextChanged" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="12,193,0,0" Name="textBox2" VerticalAlignment="Top" Width="205" TextChanged="textBox2_TextChanged" />
+                    <TextBox Height="23" HorizontalAlignment="Right" Margin="0,193,340,0" Name="textBox3" VerticalAlignment="Top" Width="145" TextChanged="textBox3_TextChanged" />
                     
                     <Button Content="Browes" Height="25" HorizontalAlignment="Left" Margin="462,10,0,0" Name="btnTarget" VerticalAlignment="Top" Width="72" Click="btnTarget_Click" />
                     <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="130,10,0,0" Name="db_path" Text="C:\myshubhalabha\amirealtime" VerticalAlignment="Top" Width="318" />
                     <Label Content="Ami database path:" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label1" VerticalAlignment="Top" />
                     <Button Content="Import symbol" Height="23" HorizontalAlignment="Left" Margin="109,500,0,0" Name="Import_symbol" VerticalAlignment="Top" Width="108" Click="Import_symbol_Click" />
-                    <ListView Canvas.Left="12" Canvas.Top="68" Name="listView1" SelectionChanged="listView1_SelectionChanged" SelectionMode="Single" Margin="10,222,191,57">
+                    <ListView Canvas.Left="12" Canvas.Top="68" Name="listView1" SelectionChanged="listView1_SelectionChanged" SelectionMode="Single" Margin="11,222,340,57" Visibility="Visible">
                         <ListView.View>
                             <GridView AllowsColumnReorder="True">
-                                <GridViewColumn  Header="Trading Symbol" Width="200" DisplayMemberBinding="{Binding Col1}" ></GridViewColumn>
                                 <GridViewColumn Header="Google Symbol" Width="150" DisplayMemberBinding="{Binding Col2}"></GridViewColumn>
                                 <GridViewColumn Header="Mapping Symbol" Width="150" DisplayMemberBinding="{Binding Col3}"></GridViewColumn>
 
@@ -66,28 +66,38 @@
                     <Label Content="please select symbol and change symbol name in textbox for mapping " Height="28" HorizontalAlignment="Left" Margin="12,165,0,0" Name="label2" VerticalAlignment="Top" />
                     <Label Content="please select symbol and enter google symbol name in textbox for google backfill " Height="28" HorizontalAlignment="Left" Margin="12,144,0,0" Name="label3" VerticalAlignment="Top" />
                     <Button Content="Start Backfill" Height="23" HorizontalAlignment="Left" Margin="271,102,0,426" Name="StartRT" Width="97" Click="StartRT_Click_1" />
-                    <RadioButton Content="Nest backfill" Height="16" HorizontalAlignment="Left" Margin="133,71,0,0" Name="nestbackfill" VerticalAlignment="Top" />
-                    <RadioButton Content="Google backfill" Height="16" HorizontalAlignment="Left" Margin="232,71,0,0" Name="googlebackfill" VerticalAlignment="Top" />
+                    <RadioButton Content="Nest backfill" Height="16" HorizontalAlignment="Left" Margin="133,71,0,0" Name="nestbackfill" VerticalAlignment="Top" Checked="nestbackfill_Checked" />
+                    <RadioButton Content="Google backfill" Height="16" HorizontalAlignment="Left" Margin="232,71,0,0" Name="googlebackfill" VerticalAlignment="Top" Checked="googlebackfill_Checked" />
                     <RadioButton Content="With out backfill" Height="16" HorizontalAlignment="Left" Margin="478,71,0,0" Name="withoutbackfill" VerticalAlignment="Top" Visibility="Hidden" />
                     <RadioButton Content="Trade Tiger Backfile " Height="16" HorizontalAlignment="Right" Margin="0,71,236,0" Name="tradetiger" VerticalAlignment="Top" />
                     <Label Content="Your data saved in :- C:\myshubhalabha" Height="28" HorizontalAlignment="Left" Margin="10,33,0,0" Name="label17" VerticalAlignment="Top" Width="226" />
                     <Border BorderBrush="Silver" BorderThickness="0.5" Height="2" HorizontalAlignment="Left" Margin="-3,59,0,0" Name="border2" VerticalAlignment="Top" Width="714"></Border>
                     <Label Content="Select backfill option:" Height="28" HorizontalAlignment="Left" Margin="3,65,0,0" Name="label23" VerticalAlignment="Top" />
+                    <ListView Canvas.Left="12" Canvas.Top="68" Margin="10,222,340,57" Name="listView2" SelectionMode="Single" SelectionChanged="listView2_SelectionChanged" Visibility="Visible">
+                        <ListView.View>
+                            <GridView AllowsColumnReorder="True">
+                                <GridViewColumn DisplayMemberBinding="{Binding Col1}" Header="Tarding Symbol" Width="200" />
+                                <GridViewColumn DisplayMemberBinding="{Binding Col3}" Header="Mapping Symbol" Width="150" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
                 </Grid> 
                     </TabItem>
            
             <TabItem Header="  Current Setting  " Name="Current_Setting" Loaded="Current_Setting_Loaded">
                 <Grid Background="#FFE9E9F5">
-                    <Label Content="Your selected terminal is - " Height="28" HorizontalAlignment="Left" Margin="76,10,0,0" Name="lbl_terminal" VerticalAlignment="Top" />
-                    <Label Content="Your selected Charting Application is  - " Height="28" HorizontalAlignment="Left" Margin="10,44,0,0" Name="lbl_chart" VerticalAlignment="Top" />
-                    <Label Content="Your Amibroker database path is -" Height="28" HorizontalAlignment="Left" Margin="38,78,0,0" Name="lbl_amipath" VerticalAlignment="Top" />
-                    <Label Content="Your Metastock database path is -" Height="28" HorizontalAlignment="Left" Margin="36,112,0,0" Name="lbl_metapath" VerticalAlignment="Top" />
-                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="231,10,0,0" Name="result_terminal" VerticalAlignment="Top" />
-                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="233,44,0,0" Name="result_chart" VerticalAlignment="Top" />
-                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="233,78,0,0" Name="result_amipath" VerticalAlignment="Top" />
-                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="233,112,0,0" Name="result_metapath" VerticalAlignment="Top" />
-                    <Label Content="Nes/Now backfill -" Height="28" HorizontalAlignment="Left" Margin="119,146,0,0" Name="label4" VerticalAlignment="Top" />
-                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="233,146,0,0" Name="nestnowbackfill" VerticalAlignment="Top" />
+                    <Label Content="Your selected terminal is - " Height="28" HorizontalAlignment="Left" Margin="207,60,0,0" Name="lbl_terminal" VerticalAlignment="Top" />
+                    <Label Content="Your selected Charting Application is  - " Height="28" HorizontalAlignment="Left" Margin="141,94,0,0" Name="lbl_chart" VerticalAlignment="Top" />
+                    <Label Content="Your Amibroker database path is -" Height="28" HorizontalAlignment="Left" Margin="169,128,0,0" Name="lbl_amipath" VerticalAlignment="Top" />
+                    <Label Content="Your Metastock database path is -" Height="28" HorizontalAlignment="Left" Margin="167,162,0,0" Name="lbl_metapath" VerticalAlignment="Top" />
+                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="362,60,0,0" Name="result_terminal" VerticalAlignment="Top" />
+                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="364,94,0,0" Name="result_chart" VerticalAlignment="Top" />
+                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="364,128,0,0" Name="result_amipath" VerticalAlignment="Top" />
+                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="364,162,0,0" Name="result_metapath" VerticalAlignment="Top" />
+                    <Label Content="Nes/Now backfill -" Height="28" HorizontalAlignment="Left" Margin="250,196,0,0" Name="label4" VerticalAlignment="Top" />
+                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="364,196,0,0" Name="nestnowbackfill" VerticalAlignment="Top" />
+                    <Button Content="Cahnge setting " Height="23" HorizontalAlignment="Left" Margin="274,253,0,0" Name="changesetting" VerticalAlignment="Top" Width="128" Click="changesetting_Click" />
+                    <Border BorderBrush="Silver" BorderThickness="1" Height="156" HorizontalAlignment="Left" Margin="104,34,0,0" Name="border3" VerticalAlignment="Top" Width="487" />
                 </Grid>
 
             </TabItem>

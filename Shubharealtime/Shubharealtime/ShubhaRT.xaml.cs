@@ -101,7 +101,7 @@ namespace Shubharealtime
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             RegistryKey regKey = Registry.CurrentUser;
-            regKey = regKey.CreateSubKey(@"Windows-temp\");
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
 
             try
             {

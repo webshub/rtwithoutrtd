@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="326" d:DesignWidth="469" Unloaded="UserControl_Unloaded">
+             d:DesignHeight="326" d:DesignWidth="469" Unloaded="UserControl_Unloaded" Loaded="UserControl_Loaded">
         <Grid Height="318" Width="464">
             <Button Content="Browes" Height="25" HorizontalAlignment="Left" Margin="360,48,0,0" Name="btnTarget" VerticalAlignment="Top" Width="72" Click="btnTarget_Click" />
             <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="164,48,0,0" Name="db_path" Text="C:\myshubhalabha\amirealtime" VerticalAlignment="Top" Width="186" />

@@ -127,7 +127,7 @@ namespace Shubharealtime
             //expiration
 
             RegistryKey regKey = Registry.CurrentUser;
-            regKey = regKey.CreateSubKey(@"Windows-temp\");
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
 
             try
             {
@@ -222,7 +222,7 @@ namespace Shubharealtime
 
                 //}
             }
-            catch(Exception ex) 
+            catch 
             {
               //  System.Windows.MessageBox.Show(ex.Message );
                System.Windows.MessageBox.Show("Please check internet connection we cant check registraion as your trail period expired ");
@@ -249,9 +249,13 @@ namespace Shubharealtime
             string googleback = ConfigurationManager.AppSettings["googlebackfill"];
             string withoutback = ConfigurationManager.AppSettings["withoutbackfill"];
             withoutbackfill.IsChecked = true;
+          
             if (nestback == "True")
             {
+
                 nestbackfill.IsChecked = true;
+                listView1.Visibility = Visibility.Hidden;
+                listView2.Visibility = Visibility.Visible;
             }
             if (tradetiger1 == "True")
             {
@@ -260,6 +264,9 @@ namespace Shubharealtime
             if (googleback == "True")
             {
                 googlebackfill.IsChecked = true;
+               
+                listView1.Visibility = Visibility.Visible;
+                listView2.Visibility = Visibility.Hidden;
             }
             if (withoutback == "True")
             {
@@ -289,8 +296,8 @@ namespace Shubharealtime
 
                 if (backfill != "yes")
                 {
-                    nestbackfill.IsChecked = false;
-                    nestbackfill.IsEnabled = false;
+                    //nestbackfill.IsChecked = false;
+                    //nestbackfill.IsEnabled = false;
                 }
 
 
@@ -664,7 +671,6 @@ namespace Shubharealtime
             Process[] processes = Process.GetProcessesByName("NestTrader");
             IntPtr abcd = new IntPtr();
             IntPtr abcd1 = new IntPtr();
-            IntPtr abcd2 = new IntPtr();
             IntPtr windowHandle = new IntPtr();
             List<Thread> processtostartback = new List<Thread>();
 
@@ -881,6 +887,11 @@ namespace Shubharealtime
 
         private void Import_symbol_Click(object sender, RoutedEventArgs e)
         {
+            
+            
+            
+            
+            
             //dataGrid3.Items.Add(new DataItem { Column0 = "abcd", Column1 = "dasdasdas" });
             //dataGrid3.Items.Add(new DataItem { Column0 = "abcasdsasdd", Column1 = "das1111111111111dasdas" });
             string terminalname = ConfigurationManager.AppSettings["terminalname"];
@@ -889,7 +900,7 @@ namespace Shubharealtime
 
             if (nestbackfill.IsChecked == true)
             {
-
+               
                 if (terminalname == "NEST")
                 {
                     try
@@ -926,7 +937,6 @@ namespace Shubharealtime
                     }
                 } IntPtr abcd = new IntPtr();
                 IntPtr abcd1 = new IntPtr();
-                IntPtr abcd2 = new IntPtr();
                 IntPtr windowHandle = new IntPtr();
 
 
@@ -974,24 +984,24 @@ namespace Shubharealtime
 
                 for (int i = 0; i < f.Children.Count() - 1; i++)
                 {
-                    listView1.Items.Add(new ListViewData(f.Children[i].Name, "NOTBACKFILL", f.Children[i].Name));
+                    listView2.Items.Add(new ListViewData(f.Children[i].Name, "NOTBACKFILL", f.Children[i].Name));
               
                 }
 
-              
+
 
             }
             else if (googlebackfill.IsChecked == true)
             {
                 for (int i = 0; i < 15; i++)
                 {
-                    listView1.Items.Add(new ListViewData("", ":NOTBACKFILL", "NO" ));
+                    listView1.Items.Add(new ListViewData("NOTNEEDED", ":NOTBACKFILL", "NO"));
 
                 }
 
-                
-           
-               
+
+
+
             }
             else
             {
@@ -1052,6 +1062,16 @@ namespace Shubharealtime
 
                 listView1.Items.Refresh();
             }
+            lvc = (ListViewData)listView2.SelectedItem; //new ListViewClass(value1, value2);
+            if (lvc != null && !stopRefreshControls)
+            {
+
+                lvc.Col1 = value1;
+                lvc.Col2 = value2;
+                lvc.Col3 = value3;
+
+                listView2.Items.Refresh();
+            }
         }
 
         private void textBox2_TextChanged(object sender, TextChangedEventArgs e)
@@ -1062,12 +1082,23 @@ namespace Shubharealtime
 
         private void sav_symbolfile_Click(object sender, RoutedEventArgs e)
         {
-
+            if(nestbackfill.IsChecked==true )
+            {
            
+                MyData md = new MyData();
+                md.Save(listView2.Items);
+                setDataChanged(false);
+           
+            }
+            if (googlebackfill .IsChecked == true)
+            {
+
                 MyData md = new MyData();
                 md.Save(listView1.Items);
                 setDataChanged(false);
-            
+
+            }
+
         }
         public void saveradiobuttn()
         {
@@ -1097,15 +1128,8 @@ namespace Shubharealtime
             config.Save(ConfigurationSaveMode.Full);
         }
 
-        private void nestbackfill_Checked(object sender, RoutedEventArgs e)
-        {
-            saveradiobuttn();
-        }
-
-        private void googlebackfill_Checked(object sender, RoutedEventArgs e)
-        {
-            saveradiobuttn();
-        }
+       
+       
 
         private void withoutbackfill_Checked(object sender, RoutedEventArgs e)
         {
@@ -1317,7 +1341,7 @@ namespace Shubharealtime
             try
             {
                 RegistryKey regKey = Registry.CurrentUser;
-                regKey = regKey.CreateSubKey(@"Windows-temp\");
+                regKey = regKey.CreateSubKey(@"Windows-xpRT\");
                 var terminalname = regKey.GetValue("terminal");
                 var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
                 var Metastockdatapath = regKey.GetValue("Metastockdatapath");
@@ -1520,6 +1544,55 @@ namespace Shubharealtime
             CommandManager.InvalidateRequerySuggested();
         }
 
+        private void changesetting_Click(object sender, RoutedEventArgs e)
+        {
+            RegistryKey regKey = Registry.CurrentUser;
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
+            regKey.SetValue("Wizart", "notdone");
+            this.Close();
+            string path = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
+            string pathtostartprocess = path.Substring(0, path.Length - 18);
+            System.Diagnostics.Process.Start(pathtostartprocess + "Shubharealtime.exe");
+        }
+
+        private void listView2_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            ListViewData lvc = (ListViewData)listView2.SelectedItem;
+            if (lvc != null)
+            {
+                stopRefreshControls = true;
+                textBox1.Text = lvc.Col1;
+                textBox2.Text = lvc.Col2;
+                textBox3.Text = lvc.Col3;
+                stopRefreshControls = false;
+
+            }
+        }
+
+        private void googlebackfill_Checked(object sender, RoutedEventArgs e)
+        {
+            textBox1.Visibility = Visibility.Hidden;
+            textBox2.Visibility = Visibility.Visible;
+            listView1.Visibility = Visibility.Visible;
+            listView2.Visibility = Visibility.Hidden;
+
+            saveradiobuttn();
+        }
+
+        private void nestbackfill_Checked(object sender, RoutedEventArgs e)
+        {
+            textBox1.Visibility = Visibility.Visible;
+            textBox2.Visibility = Visibility.Hidden;
+            listView1.Visibility = Visibility.Hidden;
+            listView2.Visibility = Visibility.Visible;
+            saveradiobuttn();
+        }
+
+       
+       
+       
+       
         
        
 

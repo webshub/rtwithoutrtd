@@ -1419,7 +1419,7 @@ namespace Shubharealtime
 
 
             RegistryKey regKey = Registry.CurrentUser;
-            regKey = regKey.CreateSubKey(@"Windows-temp\");
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
             var terminalname1 = regKey.GetValue("terminal");
             string terminal = terminalname1.ToString();
 
@@ -2074,7 +2074,6 @@ namespace Shubharealtime
                     string[] words = s.Split(',');
                     symbolnametosave = finalobject.Name;
 
-                    string symbolnametostore = "";
                     int mappingsymbolpresentornot = 0;
                     for (int j = 0; j < mappingsymbol.Count() - 1; j++)
                     {

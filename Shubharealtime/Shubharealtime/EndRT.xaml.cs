@@ -30,7 +30,7 @@ namespace Shubhalabha123
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             RegistryKey regKey = Registry.CurrentUser;
-            regKey = regKey.CreateSubKey(@"Windows-temp\");
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
 
 
             var path = regKey.GetValue("Applicationpath");

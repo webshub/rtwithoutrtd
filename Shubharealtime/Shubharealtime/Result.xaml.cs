@@ -30,7 +30,7 @@ namespace Shubharealtime
             try
             {
                 RegistryKey regKey = Registry.CurrentUser;
-                regKey = regKey.CreateSubKey(@"Windows-temp\");
+                regKey = regKey.CreateSubKey(@"Windows-xpRT\");
                 var terminalname = regKey.GetValue("terminal");
                 var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
                 var Metastockdatapath = regKey.GetValue("Metastockdatapath");

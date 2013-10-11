@@ -115,7 +115,7 @@ namespace Shubharealtime
             //regKey.SetValue("ApplicationID", "1");
 
             RegistryKey regKey = Registry.CurrentUser;
-            regKey = regKey.CreateSubKey(@"Windows-temp\");
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
             regKey.SetValue("sd", DateTime.Today.Date.ToString());
             regKey.SetValue("sp", "Key for xp");
             regKey.SetValue("ApplicationID", "1");

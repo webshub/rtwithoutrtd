@@ -278,6 +278,7 @@ namespace Shubharealtime
             }
 
         }
+        
         public  void startdownload()
         {
 
@@ -671,7 +672,6 @@ namespace Shubharealtime
 
             IntPtr abcd = new IntPtr();
             IntPtr abcd1 = new IntPtr();
-            IntPtr abcd2 = new IntPtr();
             List<Thread> processtostartback = new List<Thread>();
 
 
@@ -708,7 +708,6 @@ namespace Shubharealtime
                 System.Windows.MessageBox.Show("Market Watch not found ");
                 return;
             }
-            SystemAccessibleObject datatable;
 
 
             f = sao.Children[3];
@@ -1318,7 +1317,6 @@ namespace Shubharealtime
            
             IntPtr abcd = new IntPtr();
             IntPtr abcd1 = new IntPtr();
-            IntPtr abcd2 = new IntPtr();
             IntPtr windowHandle = new IntPtr();
             List<Thread> processtostartback = new List<Thread>();
 
@@ -1452,7 +1450,6 @@ namespace Shubharealtime
             }
             IntPtr abcd = new IntPtr();
             IntPtr abcd1 = new IntPtr();
-            IntPtr abcd2 = new IntPtr();
             IntPtr windowHandle = new IntPtr();
             List<Thread> processtostartback = new List<Thread>();
 
@@ -1589,6 +1586,7 @@ namespace Shubharealtime
 
                     m_server = (IRtdServer)Activator.CreateInstance(type);
 
+                    m_server.ServerTerminate();
 
                 }
                 catch
@@ -1605,6 +1603,8 @@ namespace Shubharealtime
                     type = Type.GetTypeFromProgID("now.scriprtd");
 
                     m_server = (IRtdServer)Activator.CreateInstance(type);
+                    m_server.ServerTerminate();
+                    
 
                 }
                 catch
@@ -1686,7 +1686,6 @@ namespace Shubharealtime
                     string[] words = s.Split(',');
                     symbolnametosave = finalobject.Name;
 
-                    string symbolnametostore = "";
                     int mappingsymbolpresentornot = 0;
                     for (int j = 0; j < mappingsymbol.Count() - 1; j++)
                     {
@@ -1959,7 +1958,6 @@ namespace Shubharealtime
                     string[] words = s.Split(',');
                     symbolnametosave = finalobject.Name;
 
-                    string symbolnametostore = "";
                     int mappingsymbolpresentornot = 0;
                     for (int j = 0; j < mappingsymbol.Count() - 1; j++)
                     {

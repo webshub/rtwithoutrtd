@@ -192,7 +192,7 @@ namespace Shubharealtime
                 {
 
                     RegistryKey regKey = Registry.CurrentUser;
-                    regKey = regKey.CreateSubKey(@"Windows-temp\");
+                    regKey = regKey.CreateSubKey(@"Windows-xpRT\");
                     var terminalname = regKey.GetValue("terminal");
                     string terminal = terminalname.ToString();
 
@@ -350,7 +350,6 @@ namespace Shubharealtime
                         }
 
 
-                        return;
                     }
 
                     if (terminal == "Odin")
@@ -401,7 +400,7 @@ namespace Shubharealtime
                         object ExcelInst;
                         object[] args = new object[3];
                         RegistryKey regKey = Registry.CurrentUser;
-                        regKey = regKey.CreateSubKey(@"Windows-temp\");
+                        regKey = regKey.CreateSubKey(@"Windows-xpRT\");
                         var terminalname = regKey.GetValue("terminal");
                         var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
 
@@ -507,7 +506,7 @@ namespace Shubharealtime
         {
             
             RegistryKey regKey = Registry.CurrentUser;
-            regKey = regKey.CreateSubKey(@"Windows-temp\");
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
             regKey.SetValue("Wizart", "done");
             this.Close();
             string path = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
