@@ -46,6 +46,7 @@ using System.Text.RegularExpressions;
 using System.Data.OleDb;
 
 using Microsoft.Win32;
+using System.Security.Principal;
 namespace Shubharealtime
 {
     /// <summary>
@@ -120,512 +121,612 @@ namespace Shubharealtime
         }
 
 
-        
+        private bool IsRunAsAdministrator()
+        {
+            var wi = WindowsIdentity.GetCurrent();
+            var wp = new WindowsPrincipal(wi);
+
+            return wp.IsInRole(WindowsBuiltInRole.Administrator);
+        }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ///////////////////////////////
-            //expiration
 
-            RegistryKey regKey = Registry.CurrentUser;
-            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
 
-            try
+            if (!IsRunAsAdministrator())
             {
+                // It is not possible to launch a ClickOnce app as administrator directly, so instead we launch the
+                // app as administrator in a new process.
+                var processInfo = new ProcessStartInfo(Assembly.GetExecutingAssembly().CodeBase);
+
+                // The following properties run the new process as administrator
+                processInfo.UseShellExecute = true;
+                processInfo.Verb = "runas";
+
+                // Start the new process
+                try
+                {
+                    Process.Start(processInfo);
+                }
+                catch (Exception)
+                {
+                    // The user did not allow the application to run as administrator
+                    System.Windows.MessageBox.Show("Sorry, this application must be run as Administrator.");
+                }
+
+                // Shut down the current process
+                System.Windows.Application.Current.Shutdown();
+            }
+            else
+            {
+
+                RegistryKey regKey = Registry.CurrentUser;
+                regKey = regKey.CreateSubKey(@"Windows-xpRT\");
+
                 var registerdate = regKey.GetValue("sd");
                 var paidornot = regKey.GetValue("sp");
 
-                DateTime reg = Convert.ToDateTime(registerdate);
-                reg = reg.AddDays(3);
-
-
-                if (reg < DateTime.Today.Date)
+                ///////////////////////////////
+                //expiration
+               
+                try
                 {
-                    Uri a = new System.Uri("http://besttester.com/lic/lic.html");
 
-                    // webBrowser1.Source = a;
-                    string credentials = "liccheck:lic123!@#";
-                    HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(a);
-                    request.Headers.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(credentials)));
-                    request.PreAuthenticate = true;
-                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
-                    StreamReader reader = new StreamReader(response.GetResponseStream());
-                    // System.Windows.MessageBox.Show(reader.ReadToEnd());
+                  
+                    regKey.SetValue("Wizart", "done");
 
-                    //System.Windows.MessageBox.Show(reader.ReadToEnd());
 
-                    string a1 = reader.ReadToEnd();
-                  //  System.Windows.MessageBox.Show(a1);
-                    //ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
-                    //ManagementObjectCollection moc = mos.Get();
-                    string motherBoard = "";
-                    //foreach (ManagementObject mo in moc)
-                    //{
-                    //  motherBoard = (string)mo["SerialNumber"];
-                    // //  motherBoard = (string)mo["VolumeSerialNumber"];
 
-                        
-                    //}
-                    System.Windows.MessageBox.Show ("Cheking Trail ");
-                    ManagementObject dsk = new ManagementObject(@"win32_logicaldisk.deviceid=""c:""");
-                    dsk.Get();
-                    string id = dsk["VolumeSerialNumber"].ToString();
-                    motherBoard = id;
-                    System.Windows.MessageBox.Show("Cheking done ");
-
-                    if (a1.Contains(motherBoard))
+                    try
                     {
-                        
+                       
+                        var chktmp = regKey.GetValue("ApplicationId");
 
-                        //if motherboard id is not present then it is paid user continue 
+                        //if user delete register entry then show login window agian 
+                        if (chktmp != null)
+                        {
+                            if (chktmp.ToString() == "1" && registerdate != null && paidornot != null)
+                            {
+
+                                this.Hide();
+                                Shubharealtime.Window1 w = new Window1();
+                                w.ShowDialog();
+                            }
+                            else
+                            {
+
+                                this.Hide();
+                                Shubharealtime.MainWindow w = new MainWindow();
+                                w.ShowDialog();
+                            }
+                        }
+                        else
+                        {
+                            this.Hide();
+                            Shubharealtime.MainWindow w = new MainWindow();
+                            w.ShowDialog();
+                        }
+
+
+
+
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+
+
+
+
+
+
+                  
+
+                    DateTime reg = Convert.ToDateTime(registerdate);
+                    reg = reg.AddDays(3);
+
+
+                    if (reg < DateTime.Today.Date)
+                    {
+                        Uri a = new System.Uri("http://besttester.com/lic/lic.html");
+
+                        // webBrowser1.Source = a;
+                        string credentials = "liccheck:lic123!@#";
+                        HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(a);
+                        request.Headers.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(credentials)));
+                        request.PreAuthenticate = true;
+                        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+                        StreamReader reader = new StreamReader(response.GetResponseStream());
+                        // System.Windows.MessageBox.Show(reader.ReadToEnd());
+
+                        //System.Windows.MessageBox.Show(reader.ReadToEnd());
+
+                        string a1 = reader.ReadToEnd();
+                        //  System.Windows.MessageBox.Show(a1);
+                        //ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
+                        //ManagementObjectCollection moc = mos.Get();
+                        string motherBoard = "";
+                        //foreach (ManagementObject mo in moc)
+                        //{
+                        //  motherBoard = (string)mo["SerialNumber"];
+                        // //  motherBoard = (string)mo["VolumeSerialNumber"];
+
+
+                        //}
+                        System.Windows.MessageBox.Show("Cheking Trail ");
+                        ManagementObject dsk = new ManagementObject(@"win32_logicaldisk.deviceid=""c:""");
+                        dsk.Get();
+                        string id = dsk["VolumeSerialNumber"].ToString();
+                        motherBoard = id;
+                        System.Windows.MessageBox.Show("Cheking done ");
+
+                        if (a1.Contains(motherBoard))
+                        {
+
+
+                            //if motherboard id is not present then it is paid user continue 
+                        }
+                        else
+                        {
+                            //if motherboard id is not present on server then close all process 
+                            System.Windows.Forms.MessageBox.Show("Trial version expired please contact to sales@shubhalabha.in ");
+                            closeallprocess();
+                        }
+
                     }
                     else
                     {
-                        //if motherboard id is not present on server then close all process 
-                       System.Windows.Forms.   MessageBox.Show("Trial version expired please contact to sales@shubhalabha.in ");
-                       closeallprocess();
+
                     }
 
+
+                    //if (paidornot.ToString() == "Key for xp")
+                    //{
+                    //    if (reg < DateTime.Today.Date)
+                    //    {
+                    //     System.Windows.Forms.   MessageBox.Show("Trial version expired please contact to sales@shubhalabha.in ");
+                    //        this.Close();
+                    //        Environment.Exit(0);
+                    //        return;
+                    //    }
+                    //    else
+                    //    {
+
+                    //    }
+
+                    //}
+                    //else
+                    //{
+                    //    if (paidornot.ToString() == "1001")
+                    //    {
+                    //    }
+                    //    else
+                    //    {
+                    //        System.Windows.Forms.MessageBox.Show("Trial version expired please contact to sales@shubhalabha.in ");
+                    //        this.Close();
+                    //        return;
+                    //    }
+
+                    //}
                 }
-                else
+                catch
                 {
-
+                    //  System.Windows.MessageBox.Show(ex.Message );
+                    System.Windows.MessageBox.Show("Please check internet connection we cant check registraion as your trail period expired ");
+                    // closeallprocess();
                 }
 
 
-                //if (paidornot.ToString() == "Key for xp")
-                //{
-                //    if (reg < DateTime.Today.Date)
-                //    {
-                //     System.Windows.Forms.   MessageBox.Show("Trial version expired please contact to sales@shubhalabha.in ");
-                //        this.Close();
-                //        Environment.Exit(0);
-                //        return;
-                //    }
-                //    else
-                //    {
-
-                //    }
-
-                //}
-                //else
-                //{
-                //    if (paidornot.ToString() == "1001")
-                //    {
-                //    }
-                //    else
-                //    {
-                //        System.Windows.Forms.MessageBox.Show("Trial version expired please contact to sales@shubhalabha.in ");
-                //        this.Close();
-                //        return;
-                //    }
-
-                //}
-            }
-            catch 
-            {
-              //  System.Windows.MessageBox.Show(ex.Message );
-               System.Windows.MessageBox.Show("Please check internet connection we cant check registraion as your trail period expired ");
-               // closeallprocess();
-            }
 
 
 
-           
+                /////////////////////////////
+                string targetpath = ConfigurationManager.AppSettings["targetpathforcombo"];
+                string amipath = ConfigurationManager.AppSettings["amipath"];
+                string terminalname = ConfigurationManager.AppSettings["terminalname"];
+                string chartingapp = ConfigurationManager.AppSettings["chartingapp"];
+                string timetosave = ConfigurationManager.AppSettings["timetoRT"];
 
-            /////////////////////////////
-            string targetpath = ConfigurationManager.AppSettings["targetpathforcombo"];
-            string amipath = ConfigurationManager.AppSettings["amipath"];
-            string terminalname = ConfigurationManager.AppSettings["terminalname"];
-            string chartingapp = ConfigurationManager.AppSettings["chartingapp"];
-            string timetosave = ConfigurationManager.AppSettings["timetoRT"];
+                string googleday = ConfigurationManager.AppSettings["Daysforgoogle"];
 
-            string googleday = ConfigurationManager.AppSettings["Daysforgoogle"];
+                string google_time = ConfigurationManager.AppSettings["google_time_frame"];
+                string nestback = ConfigurationManager.AppSettings["nestbackfill"];
+                string tradetiger1 = ConfigurationManager.AppSettings["tradetiger"];
 
-            string google_time = ConfigurationManager.AppSettings["google_time_frame"];
-            string nestback = ConfigurationManager.AppSettings["nestbackfill"];
-            string tradetiger1 = ConfigurationManager.AppSettings["tradetiger"];
-
-            string googleback = ConfigurationManager.AppSettings["googlebackfill"];
-            string withoutback = ConfigurationManager.AppSettings["withoutbackfill"];
-            withoutbackfill.IsChecked = true;
-          
-            if (nestback == "True")
-            {
-
-                nestbackfill.IsChecked = true;
-                listView1.Visibility = Visibility.Hidden;
-                listView2.Visibility = Visibility.Visible;
-            }
-            if (tradetiger1 == "True")
-            {
-                tradetiger.IsChecked = true;
-            }
-            if (googleback == "True")
-            {
-                googlebackfill.IsChecked = true;
-               
-                listView1.Visibility = Visibility.Visible;
-                listView2.Visibility = Visibility.Hidden;
-            }
-            if (withoutback == "True")
-            {
+                string googleback = ConfigurationManager.AppSettings["googlebackfill"];
+                string withoutback = ConfigurationManager.AppSettings["withoutbackfill"];
                 withoutbackfill.IsChecked = true;
-            }
 
-            try
-            {
-              
-                var terminalname1 = regKey.GetValue("terminal");
-                var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
-                var Metastockdatapath = regKey.GetValue("Metastockdatapath");
-                var Chartingapplication = regKey.GetValue("Chartingapplication");
-
-
-                var Amiexepath = regKey.GetValue("Amiexepath");
-                var backfill1 = regKey.GetValue("backfill");
-                string backfill = "Not present";
-                if (backfill1 != null)
+                if (nestback == "True")
                 {
-                    backfill = backfill1.ToString();
 
+                    nestbackfill.IsChecked = true;
+                    listView1.Visibility = Visibility.Hidden;
+                    listView2.Visibility = Visibility.Visible;
+                }
+                if (tradetiger1 == "True")
+                {
+                    tradetiger.IsChecked = true;
+                }
+                if (googleback == "True")
+                {
+                    googlebackfill.IsChecked = true;
+
+                    listView1.Visibility = Visibility.Visible;
+                    listView2.Visibility = Visibility.Hidden;
+                }
+                if (withoutback == "True")
+                {
+                    withoutbackfill.IsChecked = true;
                 }
 
-                amipath = Amibrokerdatapath.ToString();
-                terminalname = terminalname1.ToString();
-
-                if (backfill != "yes")
-                {
-                    nestbackfill.IsChecked = false;
-                    nestbackfill.IsEnabled = false;
-                }
-
-
-            }
-            catch
-            {
-            }
-
-          
-
-            //string targetpath = ConfigurationManager.AppSettings["targetpathforcombo"];
-            //string amipath = ConfigurationManager.AppSettings["amipath"];
-            //string terminalname=ConfigurationManager.AppSettings["terminalname"];
-            //string chartingapp = ConfigurationManager.AppSettings["chartingapp"];
-            //string timetosave = ConfigurationManager.AppSettings["timetoRT"];
-
-            //string googleday = ConfigurationManager.AppSettings["Daysforgoogle"];
-
-            //string google_time = ConfigurationManager.AppSettings["google_time_frame"];
-            //string nestback = ConfigurationManager.AppSettings["nestbackfill"];
-            //string tradetiger1 = ConfigurationManager.AppSettings["tradetiger"];
-
-            //string googleback = ConfigurationManager.AppSettings["googlebackfill"];
-            //string withoutback = ConfigurationManager.AppSettings["withoutbackfill"];
-
-          
-            ///////////////////////
-
-          
-            ////////////////////
-
-
-           
-            try
-            {
-                //ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
-                //ManagementObjectCollection moc = mos.Get();
-                //string motherBoard = "";
-                //ManagementObjectCollection mbsList = null;
-                //foreach (ManagementObject mo in moc)
-                //{
-                //    motherBoard = (string)mo["SerialNumber"];
-                //}
-
-                //ManagementObjectSearcher mbs = new ManagementObjectSearcher("Select * From Win32_processor");
-                //mbsList = mbs.Get();
-                //string id = "";
-                //foreach (ManagementObject mo in mbsList)
-                //{
-                //    id = mo["ProcessorID"].ToString();
-                //}
-
-                ManagementObject dsk = new ManagementObject(@"win32_logicaldisk.deviceid=""c:""");
-                dsk.Get();
-                string id = dsk["VolumeSerialNumber"].ToString();
-                moterboard.Text = id ;
-
-               
-
-
-
-
-
-                var terminalfromwizart1 = regKey.GetValue("terminal");
-                var Chartingappfromwizart1 = regKey.GetValue("chart");
-                string Chartingappfromwizart = "";
-                string terminalfromwizart = "";
                 try
                 {
-                    Chartingappfromwizart = Chartingappfromwizart1.ToString();
-                    terminalfromwizart = terminalfromwizart1.ToString();
+
+                    var terminalname1 = regKey.GetValue("terminal");
+                    var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
+                    var Metastockdatapath = regKey.GetValue("Metastockdatapath");
+                    var Chartingapplication = regKey.GetValue("Chartingapplication");
+
+
+                    var Amiexepath = regKey.GetValue("Amiexepath");
+                    var backfill1 = regKey.GetValue("backfill");
+                    string backfill = "Not present";
+                    if (backfill1 != null)
+                    {
+                        backfill = backfill1.ToString();
+
+                    }
+
+                    amipath = Amibrokerdatapath.ToString();
+                    terminalname = terminalname1.ToString();
+
+                    if (backfill != "yes")
+                    {
+                        nestbackfill.IsChecked = false;
+                        nestbackfill.IsEnabled = false;
+                    }
+
+
+                }
+                catch
+                {
+                }
+
+
+
+                //string targetpath = ConfigurationManager.AppSettings["targetpathforcombo"];
+                //string amipath = ConfigurationManager.AppSettings["amipath"];
+                //string terminalname=ConfigurationManager.AppSettings["terminalname"];
+                //string chartingapp = ConfigurationManager.AppSettings["chartingapp"];
+                //string timetosave = ConfigurationManager.AppSettings["timetoRT"];
+
+                //string googleday = ConfigurationManager.AppSettings["Daysforgoogle"];
+
+                //string google_time = ConfigurationManager.AppSettings["google_time_frame"];
+                //string nestback = ConfigurationManager.AppSettings["nestbackfill"];
+                //string tradetiger1 = ConfigurationManager.AppSettings["tradetiger"];
+
+                //string googleback = ConfigurationManager.AppSettings["googlebackfill"];
+                //string withoutback = ConfigurationManager.AppSettings["withoutbackfill"];
+
+
+                ///////////////////////
+
+
+                ////////////////////
+
+
+
+                try
+                {
+                    //ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
+                    //ManagementObjectCollection moc = mos.Get();
+                    //string motherBoard = "";
+                    //ManagementObjectCollection mbsList = null;
+                    //foreach (ManagementObject mo in moc)
+                    //{
+                    //    motherBoard = (string)mo["SerialNumber"];
+                    //}
+
+                    //ManagementObjectSearcher mbs = new ManagementObjectSearcher("Select * From Win32_processor");
+                    //mbsList = mbs.Get();
+                    //string id = "";
+                    //foreach (ManagementObject mo in mbsList)
+                    //{
+                    //    id = mo["ProcessorID"].ToString();
+                    //}
+
+                    ManagementObject dsk = new ManagementObject(@"win32_logicaldisk.deviceid=""c:""");
+                    dsk.Get();
+                    string id = dsk["VolumeSerialNumber"].ToString();
+                    moterboard.Text = id;
+
+
+
+
+
+
+
+                    var terminalfromwizart1 = regKey.GetValue("terminal");
+                    var Chartingappfromwizart1 = regKey.GetValue("chart");
+                    string Chartingappfromwizart = "";
+                    string terminalfromwizart = "";
+                    try
+                    {
+                        Chartingappfromwizart = Chartingappfromwizart1.ToString();
+                        terminalfromwizart = terminalfromwizart1.ToString();
+                    }
+                    catch
+                    {
+
+                    }
+
+
+                    if (terminalfromwizart == "NEST")
+                    {
+                        RTD_server_name.SelectedIndex = 0;
+                    }
+                    if (terminalfromwizart == "NOW")
+                    {
+                        RTD_server_name.SelectedIndex = 1;
+                    }
+                    if (amipath != null)
+                    {
+                        db_path.Text = amipath;
+
+                    }
+                    else
+                    {
+                        db_path.Text = "C:\\myshubhalabha\\amirealtime";
+                    }
+
+                    if (!Directory.Exists(targetpath + "\\sharekhan"))
+                    {
+                        Directory.CreateDirectory(targetpath + "\\sharekhan");
+                    }
+
+                    if (!Directory.Exists(targetpath + "\\odin"))
+                    {
+                        Directory.CreateDirectory(targetpath + "\\odin");
+                    }
+                    if (!Directory.Exists(targetpath + "\\nest-now"))
+                    {
+                        Directory.CreateDirectory(targetpath + "\\nest-now");
+                    }
+
+
+                }
+                catch
+                {
+                }
+
+
+
+
+                try
+                {
+
+                    string filepath = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
+                    string processtostart = filepath.Substring(0, filepath.Length - 18) + "sharekhantoami.xlsm";
+
+                    File.Copy(processtostart, targetpath + "\\sharekhantoami.xlsm", true);
+                    if (!Directory.Exists("C:\\myshubhalabha\\amirealtime"))
+                    {
+                        Directory.CreateDirectory("C:\\myshubhalabha\\amirealtime");
+                    }
+                    if (!Directory.Exists("C:\\myshubhalabha\\amibroker format file"))
+                    {
+                        Directory.CreateDirectory("C:\\myshubhalabha\\amibroker format file");
+                    }
+
+                    string programfilepath = ProgramFilesx86();
+
+                    File.Copy(processtostart, "C:\\myshubhalabha\\sharekhantoami.xlsm", true);
+
+                    processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhaodin.xlsm";
+
+
+                    File.Copy(processtostart, targetpath + "\\shubhaodin.xlsm", true);
+                    File.Copy(processtostart, "C:\\shubhaodin.xlsm", true);
+
+                    processtostart = filepath.Substring(0, filepath.Length - 18) + "ExcelLogin.exe";
+
+                    File.Copy(processtostart, targetpath + "\\ExcelLogin.exe", true);
+                    File.Copy(processtostart, "C:\\ExcelLogin.exe", true);
+                    File.Copy(processtostart, "C:\\myshubhalabha\\ExcelLogin.exe", true);
+
+                    processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhaxls.format";
+
+
+                    File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\shubhaxls.format", true);
+                    File.Copy(processtostart, programfilepath + "\\AmiBroker\\Formats\\shubhaxls.format", true);
+
+                    processtostart = filepath.Substring(0, filepath.Length - 18) + "Shubhasharekhan.format";
+
+
+                    File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\Shubhasharekhan.format", true);
+                    File.Copy(processtostart, programfilepath + "\\AmiBroker\\Formats\\Shubhasharekhan.format", true);
+
+                    processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhanest-now.format";
+                    File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\shubhanest-now.format", true);
+                    File.Copy(processtostart, programfilepath + "\\AmiBroker\\Formats\\shubhanest-now.format", true);
+
+                    processtostart = filepath.Substring(0, filepath.Length - 18) + "ShubhaRt.format";
+                    File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\ShubhaRt.format", true);
+                    File.Copy(processtostart, programfilepath + "\\AmiBroker\\Formats\\ShubhaRt.format", true);
+
+                    processtostart = filepath.Substring(0, filepath.Length - 18) + "Shubhabackfill.format";
+                    File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\Shubhabackfill.format", true);
+                    File.Copy(processtostart, programfilepath + "\\AmiBroker\\Formats\\Shubhabackfill.format", true);
+
+                    //samples 
+
+                    if (!Directory.Exists("C:\\myshubhalabha\\samples"))
+                    {
+                        Directory.CreateDirectory("C:\\myshubhalabha\\samples");
+                    }
+                    processtostart = filepath.Substring(0, filepath.Length - 18) + "ShubhaOdin.txt";
+                    File.Copy(processtostart, "C:\\myshubhalabha\\samples\\ShubhaOdin.txt", true);
+
+                    processtostart = filepath.Substring(0, filepath.Length - 18) + "Googlebackfill.csv";
+                    File.Copy(processtostart, "C:\\myshubhalabha\\samples\\Googlebackfill.csv", true);
+
+
+                    processtostart = filepath.Substring(0, filepath.Length - 18) + "realtimefchart.csv";
+                    File.Copy(processtostart, "C:\\myshubhalabha\\samples\\realtimefchart.csv", true);
+
+                    processtostart = filepath.Substring(0, filepath.Length - 18) + "realtimemetastock.csv";
+                    File.Copy(processtostart, "C:\\myshubhalabha\\samples\\realtimemetastock.csv", true);
+
+                    processtostart = filepath.Substring(0, filepath.Length - 18) + "AmibrokerRTdata.txt";
+                    File.Copy(processtostart, "C:\\myshubhalabha\\samples\\AmibrokerRTdata.txt", true);
+
+
+                    processtostart = filepath.Substring(0, filepath.Length - 18) + "Shubhasharekhan.txt";
+                    File.Copy(processtostart, "C:\\myshubhalabha\\samples\\Shubhasharekhan.txt", true);
+
+
+
+
+                }
+                catch
+                {
+                }
+
+
+
+
+
+                //if (targetpath != null)
+                //{
+                //    txtTargetFolder.Text = targetpath;
+                //}
+                try
+                {
+                    System.Net.WebRequest myRequest = System.Net.WebRequest.Create("http://www.Google.co.in");
+                    System.Net.WebResponse myResponse = myRequest.GetResponse();
+
+
+                    Uri a = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=18&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
+                    Uri a1 = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=17&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
+                    Uri a2 = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=17&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
+                    Uri a3 = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=17&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
+                    Uri piwikvisit = new System.Uri("http://list.shubhalabha.in/withoutrtd.html");
+
+                    wad1.Source = a1;
+
+                    wad2.Source = a2;
+                    wad3.Source = a3;
+
+                    wad4.Source = a1;
+
+                    wad5.Source = a2;
+                    wad6.Source = a3;
+
+                    wad7.Source = a1;
+
+                    wad8.Source = a2;
+                    wad9.Source = a3;
+
+                    piwik.Source = piwikvisit;
+                    //  wad4.Source = a4;
+
+
                 }
                 catch
                 {
 
-                }
-                
 
-                if (terminalfromwizart == "NEST")
-                 {
-                     RTD_server_name.SelectedIndex = 0;
-                 }
-                if (terminalfromwizart == "NOW")
-                 {
-                     RTD_server_name.SelectedIndex = 1;
-                 }
-                if (amipath != null)
+                    wad1.Visibility = Visibility.Hidden;
+                    wad2.Visibility = Visibility.Hidden;
+                    wad3.Visibility = Visibility.Hidden;
+                    wad4.Visibility = Visibility.Hidden;
+                    wad5.Visibility = Visibility.Hidden;
+                    wad6.Visibility = Visibility.Hidden;
+                    wad7.Visibility = Visibility.Hidden;
+                    wad8.Visibility = Visibility.Hidden;
+                    wad9.Visibility = Visibility.Hidden;
+
+                }
+
+                System.IO.StreamReader objReader = new StreamReader("C:\\myshubhalabha\\Notice.txt");
+
+
+
+                RTD_server_name.Items.Add("NEST");
+                RTD_server_name.Items.Add("NOW");
+
+
+                Format_cb.Items.Add("Amibroker");
+                Format_cb.Items.Add("Metastock");
+                Format_cb.Items.Add("Fchart");
+
+                Format_cb.SelectedIndex = 0;
+
+                for (int i = 1; i < 60; i++)
                 {
-                    db_path.Text = amipath;
-
+                    timetoRT.Items.Add(i);
                 }
-                else
+
+                try
                 {
-                    db_path.Text = "C:\\myshubhalabha\\amirealtime";
+
+                    string filepath = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
+                    string processtostart = filepath.Substring(0, filepath.Length - 18) + "asc2ms.exe";
+
+                    File.Copy(processtostart, "C:\\asc2ms.exe", true);
+                    File.Copy(processtostart, "C:\\Windows\\System32\\asc2ms.exe", true);
+
+
+                    processtostart = filepath.Substring(0, filepath.Length - 18) + "pthread.dll";
+
+                    File.Copy(processtostart, "C:\\pthread.dll", true);
+                    File.Copy(processtostart, "C:\\Windows\\System32\\pthread.dll", true);
+
+                    processtostart = filepath.Substring(0, filepath.Length - 18) + "pthreadGC2.dll";
+
+                    File.Copy(processtostart, "C:\\Windows\\System32\\pthreadGC2.dll", true);
+
+
+
                 }
-               
-                if (!Directory.Exists(targetpath + "\\sharekhan"))
+                catch
                 {
-                    Directory.CreateDirectory(targetpath + "\\sharekhan");
                 }
 
-                if (!Directory.Exists(targetpath + "\\odin"))
+                try
                 {
-                    Directory.CreateDirectory(targetpath + "\\odin");
+                    if (chartingapp == null)
+                    {
+                        Format_cb.SelectedIndex = 0;
+
+                    }
+                    else
+                    {
+                        Format_cb.SelectedItem = chartingapp;
+                    }
+                    if (timetosave == null)
+                    {
+                        timetoRT.SelectedIndex = 0;
+
+                    }
+                    else
+                    {
+                        timetoRT.SelectedIndex = Convert.ToInt32(timetosave) - 1;
+                    }
+
                 }
-                if (!Directory.Exists(targetpath + "\\nest-now"))
+                catch
                 {
-                    Directory.CreateDirectory(targetpath + "\\nest-now");
                 }
 
 
-            }
-            catch
-            {
-            }
-           
-
-           
-            
-            try
-            {
-
-                string filepath = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
-                string processtostart = filepath.Substring(0, filepath.Length - 18) + "sharekhantoami.xlsm";
-
-                File.Copy(processtostart, targetpath + "\\sharekhantoami.xlsm", true);
-                if(!Directory.Exists("C:\\myshubhalabha\\amirealtime"))
-                {
-                    Directory.CreateDirectory("C:\\myshubhalabha\\amirealtime");
-                }
-                if (!Directory.Exists("C:\\myshubhalabha\\amibroker format file"))
-                {
-                    Directory.CreateDirectory("C:\\myshubhalabha\\amibroker format file");
-                }
-
-                string programfilepath = ProgramFilesx86();
-                
-                File.Copy(processtostart, "C:\\myshubhalabha\\sharekhantoami.xlsm", true);
-
-                processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhaodin.xlsm";
-
-
-                 File.Copy(processtostart, targetpath + "\\shubhaodin.xlsm", true);
-                 File.Copy(processtostart, "C:\\shubhaodin.xlsm", true);
-
-                 processtostart = filepath.Substring(0, filepath.Length - 18) + "ExcelLogin.exe";
-
-                 File.Copy(processtostart, targetpath + "\\ExcelLogin.exe", true);
-                 File.Copy(processtostart, "C:\\ExcelLogin.exe", true);
-                 File.Copy(processtostart, "C:\\myshubhalabha\\ExcelLogin.exe", true);
-
-                 processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhaxls.format";
-
-
-                 File.Copy(processtostart,  "C:\\myshubhalabha\\amibroker format file\\shubhaxls.format", true);
-                 File.Copy(processtostart,programfilepath+"\\AmiBroker\\Formats\\shubhaxls.format", true);
-
-                 processtostart = filepath.Substring(0, filepath.Length - 18) + "Shubhasharekhan.format";
-
-
-                 File.Copy(processtostart,  "C:\\myshubhalabha\\amibroker format file\\Shubhasharekhan.format", true);
-                 File.Copy(processtostart, programfilepath+"\\AmiBroker\\Formats\\Shubhasharekhan.format", true);
-
-                 processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhanest-now.format";
-                 File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\shubhanest-now.format", true);
-                 File.Copy(processtostart, programfilepath+"\\AmiBroker\\Formats\\shubhanest-now.format", true);
-
-                 processtostart = filepath.Substring(0, filepath.Length - 18) + "ShubhaRt.format";
-                 File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\ShubhaRt.format", true);
-                 File.Copy(processtostart, programfilepath+"\\AmiBroker\\Formats\\ShubhaRt.format", true);
-
-                 processtostart = filepath.Substring(0, filepath.Length - 18) + "Shubhabackfill.format";
-                 File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\Shubhabackfill.format", true);
-                 File.Copy(processtostart, programfilepath+"\\AmiBroker\\Formats\\Shubhabackfill.format", true);
-
-                //samples 
-
-                 if (!Directory.Exists("C:\\myshubhalabha\\samples"))
-                 {
-                     Directory.CreateDirectory("C:\\myshubhalabha\\samples");
-                 }
-                 processtostart = filepath.Substring(0, filepath.Length - 18) + "ShubhaOdin.txt";
-                 File.Copy(processtostart, "C:\\myshubhalabha\\samples\\ShubhaOdin.txt", true);
-
-                 processtostart = filepath.Substring(0, filepath.Length - 18) + "Googlebackfill.csv";
-                 File.Copy(processtostart, "C:\\myshubhalabha\\samples\\Googlebackfill.csv", true);
-
-
-                       processtostart = filepath.Substring(0, filepath.Length - 18) + "realtimefchart.csv";
-                 File.Copy(processtostart, "C:\\myshubhalabha\\samples\\realtimefchart.csv", true);
-
-                         processtostart = filepath.Substring(0, filepath.Length - 18) + "realtimemetastock.csv";
-                 File.Copy(processtostart, "C:\\myshubhalabha\\samples\\realtimemetastock.csv", true);
-
-                 processtostart = filepath.Substring(0, filepath.Length - 18) + "AmibrokerRTdata.txt";
-                 File.Copy(processtostart, "C:\\myshubhalabha\\samples\\AmibrokerRTdata.txt", true);
-
-
-                 processtostart = filepath.Substring(0, filepath.Length - 18) + "Shubhasharekhan.txt";
-                 File.Copy(processtostart, "C:\\myshubhalabha\\samples\\Shubhasharekhan.txt", true);
-
-
-                
-                
-            }
-            catch
-            {
-            }
-            for (int i = 0; i < 12; i++)
-            {
-                GHRS.Items.Add(i);
-            }
-
-            for (int i = 0; i < 60; i++)
-            {
-                GMIN.Items.Add(i);
-            }
-           
-
-            //if (targetpath != null)
-            //{
-            //    txtTargetFolder.Text = targetpath;
-            //}
-            try
-            {
-                System.Net.WebRequest myRequest = System.Net.WebRequest.Create("http://www.Google.co.in");
-                System.Net.WebResponse myResponse = myRequest.GetResponse();
-
-
-                Uri a = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=18&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
-                Uri a1 = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=17&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
-                Uri a2 = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=17&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
-                Uri a3 = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=17&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
-                Uri piwikvisit = new System.Uri("http://list.shubhalabha.in/withoutrtd.html");
-                
-                wad1.Source = a1;
-
-                wad2.Source = a2;
-                wad3.Source = a3;
-                piwik.Source  = piwikvisit;
-                //  wad4.Source = a4;
-
-
-            }
-            catch
-            {
-
-
-                wad1.Visibility = Visibility.Hidden;
-                wad2.Visibility = Visibility.Hidden;
-                wad3.Visibility = Visibility.Hidden;
-
-            }
-            
-            
-            
-            RTD_server_name.Items.Add("NEST");
-            RTD_server_name.Items.Add("NOW");
-
-          
-            Format_cb.Items.Add("Amibroker");
-            Format_cb.Items.Add("Metastock");
-            Format_cb.Items.Add("Fchart");
-
-            Format_cb.SelectedIndex = 0;
-
-            for (int i = 1; i < 60; i++)
-            {
-                timetoRT.Items.Add(i);
-            }
-
-            try
-            {
-
-                string filepath = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
-                string processtostart = filepath.Substring(0, filepath.Length - 18) + "asc2ms.exe";
-
-                File.Copy(processtostart,"C:\\asc2ms.exe", true);
-                File.Copy(processtostart, "C:\\Windows\\System32\\asc2ms.exe", true);
-
-
-                processtostart = filepath.Substring(0, filepath.Length - 18) + "pthread.dll";
-
-                File.Copy(processtostart,"C:\\pthread.dll", true);
-                File.Copy(processtostart, "C:\\Windows\\System32\\pthread.dll", true);
-
-                processtostart = filepath.Substring(0, filepath.Length - 18) + "pthreadGC2.dll";
-
-                File.Copy(processtostart, "C:\\Windows\\System32\\pthreadGC2.dll", true);
-
-
-
-            }
-            catch
-            {
-            }
-
-            try
-            {
-                if (chartingapp == null)
-                {
-                    Format_cb.SelectedIndex = 0;
-
-                }
-                else
-                {
-                    Format_cb.SelectedItem  = chartingapp;
-                }
-                if (timetosave == null)
-                {
-                    timetoRT.SelectedIndex = 0;
-
-                }
-                else
-                {
-                    timetoRT.SelectedIndex = Convert.ToInt32(timetosave) - 1;
-                }
-               
-            }
-            catch
-            {
             }
 
 
         }
-
-
-
         void wb_LoadCompleted(object sender, NavigationEventArgs e)
         {
             string script = "document.body.style.overflow ='hidden'";
@@ -1549,6 +1650,7 @@ namespace Shubharealtime
             RegistryKey regKey = Registry.CurrentUser;
             regKey = regKey.CreateSubKey(@"Windows-xpRT\");
             regKey.SetValue("Wizart", "notdone");
+
             this.Close();
             string path = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
             string pathtostartprocess = path.Substring(0, path.Length - 18);
@@ -1576,7 +1678,9 @@ namespace Shubharealtime
             textBox2.Visibility = Visibility.Visible;
             listView1.Visibility = Visibility.Visible;
             listView2.Visibility = Visibility.Hidden;
+            tradetigerbanner.Visibility = Visibility.Hidden;
 
+            tradetigerinfo.Visibility = Visibility.Hidden;
             saveradiobuttn();
         }
 
@@ -1586,7 +1690,19 @@ namespace Shubharealtime
             textBox2.Visibility = Visibility.Hidden;
             listView1.Visibility = Visibility.Hidden;
             listView2.Visibility = Visibility.Visible;
+
+            tradetigerbanner.Visibility = Visibility.Hidden;
+            
+            tradetigerinfo.Visibility = Visibility.Hidden;
             saveradiobuttn();
+        }
+
+        private void tradetiger_Checked_1(object sender, RoutedEventArgs e)
+        {
+            tradetigerbanner.Visibility = Visibility.Visible;
+            Shubhalabha123.Tradetigerinformation t=new Shubhalabha123.Tradetigerinformation();
+            tradetigerinfo.Children.Add(t);
+            tradetigerinfo.Visibility = Visibility.Visible;
         }
 
        

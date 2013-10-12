@@ -33,10 +33,42 @@ namespace Shubharealtime
             string filepath = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
             string leadurl = filepath.Substring(0, filepath.Length - 18) + "realtimereg.html";
             Uri a3 = new System.Uri("http://shubhalabha.in/real/realtimereg.html");
-            lead.Source = a3 ;
+            try
+            {
+                
+                lead.Source = a3;
+            }
+            catch
+            {
+
+            }
+
+
+            try
+            {
+                System.Net.WebRequest myRequest = System.Net.WebRequest.Create("http://www.Google.co.in");
+                System.Net.WebResponse myResponse = myRequest.GetResponse();
+                Uri a = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=22&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
+                //  Uri a = new System.Uri(" http://shubhalabha.in/products-2/");
+
+                advertisement.Source = a;
+                //  wad4.Source = a4;
+
+
+            }
+            catch
+            {
+
+
+                advertisement.Visibility = Visibility.Hidden;
+
+
+            }
             
         }
        
+
+
         private void Login_btn_Click(object sender, RoutedEventArgs e)
         {
               //user authentication
@@ -127,6 +159,13 @@ namespace Shubharealtime
             
         }
 
+        void wb_LoadCompleted(object sender,System.Windows.Navigation. NavigationEventArgs e)
+        {
+            string script = "document.body.style.overflow ='hidden'";
+            System.Windows.Controls.WebBrowser wb = (System.Windows.Controls.WebBrowser)sender;
+            wb.InvokeScript("execScript", new Object[] { script, "JavaScript" });
+        }
+
         private void Regiser_btn_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start("http://shubhalabha.in/community/wp-login.php?action=register");
@@ -146,6 +185,12 @@ namespace Shubharealtime
 
         private void lead_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
+
+            if(lead==null )
+            {
+                throw new ArgumentNullException("browser");
+            }
+
             if (lead.Source.ToString() == "http://shubhalabha.in/eng/crm/index.php?entryPoint=WebToLeadCapture")
             {
                 SetRegKey();
@@ -162,6 +207,11 @@ namespace Shubharealtime
         }
 
         private void Window_Closed(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void Window_Unloaded(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
         }

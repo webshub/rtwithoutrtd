@@ -106,6 +106,9 @@ namespace Shubharealtime
 
                 try
                 {
+                    notagree.IsChecked = true;
+
+
                     if (!Directory.Exists("C:\\myshubhalabha\\amirealtime"))
                     {
                         Directory.CreateDirectory("C:\\myshubhalabha\\amirealtime");
@@ -120,9 +123,15 @@ namespace Shubharealtime
                     string processtostart = "";
                     string programfilepath = ProgramFilesx86();
 
+
+                    processtostart = filepath.Substring(0, filepath.Length - 18) + "Notice.txt";
+
+
+                    File.Copy(processtostart, "C:\\myshubhalabha\\Notice.txt", true);
+
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhaxls.format";
 
-
+                    
                     File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\shubhaxls.format", true);
                     File.Copy(processtostart, programfilepath + "\\AmiBroker\\Formats\\shubhaxls.format", true);
 
@@ -154,7 +163,10 @@ namespace Shubharealtime
                 try
                 {
 
-                    Introduction n = new Introduction();
+                    //Shubhalabha123.Regidtartion r = new Shubhalabha123.Regidtartion();
+                    //stackcontainer.Children.Add(r);
+
+                    Shubhalabha123.GNUGPL n = new Shubhalabha123.GNUGPL();
                     stackcontainer.Children.Add(n);
                 }
                 catch
@@ -169,7 +181,37 @@ namespace Shubharealtime
             try
             {
                 Rsult_lbl.Content = "";
+
                 if (nextcount == 0)
+                {
+
+                    if(agree.IsChecked==false )
+                    {
+                        return ;
+
+                    }
+
+                    agree.Visibility = Visibility.Hidden;
+                    notagree.Visibility = Visibility.Hidden;
+                        
+
+                    try
+                    {
+                        stackcontainer.Children.RemoveAt(0);
+                    }
+                    catch
+                    {
+                    }
+                    Introduction n = new Introduction();
+                    stackcontainer.Children.Add(n);
+                    nextcount++;
+                    backButton.IsEnabled = true;
+
+
+                    return;
+                }
+
+                if (nextcount == 1)
                 {
                     try
                     {
@@ -188,7 +230,7 @@ namespace Shubharealtime
 
 
                 }
-                if (nextcount == 1)
+                if (nextcount == 2)
                 {
 
                     RegistryKey regKey = Registry.CurrentUser;
@@ -391,7 +433,7 @@ namespace Shubharealtime
 
                 }
 
-                if (nextcount == 2)
+                if (nextcount == 3)
                 {
                     ///for checking amibroker database path
                     try
@@ -454,8 +496,9 @@ namespace Shubharealtime
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            if (nextcount == 3)
+            if (nextcount == 4)
             {
+               
                 try
                 {
                     stackcontainer.Children.RemoveAt(0);
@@ -463,13 +506,14 @@ namespace Shubharealtime
                 catch
                 {
                 }
+
                 Chartingapllication c = new Chartingapllication();
                 stackcontainer.Children.Add(c);
                 nextcount--;
-
+                nextButtonforterminal.IsEnabled = true;
                 return;
             }
-            if (nextcount == 2)
+            if (nextcount == 3)
             {
                 finish.IsEnabled = false ;
                 nextButtonforterminal.IsEnabled = true;
@@ -485,7 +529,7 @@ namespace Shubharealtime
                 nextcount--;
                 return;
             }
-            if (nextcount == 1)
+            if (nextcount == 2)
             {
                 try
                 {
@@ -500,6 +544,25 @@ namespace Shubharealtime
                 nextcount--;
                 return;
             }
+
+
+            if (nextcount == 1)
+            {
+                try
+                {
+                    stackcontainer.Children.RemoveAt(0);
+                }
+                catch
+                {
+                }
+                agree.Visibility = Visibility.Visible;
+                notagree.Visibility = Visibility.Visible;
+                Shubhalabha123.GNUGPL  c = new  Shubhalabha123.GNUGPL ();
+                stackcontainer.Children.Add(c);
+                nextcount--;
+                return;
+            }
+
         }
 
         private void finish_Click(object sender, RoutedEventArgs e)
@@ -508,10 +571,53 @@ namespace Shubharealtime
             RegistryKey regKey = Registry.CurrentUser;
             regKey = regKey.CreateSubKey(@"Windows-xpRT\");
             regKey.SetValue("Wizart", "done");
+
+
+          
+            try
+            {
+                var registerdate = regKey.GetValue("sd");
+                var paidornot = regKey.GetValue("sp");
+
+                var chktmp = regKey.GetValue("ApplicationId");
+
+                //if user delete register entry then show login window agian 
+                if (chktmp != null)
+                {
+                    if (chktmp.ToString() == "1" && registerdate != null && paidornot != null)
+                    {
+
+                        this.Hide();
+                        Shubharealtime.Window1 w = new Window1();
+                        w.ShowDialog();
+                    }
+                    else
+                    {
+
+                        this.Hide();
+                        Shubharealtime.MainWindow w = new MainWindow();
+                        w.ShowDialog();
+                    }
+                }
+                else
+                {
+                    this.Hide();
+                    Shubharealtime.MainWindow w = new MainWindow();
+                    w.ShowDialog();
+                }
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+            }
+
             this.Close();
-            string path = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
-            string pathtostartprocess = path.Substring(0, path.Length - 18);
-            System.Diagnostics.Process.Start(pathtostartprocess + "Shubharealtime.exe");
+            //string path = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
+            //string pathtostartprocess = path.Substring(0, path.Length - 18);
+            //System.Diagnostics.Process.Start(pathtostartprocess + "Shubharealtime.exe");
 
         }
     }

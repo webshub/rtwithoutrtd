@@ -581,30 +581,29 @@ namespace Shubharealtime
 
                 string[] nestnowfilePaths = Directory.GetFiles(@"C:\myshubhalabha\GoogleBackfill\", "*.csv");
 
-                if (chartingaplication == "Amibroker")
+
+
+                ExcelType = Type.GetTypeFromProgID("Broker.Application");
+                ExcelInst = Activator.CreateInstance(ExcelType);
+                ExcelType.InvokeMember("Visible", BindingFlags.SetProperty, null,
+                          ExcelInst, new object[1] { true });
+
+                ExcelType.InvokeMember("LoadDatabase", BindingFlags.InvokeMethod | BindingFlags.Public, null,
+                    ExcelInst, new string[1] { amipath });
+
+                for (int i = 0; i < nestnowfilePaths.Count(); i++)
                 {
 
-                    ExcelType = Type.GetTypeFromProgID("Broker.Application");
-                    ExcelInst = Activator.CreateInstance(ExcelType);
-                    ExcelType.InvokeMember("Visible", BindingFlags.SetProperty, null,
-                              ExcelInst, new object[1] { true });
-
-                    ExcelType.InvokeMember("LoadDatabase", BindingFlags.InvokeMethod | BindingFlags.Public, null,
-                        ExcelInst, new string[1] { amipath });
-
-                    for (int i = 0; i < nestnowfilePaths.Count(); i++)
-                    {
-
-                        args[0] = Convert.ToInt16(0);
-                        args[1] = nestnowfilePaths[i];
-                        args[2] = "Shubhabackfill.format";
+                    args[0] = Convert.ToInt16(0);
+                    args[1] = nestnowfilePaths[i];
+                    args[2] = "Shubhabackfill.format";
 
 
-                        ExcelType.InvokeMember("Import", BindingFlags.InvokeMethod | BindingFlags.Public, null,
-                                  ExcelInst, args);
-                    }
-
+                    ExcelType.InvokeMember("Import", BindingFlags.InvokeMethod | BindingFlags.Public, null,
+                              ExcelInst, args);
                 }
+
+
             }
             else if (withoutback == "True")
             {

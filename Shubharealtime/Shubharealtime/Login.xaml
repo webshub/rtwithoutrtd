@@ -1,7 +1,8 @@
 ﻿<Window x:Class="Shubharealtime.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Shubha Real Time" Height="260" Width="715" Loaded="Window_Loaded" Background="#FFE9E9F5" WindowStartupLocation="CenterScreen">
+         
+        Title="Shubha Real Time" Height="612" Width="715" Loaded="Window_Loaded" Background="#FFE9E9F5" WindowStartupLocation="CenterScreen" Unloaded="Window_Unloaded">
     <Grid>
         <Label Content="Shubha Downloader " FontSize="15" Foreground="SteelBlue" Height="28" HorizontalAlignment="Left" Margin="81,10,0,0" Name="label1" VerticalAlignment="Top" Visibility="Hidden" />
         <Label Content="User Name :" Foreground="SteelBlue" Height="28" HorizontalAlignment="Left" Margin="29,67,0,0" Name="label2" VerticalAlignment="Top" Visibility="Hidden" />
@@ -12,7 +13,8 @@
         <Button Content="Register" Height="23" HorizontalAlignment="Left" Margin="37,177,0,0" Name="Regiser_btn" TabIndex="4" VerticalAlignment="Top" Width="75" Click="Regiser_btn_Click" Visibility="Hidden" />
         <PasswordBox Height="23" HorizontalAlignment="Left" Margin="106,124,0,0" Name="password" TabIndex="2" VerticalAlignment="Top" Width="180" Visibility="Hidden" />
         <Border BorderBrush="Silver" BorderThickness="2" Height="17" HorizontalAlignment="Left" Margin="10,44,0,0" Name="border1" VerticalAlignment="Top" Width="308" Visibility="Hidden"></Border>
-        <WebBrowser Name="lead"  ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.IsDeferredScrollingEnabled="False" Width="715" VerticalAlignment="Stretch" HorizontalAlignment="Center" Margin="3,-1,-15,2" Loaded="lead_Loaded" Navigated="lead_Navigated"></WebBrowser>
+        <WebBrowser Name="lead" LoadCompleted="wb_LoadCompleted" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.IsDeferredScrollingEnabled="False" Width="693" VerticalAlignment="Stretch" HorizontalAlignment="Center" Margin="0,1,0,307" Loaded="lead_Loaded" Navigated="lead_Navigated" IsHitTestVisible="False"></WebBrowser>
+        <WebBrowser Name="advertisement"  LoadCompleted="wb_LoadCompleted" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.IsDeferredScrollingEnabled="False" Width="693" HorizontalAlignment="Right" Margin="0,263,0,0"></WebBrowser>
 
     </Grid>
 </Window>

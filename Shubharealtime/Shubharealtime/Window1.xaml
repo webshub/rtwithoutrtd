@@ -1,79 +1,70 @@
 ﻿<Window x:Class="Shubharealtime.Window1"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Shubha Real time " Height="612" Width="746" Loaded="Window_Loaded" Background="#FFE9E9F5" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
-    <Grid>
-        <TabControl Height="579" HorizontalAlignment="Left" Margin="0,9,0,0" Name="tabControl1" VerticalAlignment="Top" Width="714" Background="#FFE9E9F5">
+        Title="Shubha Real time " Height="612" Width="746" Loaded="Window_Loaded" Background="#FFF9FBFC" WindowStartupLocation="CenterScreen" Closed="Window_Closed" WindowState="Normal">
+    <Grid Height="564">
+        <Label Content="Your registartion ID :" Height="28" HorizontalAlignment="Left" Margin="524,10,0,0" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="641,15,0,0" Name="moterboard" VerticalAlignment="Top" Width="103" IsReadOnly="True" Background="#FFF9FBFC" BorderThickness="0" />
+        <TabControl Height="543" HorizontalAlignment="Left" Margin="13,12,0,0" Name="tabControl1" VerticalAlignment="Top" Width="700" Background="#FFF9FBFC">
            
-            <TabItem Header="Home" Name="tabItem1" FontSize="12" Background="#FFE9E9F5">
-                <Grid Name="exchang" Background="#FFE9E9F5" Margin="0,-4,0,4" Width="702" Height="534">
+            <TabItem Header="     Home     " Name="tabItem1" FontSize="12.5" Background="#FFDDDDDD" UseLayoutRounding="True" FontWeight="Normal">
+                <Grid Name="exchang" Background="#FFF9FBFC" Margin="0,-4,0,4" Width="680" Height="509">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="14*" />
                         <ColumnDefinition Width="687*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Height="23" HorizontalAlignment="Left" Margin="5,549,0,0" Name="textBlock2" Text="This program comes with ABSOLUTELY NO WARRANTY." VerticalAlignment="Top" Grid.ColumnSpan="2" />
-                    <TextBlock Height="23" HorizontalAlignment="Left" Margin="5,510,0,0" Name="textBlock3" Text="This software (released under GNU GPL V3) and you are welcome to redistribute it under certain conditions as per " VerticalAlignment="Top" Grid.ColumnSpan="2" />
-                    <WebBrowser Name="wad1" LoadCompleted="wb_LoadCompleted" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.IsDeferredScrollingEnabled="False" Width="120" VerticalAlignment="Stretch" Height="148" HorizontalAlignment="Center" Margin="562,354,6,152" Grid.Column="1"></WebBrowser>
-                    <WebBrowser Name="wad2" LoadCompleted="wb_LoadCompleted" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.IsDeferredScrollingEnabled="False" Width="120" VerticalAlignment="Stretch" Height="148" HorizontalAlignment="Center" Margin="562,181,6,244" Grid.Column="1"></WebBrowser>
-                    <WebBrowser Name="wad3" LoadCompleted="wb_LoadCompleted" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.IsDeferredScrollingEnabled="False" Width="120" VerticalAlignment="Stretch" Height="148" HorizontalAlignment="Center" Margin="562,11,6,414" Grid.Column="1"></WebBrowser>
-                    <Image Height="150" HorizontalAlignment="Left" Margin="6,354,0,0" Name="image2" Stretch="Fill" VerticalAlignment="Top" Width="561" Source="Images/home_banner1.jpg" Grid.ColumnSpan="2" />
+                    <WebBrowser Name="wad1" LoadCompleted="wb_LoadCompleted" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.IsDeferredScrollingEnabled="False" Width="120" VerticalAlignment="Stretch" Height="148" HorizontalAlignment="Center" Margin="540,314,6,47" Grid.Column="1"></WebBrowser>
+                    <WebBrowser Name="wad2" LoadCompleted="wb_LoadCompleted" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.IsDeferredScrollingEnabled="False" Width="120" VerticalAlignment="Stretch" Height="148" HorizontalAlignment="Center" Margin="540,160,6,201" Grid.Column="1"></WebBrowser>
+                    <WebBrowser Name="wad3" LoadCompleted="wb_LoadCompleted" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.IsDeferredScrollingEnabled="False" Width="120" VerticalAlignment="Stretch" Height="148" HorizontalAlignment="Center" Margin="540,6,6,355" Grid.Column="1"></WebBrowser>
                     <TextBox Height="23" HorizontalAlignment="Right"  Margin="0,136,136,0" Name="txtTargetFolder" VerticalAlignment="Top" Width="113" Grid.Column="1" Text="C:\myshubhalabha" IsReadOnly="True" Visibility="Hidden" />
-                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="492,16,0,0" Name="timetoRT" VerticalAlignment="Top" Width="49" SelectedIndex="0" Grid.Column="1" />
-                    <Label Content="refresh rate in sec  " Height="28" HorizontalAlignment="Left" Margin="376,11,0,0" Name="label5" VerticalAlignment="Top" Grid.Column="1" />
-                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="300,14,0,0" Name="RTD_server_name" VerticalAlignment="Top" Width="70" SelectedIndex="0" Grid.Column="1" IsReadOnly="True" IsEnabled="False" />
-                    <Label Content="Terminal " Height="28" HorizontalAlignment="Left" Margin="242,11,0,0" Name="label8" VerticalAlignment="Top" Width="58" Grid.Column="1" />
-                    <Label Content="Charting application" Height="28" HorizontalAlignment="Left" Margin="4,11,0,0" Name="label9" VerticalAlignment="Top" Grid.ColumnSpan="2" />
-                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="106,14,0,0" Name="Format_cb" VerticalAlignment="Top" Width="130" Grid.Column="1" />
-                    <Label Content="Hours" Height="28" HorizontalAlignment="Left" Margin="5,472,0,0" Name="lbl_GHours" VerticalAlignment="Top" Visibility="Hidden" Grid.ColumnSpan="2" />
-                    <Label Content="Minutes" Height="28" HorizontalAlignment="Left" Margin="196,472,0,0" Name="lbl_GMinutes" VerticalAlignment="Top" Visibility="Hidden" Grid.Column="1" />
-                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="35,472,0,0" Name="GHRS" VerticalAlignment="Top" Width="117" SelectedIndex="5" Visibility="Hidden" Grid.Column="1" />
-                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="250,472,0,0" Name="GMIN" VerticalAlignment="Top" Width="120" SelectedIndex="30" Visibility="Hidden" Grid.Column="1" />
-                    <TextBlock Margin="592,509,21,6" Grid.Column="1">
-        <Hyperlink NavigateUri="http://shubhalabha.in/disclaimer/license/" RequestNavigate="Hyperlink_RequestNavigate">
-            <TextBlock Text=" license  "  />
-        </Hyperlink>
-    </TextBlock>
-                    <TextBlock Height="23" HorizontalAlignment="Left" Margin="5,111,0,0" Name="textBlock4" Text="Note-Please use shubhaodin.xlsm for ODIN and sharekhantoami.xlsm for sharekhan/tradetiger" VerticalAlignment="Top" Foreground="#FFC32C2C" FontSize="12" Grid.ColumnSpan="2" />
-                    <Image Grid.ColumnSpan="2" Height="158" HorizontalAlignment="Left" Margin="5,181,0,0" Name="image1" Source="Images/home_banner1.jpg" Stretch="Fill" VerticalAlignment="Top" Width="561" />
-                    <TextBox Height="23" HorizontalAlignment="Left" Margin="559,-31,0,0" Name="moterboard" VerticalAlignment="Top" Width="130" Grid.Column="1" IsReadOnly="True" />
-                    <Label Content="Your registartion ID " Height="28" HorizontalAlignment="Left" Margin="437,-32,0,0" VerticalAlignment="Top" Grid.Column="1" />
-                    <WebBrowser Height="39" HorizontalAlignment="Left" Margin="496,55,0,0" Name="piwik" VerticalAlignment="Top" Width="56" Grid.Column="1" Visibility="Hidden" />
-                    <Button Content="Start" Height="34" Name="Startrealtimeonly" Width="133" Click="Startrealtimeonly_Click" Grid.Column="1" Margin="196,60,359,440" />
-                    <Border BorderBrush="Silver" BorderThickness="1" Height="43" HorizontalAlignment="Left" Margin="4,6,0,0" Name="border1" VerticalAlignment="Top" Width="565" Grid.ColumnSpan="2" />
+                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="436,24,0,0" Name="timetoRT" VerticalAlignment="Top" Width="35" SelectedIndex="0" Grid.Column="1" BorderBrush="Black" Background="#FFC4C4C4" UseLayoutRounding="True" />
+                    <Label Content="Refresh rate in sec  " Height="28" HorizontalAlignment="Left" Margin="327,21,0,0" Name="label5" VerticalAlignment="Top" Grid.Column="1" FontSize="12" FontWeight="Normal" />
+                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="263,24,0,0" Name="RTD_server_name" VerticalAlignment="Top" Width="58" SelectedIndex="0" Grid.Column="1" IsReadOnly="True" IsEnabled="False" BorderBrush="Black" Background="#FFC4C4C4" UseLayoutRounding="True" />
+                    <Label Content="Terminal " Height="28" HorizontalAlignment="Left" Margin="204,21,0,0" Name="label8" VerticalAlignment="Top" Width="58" Grid.Column="1" FontSize="12" FontWeight="Normal" />
+                    <Label Content="Charting application" Height="28" HorizontalAlignment="Left" Margin="6,21,0,0" Name="label9" VerticalAlignment="Top" Grid.ColumnSpan="2" FontSize="12" FontWeight="Normal" />
+                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="109,24,0,0" Name="Format_cb" VerticalAlignment="Top" Width="93" Grid.Column="1" BorderBrush="Black" Background="#FFC4C4C4" UseLayoutRounding="True" />
+                    <TextBlock Height="23" HorizontalAlignment="Left" Margin="6,430,0,0" Name="textBlock4" Text=" Note-Please use shubhaodin.xlsm for ODIN and sharekhantoami.xlsm for sharekhan/tradetiger" VerticalAlignment="Top" Foreground="#FFC32C2C" FontSize="12.5" FontFamily="Swis721 Lt BT" FontWeight="SemiBold" Grid.ColumnSpan="2" />
+                    <Image Grid.ColumnSpan="2" Height="297" HorizontalAlignment="Left" Margin="6,118,0,0" Name="image1" Source="Images/home_banner1.jpg" Stretch="Fill" VerticalAlignment="Top" Width="538" />
+                    
+                    <WebBrowser Height="39" HorizontalAlignment="Left" Margin="424,43,0,0" Name="piwik" VerticalAlignment="Top" Width="56" Grid.Column="1" Visibility="Hidden" />
+                    <Button Content="Start" Height="34" Name="Startrealtimeonly" Click="Startrealtimeonly_Click" Grid.Column="1" Margin="183,65,341,410" FontWeight="Normal" BorderBrush="Black" Background="#FFDDDDDD" BorderThickness="1.1" UseLayoutRounding="True" />
+                    <Border BorderBrush="Silver" BorderThickness="1" Height="98" HorizontalAlignment="Left" Margin="6,12,0,0" Name="border1" VerticalAlignment="Top" Width="540" Grid.ColumnSpan="2" />
+                    <Button Content=" This software (released under GNU GPL V3) and you are welcome to redistribute it under certain conditions as per                      " Height="25" HorizontalAlignment="Left" Margin="6,483,0,0" Name="button1" VerticalAlignment="Top" Width="668" Grid.ColumnSpan="2" FontSize="11.5" IsEnabled="False" FontWeight="SemiBold" />
+                    <TextBlock Margin="602,485,14,3" Grid.Column="1"><Hyperlink NavigateUri="http://shubhalabha.in/disclaimer/license/" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock Text=" license  " /></Hyperlink></TextBlock>
                 </Grid>
             </TabItem>
-            <TabItem Header="Backfill "  Name="Advancesetting" >
-                <Grid Background="#FFE9E9F5">
-<TextBox Height="23" HorizontalAlignment="Left" Margin="12,193,0,0" Name="textBox1" VerticalAlignment="Top" Width="205" IsReadOnly="True" TextChanged="textBox1_TextChanged" />
-                    <TextBox Height="23" HorizontalAlignment="Left" Margin="12,193,0,0" Name="textBox2" VerticalAlignment="Top" Width="205" TextChanged="textBox2_TextChanged" />
-                    <TextBox Height="23" HorizontalAlignment="Right" Margin="0,193,340,0" Name="textBox3" VerticalAlignment="Top" Width="145" TextChanged="textBox3_TextChanged" />
+            <TabItem Header="     Backfill      "  Name="Advancesetting" Background="#FFDDDDDD" FontSize="12.5" UseLayoutRounding="True">
+                <Grid Background="#FFF9FBFC">
+                    <WebBrowser HorizontalAlignment="Center" Margin="210,161,141,18" Name="tradetigerbanner" ScrollViewer.IsDeferredScrollingEnabled="False" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Stretch" Width="346" Visibility="Hidden" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="210,435,0,0" Name="textBox1" VerticalAlignment="Top" Width="205" IsReadOnly="True" TextChanged="textBox1_TextChanged" />
+                    <TextBox Height="23" HorizontalAlignment="Right" Margin="0,435,279,0" Name="textBox2" VerticalAlignment="Top" Width="204" TextChanged="textBox2_TextChanged" />
+                    <TextBox Height="23" HorizontalAlignment="Right" Margin="0,435,142,0" Name="textBox3" VerticalAlignment="Top" Width="134" TextChanged="textBox3_TextChanged" />
                     
-                    <Button Content="Browes" Height="25" HorizontalAlignment="Left" Margin="462,10,0,0" Name="btnTarget" VerticalAlignment="Top" Width="72" Click="btnTarget_Click" />
-                    <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="130,10,0,0" Name="db_path" Text="C:\myshubhalabha\amirealtime" VerticalAlignment="Top" Width="318" />
-                    <Label Content="Ami database path:" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label1" VerticalAlignment="Top" />
-                    <Button Content="Import symbol" Height="23" HorizontalAlignment="Left" Margin="109,500,0,0" Name="Import_symbol" VerticalAlignment="Top" Width="108" Click="Import_symbol_Click" />
-                    <ListView Canvas.Left="12" Canvas.Top="68" Name="listView1" SelectionChanged="listView1_SelectionChanged" SelectionMode="Single" Margin="11,222,340,57" Visibility="Visible">
+                    <Button Content="Browse " Height="23" HorizontalAlignment="Left" Margin="412,21,0,0" Name="btnTarget" VerticalAlignment="Top" Width="72" Click="btnTarget_Click" Background="#FFDDDDDD" BorderBrush="Black" UseLayoutRounding="True" />
+                    <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="196,21,0,0" Name="db_path" Text="C:\myshubhalabha\amirealtime" VerticalAlignment="Top" Width="200" />
+                    <Label Content="Select amibroker database path:" Height="28" HorizontalAlignment="Left" Margin="10,19,0,0" Name="label1" VerticalAlignment="Top" FontSize="12.5" FontFamily="Segoe UI" />
+                    <Button Content="Import symbol" Height="23" HorizontalAlignment="Left" Margin="268,465,0,0" Name="Import_symbol" VerticalAlignment="Top" Width="108" Click="Import_symbol_Click" BorderBrush="Black" Background="#FFDDDDDD" UseLayoutRounding="True" />
+                    <ListView Canvas.Left="12" Canvas.Top="68" Name="listView1" SelectionChanged="listView1_SelectionChanged" SelectionMode="Single" Margin="211,162,141,84" Visibility="Visible">
                         <ListView.View>
                             <GridView AllowsColumnReorder="True">
-                                <GridViewColumn Header="Google Symbol" Width="150" DisplayMemberBinding="{Binding Col2}"></GridViewColumn>
+                                <GridViewColumn Header="Google Symbol" Width="200" DisplayMemberBinding="{Binding Col2}"></GridViewColumn>
                                 <GridViewColumn Header="Mapping Symbol" Width="150" DisplayMemberBinding="{Binding Col3}"></GridViewColumn>
 
                             </GridView>
                         </ListView.View>
                     </ListView>
                    
-                    <Button Content="Save" Height="23" HorizontalAlignment="Left" Margin="255,500,0,0" Name="sav_symbolfile" VerticalAlignment="Top" Width="75" Click="sav_symbolfile_Click" />
-                    <Label Content="please select symbol and change symbol name in textbox for mapping " Height="28" HorizontalAlignment="Left" Margin="12,165,0,0" Name="label2" VerticalAlignment="Top" />
-                    <Label Content="please select symbol and enter google symbol name in textbox for google backfill " Height="28" HorizontalAlignment="Left" Margin="12,144,0,0" Name="label3" VerticalAlignment="Top" />
-                    <Button Content="Start Backfill" Height="23" HorizontalAlignment="Left" Margin="271,102,0,426" Name="StartRT" Width="97" Click="StartRT_Click_1" />
-                    <RadioButton Content="Nest backfill" Height="16" HorizontalAlignment="Left" Margin="133,71,0,0" Name="nestbackfill" VerticalAlignment="Top" Checked="nestbackfill_Checked" />
-                    <RadioButton Content="Google backfill" Height="16" HorizontalAlignment="Left" Margin="232,71,0,0" Name="googlebackfill" VerticalAlignment="Top" Checked="googlebackfill_Checked" />
-                    <RadioButton Content="With out backfill" Height="16" HorizontalAlignment="Left" Margin="478,71,0,0" Name="withoutbackfill" VerticalAlignment="Top" Visibility="Hidden" />
-                    <RadioButton Content="Trade Tiger Backfile " Height="16" HorizontalAlignment="Right" Margin="0,71,236,0" Name="tradetiger" VerticalAlignment="Top" />
-                    <Label Content="Your data saved in :- C:\myshubhalabha" Height="28" HorizontalAlignment="Left" Margin="10,33,0,0" Name="label17" VerticalAlignment="Top" Width="226" />
-                    <Border BorderBrush="Silver" BorderThickness="0.5" Height="2" HorizontalAlignment="Left" Margin="-3,59,0,0" Name="border2" VerticalAlignment="Top" Width="714"></Border>
-                    <Label Content="Select backfill option:" Height="28" HorizontalAlignment="Left" Margin="3,65,0,0" Name="label23" VerticalAlignment="Top" />
-                    <ListView Canvas.Left="12" Canvas.Top="68" Margin="10,222,340,57" Name="listView2" SelectionMode="Single" SelectionChanged="listView2_SelectionChanged" Visibility="Visible">
+                    <Button Content="Save" Height="23" HorizontalAlignment="Left" Margin="407,465,0,0" Name="sav_symbolfile" VerticalAlignment="Top" Width="75" Click="sav_symbolfile_Click" BorderBrush="Black" Background="#FFDDDDDD" UseLayoutRounding="True" />
+                    <Button Content="Start Backfill" Height="23" HorizontalAlignment="Right" Margin="0,113,360,378" Name="StartRT" Width="97" Click="StartRT_Click_1" Background="#FFDDDDDD" BorderThickness="1.1" BorderBrush="Black" UseLayoutRounding="True" />
+                    <RadioButton Content="Nest backfill" Height="16" HorizontalAlignment="Left" Margin="137,91,0,0" Name="nestbackfill" VerticalAlignment="Top" Checked="nestbackfill_Checked" FontSize="12.5" />
+                    <RadioButton Content="Google backfill" Height="16" HorizontalAlignment="Left" Margin="233,91,0,0" Name="googlebackfill" VerticalAlignment="Top" Checked="googlebackfill_Checked" FontSize="12.5" />
+                    <RadioButton Content="With out backfill" Height="16" HorizontalAlignment="Left" Margin="478,91,0,0" Name="withoutbackfill" VerticalAlignment="Top" Visibility="Hidden" FontSize="12.5" />
+                    <RadioButton Content="Trade Tiger Backfile " Height="16" HorizontalAlignment="Left" Margin="342,91,0,0" Name="tradetiger" VerticalAlignment="Top" FontSize="12.5" Checked="tradetiger_Checked_1" />
+                    <Label Content="Your data saved in :- C:\myshubhalabha" Height="28" HorizontalAlignment="Left" Margin="10,49,0,0" Name="label17" VerticalAlignment="Top" Width="252" FontSize="12.5" />
+                    <Border BorderBrush="Silver" BorderThickness="1" Height="65" HorizontalAlignment="Left" Margin="6,13,0,0" Name="border2" VerticalAlignment="Top" Width="546"></Border>
+                    <Label Content="Select backfill option:" Height="28" HorizontalAlignment="Left" Margin="10,85,0,0" Name="label23" VerticalAlignment="Top" FontSize="12.5" />
+                    <ListView Canvas.Left="12" Canvas.Top="68" Margin="210,163,141,83" Name="listView2" SelectionMode="Single" SelectionChanged="listView2_SelectionChanged" Visibility="Visible">
                         <ListView.View>
                             <GridView AllowsColumnReorder="True">
                                 <GridViewColumn DisplayMemberBinding="{Binding Col1}" Header="Tarding Symbol" Width="200" />
@@ -81,29 +72,50 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
+                    <WebBrowser Height="148" LoadCompleted="wb_LoadCompleted" HorizontalAlignment="Center" Margin="566,316,8,50" Name="wad6" ScrollViewer.IsDeferredScrollingEnabled="False" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Stretch" Width="120" />
+                    <WebBrowser Height="148" LoadCompleted="wb_LoadCompleted" HorizontalAlignment="Center" Margin="566,162,8,204" Name="wad5" ScrollViewer.IsDeferredScrollingEnabled="False" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Stretch" Width="120" />
+                    <WebBrowser Height="148" LoadCompleted="wb_LoadCompleted" HorizontalAlignment="Center" Margin="566,8,8,358" Name="wad4" ScrollViewer.IsDeferredScrollingEnabled="False" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Stretch" Width="120" />
+                    <Border BorderBrush="Silver" BorderThickness="1" Height="69" HorizontalAlignment="Left" Margin="6,89,0,0" Name="border4" VerticalAlignment="Top" Width="548" />
+                    <TextBox Height="243" HorizontalAlignment="Left" Margin="10,187,0,0" Name="textBox4" VerticalAlignment="Top" Width="195" IsReadOnly="True" />
+                    <Label Content="1. Please click on import symbol" FontSize="11.5" Height="28" HorizontalAlignment="Left" Margin="10,189,0,0" Name="label22" VerticalAlignment="Top" Width="192" />
+                    <Label Content="2. Click on symbol in table " FontSize="11.5" Height="28" HorizontalAlignment="Left" Margin="12,214,0,0" Name="label24" VerticalAlignment="Top" Width="192" />
+                    <Label Content="3. Enter mapping symbol name in" FontSize="11.5" Height="28" HorizontalAlignment="Left" Margin="12,237,0,0" Name="label25" VerticalAlignment="Top" Width="193" />
+                    <Label Content="textbox which below mapping " FontSize="11.5" Height="28" HorizontalAlignment="Left" Margin="25,257,0,0" Name="label26" VerticalAlignment="Top" Width="176" />
+                    <Button Content="Procedure for mapping  symbol" Height="23" HorizontalAlignment="Left" Margin="11,162,0,0" Name="button2" VerticalAlignment="Top" Width="193" IsEnabled="False" FontWeight="SemiBold" />
+                    <Label Content="symbol column" FontSize="11.5" Height="28" HorizontalAlignment="Left" Margin="26,275,0,0" Name="label2" VerticalAlignment="Top" Width="176" />
+                    <Label Content="4. For google backfill enter google " FontSize="11.5" Height="28" HorizontalAlignment="Left" Margin="12,299,0,0" Name="label3" VerticalAlignment="Top" Width="193" />
+                    <Label Content="symbol name below google " FontSize="11.5" Height="28" HorizontalAlignment="Left" Margin="24,316,0,0" Name="label27" VerticalAlignment="Top" Width="176" />
+                    <Label Content="symbol column" FontSize="11.5" Height="28" HorizontalAlignment="Left" Margin="25,335,0,0" Name="label28" VerticalAlignment="Top" Width="176" />
+                    <Label Content="5. Click on save button" FontSize="11.5" Height="28" HorizontalAlignment="Left" Margin="11,354,0,0" Name="label29" VerticalAlignment="Top" Width="193" />
+                    <Label Content="6. Click on start button" FontSize="11.5" Height="28" HorizontalAlignment="Left" Margin="11,374,0,0" Name="label30" VerticalAlignment="Top" Width="193" />
+                    <StackPanel Height="333" HorizontalAlignment="Left" Margin="7,162,0,0" Name="tradetigerinfo" VerticalAlignment="Top" Width="199" Visibility="Hidden" Background="#FFF9FBFC" />
                 </Grid> 
                     </TabItem>
            
-            <TabItem Header="  Current Setting  " Name="Current_Setting" Loaded="Current_Setting_Loaded">
-                <Grid Background="#FFE9E9F5">
-                    <Label Content="Your selected terminal is - " Height="28" HorizontalAlignment="Left" Margin="207,60,0,0" Name="lbl_terminal" VerticalAlignment="Top" />
-                    <Label Content="Your selected Charting Application is  - " Height="28" HorizontalAlignment="Left" Margin="141,94,0,0" Name="lbl_chart" VerticalAlignment="Top" />
-                    <Label Content="Your Amibroker database path is -" Height="28" HorizontalAlignment="Left" Margin="169,128,0,0" Name="lbl_amipath" VerticalAlignment="Top" />
-                    <Label Content="Your Metastock database path is -" Height="28" HorizontalAlignment="Left" Margin="167,162,0,0" Name="lbl_metapath" VerticalAlignment="Top" />
-                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="362,60,0,0" Name="result_terminal" VerticalAlignment="Top" />
-                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="364,94,0,0" Name="result_chart" VerticalAlignment="Top" />
-                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="364,128,0,0" Name="result_amipath" VerticalAlignment="Top" />
-                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="364,162,0,0" Name="result_metapath" VerticalAlignment="Top" />
-                    <Label Content="Nes/Now backfill -" Height="28" HorizontalAlignment="Left" Margin="250,196,0,0" Name="label4" VerticalAlignment="Top" />
-                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="364,196,0,0" Name="nestnowbackfill" VerticalAlignment="Top" />
-                    <Button Content="Cahnge setting " Height="23" HorizontalAlignment="Left" Margin="274,253,0,0" Name="changesetting" VerticalAlignment="Top" Width="128" Click="changesetting_Click" />
-                    <Border BorderBrush="Silver" BorderThickness="1" Height="156" HorizontalAlignment="Left" Margin="104,34,0,0" Name="border3" VerticalAlignment="Top" Width="487" />
+            <TabItem Header="     Current Setting       " Name="Current_Setting" Loaded="Current_Setting_Loaded" Background="#FFDDDDDD" FontSize="12.5" UseLayoutRounding="True">
+                <Grid Background="#FFF9FBFC">
+                    <Label Content="Your selected terminal is - " Height="28" HorizontalAlignment="Left" Margin="109,32,0,0" Name="lbl_terminal" VerticalAlignment="Top" />
+                    <Label Content="Your selected Charting Application is  - " Height="28" HorizontalAlignment="Left" Margin="43,66,0,0" Name="lbl_chart" VerticalAlignment="Top" />
+                    <Label Content="Your Amibroker database path is -" Height="28" HorizontalAlignment="Left" Margin="71,100,0,0" Name="lbl_amipath" VerticalAlignment="Top" />
+                    <Label Content="Your Metastock database path is -" Height="28" HorizontalAlignment="Left" Margin="69,134,0,0" Name="lbl_metapath" VerticalAlignment="Top" />
+                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="264,32,0,0" Name="result_terminal" VerticalAlignment="Top" />
+                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="266,66,0,0" Name="result_chart" VerticalAlignment="Top" />
+                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="266,100,0,0" Name="result_amipath" VerticalAlignment="Top" />
+                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="266,134,0,0" Name="result_metapath" VerticalAlignment="Top" />
+                    <Label Content="Nes/Now backfill -" Height="28" HorizontalAlignment="Left" Margin="152,168,0,0" Name="label4" VerticalAlignment="Top" />
+                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="266,168,0,0" Name="nestnowbackfill" VerticalAlignment="Top" />
+                    <Button Content="Change setting " Height="23" HorizontalAlignment="Left" Margin="176,225,0,0" Name="changesetting" VerticalAlignment="Top" Width="128" Click="changesetting_Click" UseLayoutRounding="True" />
+                    <Border BorderBrush="Silver" BorderThickness="1" Height="213" HorizontalAlignment="Left" Margin="6,6,0,0" Name="border3" VerticalAlignment="Top" Width="540" />
+                    <WebBrowser Height="148" LoadCompleted="wb_LoadCompleted" HorizontalAlignment="Center" Margin="563,315,11,51.373" Name="wad9" ScrollViewer.IsDeferredScrollingEnabled="False" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Stretch" Width="120" />
+                    <WebBrowser Height="148" LoadCompleted="wb_LoadCompleted" HorizontalAlignment="Center" Margin="563,161,11,205.373" Name="wad8" ScrollViewer.IsDeferredScrollingEnabled="False" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Stretch" Width="120" />
+                    <WebBrowser Height="148" LoadCompleted="wb_LoadCompleted" HorizontalAlignment="Center" Margin="563,7,11,359.373" Name="wad7" ScrollViewer.IsDeferredScrollingEnabled="False" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Stretch" Width="120" />
+                    <WebBrowser HorizontalAlignment="Center" Margin="6,256,148,51.373" Name="webBrowser1" ScrollViewer.IsDeferredScrollingEnabled="False" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Stretch" Width="540" />
                 </Grid>
 
             </TabItem>
 
-            <TabItem Header="  Help  " Name="help" >
-                <Grid Height="549"  Background="#FFE9E9F5" HorizontalAlignment="Left" Name="grid1" VerticalAlignment="Top" Width="701" >
+            <TabItem Header="     Help     " Name="help" Background="#FFDDDDDD" FontSize="12.5" UseLayoutRounding="True">
+                <Grid Height="549"  Background="#FFF9FBFC" HorizontalAlignment="Left" Name="grid1" VerticalAlignment="Top" Width="701" >
                     <Label Content="shubhart.format" Height="28" HorizontalAlignment="Left" Margin="8,90,0,0" Foreground="#FF12128D" />
                     <Label Content="shubhaxls.format" Height="28" HorizontalAlignment="Left" Margin="8,90,0,0" Name="lbe10" VerticalAlignment="Top" Foreground="#FF12128D" />
 
@@ -120,11 +132,10 @@
                     <Label Content="shubhanest-now.format" Foreground="#FF12128D" Height="28" HorizontalAlignment="Left" Margin="9,294,0,0" Name="label19" VerticalAlignment="Top" />
                     <Label Content="FORMAT:- Ticker, Date_DMY, Open, High, Low, Close, Volume" Height="28" HorizontalAlignment="Left" Margin="8,314,0,0" Name="label20" VerticalAlignment="Top" />
                     <Label Content="SEPARATOR:- ,(comma)" Height="28" HorizontalAlignment="Left" Margin="8,332,0,0" Name="label21" VerticalAlignment="Top" />
-                    <Label Content="Please create all format file as shown below and set date format like dd/mm/yyyy" Foreground="#FFC11E1E" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label22" VerticalAlignment="Top" FontSize="12" />
                 </Grid>
 
             </TabItem>
-            <TabItem Header="  Contact us  " Name="contactus" >
+            <TabItem Header="     Contact us       " Name="contactus" Background="#FFDDDDDD" FontSize="12.5" UseLayoutRounding="True">
                 <Grid Background="#FFE9E9F5">
                     <WebBrowser Name="wa" Source="http://shubhalabha.in/contact-us/" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.IsDeferredScrollingEnabled="False" Width="715" VerticalAlignment="Stretch" HorizontalAlignment="Center" Margin="3,-1,-15,2"></WebBrowser>
 

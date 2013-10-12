@@ -11,33 +11,33 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.IO;
+
 namespace Shubhalabha123
 {
     /// <summary>
-    /// Interaction logic for GNUGPL.xaml
+    /// Interaction logic for Regidtartion.xaml
     /// </summary>
-    public partial class GNUGPL : UserControl
+    public partial class Regidtartion : UserControl
     {
-        public GNUGPL()
+        public Regidtartion()
         {
             InitializeComponent();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            System.IO.StreamReader objReader = new StreamReader("C:\\myshubhalabha\\Notice.txt");
-
-            if (File.Exists("C:\\myshubhalabha\\Notice.txt"))
+            string filepath = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
+            string leadurl = filepath.Substring(0, filepath.Length - 18) + "realtimereg.html";
+            Uri a3 = new System.Uri("http://shubhalabha.in/real/realtimereg.html");
+            try
             {
-                richTextBox1.AppendText(objReader.ReadToEnd());
+
+                lead.Source = a3;
             }
-            else richTextBox1.AppendText("ERROR: File not found!");
-            objReader.Close();
+            catch
+            {
+
+            }
         }
-
-
-
-
     }
 }

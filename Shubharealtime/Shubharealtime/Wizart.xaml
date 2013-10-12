@@ -13,7 +13,7 @@
             <RowDefinition Height="65"></RowDefinition>
         </Grid.RowDefinitions>
         <Border Name="buttonBorder" Grid.Row="2" Grid.Column="1" BorderThickness="4,2,0,0" BorderBrush="White" Background="Transparent">
-            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
+            <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Height="61">
                 <Grid Width="458" Background="#FFB3B8F2">
                 <Button Height="23" Name="cancelButton" Width="75" Margin="12,20,0,20" Click="cancelButton_Click" HorizontalAlignment="Left">
                     Cancel
@@ -30,10 +30,10 @@
         </Border>
         <Border Name="contentBorder" Grid.Row="1" Grid.Column="1" BorderThickness="4,2,0,0" BorderBrush="White" Background="WhiteSmoke">
             <Grid Name="contentGrid">
-                <StackPanel Height="255" HorizontalAlignment="Left" Margin="0,5,0,0" Name="stackcontainer" VerticalAlignment="Top" Width="486">
-                </StackPanel>
+                <StackPanel Height="255" HorizontalAlignment="Left" Margin="0,5,0,0" Name="stackcontainer" VerticalAlignment="Top" Width="486"></StackPanel>
                 <Label Content="" Height="28" Name="Rsult_lbl" Margin="3,258,11,6" Foreground="#FFF51616" />
-
+                <RadioButton Content="I accept license agreement " Height="16" HorizontalAlignment="Left" Margin="6,263,0,0" Name="agree" VerticalAlignment="Top" />
+                <RadioButton Content="I Don't accept license agreement " Height="16" HorizontalAlignment="Right" Margin="0,263,113,0" Name="notagree" VerticalAlignment="Top" />
             </Grid>
         </Border>
 
@@ -47,9 +47,9 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Image Name="imageIcon" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Left" Stretch="Fill" Margin="20,5,5,5" Opacity="128" />
-            <Label FontSize="24" Name="headingLabel" FontWeight="Bold" Margin="10,-10,15,10" Content="Welcome to Shubha Real Time CoMbo !!" Foreground="Black" Grid.Column="1"></Label>
-            <Label Grid.Column="1" Name="summaryLabel" Margin="37,29,28,0" VerticalAlignment="Top" Content="This Wizard will help you in configuring Shubha Real Time Combo..." Grid.RowSpan="2" Foreground="Black" FontSize="13" FontWeight="SemiBold"></Label>
-            <Label Content="So Lets Get Started....." Height="28" HorizontalAlignment="Left" Margin="145,6,0,0" Name="label1" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Foreground="Black" FontSize="13" FontWeight="SemiBold" />
+            <Label FontSize="24" Name="headingLabel" FontWeight="Bold" Margin="10,-10,15,10" Content="Welcome to Shubha Real Time Combo !!" Foreground="Black" Grid.Column="1"></Label>
+            <Label Grid.Column="1" Name="summaryLabel" Margin="37,29,28,0" VerticalAlignment="Top" Content="This Wizard will help you in configuring Shubha Real Time Combo" Grid.RowSpan="2" Foreground="Black" FontSize="13" FontWeight="SemiBold"></Label>
+            <Label Content="So Lets Get Started" Height="28" HorizontalAlignment="Left" Margin="145,6,0,0" Name="label1" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Foreground="Black" FontSize="13" FontWeight="SemiBold" />
         </Grid>
         <Border Name="keyBorder" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Background="WhiteSmoke" BorderThickness="0,2,0,0" BorderBrush="White">
             <Grid>
