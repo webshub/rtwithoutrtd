@@ -124,6 +124,38 @@ namespace Shubharealtime
         {
             ami_chk.IsChecked = true;
 
+            try
+            {
+                var terminalname = regKey.GetValue("terminal");
+                var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
+                var Metastockdatapath = regKey.GetValue("Metastockdatapath");
+                var Chartingapplication = regKey.GetValue("Chartingapplication");
+
+
+                var Amiexepath1 = regKey.GetValue("Amiexepath");
+                var backfill1 = regKey.GetValue("backfill");
+                string backfill = "Not present";
+                if (backfill1 != null)
+                {
+                    backfill = backfill1.ToString();
+
+                }
+
+                db_path.Text = Amibrokerdatapath.ToString();
+                Amiexepath.Text = Amiexepath1.ToString();
+                meatpath_txt.Text = Metastockdatapath.ToString();
+            }
+            catch
+            {
+
+            }
+
+
+
+
+            regKey.SetValue("Amibrokerdatapath", db_path.Text.ToString());
+            regKey.SetValue("Metastockdatapath", meatpath_txt.Text.ToString());
+            regKey.SetValue("Amiexepath", Amiexepath.Text.ToString());
         }
     }
 }

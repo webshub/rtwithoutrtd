@@ -177,44 +177,6 @@ namespace Shubharealtime
 
 
 
-                    try
-                    {
-                       
-                        var chktmp = regKey.GetValue("ApplicationId");
-
-                        //if user delete register entry then show login window agian 
-                        if (chktmp != null)
-                        {
-                            if (chktmp.ToString() == "1" && registerdate != null && paidornot != null)
-                            {
-
-                                this.Hide();
-                                Shubharealtime.Window1 w = new Window1();
-                                w.ShowDialog();
-                            }
-                            else
-                            {
-
-                                this.Hide();
-                                Shubharealtime.MainWindow w = new MainWindow();
-                                w.ShowDialog();
-                            }
-                        }
-                        else
-                        {
-                            this.Hide();
-                            Shubharealtime.MainWindow w = new MainWindow();
-                            w.ShowDialog();
-                        }
-
-
-
-
-                    }
-                    catch (Exception ex)
-                    {
-                    }
-
 
 
 
@@ -382,6 +344,36 @@ namespace Shubharealtime
                     amipath = Amibrokerdatapath.ToString();
                     terminalname = terminalname1.ToString();
 
+                    if (terminalname=="NEST")
+                    {
+                        textBlock4.Visibility = Visibility.Hidden;
+
+                        RTD_server_name.SelectedIndex = 0;
+                    }
+                    else if (terminalname == "NOW")
+                    {
+                        textBlock4.Visibility = Visibility.Hidden;
+
+                        RTD_server_name.SelectedIndex = 1;
+
+                    }
+                    else
+                    {
+                        Startrealtimeonly.Visibility = Visibility.Hidden;
+                        Format_cb.Visibility = Visibility.Hidden;
+                        RTD_server_name.Visibility = Visibility.Hidden;
+                        timetoRT.Visibility = Visibility.Hidden;
+                        label5.Visibility = Visibility.Hidden;
+                        label8.Visibility = Visibility.Hidden;
+                        label9.Visibility = Visibility.Hidden;
+
+                        clickhere.Visibility = Visibility.Hidden;
+                        textBlock1.Visibility = Visibility.Visible;
+
+                        textBlock3.Visibility = Visibility.Visible;
+
+                        textBlock4.Visibility = Visibility.Visible;
+                    }
                     if (backfill != "yes")
                     {
                         nestbackfill.IsChecked = false;
@@ -472,15 +464,7 @@ namespace Shubharealtime
                     {
                         RTD_server_name.SelectedIndex = 1;
                     }
-                    if (amipath != null)
-                    {
-                        db_path.Text = amipath;
-
-                    }
-                    else
-                    {
-                        db_path.Text = "C:\\myshubhalabha\\amirealtime";
-                    }
+                   
 
                     if (!Directory.Exists(targetpath + "\\sharekhan"))
                     {
@@ -613,6 +597,9 @@ namespace Shubharealtime
                     Uri a1 = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=17&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
                     Uri a2 = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=17&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
                     Uri a3 = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=17&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
+                    Uri tradetigerbanner1 = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=17&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
+                    Uri tipofday = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=17&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
+                   
                     Uri piwikvisit = new System.Uri("http://list.shubhalabha.in/withoutrtd.html");
 
                     wad1.Source = a1;
@@ -629,6 +616,8 @@ namespace Shubharealtime
 
                     wad8.Source = a2;
                     wad9.Source = a3;
+                    tradetigerbanner.Source = tradetigerbanner1;
+                    tipoftheday.Source = tipofday;
 
                     piwik.Source = piwikvisit;
                     //  wad4.Source = a4;
@@ -922,10 +911,7 @@ namespace Shubharealtime
             config.AppSettings.Settings.Add("withoutbackfill", withoutbackfill.IsChecked.ToString());
             config.Save(ConfigurationSaveMode.Full);
 
-            config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings.Remove("amipath");
-
-            config.AppSettings.Settings.Add("amipath", db_path.Text);
+           
             config.Save(ConfigurationSaveMode.Full);
             ConfigurationManager.RefreshSection("appSettings");
             config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -933,11 +919,7 @@ namespace Shubharealtime
 
             config.AppSettings.Settings.Add("targetpathforcombo", txtTargetFolder.Text);
             config.Save(ConfigurationSaveMode.Full);
-            ConfigurationManager.RefreshSection("appSettings");
-            config.AppSettings.Settings.Remove("amipath");
-
-            config.AppSettings.Settings.Add("amipath", db_path.Text);
-            config.Save(ConfigurationSaveMode.Full);
+           
             ConfigurationManager.RefreshSection("appSettings");
 
             config.AppSettings.Settings.Remove("terminalname");
@@ -964,13 +946,8 @@ namespace Shubharealtime
                 string Target_Folder_Path = Open_Folder.SelectedPath;
 
 
-                db_path.Text = Target_Folder_Path;
 
-                config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                config.AppSettings.Settings.Remove("amipath");
-
-                config.AppSettings.Settings.Add("amipath", db_path.Text);
-                config.Save(ConfigurationSaveMode.Full);
+               
                 ConfigurationManager.RefreshSection("appSettings");
                 config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                 config.AppSettings.Settings.Remove("targetpathforcombo");
@@ -978,11 +955,7 @@ namespace Shubharealtime
                 config.AppSettings.Settings.Add("targetpathforcombo", txtTargetFolder.Text);
                 config.Save(ConfigurationSaveMode.Full);
                 ConfigurationManager.RefreshSection("appSettings");
-                config.AppSettings.Settings.Remove("amipath");
-
-                config.AppSettings.Settings.Add("amipath", db_path.Text);
-                config.Save(ConfigurationSaveMode.Full);
-                ConfigurationManager.RefreshSection("appSettings");
+                
             }
         }
 
@@ -1301,141 +1274,7 @@ namespace Shubharealtime
             saveradiobuttn();
         }
 
-        private void Startrealtimeonly_Click(object sender, RoutedEventArgs e)
-        {
-            savedata();
-
-           
-
-            Shubharealtime.datadownload s1 = new datadownload();
-            if (RTD_server_name.SelectedItem == "NEST")
-            {
-                try
-                {
-                    type = Type.GetTypeFromProgID("nest.scriprtd");
-
-                    m_server = (IRtdServer)Activator.CreateInstance(type);
-                    m_server.ServerTerminate();
-                }
-                catch
-                {
-                    System.Windows.MessageBox.Show("Please start Nest as Run as Administrator and again start Realtime combo");
-
-                    return;
-                }
-            }
-            if (RTD_server_name.SelectedItem == "NOW")
-            {
-                try
-                {
-                    type = Type.GetTypeFromProgID("now.scriprtd");
-
-                    m_server = (IRtdServer)Activator.CreateInstance(type);
-                    m_server.ServerTerminate();
-                }
-                catch
-                {
-                    System.Windows.MessageBox.Show("Please start Nest as 'Run as Administrator' and again start Realtime combo");
-
-                    return;
-                }
-            }
-
-            if (txtTargetFolder.Text == "")
-            {
-                System.Windows.MessageBox.Show("Set Target Path.");
-                txtTargetFolder.Focus();
-                return;
-
-            }
-
-
-
-            System.Windows.MessageBox.Show(System.Windows.Application.Current.MainWindow, "Application is pulling backfill data and processing files,please wait for some time.");
-
-
-
-
-            CommandManager.InvalidateRequerySuggested();
-
-            try
-            {
-
-
-                //   type = Type.GetTypeFromProgID("nest.scriprtd");
-
-
-
-                config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-
-                config.AppSettings.Settings.Remove("targetpathforcombo");
-
-                config.AppSettings.Settings.Add("targetpathforcombo", txtTargetFolder.Text);
-                config.Save(ConfigurationSaveMode.Full);
-                ConfigurationManager.RefreshSection("appSettings");
-
-                config.AppSettings.Settings.Remove("format");
-
-                config.AppSettings.Settings.Add("format", Format_cb.SelectedItem.ToString());
-                config.Save(ConfigurationSaveMode.Full);
-                ConfigurationManager.RefreshSection("appSettings");
-
-                config.AppSettings.Settings.Remove("terminal");
-
-                config.AppSettings.Settings.Add("terminal", RTD_server_name.SelectedItem.ToString());
-                config.Save(ConfigurationSaveMode.Full);
-                ConfigurationManager.RefreshSection("appSettings");
-
-                config.AppSettings.Settings.Remove("interval");
-
-                config.AppSettings.Settings.Add("interval", timetoRT.SelectedItem.ToString());
-                config.Save(ConfigurationSaveMode.Full);
-                ConfigurationManager.RefreshSection("appSettings");
-                //SystemAccessibleObject sao = SystemAccessibleObject.FromPoint(4, 200);
-                // LoadTree(sao);
-            }
-            catch
-            {
-
-
-            }
-
-            string terminal = ConfigurationManager.AppSettings["terminal"];
-            /////////////////////////////
-            //servaer checking now/nest
-
-
-            /////////////////////////////
-            //Advancesetting.IsEnabled = false;
-            //contactus.IsEnabled = false;
-            //help.IsEnabled = false;
-            //Format_cb.IsEnabled = false;
-            //RTD_server_name.IsEnabled = false;
-            //timetoRT.IsEnabled = false;
-            //StartRT.IsEnabled = false;
-
-
-
-
-            string path = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
-            string pathtostartprocess = path.Substring(0, path.Length - 18);
-            System.Diagnostics.Process.Start(pathtostartprocess + "Endrt.exe");
-
-            Shubharealtime.datadownload s = new datadownload();
-            if (RTD_server_name.SelectedItem == "NEST")
-            {
-                s.checknestfiled();
-            }
-            if (RTD_server_name.SelectedItem == "NOW")
-            {
-                s.checknowfiled();
-            }
-            Task.Factory.StartNew(s.startRealtime );
-            this.Hide();
-           
-
-        }
+       
 
         private void Current_Setting_Loaded(object sender, RoutedEventArgs e)
         {
@@ -1473,7 +1312,10 @@ namespace Shubharealtime
         private void StartRT_Click_1(object sender, RoutedEventArgs e)
         {
             savedata();
-
+            RegistryKey regKey = Registry.CurrentUser;
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
+            var terminalname = regKey.GetValue("terminal");
+            var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
             //if trade tiger backfill 
             if (tradetiger.IsChecked == true)
             {
@@ -1487,7 +1329,7 @@ namespace Shubharealtime
                 ExcelType.InvokeMember("Visible", BindingFlags.SetProperty, null,
                           ExcelInst, new object[1] { true });
                 ExcelType.InvokeMember("LoadDatabase", BindingFlags.InvokeMethod | BindingFlags.Public, null,
-                     ExcelInst, new string[1] { db_path.Text });
+                     ExcelInst, new string[1] { Amibrokerdatapath.ToString() });
 
                 for (int i = 0; i < sharekhanfilePaths.Count(); i++)
                 {
@@ -1650,11 +1492,13 @@ namespace Shubharealtime
             RegistryKey regKey = Registry.CurrentUser;
             regKey = regKey.CreateSubKey(@"Windows-xpRT\");
             regKey.SetValue("Wizart", "notdone");
+            System.Windows.Forms.Application.Restart();
+            System.Windows.Application.Current.Shutdown();
 
-            this.Close();
-            string path = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
-            string pathtostartprocess = path.Substring(0, path.Length - 18);
-            System.Diagnostics.Process.Start(pathtostartprocess + "Shubharealtime.exe");
+            //this.Close();
+            //string path = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
+            //string pathtostartprocess = path.Substring(0, path.Length - 18);
+            //System.Diagnostics.Process.Start(pathtostartprocess + "Shubharealtime.exe");
         }
 
         private void listView2_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1705,6 +1549,145 @@ namespace Shubharealtime
             tradetigerinfo.Visibility = Visibility.Visible;
         }
 
+        private void Startrealtimeonly_Click(object sender, RoutedEventArgs e)
+        {
+            savedata();
+
+
+
+            Shubharealtime.datadownload s1 = new datadownload();
+            if (RTD_server_name.SelectedItem == "NEST")
+            {
+                try
+                {
+                    type = Type.GetTypeFromProgID("nest.scriprtd");
+
+                    m_server = (IRtdServer)Activator.CreateInstance(type);
+                    m_server.ServerTerminate();
+                }
+                catch
+                {
+                    System.Windows.MessageBox.Show("Please start Nest as Run as Administrator and again start Realtime combo");
+
+                    return;
+                }
+            }
+            if (RTD_server_name.SelectedItem == "NOW")
+            {
+                try
+                {
+                    type = Type.GetTypeFromProgID("now.scriprtd");
+
+                    m_server = (IRtdServer)Activator.CreateInstance(type);
+                    m_server.ServerTerminate();
+                }
+                catch
+                {
+                    System.Windows.MessageBox.Show("Please start Now as 'Run as Administrator' and again start Realtime combo");
+
+                    return;
+                }
+            }
+
+            if (txtTargetFolder.Text == "")
+            {
+                System.Windows.MessageBox.Show("Set Target Path.");
+                txtTargetFolder.Focus();
+                return;
+
+            }
+
+
+
+         
+
+
+
+
+            CommandManager.InvalidateRequerySuggested();
+
+            try
+            {
+
+
+                //   type = Type.GetTypeFromProgID("nest.scriprtd");
+
+
+
+                config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+
+                config.AppSettings.Settings.Remove("targetpathforcombo");
+
+                config.AppSettings.Settings.Add("targetpathforcombo", txtTargetFolder.Text);
+                config.Save(ConfigurationSaveMode.Full);
+                ConfigurationManager.RefreshSection("appSettings");
+
+                config.AppSettings.Settings.Remove("format");
+
+                config.AppSettings.Settings.Add("format", Format_cb.SelectedItem.ToString());
+                config.Save(ConfigurationSaveMode.Full);
+                ConfigurationManager.RefreshSection("appSettings");
+
+                config.AppSettings.Settings.Remove("terminal");
+
+                config.AppSettings.Settings.Add("terminal", RTD_server_name.SelectedItem.ToString());
+                config.Save(ConfigurationSaveMode.Full);
+                ConfigurationManager.RefreshSection("appSettings");
+
+                config.AppSettings.Settings.Remove("interval");
+
+                config.AppSettings.Settings.Add("interval", timetoRT.SelectedItem.ToString());
+                config.Save(ConfigurationSaveMode.Full);
+                ConfigurationManager.RefreshSection("appSettings");
+                //SystemAccessibleObject sao = SystemAccessibleObject.FromPoint(4, 200);
+                // LoadTree(sao);
+            }
+            catch
+            {
+
+
+            }
+
+            string terminal = ConfigurationManager.AppSettings["terminal"];
+            /////////////////////////////
+            //servaer checking now/nest
+
+
+            /////////////////////////////
+            //Advancesetting.IsEnabled = false;
+            //contactus.IsEnabled = false;
+            //help.IsEnabled = false;
+            //Format_cb.IsEnabled = false;
+            //RTD_server_name.IsEnabled = false;
+            //timetoRT.IsEnabled = false;
+            //StartRT.IsEnabled = false;
+
+
+
+
+            string path = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
+            string pathtostartprocess = path.Substring(0, path.Length - 18);
+            System.Diagnostics.Process.Start(pathtostartprocess + "Endrt.exe");
+
+            Shubharealtime.datadownload s = new datadownload();
+            if (RTD_server_name.SelectedItem == "NEST")
+            {
+                s.checknestfiled();
+            }
+            if (RTD_server_name.SelectedItem == "NOW")
+            {
+                s.checknowfiled();
+            }
+            Task.Factory.StartNew(s.startRealtime);
+            this.Hide();
+        }
+
+      
+      
+
+       
+       
        
        
        

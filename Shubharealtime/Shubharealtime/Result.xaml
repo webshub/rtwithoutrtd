@@ -6,15 +6,15 @@
              mc:Ignorable="d" 
              d:DesignHeight="344" d:DesignWidth="473" Loaded="UserControl_Loaded">
     <Grid>
-        <Label Content="Your selected terminal is - " Height="28" HorizontalAlignment="Left" Margin="78,12,0,0" Name="lbl_terminal" VerticalAlignment="Top" FontWeight="Medium" />
-        <Label Content="Your selected Charting Application is  - " Height="28" HorizontalAlignment="Left" Margin="10,44,0,0" Name="lbl_chart" VerticalAlignment="Top" FontWeight="Medium" />
-        <Label Content="Your Amibroker database path is -" Height="28" HorizontalAlignment="Left" Margin="34,78,0,0" Name="lbl_amipath" VerticalAlignment="Top" FontWeight="Medium" />
-        <Label Content="Your Metastock database path is -" Height="28" HorizontalAlignment="Left" Margin="34,112,0,0" Name="lbl_metapath" VerticalAlignment="Top" FontWeight="Medium" />
-        <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="233,12,0,0" Name="result_terminal" VerticalAlignment="Top" FontWeight="Medium" />
-        <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="233,44,0,0" Name="result_chart" VerticalAlignment="Top" FontWeight="Medium" />
-        <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="233,78,0,0" Name="result_amipath" VerticalAlignment="Top" FontWeight="Medium" />
-        <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="231,112,0,0" Name="result_metapath" VerticalAlignment="Top" FontWeight="Medium" />
-        <Label Content="Nes/Now backfill -" Height="28" HorizontalAlignment="Left" Margin="117,146,0,0" Name="label1" VerticalAlignment="Top" FontWeight="Medium" />
-        <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="231,146,0,0" Name="nestnowbackfill" VerticalAlignment="Top" FontWeight="Medium" />
+        <Label Content="• Trading  terminal  -" Height="28" HorizontalAlignment="Left" Margin="10,12,0,0" Name="lbl_terminal" VerticalAlignment="Top" FontWeight="Medium" />
+        <Label Content="• Charting Application  -" Height="28" HorizontalAlignment="Left" Margin="10,44,0,0" Name="lbl_chart" VerticalAlignment="Top" FontWeight="Medium" />
+        <Label Content="• Amibroker database path is -" Height="28" HorizontalAlignment="Left" Margin="12,78,0,0" Name="lbl_amipath" VerticalAlignment="Top" FontWeight="Medium" />
+        <Label Content="• Metastock database path is -" Height="28" HorizontalAlignment="Left" Margin="10,112,0,0" Name="lbl_metapath" VerticalAlignment="Top" FontWeight="Medium" />
+        <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="138,12,0,0" Name="result_terminal" VerticalAlignment="Top" FontWeight="Medium" />
+        <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="159,44,0,0" Name="result_chart" VerticalAlignment="Top" FontWeight="Medium" />
+        <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="191,78,0,0" Name="result_amipath" VerticalAlignment="Top" FontWeight="Medium" />
+        <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="191,112,0,0" Name="result_metapath" VerticalAlignment="Top" FontWeight="Medium" />
+        <Label Content="• Nest/Now backfill -" Height="28" HorizontalAlignment="Left" Margin="12,146,0,0" Name="label1" VerticalAlignment="Top" FontWeight="Medium" />
+        <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="131,147,0,0" Name="nestnowbackfill" VerticalAlignment="Top" FontWeight="Medium" />
     </Grid>
 </UserControl>

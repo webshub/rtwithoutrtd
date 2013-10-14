@@ -16,6 +16,7 @@ using Microsoft.Win32;
 using System.Configuration;
 using System.Net.Mail;
 using System.Management;
+using System.Reflection;
 namespace Shubharealtime
 {
     /// <summary>
@@ -183,18 +184,44 @@ namespace Shubharealtime
            
         }
 
+
+
+
+
+  public void HideScriptErrors(WebBrowser wb, bool Hide)
+{
+
+FieldInfo fiComWebBrowser = typeof(WebBrowser).GetField("_axIWebBrowser2", BindingFlags.Instance | BindingFlags.NonPublic);
+if
+ (fiComWebBrowser == null)
+return;
+
+object
+ objComWebBrowser = fiComWebBrowser.GetValue(wb);
+
+if
+ (objComWebBrowser == null)
+return;
+
+objComWebBrowser.GetType().InvokeMember( 
+"Silent",
+BindingFlags.SetProperty,null,objComWebBrowser, new object[] { Hide }); 
+
+}
+
+ 
+
+
+
         private void lead_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
 
-            if(lead==null )
-            {
-                throw new ArgumentNullException("browser");
-            }
+            HideScriptErrors(lead , true);
 
             if (lead.Source.ToString() == "http://shubhalabha.in/eng/crm/index.php?entryPoint=WebToLeadCapture")
             {
                 SetRegKey();
-                System.Windows.Forms.MessageBox.Show("Thank you for using shubha real time  ");
+                System.Windows.Forms.MessageBox.Show("Your trial period will expired on  " +DateTime.Today.Date.AddDays(2).ToString());
 
 
                 this.Hide();

@@ -268,6 +268,7 @@ namespace Shubharealtime
 
 
 
+                                    Rsult_lbl.Content = "Nest pluse is working fine  ";
 
 
 

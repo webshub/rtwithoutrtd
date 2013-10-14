@@ -18,7 +18,7 @@
                 <Button Height="23" Name="cancelButton" Width="75" Margin="12,20,0,20" Click="cancelButton_Click" HorizontalAlignment="Left">
                     Cancel
                 </Button>
-                    <Button Height="23" Name="nextButtonforterminal" Width="75" Margin="258,20,125,20" Click="nextButtonforterminal_Click">
+                    <Button Height="23" Name="nextButtonforterminal" Width="75" Margin="258,19,125,19" Click="nextButtonforterminal_Click">
                     Next
                 </Button>
                 <Button Height="23" Name="backButton" Width="75" IsEnabled="False" Margin="364,20,20,20" Click="backButton_Click">
@@ -47,8 +47,8 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Image Name="imageIcon" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Left" Stretch="Fill" Margin="20,5,5,5" Opacity="128" />
-            <Label FontSize="24" Name="headingLabel" FontWeight="Bold" Margin="10,-10,15,10" Content="Welcome to Shubha Real Time Combo !!" Foreground="Black" Grid.Column="1"></Label>
-            <Label Grid.Column="1" Name="summaryLabel" Margin="37,29,28,0" VerticalAlignment="Top" Content="This Wizard will help you in configuring Shubha Real Time Combo" Grid.RowSpan="2" Foreground="Black" FontSize="13" FontWeight="SemiBold"></Label>
+            <Label FontSize="24" Name="headingLabel" FontWeight="Bold" Margin="10,-5,15,5" Content="Welcome to Shubha Realtime Combo " Foreground="Black" Grid.Column="1"></Label>
+            <Label Grid.Column="1" Name="summaryLabel" Margin="37,29,28,0" VerticalAlignment="Top" Content="This Wizard will help you in configuring Shubha RealTime Combo" Grid.RowSpan="2" Foreground="Black" FontSize="13" FontWeight="SemiBold"></Label>
             <Label Content="So Lets Get Started" Height="28" HorizontalAlignment="Left" Margin="145,6,0,0" Name="label1" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Foreground="Black" FontSize="13" FontWeight="SemiBold" />
         </Grid>
         <Border Name="keyBorder" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Background="WhiteSmoke" BorderThickness="0,2,0,0" BorderBrush="White">
