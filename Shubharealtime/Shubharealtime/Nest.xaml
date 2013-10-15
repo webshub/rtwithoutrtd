@@ -9,12 +9,13 @@
 
 
             <Grid Margin="0,1,0,-1">
-                <Label Content="• Important steps to be followed for Nest Configuration" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label2" VerticalAlignment="Top" FontWeight="SemiBold" />
+                <Label Content="• Important steps to be followed for Nest Configuration:" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label2" VerticalAlignment="Top" FontWeight="SemiBold" />
                 <Label Content="1.Please start Nest as Run as Administrator " Height="28" HorizontalAlignment="Left" Margin="41,36,0,0" Name="label3" VerticalAlignment="Top" />
             <Label Content="2.Please configure/set column profile to show data in following format." Height="28" HorizontalAlignment="Left" Margin="41,55,0,0" Name="label4" VerticalAlignment="Top" />
                 <Label Content="-&gt;Trading symbol , LTT , LUT , LTP , Volume Traded Today ,Open Interest." Height="28" HorizontalAlignment="Left" Margin="36,76,0,0" Name="label5" VerticalAlignment="Top" />
-            <Label Content="3.LTT should be followed by Trading symbol " Height="28" HorizontalAlignment="Left" Margin="43,98,0,0" Name="label6" VerticalAlignment="Top" />
+            <Label Content="3.LTT should be followed by Trading symbol ." Height="28" HorizontalAlignment="Left" Margin="43,98,0,0" Name="label6" VerticalAlignment="Top" />
             <Label Content="• Click on next if you have successfully configured the NEST terminal." Height="28" HorizontalAlignment="Left" Margin="18,151,0,0" Name="label7" VerticalAlignment="Top" FontWeight="SemiBold" FontFamily="Times New Roman" />
+            <TextBlock Margin="27,132,351,159"><Hyperlink NavigateUri="http://shubhalabha.in/disclaimer/license/" ><TextBlock Text=" Click here to watch video   " /></Hyperlink></TextBlock>
         </Grid>
     </Grid>
 </UserControl>

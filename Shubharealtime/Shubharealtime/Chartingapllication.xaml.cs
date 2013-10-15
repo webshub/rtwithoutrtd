@@ -1,4 +1,9 @@
-﻿using System;
+﻿//////////////////////////////////////////////////
+//This software (released under GNU GPL V3) and you are welcome to redistribute it under certain conditions as per license 
+///////////////////////////////////////////////////
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -94,16 +99,16 @@ namespace Shubharealtime
         {
             if (ami_chk.IsChecked == true)
             {
-                chartingapp = chartingapp + "," + "Amibroker";
+                chartingapp = chartingapp +  " Amibroker";
             }
             if (meta_chk.IsChecked == true)
             {
-                chartingapp = chartingapp + "," + "Metastock";
+                chartingapp = chartingapp + " Metastock";
 
             }
             if (fchart_chk.IsChecked == true)
             {
-                chartingapp = chartingapp + "," + "Fchart";
+                chartingapp = chartingapp +" Fchart";
 
             }
             if (chartingapp == "")

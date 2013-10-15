@@ -446,6 +446,9 @@ namespace Shubharealtime
                         regKey = regKey.CreateSubKey(@"Windows-xpRT\");
                         var terminalname = regKey.GetValue("terminal");
                         var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
+                        var Chartingapplication = regKey.GetValue("Chartingapplication");
+                        if (Chartingapplication.ToString().Contains("Amibroker"))
+                        {
 
                         ExcelType = Type.GetTypeFromProgID("Broker.Application");
                         ExcelInst = Activator.CreateInstance(ExcelType);
@@ -462,7 +465,7 @@ namespace Shubharealtime
                         args[2] = "RT.format";
                         ExcelType.InvokeMember("Import", BindingFlags.InvokeMethod | BindingFlags.Public, null,
                              ExcelInst, args);
-
+                        }
                     }catch
                     {
                         }
@@ -497,6 +500,8 @@ namespace Shubharealtime
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
+            Rsult_lbl.Content = "";
+            
             if (nextcount == 4)
             {
                
@@ -620,6 +625,53 @@ namespace Shubharealtime
             //string pathtostartprocess = path.Substring(0, path.Length - 18);
             //System.Diagnostics.Process.Start(pathtostartprocess + "Shubharealtime.exe");
 
+        }
+        public void closeallprocess()
+        {
+            Process[] workers = Process.GetProcessesByName("Shubharealtime.vshost");
+            Process[] workers1 = Process.GetProcessesByName("Shubharealtime");
+            Process[] workers2 = Process.GetProcessesByName("Endrt.vshost");
+            Process[] workers3 = Process.GetProcessesByName("Endrt");
+            Process[] workers4 = Process.GetProcessesByName("Broker");
+            Process[] workers5 = Process.GetProcessesByName("Shubharealtime123");
+
+
+
+            foreach (Process worker in workers4)
+            {
+                worker.Kill();
+                worker.WaitForExit();
+                worker.Dispose();
+            }
+            foreach (Process worker in workers3)
+            {
+                worker.Kill();
+                worker.WaitForExit();
+                worker.Dispose();
+            }
+            foreach (Process worker in workers2)
+            {
+                worker.Kill();
+                worker.WaitForExit();
+                worker.Dispose();
+            }
+            foreach (Process worker in workers)
+            {
+                worker.Kill();
+                worker.WaitForExit();
+                worker.Dispose();
+            }
+            foreach (Process worker in workers1)
+            {
+                worker.Kill();
+                worker.WaitForExit();
+                worker.Dispose();
+            }
+            Environment.Exit(0);
+        }
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            closeallprocess();
         }
     }
 }

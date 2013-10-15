@@ -9,12 +9,13 @@
 
 
         <Grid Margin="0,1,0,0">
-            <Label Content="Important steps to be followed for Now Configuration " Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label2" VerticalAlignment="Top" FontWeight="SemiBold" />
+            <Label Content="• Important steps to be followed for Now Configuration:" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label2" VerticalAlignment="Top" FontWeight="SemiBold" />
             <Label Content="1.Please start Now as Run as Administrator " Height="28" HorizontalAlignment="Left" Margin="41,36,0,0" Name="label3" VerticalAlignment="Top" />
             <Label Content="2.Please configure/set column profile to show data in following format." Height="28" HorizontalAlignment="Left" Margin="41,55,0,0" Name="label4" VerticalAlignment="Top" />
             <Label Content="->Trading symbol , LTT , LUT , LTP , Volume Traded Today ,Open Interest" Height="28" HorizontalAlignment="Left" Margin="36,76,0,0" Name="label5" VerticalAlignment="Top" />
-            <Label Content="3.Symbol name has should be followed by LTT field " Height="28" HorizontalAlignment="Left" Margin="43,98,0,0" Name="label6" VerticalAlignment="Top" />
-            <Label Content="CLICK on NEXT if you have successfully configured the NOW terminal. " Height="28" HorizontalAlignment="Left" Margin="0,151,0,0" Name="label7" VerticalAlignment="Top" FontWeight="SemiBold" FontFamily="Times New Roman" />
+            <Label Content="3.Symbol name has should be followed by LTT field ." Height="28" HorizontalAlignment="Left" Margin="43,98,0,0" Name="label6" VerticalAlignment="Top" />
+            <TextBlock Margin="22,132,291,158"><Hyperlink NavigateUri="http://shubhalabha.in/disclaimer/license/"><TextBlock Text=" Click here to watch video   " /></Hyperlink></TextBlock>
+            <Label Content="• Click on next if you have successfully configured the NOWterminal." FontFamily="Times New Roman" FontWeight="SemiBold" Height="28" HorizontalAlignment="Left" Margin="10,163,0,0" Name="label1" VerticalAlignment="Top" />
         </Grid>
     </Grid>
 </UserControl>

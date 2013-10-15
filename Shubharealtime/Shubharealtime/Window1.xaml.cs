@@ -85,6 +85,7 @@ namespace Shubharealtime
             e.Handled = true;
         }
 
+        //find machine  32 bit or 64 bit 
         static string ProgramFilesx86()
         {
             if (8 == IntPtr.Size
@@ -95,32 +96,9 @@ namespace Shubharealtime
 
             return Environment.GetEnvironmentVariable("ProgramFiles");
         }
-        private void SendMail(string p_sEmailTo, string subject, string messageBody, bool isHtml)
-        {
-            var fromAddress = new MailAddress("shanteshpaigude1988@gmail.com", "From Name");
-            var toAddress = new MailAddress("shanteshpaigude1988@gmail.com", "To Name");
-            subject = "Your Password";
-            string body = "This is your password:" + subject + "\n ";
-            var smtp = new SmtpClient
-            {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = false ,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-               UseDefaultCredentials = true  ,
-                Credentials = new NetworkCredential(fromAddress.Address, "lionking@143")
-            };
-            using (var message = new MailMessage(fromAddress, toAddress)
-            {
-                Subject = subject,
-                Body = body
-            })
-            {
-                smtp.Send(message);
-            }
-        }
+       
 
-
+        //Run program as Administartor 
         private bool IsRunAsAdministrator()
         {
             var wi = WindowsIdentity.GetCurrent();
@@ -716,6 +694,7 @@ namespace Shubharealtime
 
 
         }
+        //Removing scroll bar from webbrowser
         void wb_LoadCompleted(object sender, NavigationEventArgs e)
         {
             string script = "document.body.style.overflow ='hidden'";
@@ -726,7 +705,7 @@ namespace Shubharealtime
        
       
 
-        
+        //starting real time data feed 
         private void StartRT_Click(object sender, RoutedEventArgs e)
         {
           
@@ -755,7 +734,7 @@ namespace Shubharealtime
         }
 
 
-
+        //Checking all require fields in nest terminal 
         public void checknestfiled()
         {
             Process[] processes = Process.GetProcessesByName("NestTrader");
@@ -846,7 +825,7 @@ namespace Shubharealtime
         }
 
 
-
+        //Close all running process of the application 
         public void closeallprocess()
         {
             Process[] workers = Process.GetProcessesByName("Shubharealtime.vshost");
@@ -854,6 +833,7 @@ namespace Shubharealtime
             Process[] workers2 = Process.GetProcessesByName("Endrt.vshost");
             Process[] workers3 = Process.GetProcessesByName("Endrt");
             Process[] workers4 = Process.GetProcessesByName("Broker");
+            Process[] workers5 = Process.GetProcessesByName("Shubharealtime123");
 
 
 
@@ -890,9 +870,17 @@ namespace Shubharealtime
             Environment.Exit(0);
         }
 
-
+        //Save data 
         public void savedata()
         {
+
+            config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings.Remove("timesec");
+
+            config.AppSettings.Settings.Add("timesec", timetoRT.SelectedItem.ToString());
+            config.Save(ConfigurationSaveMode.Full);
+
+
             config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             config.AppSettings.Settings.Remove("nestbackfill");
 
@@ -934,10 +922,10 @@ namespace Shubharealtime
 
             savedata();
 
-
+            closeallprocess();
             Environment.Exit(0);
         }
-
+        //open dialog box and save path
         private void btnTarget_Click(object sender, RoutedEventArgs e)
         {
             var Open_Folder = new System.Windows.Forms.FolderBrowserDialog();
@@ -959,6 +947,7 @@ namespace Shubharealtime
             }
         }
 
+        //Import symbol from NEST or NOW terminal
         private void Import_symbol_Click(object sender, RoutedEventArgs e)
         {
             
@@ -1085,23 +1074,8 @@ namespace Shubharealtime
 
         }
 
-        private void dataGrid3_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        
-
-        private void dataGrid3_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-        
-        }
-
-        private void dataGrid3_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-
-        }
-
+       
+        //Selected listview symbol name Editing 
         private void listView1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListViewData lvc = (ListViewData)listView1.SelectedItem;
@@ -1116,6 +1090,7 @@ namespace Shubharealtime
             }
         }
 
+        //Editing of symbol name
         private void textBox3_TextChanged(object sender, TextChangedEventArgs e)
         {
             RefreshListView(textBox1.Text, textBox2.Text,textBox3.Text );
@@ -1148,12 +1123,14 @@ namespace Shubharealtime
             }
         }
 
+        //Editing of symbol name
         private void textBox2_TextChanged(object sender, TextChangedEventArgs e)
         {
             RefreshListView(textBox1.Text, textBox2.Text, textBox3.Text);
 
         }
 
+        //Save symbol into File 
         private void sav_symbolfile_Click(object sender, RoutedEventArgs e)
         {
             if(nestbackfill.IsChecked==true )
@@ -1204,7 +1181,7 @@ namespace Shubharealtime
 
        
        
-
+        //
         private void withoutbackfill_Checked(object sender, RoutedEventArgs e)
         {
             saveradiobuttn();
@@ -1244,30 +1221,14 @@ namespace Shubharealtime
 
         }
 
+        //Editing of symbol name
+
         private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
 
-        private void button1_Click_1(object sender, RoutedEventArgs e)
-        {
-            MailMessage mail = new MailMessage();
-            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-
-            mail.From = new MailAddress("shanteshpaigude1988@gmail.com");
-            mail.To.Add("shanteshpaigude1988@gmail.com");
-            mail.Subject = "demo";
-            mail.Body = "Report";
-            //Attachment attachment = new Attachment(filename);
-            //mail.Attachments.Add(attachment);
-
-            SmtpServer.Port = 25;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("shanteshpaigude1988@gmail.com", "");
-            SmtpServer.EnableSsl = true;
-
-            SmtpServer.Send(mail);
-           // SendMail("", "", "", true);
-        }
+       
 
         private void tradetiger_Checked(object sender, RoutedEventArgs e)
         {
@@ -1275,7 +1236,7 @@ namespace Shubharealtime
         }
 
        
-
+        //Load all current setting of the user 
         private void Current_Setting_Loaded(object sender, RoutedEventArgs e)
         {
             try
@@ -1486,7 +1447,7 @@ namespace Shubharealtime
 
             CommandManager.InvalidateRequerySuggested();
         }
-
+        //Srtart wazart again 
         private void changesetting_Click(object sender, RoutedEventArgs e)
         {
             RegistryKey regKey = Registry.CurrentUser;
@@ -1553,7 +1514,10 @@ namespace Shubharealtime
         {
             savedata();
 
-
+            RegistryKey regKey = Registry.CurrentUser;
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
+            regKey.SetValue("timesec", timetoRT.SelectedItem.ToString());
+            var ApplicationID = regKey.GetValue("sd");
 
             Shubharealtime.datadownload s1 = new datadownload();
             if (RTD_server_name.SelectedItem == "NEST")

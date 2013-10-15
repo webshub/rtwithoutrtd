@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Shubharealtime.Window1"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Shubha Real time " Height="588" Width="753" Loaded="Window_Loaded" Background="#FFF9FBFC" WindowStartupLocation="CenterScreen" Closed="Window_Closed" WindowState="Normal">
+        Title="Shubha Real time " Height="588" Width="753" Loaded="Window_Loaded" Background="#FFF9FBFC" WindowStartupLocation="CenterScreen" Closed="Window_Closed" WindowState="Normal" ResizeMode="NoResize">
     <Grid Height="555" Width="729">
         <Label Content="Your Registartion ID :" Height="28" HorizontalAlignment="Left" Margin="524,10,0,0" VerticalAlignment="Top" />
         <TextBox Height="23" HorizontalAlignment="Left" Margin="641,15,0,0" Name="moterboard" VerticalAlignment="Top" Width="103" IsReadOnly="True" Background="#FFF9FBFC" BorderThickness="0" />
@@ -34,7 +34,7 @@
                     <TextBlock Margin="76,48,522,420" Grid.Column="1" Name="clickhere" Visibility="Hidden"><Hyperlink NavigateUri="http://shubhalabha.in/disclaimer/license/" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock Text=" Click here  " /></Hyperlink></TextBlock>
                     <TextBlock Height="21" Name="textBlock4" Text="Note-please          " Foreground="#FFC32C2C" FontSize="12.5" FontFamily="Swis721 Lt BT" FontWeight="SemiBold" Width="96" Margin="2,49,569,420" Grid.Column="1" Visibility="Hidden" />
                     <TextBlock FontFamily="Swis721 Lt BT" FontSize="12.5" FontWeight="SemiBold" Foreground="#FFC32C2C" Height="21" Margin="148,48,159,421" Name="textBlock3" Text="to the watch video for how to use it you can also refere manual " Grid.Column="1" Visibility="Hidden" />
-                    <Border BorderBrush="Silver" BorderThickness="1" Height="102" Name="border4" Width="513" Grid.ColumnSpan="2" Margin="11,6,157,382" />
+                    <Border BorderBrush="Silver" BorderThickness="1" Height="102" Name="border4" Width="513" Grid.ColumnSpan="2" Margin="11,103,157,285" />
                 </Grid>
             </TabItem>
             <TabItem Header="     Backfill      "  Name="Advancesetting" Background="#FFDDDDDD" FontSize="12.5" UseLayoutRounding="True">

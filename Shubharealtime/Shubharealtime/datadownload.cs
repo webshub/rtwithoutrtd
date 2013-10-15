@@ -1,4 +1,9 @@
-﻿using System;
+﻿//////////////////////////////////////////////////
+//This software (released under GNU GPL V3) and you are welcome to redistribute it under certain conditions as per license 
+///////////////////////////////////////////////////
+
+
+using System;
 using System.Configuration;
 using System.Net.Mail;
 using System.Collections.Generic;
@@ -106,10 +111,12 @@ namespace Shubharealtime
          const int WM_p = 0x50;
          const int WM_d = 0x43;
 
+        //Close window by its handle 
         void CloseWindow(IntPtr hwnd)
         {
             SendMessage(hwnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
         }
+        //Find all child window by its handle 
         public static IntPtr FindChildWindow(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszTitle)
         {
             // Try to find a match.
@@ -130,6 +137,7 @@ namespace Shubharealtime
             }
             return hwnd;
         }
+        //Process nest and now backfill data 
         public void Executenestnowbackfillrocessing(string strBSECSVArr, string datetostore, string name, int count, string mappingsymbol)
         {
 
@@ -255,6 +263,7 @@ namespace Shubharealtime
 
 
         }
+        //take symbol name from saved file 
         public void getsymbolname()
         {
 
@@ -279,6 +288,7 @@ namespace Shubharealtime
 
         }
         
+        //Starting backfill data 
         public  void startdownload()
         {
 
@@ -534,6 +544,9 @@ namespace Shubharealtime
 
             string[] nestnowfilePaths = Directory.GetFiles(@"C:\myshubhalabha\NESTbackfill\", "*.csv");
 
+            RegistryKey regKey = Registry.CurrentUser;
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
+            var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
 
             if (chartingaplication == "Amibroker")
             {
@@ -543,7 +556,7 @@ namespace Shubharealtime
                           ExcelInst, new object[1] { true });
 
                 ExcelType.InvokeMember("LoadDatabase", BindingFlags.InvokeMethod | BindingFlags.Public, null,
-                    ExcelInst, new string[1] { amipath });
+                    ExcelInst, new string[1] { Amibrokerdatapath.ToString( )});
             }
            string datetostore = "";
            for (int i = 0; i < nestnowfilePaths.Count(); i++)
@@ -728,7 +741,7 @@ namespace Shubharealtime
         }
 
 
-
+        //Google backfill 
       public   void googlebackfill()
         {
             string targetpath = ConfigurationManager.AppSettings["targetpathforcombo"];
@@ -821,6 +834,8 @@ namespace Shubharealtime
                 
 
         }
+
+        //join csv files present in perticular folder
       private static void JoinCsvFiles(string[] csvFileNames, string outputDestinationPath)
       {
           StringBuilder sb = new StringBuilder();
@@ -855,6 +870,7 @@ namespace Shubharealtime
 
 
       }
+        //Processing of google backfill file
       public void ExecuteYAHOOProcessing(string[] strBSECSVArr, string datetostore, string name, int count, string mappingsymbol)
       {
 
@@ -1213,6 +1229,7 @@ namespace Shubharealtime
 
           return null;
       }
+        //Download Google backfill data
       private void downliaddata(string path, string url)
       {
 
@@ -1246,6 +1263,7 @@ namespace Shubharealtime
 
 
       }
+        //Timer for call realtime function
         private void dispatcherTimerForRT_Tick(object sender, EventArgs e)
         {
             if (terminalname == "NEST")
@@ -1256,19 +1274,29 @@ namespace Shubharealtime
             {
                 Nowdata (f);
             }
-            RtdataRecall();
+          //  RtdataRecall();
 
         }
+        //Timer for call realtime function
+
         private void RtdataRecall()
         {
-            int sec=Convert.ToInt32(timetosave);
+
+
+            
+                 RegistryKey regKey = Registry.CurrentUser;
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
+            var timesec = regKey.GetValue("timesec");
+
+            int sec = Convert.ToInt32(timesec);
             DispatcherTimer1.Tick += new EventHandler(dispatcherTimerForRT_Tick);
-            DispatcherTimer1.Interval = new TimeSpan(0, 0,sec );
+            DispatcherTimer1.Interval = new TimeSpan(0, 0, sec);
             DispatcherTimer1.Start();
             CommandManager.InvalidateRequerySuggested();
 
         }
 
+        //Mouse click on perticular point
         private void ClickOnPoint(IntPtr wndHandle,System.Windows.Point  clientPoint)
         {
 
@@ -1286,7 +1314,8 @@ namespace Shubharealtime
                                                             /// 
             /// return mouse 
         }
-
+       
+        //Mouse click on Symbol name point
         public void backfill(SystemAccessibleObject backfillsymbolname)
         {
            System.Windows. Point a1 = new System.Windows.Point (Convert.ToDouble(backfillsymbolname.Location.X), Convert.ToDouble(backfillsymbolname.Location.Y));
@@ -1294,6 +1323,8 @@ namespace Shubharealtime
             ClickOnPoint(windowHandle, a1);
 
         }
+
+        //Checking all require fieldes from NEST terminal 
         public int  checknestfiled()
         {
             Process[] processes = null;
@@ -1426,6 +1457,8 @@ namespace Shubharealtime
 
             return 1;
         }
+        //Checking all require fieldes from NOW terminal 
+
         public void checknowfiled()
         {
             Process[] processes = null;
@@ -1533,6 +1566,7 @@ namespace Shubharealtime
                 closeallprocess();
             }
         }
+        //Close all running process of our application 
         public void closeallprocess()
         {
             Process[] workers = Process.GetProcessesByName("Shubharealtime.vshost");
@@ -1575,6 +1609,8 @@ namespace Shubharealtime
             }
             Environment.Exit(0);
         }
+
+        //Real time data of NEST terminal 
         private void LoadTree(SystemAccessibleObject f )
         {
             
@@ -1679,6 +1715,7 @@ namespace Shubharealtime
                      LTT = "";
                      openint = "";
                      symbolnametosave = "";
+     
                     finalobject = f.Children[i];
                     string s = finalobject.Description;
 
@@ -1801,7 +1838,6 @@ namespace Shubharealtime
                          ExcelInst, args);
 
 
-                    CommandManager.InvalidateRequerySuggested();
 
                     ExcelType.InvokeMember("RefreshAll", BindingFlags.InvokeMethod | BindingFlags.Public, null,
                            ExcelInst, new object[1] { "" });
@@ -1857,15 +1893,17 @@ namespace Shubharealtime
                         writer.WriteLine(datatostore);
                 }
 
-
+                f = null;
             }
             catch(Exception ex)
             {
-                System.Windows.MessageBox.Show(ex.Message );
+                //System.Windows.MessageBox.Show(ex.Message );
             }
 
 
         }
+        //Real time data of NOW terminal 
+
         private void Nowdata(SystemAccessibleObject f)
         {
 

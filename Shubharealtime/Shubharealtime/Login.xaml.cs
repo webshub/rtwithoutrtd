@@ -1,4 +1,10 @@
-﻿using System;
+﻿//////////////////////////////////////////////////
+//This software (released under GNU GPL V3) and you are welcome to redistribute it under certain conditions as per license 
+///////////////////////////////////////////////////
+
+
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -221,7 +227,7 @@ BindingFlags.SetProperty,null,objComWebBrowser, new object[] { Hide });
             if (lead.Source.ToString() == "http://shubhalabha.in/eng/crm/index.php?entryPoint=WebToLeadCapture")
             {
                 SetRegKey();
-                System.Windows.Forms.MessageBox.Show("Your trial period will expired on  " +DateTime.Today.Date.AddDays(2).ToString());
+                System.Windows.Forms.MessageBox.Show("Your trial period will expired on  " +DateTime.Today.Date.AddDays(2).ToShortDateString());
 
 
                 this.Hide();
@@ -235,6 +241,8 @@ BindingFlags.SetProperty,null,objComWebBrowser, new object[] { Hide });
 
         private void Window_Closed(object sender, EventArgs e)
         {
+            
+            
             Environment.Exit(0);
         }
 
@@ -242,6 +250,8 @@ BindingFlags.SetProperty,null,objComWebBrowser, new object[] { Hide });
         {
             Environment.Exit(0);
         }
+
+       
 
        
 

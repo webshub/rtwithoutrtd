@@ -1,4 +1,9 @@
-﻿using System.Runtime.InteropServices;
+﻿//////////////////////////////////////////////////
+//This software (released under GNU GPL V3) and you are welcome to redistribute it under certain conditions as per license 
+///////////////////////////////////////////////////
+
+
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Shubharealtime

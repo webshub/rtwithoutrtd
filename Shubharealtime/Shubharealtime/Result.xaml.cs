@@ -1,4 +1,8 @@
-﻿using System;
+﻿//////////////////////////////////////////////////
+//This software (released under GNU GPL V3) and you are welcome to redistribute it under certain conditions as per license 
+///////////////////////////////////////////////////
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +29,7 @@ namespace Shubharealtime
             InitializeComponent();
         }
 
+        //Result Of current setting 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             try

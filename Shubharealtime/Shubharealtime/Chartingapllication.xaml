@@ -19,7 +19,7 @@
         <Button Content="Browes" Height="25" HorizontalAlignment="Right" Margin="0,80,32,0" Name="button1" VerticalAlignment="Top" Width="72" Click="button1_Click" />
         <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="164,80,0,0" Name="Amiexepath" Text="C:\myshubhalabha\amirealtime" VerticalAlignment="Top" Width="186" />
         <Label Content="Amibroker Exe path" Height="28" HorizontalAlignment="Left" Margin="43,77,0,0" Name="label1" VerticalAlignment="Top" />
-        <Label Content="• Amibroker users  :Click  on next it will amibroker  please follow following steps" FontWeight="SemiBold" Height="28" HorizontalAlignment="Left" Margin="5,145,0,0" Name="label7" VerticalAlignment="Top" />
+        <Label Content="• Amibroker users  :Click  on next it will open amibroker  please follow following steps" FontWeight="SemiBold" Height="28" HorizontalAlignment="Left" Margin="5,145,0,0" Name="label7" VerticalAlignment="Top" FontSize="11.5" />
         <Label Content="1. Go to file click on database setting" Height="28" HorizontalAlignment="Left" Margin="10,167,0,0" Name="label3" VerticalAlignment="Top" />
         <Label Content="2. Set basetime interval to 1 second " Height="28" HorizontalAlignment="Left" Margin="10,187,0,0" Name="label4" VerticalAlignment="Top" />
     </Grid>

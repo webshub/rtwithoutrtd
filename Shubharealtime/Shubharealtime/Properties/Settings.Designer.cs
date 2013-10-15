@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Shubhalabha123.Properties {
+namespace shubhalabha123.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

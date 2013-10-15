@@ -1,4 +1,8 @@
-﻿using System;
+﻿//////////////////////////////////////////////////
+//This software (released under GNU GPL V3) and you are welcome to redistribute it under certain conditions as per license 
+///////////////////////////////////////////////////
+
+using System;
 using System.Configuration;
 using System.Net.Mail;
 using System.Collections.Generic;
@@ -106,10 +110,13 @@ namespace Shubharealtime
         const int WM_p = 0x50;
         const int WM_d = 0x43;
 
+        //Close window by its handle 
         void CloseWindow(IntPtr hwnd)
         {
             SendMessage(hwnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
         }
+        //Find all child window by its handle 
+
         public static IntPtr FindChildWindow(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszTitle)
         {
             // Try to find a match.
@@ -130,6 +137,7 @@ namespace Shubharealtime
             }
             return hwnd;
         }
+       //Nest backfill processing 
         public void Executenestnowbackfillrocessing(string strBSECSVArr, string datetostore, string name, int count, string mappingsymbol)
         {
 
@@ -255,6 +263,7 @@ namespace Shubharealtime
 
 
         }
+        //Find symbol name saved in file
         public void getsymbolname()
         {
 
@@ -278,6 +287,7 @@ namespace Shubharealtime
             }
 
         }
+        //start backfill data
         public void startdownload()
         {
 
@@ -1182,6 +1192,7 @@ namespace Shubharealtime
             ClickOnPoint(windowHandle, a1);
 
         }
+       //Checking NEST require filed 
         public string  checknestfiled()
         {
             Process[] processes = null;
@@ -1310,6 +1321,8 @@ namespace Shubharealtime
             }
             return "Done";
         }
+        //Checking NOW require filed 
+
         public string  checknowfiled()
         {
             Process[] processes = null;
@@ -1414,6 +1427,8 @@ namespace Shubharealtime
 
             return "Done";
         }
+        //Checking NEST Plus require filed 
+        //
         public int checkbackfill()
         {
 
