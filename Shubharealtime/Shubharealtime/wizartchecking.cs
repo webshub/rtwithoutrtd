@@ -544,7 +544,17 @@ namespace Shubharealtime
 
                 string[] nestnowfilePaths = Directory.GetFiles(@"C:\myshubhalabha\NESTbackfill\", "*.csv");
 
+                var Amibrokerdatapath = "";
 
+                try
+                {
+                    RegistryKey regKey = Registry.CurrentUser;
+                    regKey = regKey.CreateSubKey(@"Windows-xpRT\");
+                    Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath").ToString();
+                }
+                catch
+                {
+                }
                 if (chartingaplication == "Amibroker")
                 {
                     ExcelType = Type.GetTypeFromProgID("Broker.Application");
@@ -553,7 +563,7 @@ namespace Shubharealtime
                               ExcelInst, new object[1] { true });
 
                     ExcelType.InvokeMember("LoadDatabase", BindingFlags.InvokeMethod | BindingFlags.Public, null,
-                        ExcelInst, new string[1] { amipath });
+                        ExcelInst, new string[1] { Amibrokerdatapath });
                 }
                 string datetostore = "";
                 for (int i = 0; i < nestnowfilePaths.Count(); i++)
@@ -1209,7 +1219,7 @@ namespace Shubharealtime
                 }
                 catch
                 {
-                    return "Please start Nest as Run as Administrator";
+                    return "Error: Please start Nest as Run as Administrator";
                 }
             
 
@@ -1248,7 +1258,7 @@ namespace Shubharealtime
             }
             catch
             {
-                return "Market Watch not found";
+                return "Error: Market Watch not found";
             }
 
             SystemAccessibleObject finalobject;
@@ -1317,7 +1327,7 @@ namespace Shubharealtime
             }
             if (flag == 1)
             {
-                return "Mandatory fields are missing in NEST terminal";
+                return "Error:Mandatory fields are missing in NEST terminal or LTT value not present";
             }
             return "Done";
         }
@@ -1339,7 +1349,7 @@ namespace Shubharealtime
                 }
                 catch
                 {
-                    return " Please start NOW as Run as Administrator";
+                    return "Error: Please start NOW as Run as Administrator";
                 }
             
             IntPtr abcd = new IntPtr();
@@ -1377,7 +1387,7 @@ namespace Shubharealtime
             }
             catch
             {
-                return "Market Watch not found";
+                return "Error: Market Watch not found";
             }
 
             SystemAccessibleObject finalobject;
@@ -1422,8 +1432,9 @@ namespace Shubharealtime
             }
             if (flag == 1)
             {
-                return "Mandatory fields are missing in now Terminal";
+                return "Error:Mandatory fields are missing in NOW terminal or LTT value not present";
             }
+
 
             return "Done";
         }

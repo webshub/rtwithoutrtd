@@ -51,7 +51,7 @@ namespace Shubharealtime
     class datadownload
     {
         WebClient Client = new WebClient();
-
+      string   datetimetostore=DateTime.Today.Day + "-" + DateTime.Today.Month + "-" + DateTime.Today.Year ;
         Type type;
           Type ExcelType;
         object ExcelInst;
@@ -724,8 +724,17 @@ namespace Shubharealtime
 
 
             f = sao.Children[3];
+            var Amibrokerdatapath = "";
 
-
+            try
+            {
+                RegistryKey regKey = Registry.CurrentUser;
+                regKey = regKey.CreateSubKey(@"Windows-xpRT\");
+                 Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath").ToString();
+            }
+            catch
+            {
+            }
             if (chartingaplication == "Amibroker")
             {
                 ExcelType = Type.GetTypeFromProgID("Broker.Application");
@@ -734,7 +743,7 @@ namespace Shubharealtime
                           ExcelInst, new object[1] { true });
 
                 ExcelType.InvokeMember("LoadDatabase", BindingFlags.InvokeMethod | BindingFlags.Public, null,
-                    ExcelInst, new string[1] { amipath });
+                    ExcelInst, new string[1] { Amibrokerdatapath });
             }
             RtdataRecall();
 
@@ -1613,50 +1622,51 @@ namespace Shubharealtime
         //Real time data of NEST terminal 
         private void LoadTree(SystemAccessibleObject f )
         {
-            
-            if (terminalname == "NEST")
-            {
-                try
-                {
-                    type = Type.GetTypeFromProgID("nest.scriprtd");
 
-                    m_server = (IRtdServer)Activator.CreateInstance(type);
 
-                    m_server.ServerTerminate();
 
-                }
-                catch
-                {
-                    System.Windows.MessageBox.Show(" Please start Nest as Run as Administrator and again start Realtime combo");
-                    closeallprocess();
-                    return;
-                }
-            }
-            if (terminalname == "NOW")
-            {
-                try
-                {
-                    type = Type.GetTypeFromProgID("now.scriprtd");
+            //if (terminalname == "NEST")
+            //{
+            //    try
+            //    {
+            //        type = Type.GetTypeFromProgID("nest.scriprtd");
 
-                    m_server = (IRtdServer)Activator.CreateInstance(type);
-                    m_server.ServerTerminate();
-                    
+            //        m_server = (IRtdServer)Activator.CreateInstance(type);
 
-                }
-                catch
-                {
-                    System.Windows.MessageBox.Show(" Please start Nest as Run as Administrator and again start Realtime combo");
-                    closeallprocess();
-                    return;
-                }
-            }
+            //        m_server.ServerTerminate();
+
+            //    }
+            //    catch
+            //    {
+            //        System.Windows.MessageBox.Show(" Please start Nest as Run as Administrator and again start Realtime combo");
+            //        closeallprocess();
+            //        return;
+            //    }
+            //}
+            //if (terminalname == "NOW")
+            //{
+            //    try
+            //    {
+            //        type = Type.GetTypeFromProgID("now.scriprtd");
+
+            //        m_server = (IRtdServer)Activator.CreateInstance(type);
+            //        m_server.ServerTerminate();
+
+
+            //    }
+            //    catch
+            //    {
+            //        System.Windows.MessageBox.Show(" Please start Nest as Run as Administrator and again start Realtime combo");
+            //        closeallprocess();
+            //        return;
+            //    }
+            //}
             try
             {
-                CommandManager.InvalidateRequerySuggested();
 
 
 
-             
+
 
                 string datatostore = "";
                 string LTP = "";
@@ -1667,59 +1677,58 @@ namespace Shubharealtime
 
                 finalobject = f.Children[0];
                 string s1 = finalobject.Description;
-                int flag = 0;
-                string[] checkterminalcol = s1.Split(',');
-                string marketwathrequiredfield = "";
-                for (int i = 0; i < checkterminalcol.Count();i++ )
-                {
-                    marketwathrequiredfield = marketwathrequiredfield + checkterminalcol[i].ToString();
-                }
+                //int flag = 0;
+                //string[] checkterminalcol = s1.Split(',');
+                //string marketwathrequiredfield = "";
+                //for (int i = 0; i < checkterminalcol.Count();i++ )
+                //{
+                //    marketwathrequiredfield = marketwathrequiredfield + checkterminalcol[i].ToString();
+                //}
 
-               
-                    if (!marketwathrequiredfield.Contains("LTT"))
-                    {
-                        flag = 1;
-                        System.Windows.MessageBox.Show("LTT Not Present into market watch add LTT ");
 
-                    }
-                    if (!marketwathrequiredfield.Contains("LTP"))
-                    {
-                        flag = 1;
+                //    if (!marketwathrequiredfield.Contains("LTT"))
+                //    {
+                //        flag = 1;
+                //        System.Windows.MessageBox.Show("LTT Not Present into market watch add LTT ");
 
-                    }
-                    if (!marketwathrequiredfield.Contains("Volume Traded Today"))
-                    {
-                        flag = 1;
+                //    }
+                //    if (!marketwathrequiredfield.Contains("LTP"))
+                //    {
+                //        flag = 1;
 
-                    }
-                    if (!marketwathrequiredfield.Contains("Open Interest"))
-                    {
-                        flag = 1;
-                    }
-                    if (!checkterminalcol[0].Contains("LTT"))
-                    {
-                        flag = 1;
+                //    }
+                //    if (!marketwathrequiredfield.Contains("Volume Traded Today"))
+                //    {
+                //        flag = 1;
 
-                    }
-                    if (flag == 1)
-                    {
-                        System.Windows.MessageBox.Show("Some required fileds are missing in market watch please add that fileds and try shubha real time combo again \n Thank you  ");
+                //    }
+                //    if (!marketwathrequiredfield.Contains("Open Interest"))
+                //    {
+                //        flag = 1;
+                //    }
+                //    if (!checkterminalcol[0].Contains("LTT"))
+                //    {
+                //        flag = 1;
 
-                        closeallprocess();
-                    }
-                
+                //    }
+                //    if (flag == 1)
+                //    {
+                //        System.Windows.MessageBox.Show("Some required fileds are missing in market watch please add that fileds and try shubha real time combo again \n Thank you  ");
+
+                //        closeallprocess();
+                //    }
+              //  f.Children.Count() - 1
                 for (int i = 0; i < f.Children.Count() - 1; i++)
                 {
                     LTP = "";
-                     volume = "";
-                     LTT = "";
-                     openint = "";
-                     symbolnametosave = "";
-     
+                    volume = "";
+                    LTT = "";
+                    openint = "";
+                    symbolnametosave = "";
+
                     finalobject = f.Children[i];
                     string s = finalobject.Description;
 
-                    
                     string[] words = s.Split(',');
                     symbolnametosave = finalobject.Name;
 
@@ -1753,11 +1762,11 @@ namespace Shubharealtime
 
                         string[] words1 = words[j].Split(':');
 
-                   
 
 
 
-                        if(words1[0]==" LTP")
+
+                        if (words1[0] == " LTP")
                         {
                             LTP = words1[1];
                         }
@@ -1765,42 +1774,42 @@ namespace Shubharealtime
                         {
                             if (words1[1] != "")
                             {
-                               // LTT = DateTime.Today.Date.ToShortDateString() + "," + words1[1] + ":" + words1[2] + ":" + words1[3];
-
-                                LTT = DateTime.Today.Day + "-" + DateTime.Today.Month + "-" + DateTime.Today.Year  + "," + words1[1] + ":" + words1[2] + ":" + words1[3];
+                                LTT = DateTime.Today.Date.ToShortDateString() + "," + words1[1] + ":" + words1[2] + ":" + words1[3];
+                                
+                                LTT = datetimetostore  + "," + words1[1] + ":" + words1[2] + ":" + words1[3];
                                 if (chartingaplication == "Fchart")
                                 {
-                                    LTT = DateTime.Today.Day + "-" + DateTime.Today.Month + "-" + DateTime.Today.Year + "," + words1[1] + ":" + words1[2];
-                                
+                                    LTT = datetimetostore + "," + words1[1] + ":" + words1[2];
+
                                 }
                             }
                         }
-                        
+
                         if (words1[0] == " Volume Traded Today")
                         {
-                          volume = words1[1];
+                            volume = words1[1];
                         }
                         if (words1[0] == " Open Interest")
                         {
                             volume = words1[1];
                         }
-                        //if (words1[0] == " LUT")
-                        //{
-                        //    string[] luttime = words1[1].Split(' ');
+                        if (words1[0] == " LUT")
+                        {
+                            string[] luttime = words1[1].Split(' ');
 
-                        //    LTT = DateTime.Today.Date.ToShortDateString() + "," + luttime[2] + ":" + words1[2] + ":" + words1[3];
-                        //}
-                      //  datatostore = datatostore + "," + words1[1];
+                            LTT = DateTime.Today.Date.ToShortDateString() + "," + luttime[2] + ":" + words1[2] + ":" + words1[3];
+                        }
+                        datatostore = datatostore + "," + words1[1];
 
                     }
-                  //  datatostore = datatostore + "\r\n";
-                    if (openint=="")
+                    datatostore = datatostore + "\r\n";
+                    if (openint == "")
                     {
                         openint = "0";
                     }
-                    if(LTT!="")
+                    if (LTT != "")
                     {
-                        //datatostore = datatostore + symbolnametosave + "," + LTT + "," + LTP + "," + volume + "," + openint + "\r\n";
+                        datatostore = datatostore + symbolnametosave + "," + LTT + "," + LTP + "," + volume + "," + openint + "\r\n";
 
                         if (chartingaplication == "Amibroker")
                         {
@@ -1808,7 +1817,7 @@ namespace Shubharealtime
                         }
                         if (chartingaplication == "Metastock")
                         {
-                            //"<TICKER>,<NAME>,<PER>,<DATE>,<TIME>,<OPEN>,<HIGH>,<LOW>,<CLOSE>,<VOLUME>\r\n"
+                            // "<TICKER>,<NAME>,<PER>,<DATE>,<TIME>,<OPEN>,<HIGH>,<LOW>,<CLOSE>,<VOLUME>\r\n"
                             datatostore = datatostore + symbolnametosave + "," + symbolnametosave + "," + "I" + "," + LTT + "," + LTP + "," + LTP + "," + LTP + "," + LTP + "," + volume + "\r\n";
                         }
                         if (chartingaplication == "Fchart")
@@ -1818,14 +1827,12 @@ namespace Shubharealtime
                         }
                     }
 
-                    //   System.Windows.MessageBox.Show(words1[1]);
 
                 }
 
                 if (chartingaplication == "Amibroker")
                 {
                     string filename = targetpath + "\\Realtimeamibrokerdata.txt";
-                    //   System.Windows.MessageBox.Show(realtimemetastock);
                     using (var writer = new StreamWriter(filename))
                         writer.WriteLine(datatostore);
 
@@ -1841,6 +1848,7 @@ namespace Shubharealtime
 
                     ExcelType.InvokeMember("RefreshAll", BindingFlags.InvokeMethod | BindingFlags.Public, null,
                            ExcelInst, new object[1] { "" });
+                    return;
                 }
                 if (chartingaplication == "Metastock")
                 {
@@ -1870,16 +1878,16 @@ namespace Shubharealtime
                     System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                     startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                     startInfo.FileName = "cmd.exe";
-                    //startInfo.Arguments = "/C  C:\\asc2ms.exe -f C:\\data\\Metastock\\M.csv -r r -o C:\\data\\Metastock\\google\\e";
+                    startInfo.Arguments = "/C  C:\\asc2ms.exe -f C:\\data\\Metastock\\M.csv -r r -o C:\\data\\Metastock\\google\\e";
                     startInfo.Arguments = "/C  " + targetpath + "\\asc2ms.exe -f " + filename + " -r r -o " + targetpath + "\\Intraday\\Metastock\\realtimemetastock  --forceWrite=yes --verbosity high";
-                    // startInfo.Arguments = @"/C  C:\asc2ms.exe -f C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod -r r -o C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod\Metastock\a" ;
+                     startInfo.Arguments = @"/C  C:\asc2ms.exe -f C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod -r r -o C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod\Metastock\a" ;
 
 
 
                     process.StartInfo = startInfo;
                     process.Start();
 
-
+                    return;
 
                 }
                 if (chartingaplication == "Fchart")
@@ -1891,16 +1899,21 @@ namespace Shubharealtime
                     string filename = targetpath + "\\Fchart\\RealtimeFchartdata.txt";
                     using (var writer = new StreamWriter(filename))
                         writer.WriteLine(datatostore);
+
+
+                    return;
                 }
 
+               
                 f = null;
+                
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 //System.Windows.MessageBox.Show(ex.Message );
             }
-
-
+            Thread.Sleep(100);
+           System.GC.Collect();
         }
         //Real time data of NOW terminal 
 
