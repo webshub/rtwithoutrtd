@@ -152,7 +152,7 @@ namespace Shubharealtime
 
                   
                     regKey.SetValue("Wizart", "done");
-
+                   
 
 
 
@@ -183,7 +183,6 @@ namespace Shubharealtime
 
 
                         string [] serverdata = reader.ReadToEnd().Split(',');
-                        System.Windows.MessageBox.Show(serverdata[0]);
                         string [] serverdata1=null;
                         int flagforuserpresentonserver = 0;
                         for (int i = 0; i < serverdata.Count(); i++)
@@ -249,6 +248,7 @@ namespace Shubharealtime
                     }
                     else
                     {
+                        System.Windows.Forms.MessageBox.Show("Your trial period will expired on  " + DateTime.Today.Date.AddDays(2).ToShortDateString());
 
                     }
 

@@ -14,7 +14,7 @@
             <Label Content="2.Please configure/set column profile to show data in following format." Height="28" HorizontalAlignment="Left" Margin="41,55,0,0" Name="label4" VerticalAlignment="Top" />
             <Label Content="-&gt;Trading symbol , Last Traded Time  , Last Traded Price , Volume Traded " Height="28" HorizontalAlignment="Left" Margin="36,76,0,0" Name="label5" VerticalAlignment="Top" />
             <Label Content="3.Symbol name has should be followed by LTT field ." Height="28" HorizontalAlignment="Left" Margin="43,116,0,0" Name="label6" VerticalAlignment="Top" />
-            <TextBlock Margin="52,146,183,143"><Hyperlink NavigateUri="http://shubhalabha.in/disclaimer/license/"><TextBlock Text=" Click here to refer configuration video   " /></Hyperlink></TextBlock>
+            <TextBlock Margin="52,146,183,143"><Hyperlink NavigateUri="http://www.youtube.com/watch?v=dKSKXA5KxJg" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock Text=" Click here to refer configuration video   " /></Hyperlink></TextBlock>
             <Label Content="• Click on next if you have successfully configured the NOWterminal." FontFamily="Times New Roman" FontWeight="SemiBold" Height="28" HorizontalAlignment="Left" Margin="11,175,0,0" Name="label1" VerticalAlignment="Top" />
             <Label Content="Today ,Open Interest" Height="28" HorizontalAlignment="Left" Margin="51,94,0,0" Name="label7" VerticalAlignment="Top" />
         </Grid>

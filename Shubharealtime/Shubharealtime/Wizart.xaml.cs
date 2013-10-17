@@ -253,7 +253,7 @@ namespace Shubharealtime
                             }
                             if (backfill == "yes")
                             {
-                                MessageBox.Show("Please stay idle for 1 min its cheking backfill option");
+                                MessageBox.Show("Please stay idle for 2 min we are checking your PLUS configaration please wait till you get responce message ");
                                
                                 int resultforbackfill = d.checkbackfill();
                                 if (resultforbackfill == 1)

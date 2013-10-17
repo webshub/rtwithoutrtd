@@ -636,7 +636,7 @@ namespace Shubharealtime
                     ExcelInst, new string[1] { amipath });
             }
 
-            System.Windows.MessageBox.Show("Backfill Completed ....");
+            System.Windows.MessageBox.Show("Backfill Completed");
 
         }
         public void startRealtime()
@@ -1835,6 +1835,47 @@ namespace Shubharealtime
                             datatostore = datatostore + symbolnametosave + "," + LTT + "," + LTP + "," + LTP + "," + LTP + "," + LTP + "," + volume + "\r\n";
 
                         }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            RegistryKey regKey = Registry.CurrentUser;
+                            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
+                            var lttreg = regKey.GetValue("LTT");
+                            string lttreg1 = "";
+                            if (lttreg!=null )
+                            {
+                             lttreg1 = lttreg.ToString();
+                            }
+
+                            if (lttreg1=="1")
+                            {
+                                LTT = DateTime.Today.Date.ToShortDateString() + "," + DateTime.Today.TimeOfDay.Hours + ":" + DateTime.Today.TimeOfDay.Minutes + ":" + DateTime.Today.TimeOfDay.Seconds ;
+                                
+                            datatostore = datatostore + symbolnametosave + "," + LTT + "," + LTP + "," + volume + "," + openint + "\r\n";
+
+                            if (chartingaplication == "Amibroker")
+                            {
+                                datatostore = datatostore + symbolnametosave + "," + LTT + "," + LTP + "," + volume + "," + openint + "\r\n";
+                            }
+                            if (chartingaplication == "Metastock")
+                            {
+                                // "<TICKER>,<NAME>,<PER>,<DATE>,<TIME>,<OPEN>,<HIGH>,<LOW>,<CLOSE>,<VOLUME>\r\n"
+                                datatostore = datatostore + symbolnametosave + "," + symbolnametosave + "," + "I" + "," + LTT + "," + LTP + "," + LTP + "," + LTP + "," + LTP + "," + volume + "\r\n";
+                            }
+                            if (chartingaplication == "Fchart")
+                            {
+                                datatostore = datatostore + symbolnametosave + "," + LTT + "," + LTP + "," + LTP + "," + LTP + "," + LTP + "," + volume + "\r\n";
+
+                            }
+                            }
+                        }
+                        catch
+                        {
+
+                        }
+                       
                     }
 
 

@@ -158,6 +158,7 @@ namespace Shubharealtime
             regKey.SetValue("sd", DateTime.Today.Date.ToString());
             regKey.SetValue("sp", "Key for xp");
             regKey.SetValue("ApplicationID", "1");
+            regKey.SetValue("LTT", "0");
            // regKey.SetValue("Wizart", "notdone");
 
             regKey.SetValue("Applicationpath", System.Reflection.Assembly.GetExecutingAssembly().Location.ToString());
@@ -227,7 +228,6 @@ BindingFlags.SetProperty,null,objComWebBrowser, new object[] { Hide });
             if (lead.Source.ToString() == "http://shubhalabha.in/eng/crm/index.php?entryPoint=WebToLeadCapture")
             {
                 SetRegKey();
-                System.Windows.Forms.MessageBox.Show("Your trial period will expired on  " +DateTime.Today.Date.AddDays(2).ToShortDateString());
 
 
                 this.Hide();

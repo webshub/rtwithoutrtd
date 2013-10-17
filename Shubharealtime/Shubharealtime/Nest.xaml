@@ -15,7 +15,7 @@
                 <Label Content="-&gt;Trading symbol , LTT , LUT , LTP , Volume Traded Today ,Open Interest." Height="28" HorizontalAlignment="Left" Margin="36,76,0,0" Name="label5" VerticalAlignment="Top" />
             <Label Content="3.LTT should be followed by Trading symbol ." Height="28" HorizontalAlignment="Left" Margin="43,98,0,0" Name="label6" VerticalAlignment="Top" />
             <Label Content="• Click on next if you have successfully configured the NEST terminal." Height="28" HorizontalAlignment="Left" Margin="18,159,0,0" Name="label7" VerticalAlignment="Top" FontWeight="SemiBold" FontFamily="Times New Roman" />
-            <TextBlock Margin="49,141,254,150"><Hyperlink NavigateUri="http://shubhalabha.in/disclaimer/license/" ><TextBlock Text=" Click here to refer configuration video   " /></Hyperlink></TextBlock>
+            <TextBlock Margin="49,141,254,150"><Hyperlink NavigateUri="http://www.youtube.com/watch?v=xyxZAClSmp0" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock Text=" Click here to refer configuration video   " /></Hyperlink></TextBlock>
             <Label Content="4.First two symbols should have LTT value" Height="28" HorizontalAlignment="Left" Margin="43,115,0,0" Name="label1" VerticalAlignment="Top" />
         </Grid>
     </Grid>
