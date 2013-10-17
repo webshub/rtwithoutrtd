@@ -197,6 +197,8 @@ namespace Shubharealtime
             RegistryKey regKey = Registry.CurrentUser;
             regKey = regKey.CreateSubKey(@"Windows-xpRT\");
             regKey.SetValue("backfill", "yes");
+           
+           
 
         }
 
@@ -208,6 +210,11 @@ namespace Shubharealtime
             regKey = regKey.CreateSubKey(@"Windows-xpRT\");
             regKey.SetValue("backfill", "no");
             }
+        }
+
+        private void stackPanel2_Unloaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

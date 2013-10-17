@@ -50,6 +50,12 @@ namespace Shubharealtime
 {
     class datadownload
     {
+
+
+        string s = "";
+        string[] words = null;
+        string[] words1 = null;
+        string[] luttime = null;
         WebClient Client = new WebClient();
       string   datetimetostore=DateTime.Today.Day + "-" + DateTime.Today.Month + "-" + DateTime.Today.Year ;
         Type type;
@@ -774,7 +780,7 @@ namespace Shubharealtime
             {
                 string[] words = googlesymbol[i].Split(':');
 
-                if (words[1] != "NOTBACKFILL")
+                if (words[1] != "No symbol selected")
                 {
 
 
@@ -1677,9 +1683,9 @@ namespace Shubharealtime
 
                 finalobject = f.Children[0];
                 string s1 = finalobject.Description;
-                //int flag = 0;
-                //string[] checkterminalcol = s1.Split(',');
-                //string marketwathrequiredfield = "";
+                int flag = 0;
+                string[] checkterminalcol = s1.Split(',');
+                string marketwathrequiredfield = "";
                 //for (int i = 0; i < checkterminalcol.Count();i++ )
                 //{
                 //    marketwathrequiredfield = marketwathrequiredfield + checkterminalcol[i].ToString();
@@ -1717,7 +1723,8 @@ namespace Shubharealtime
 
                 //        closeallprocess();
                 //    }
-              //  f.Children.Count() - 1
+              ////  f.Children.Count() - 1
+                ////string datatostore = "";
                 for (int i = 0; i < f.Children.Count() - 1; i++)
                 {
                     LTP = "";
@@ -1726,28 +1733,31 @@ namespace Shubharealtime
                     openint = "";
                     symbolnametosave = "";
 
-                    finalobject = f.Children[i];
-                    string s = finalobject.Description;
+                    finalobject = f.Children[i] ;
+                     s = finalobject.Description;
 
-                    string[] words = s.Split(',');
+                  //   string result = Regex.Replace(f.Children[i].Description, @"[^0-9,.]+", "");
+                  //   result = f.Children[i].Name  + "," + datetimetostore + "," + result;
+                  //datatostore = datatostore+result+"\r\n";
+                     words = s.Split(',');
                     symbolnametosave = finalobject.Name;
 
                     int mappingsymbolpresentornot = 0;
-                    for (int j = 0; j < mappingsymbol.Count() - 1; j++)
-                    {
-                        try
-                        {
-                            if (finalobject.Name.ToString() == symbolname[j].ToString())
-                            {
-                                mappingsymbolpresentornot = 1;
-                                symbolnametosave = mappingsymbol[j].ToString();
-                                break;
-                            }
-                        }
-                        catch
-                        {
-                        }
-                    }
+                    //for (int j = 0; j < mappingsymbol.Count() - 1; j++)
+                    //{
+                    //    try
+                    //    {
+                    //        if (finalobject.Name.ToString() == symbolname[j].ToString())
+                    //        {
+                    //            mappingsymbolpresentornot = 1;
+                    //            symbolnametosave = mappingsymbol[j].ToString();
+                    //            break;
+                    //        }
+                    //    }
+                    //    catch
+                    //    {
+                    //    }
+                    //}
                     if (mappingsymbolpresentornot == 0)
                     {
                         symbolnametosave = f.Children[i].Name;
@@ -1760,10 +1770,10 @@ namespace Shubharealtime
                     for (int j = 0; j < i1; j++)
                     {
 
-                        string[] words1 = words[j].Split(':');
+                         words1 = words[j].Split(':');
 
-
-
+                       
+                      
 
 
                         if (words1[0] == " LTP")
@@ -1795,7 +1805,7 @@ namespace Shubharealtime
                         }
                         if (words1[0] == " LUT")
                         {
-                            string[] luttime = words1[1].Split(' ');
+                             luttime = words1[1].Split(' ');
 
                             LTT = DateTime.Today.Date.ToShortDateString() + "," + luttime[2] + ":" + words1[2] + ":" + words1[3];
                         }
@@ -1903,7 +1913,7 @@ namespace Shubharealtime
 
                     return;
                 }
-
+                
                
                 f = null;
                 
@@ -1912,8 +1922,8 @@ namespace Shubharealtime
             {
                 //System.Windows.MessageBox.Show(ex.Message );
             }
-            Thread.Sleep(100);
-           System.GC.Collect();
+         //   Thread.Sleep(100);
+         //  System.GC.Collect();
         }
         //Real time data of NOW terminal 
 
@@ -2178,7 +2188,7 @@ namespace Shubharealtime
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(ex.Message);
+               // System.Windows.MessageBox.Show(ex.Message);
             }
 
 

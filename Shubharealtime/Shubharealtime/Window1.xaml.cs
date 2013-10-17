@@ -163,12 +163,12 @@ namespace Shubharealtime
                   
 
                     DateTime reg = Convert.ToDateTime(registerdate);
-                    reg = reg.AddDays(3);
+                    reg = reg.AddDays(2);
 
 
                     if (reg < DateTime.Today.Date)
                     {
-                        Uri a = new System.Uri("http://besttester.com/lic/lic.html");
+                        Uri a = new System.Uri("http://besttester.com/lic/lic.txt");
 
                         // webBrowser1.Source = a;
                         string credentials = "liccheck:lic123!@#";
@@ -178,41 +178,73 @@ namespace Shubharealtime
                         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
                         StreamReader reader = new StreamReader(response.GetResponseStream());
-                        // System.Windows.MessageBox.Show(reader.ReadToEnd());
 
-                        //System.Windows.MessageBox.Show(reader.ReadToEnd());
-
-                        string a1 = reader.ReadToEnd();
-                        //  System.Windows.MessageBox.Show(a1);
-                        //ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
-                        //ManagementObjectCollection moc = mos.Get();
-                        string motherBoard = "";
-                        //foreach (ManagementObject mo in moc)
-                        //{
-                        //  motherBoard = (string)mo["SerialNumber"];
-                        // //  motherBoard = (string)mo["VolumeSerialNumber"];
+                        ////////////////////////////////////////////
 
 
-                        //}
-                        System.Windows.MessageBox.Show("Cheking Trail ");
-                        ManagementObject dsk = new ManagementObject(@"win32_logicaldisk.deviceid=""c:""");
-                        dsk.Get();
-                        string id = dsk["VolumeSerialNumber"].ToString();
-                        motherBoard = id;
-                        System.Windows.MessageBox.Show("Cheking done ");
+                        string [] serverdata = reader.ReadToEnd().Split(',');
+                        System.Windows.MessageBox.Show(serverdata[0]);
+                        string [] serverdata1=null;
+                        int flagforuserpresentonserver = 0;
+                        for (int i = 0; i < serverdata.Count(); i++)
+                         {
+                             serverdata1 = serverdata[i].Split(' ');
+                            DateTime dateonserver=Convert.ToDateTime(serverdata1[1]);
 
-                        if (a1.Contains(motherBoard))
+                            ManagementObject dsk1 = new ManagementObject(@"win32_logicaldisk.deviceid=""c:""");
+                            dsk1.Get();
+                            string id1 = dsk1["VolumeSerialNumber"].ToString();
+                            if (id1 == serverdata1[0] )
+                            {
+                                flagforuserpresentonserver = 1;
+                            if (dateonserver<DateTime.Today.Date )
+                            {
+                                System.Windows.Forms.MessageBox.Show("Trial version expired please contact to sales@shubhalabha.in ");
+                                closeallprocess();
+
+                            }
+                            }
+                         }
+
+                        if (flagforuserpresentonserver==0)
                         {
-
-
-                            //if motherboard id is not present then it is paid user continue 
-                        }
-                        else
-                        {
-                            //if motherboard id is not present on server then close all process 
                             System.Windows.Forms.MessageBox.Show("Trial version expired please contact to sales@shubhalabha.in ");
                             closeallprocess();
                         }
+                        ///////////////////////////////////////////
+
+
+                        //string a1 = reader.ReadToEnd();
+                        ////  System.Windows.MessageBox.Show(a1);
+                        ////ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
+                        ////ManagementObjectCollection moc = mos.Get();
+                        //string motherBoard = "";
+                        ////foreach (ManagementObject mo in moc)
+                        ////{
+                        ////  motherBoard = (string)mo["SerialNumber"];
+                        //// //  motherBoard = (string)mo["VolumeSerialNumber"];
+
+
+                        ////}
+                        //System.Windows.MessageBox.Show("Cheking Trail ");
+                        //ManagementObject dsk = new ManagementObject(@"win32_logicaldisk.deviceid=""c:""");
+                        //dsk.Get();
+                        //string id = dsk["VolumeSerialNumber"].ToString();
+                        //motherBoard = id;
+                        //System.Windows.MessageBox.Show("Cheking done ");
+
+                        //if (a1.Contains(motherBoard))
+                        //{
+
+
+                        //    //if motherboard id is not present then it is paid user continue 
+                        //}
+                        //else
+                        //{
+                        //    //if motherboard id is not present on server then close all process 
+                        //    System.Windows.Forms.MessageBox.Show("Trial version expired please contact to sales@shubhalabha.in ");
+                        //    closeallprocess();
+                        //}
 
                     }
                     else
@@ -345,7 +377,7 @@ namespace Shubharealtime
                         label8.Visibility = Visibility.Hidden;
                         label9.Visibility = Visibility.Hidden;
 
-                        clickhere.Visibility = Visibility.Hidden;
+                        clickhere.Visibility = Visibility.Visible;
                         textBlock1.Visibility = Visibility.Visible;
 
                         textBlock3.Visibility = Visibility.Visible;
@@ -922,7 +954,7 @@ namespace Shubharealtime
 
             savedata();
 
-            closeallprocess();
+           // closeallprocess();
             Environment.Exit(0);
         }
         //open dialog box and save path
@@ -1058,7 +1090,7 @@ namespace Shubharealtime
             {
                 for (int i = 0; i < 15; i++)
                 {
-                    listView1.Items.Add(new ListViewData("NOTNEEDED", ":NOTBACKFILL", "NO"));
+                    listView1.Items.Add(new ListViewData("NOTNEEDED", ":No symbol selected", "NO"));
 
                 }
 
@@ -1475,6 +1507,7 @@ namespace Shubharealtime
                 stopRefreshControls = false;
 
             }
+
         }
 
         private void googlebackfill_Checked(object sender, RoutedEventArgs e)

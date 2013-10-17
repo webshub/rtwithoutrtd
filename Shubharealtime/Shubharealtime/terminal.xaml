@@ -16,7 +16,7 @@
             <CheckBox Content="Nest/Now" Height="16" HorizontalAlignment="Left" Margin="227,38,0,0" Name="plusbackfill" VerticalAlignment="Top" Checked="plusbackfill_Checked" Click="plusbackfill_Click" />
             <Label Content="Select the Check box for backfill option:" Height="28" HorizontalAlignment="Left" Margin="11,32,0,0" Name="label2" VerticalAlignment="Top" />
         </Grid>
-        <StackPanel Height="226" HorizontalAlignment="Left" Margin="0,69,0,0" Name="stackPanel2" VerticalAlignment="Top" Width="455"></StackPanel>
+        <StackPanel Height="226" HorizontalAlignment="Left" Margin="0,69,0,0" Name="stackPanel2" VerticalAlignment="Top" Width="455" Unloaded="stackPanel2_Unloaded"></StackPanel>
         <Border BorderBrush="Silver" BorderThickness="1" Height="0" HorizontalAlignment="Left" Margin="4,60,0,0" Name="border1" VerticalAlignment="Top" Width="451" />
     </Grid>
 </UserControl>

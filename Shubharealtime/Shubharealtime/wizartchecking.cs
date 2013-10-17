@@ -663,7 +663,7 @@ namespace Shubharealtime
 
             for (int i = 0; i < googlesymbol.Count(); i++)
             {
-                if (googlesymbol[i] != "NOTBACKFILL")
+                if (googlesymbol[i] != "No symbol selected")
                 {
 
 

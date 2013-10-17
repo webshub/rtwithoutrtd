@@ -258,6 +258,8 @@ namespace Shubharealtime
                                 int resultforbackfill = d.checkbackfill();
                                 if (resultforbackfill == 1)
                                 {
+                                    MessageBox.Show("Backfill chacking done");
+
                                     try
                                     {
                                         stackcontainer.Children.RemoveAt(0);
@@ -334,10 +336,14 @@ namespace Shubharealtime
                             }
                             if (backfill == "yes")
                             {
-                                int resultforbackfill = d.checkbackfill();
                                 MessageBox.Show("Please stay idle for 1 min its cheking backfill option");
+
+                                int resultforbackfill = d.checkbackfill();
                                 if (resultforbackfill == 1)
                                 {
+
+                                    MessageBox.Show("Backfill chacking done");
+
                                     try
                                     {
                                         stackcontainer.Children.RemoveAt(0);
