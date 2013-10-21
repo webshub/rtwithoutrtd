@@ -8,8 +8,8 @@
     <ProjectGuid>{6A1491AF-0DAD-4342-9DC9-36B2D4085CCB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>shubhalabhartx</RootNamespace>
-    <AssemblyName>shubhalabhartx</AssemblyName>
+    <RootNamespace>shubhalabharts</RootNamespace>
+    <AssemblyName>shubhalabharts</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -34,7 +34,7 @@
     <PublisherName>shubhalabha</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -369,9 +369,9 @@
     <Content Include="realtimemetastock.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="RT.format">
+    <Content Include="RT.format">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="Shubharealtime_1_TemporaryKey.pfx" />
     <None Include="Shubharealtime_2_TemporaryKey.pfx" />
     <None Include="Shubharealtime_TemporaryKey.pfx" />

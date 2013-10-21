@@ -18,8 +18,6 @@
                     <WebBrowser Name="wad2" LoadCompleted="wb_LoadCompleted" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.IsDeferredScrollingEnabled="False" Width="120" VerticalAlignment="Stretch" Height="148" HorizontalAlignment="Center" Margin="540,160,6,201" Grid.Column="1"></WebBrowser>
                     <WebBrowser Name="wad3" LoadCompleted="wb_LoadCompleted" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.IsDeferredScrollingEnabled="False" Width="120" VerticalAlignment="Stretch" Height="148" HorizontalAlignment="Center" Margin="540,6,6,355" Grid.Column="1"></WebBrowser>
                     <TextBox Height="23" HorizontalAlignment="Right"  Margin="0,136,136,0" Name="txtTargetFolder" VerticalAlignment="Top" Width="113" Grid.Column="1" Text="C:\myshubhalabha" IsReadOnly="True" Visibility="Hidden" />
-                    <Image Grid.ColumnSpan="2" Height="343" HorizontalAlignment="Left" Margin="11,114,0,0" Name="image1" Source="Images/home_banner1.jpg" Stretch="Fill" VerticalAlignment="Top" Width="535" />
-                    
                     <WebBrowser Height="39" HorizontalAlignment="Left" Margin="424,43,0,0" Name="piwik" VerticalAlignment="Top" Width="56" Grid.Column="1" Visibility="Hidden" />
                     <Button Content=" This software (released under GNU GPL V3) and you are welcome to redistribute it under certain conditions as per                      " Height="25" HorizontalAlignment="Left" Margin="6,463,0,0" Name="button1" VerticalAlignment="Top" Width="668" Grid.ColumnSpan="2" FontSize="11.5" IsEnabled="False" FontWeight="SemiBold" />
                     <TextBlock Margin="600,466,17,2" Grid.Column="1"><Hyperlink NavigateUri="http://shubhalabha.in/disclaimer/license/" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock Text=" license  " /></Hyperlink></TextBlock>
@@ -34,7 +32,8 @@
                     <TextBlock Margin="0,48,522,420" Grid.Column="1" Name="clickhere" Visibility="Hidden" HorizontalAlignment="Right" Width="69"><Hyperlink NavigateUri="http://shubhalabha.in/disclaimer/license/" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock Text=" Click here  " /></Hyperlink></TextBlock>
                     <TextBlock Height="21" Name="textBlock4" Text="Note-please          " Foreground="#FFC32C2C" FontSize="12.5" FontFamily="Swis721 Lt BT" FontWeight="SemiBold" Width="96" Margin="2,49,569,420" Grid.Column="1" Visibility="Hidden" />
                     <TextBlock FontFamily="Swis721 Lt BT" FontSize="12.5" FontWeight="SemiBold" Foreground="#FFC32C2C" Height="21" Margin="148,48,159,421" Name="textBlock3" Text="to the watch video for how to use it you can also refere manual " Grid.Column="1" Visibility="Hidden" />
-                    <Border BorderBrush="Silver" BorderThickness="1" Height="102" Name="border4" Width="513" Grid.ColumnSpan="2" Margin="11,8,157,380" />
+                    <Border BorderBrush="Silver" BorderThickness="1" Height="102" Name="border4" Margin="11,6,137,382" Grid.ColumnSpan="2" />
+                    <WebBrowser Grid.ColumnSpan="2" LoadCompleted="wb_LoadCompleted"  Height="343" HorizontalAlignment="Center" Margin="9,115,136,32" Name="homepageadd" ScrollViewer.IsDeferredScrollingEnabled="False" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Stretch" Width="535" />
                 </Grid>
             </TabItem>
             <TabItem Header="     Backfill      "  Name="Advancesetting" Background="#FFDDDDDD" FontSize="12.5" UseLayoutRounding="True">
@@ -85,36 +84,36 @@
                     <Label Content="6. Click on start button" FontSize="11.5" Height="28" HorizontalAlignment="Left" Margin="12,343,0,0" Name="label30" VerticalAlignment="Top" Width="193" />
                     <StackPanel Height="333" HorizontalAlignment="Left" Margin="8,129,0,0" Name="tradetigerinfo" VerticalAlignment="Top" Width="199" Visibility="Hidden" Background="#FFF9FBFC" />
                     <Button Content="Start Backfill" Height="23" Name="StartRT" Width="97" Click="StartRT_Click_1" Background="#FFDDDDDD" BorderThickness="1.1" BorderBrush="Black" UseLayoutRounding="True" Margin="258,66,338,402" />
-                    <Border BorderBrush="Silver" BorderThickness="1" Height="103" HorizontalAlignment="Left" Margin="8,17,0,0" Name="border2" VerticalAlignment="Top" Width="545" />
+                    <Border BorderBrush="Silver" BorderThickness="1" Height="103" HorizontalAlignment="Left" Margin="6,6,0,0" Name="border2" VerticalAlignment="Top" Width="545" />
                 </Grid> 
                     </TabItem>
            
             <TabItem Header="     Current Setting       " Name="Current_Setting" Loaded="Current_Setting_Loaded" Background="#FFDDDDDD" FontSize="12.5" UseLayoutRounding="True">
                 <Grid Background="#FFF9FBFC" Height="495">
-                    <Label Content="Your selected terminal is - " Height="28" HorizontalAlignment="Left" Margin="109,39,0,0" Name="lbl_terminal" VerticalAlignment="Top" />
-                    <Label Content="Your selected Charting Application is  - " Height="28" HorizontalAlignment="Left" Margin="43,73,0,0" Name="lbl_chart" VerticalAlignment="Top" />
-                    <Label Content="Your Amibroker database path is -" Height="28" HorizontalAlignment="Left" Margin="71,107,0,0" Name="lbl_amipath" VerticalAlignment="Top" />
-                    <Label Content="Your Metastock database path is -" Height="28" HorizontalAlignment="Left" Margin="69,141,0,0" Name="lbl_metapath" VerticalAlignment="Top" />
-                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="264,39,0,0" Name="result_terminal" VerticalAlignment="Top" />
-                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="266,73,0,0" Name="result_chart" VerticalAlignment="Top" />
-                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="266,107,0,0" Name="result_amipath" VerticalAlignment="Top" />
-                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="266,141,0,0" Name="result_metapath" VerticalAlignment="Top" />
-                    <Label Content="Nes/Now backfill -" Height="28" HorizontalAlignment="Left" Margin="152,175,0,0" Name="label4" VerticalAlignment="Top" />
-                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="266,175,0,0" Name="nestnowbackfill" VerticalAlignment="Top" />
+                    <Label Content="Selected terminal is - " Height="28" HorizontalAlignment="Left" Margin="8,37,0,0" Name="lbl_terminal" VerticalAlignment="Top" />
+                    <Label Content="Selected Charting Application is  - " Height="28" HorizontalAlignment="Left" Margin="7,71,0,0" Name="lbl_chart" VerticalAlignment="Top" />
+                    <Label Content="Amibroker database path is -" Height="28" HorizontalAlignment="Left" Margin="6,105,0,0" Name="lbl_amipath" VerticalAlignment="Top" />
+                    <Label Content="Metastock database path is -" Height="28" HorizontalAlignment="Left" Margin="8,139,0,0" Name="lbl_metapath" VerticalAlignment="Top" />
+                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="138,37,0,0" Name="result_terminal" VerticalAlignment="Top" />
+                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="211,71,0,0" Name="result_chart" VerticalAlignment="Top" />
+                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="176,105,0,0" Name="result_amipath" VerticalAlignment="Top" />
+                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="176,139,0,0" Name="result_metapath" VerticalAlignment="Top" />
+                    <Label Content="Nes/Now backfill -" Height="28" HorizontalAlignment="Left" Margin="8,173,0,0" Name="label4" VerticalAlignment="Top" />
+                    <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="126,173,0,0" Name="nestnowbackfill" VerticalAlignment="Top" />
                     <Button Content="Run wizard again " Height="23" HorizontalAlignment="Left" Margin="176,225,0,0" Name="changesetting" VerticalAlignment="Top" Width="128" Click="changesetting_Click" UseLayoutRounding="True" />
-                    <Border BorderBrush="Silver" BorderThickness="1" Height="213" HorizontalAlignment="Left" Margin="8,6,0,0" Name="border3" VerticalAlignment="Top" Width="540" />
+                    <Border BorderBrush="Silver" BorderThickness="1" Height="213" HorizontalAlignment="Left" Margin="6,4,0,0" Name="border3" VerticalAlignment="Top" Width="540" />
                     <WebBrowser Height="148" LoadCompleted="wb_LoadCompleted" HorizontalAlignment="Center" Margin="563,312,11,35" Name="wad9" ScrollViewer.IsDeferredScrollingEnabled="False" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Stretch" Width="120" />
                     <WebBrowser Height="148" LoadCompleted="wb_LoadCompleted" HorizontalAlignment="Center" Margin="563,158,11,189" Name="wad8" ScrollViewer.IsDeferredScrollingEnabled="False" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Stretch" Width="120" />
                     <WebBrowser Height="148" LoadCompleted="wb_LoadCompleted" HorizontalAlignment="Center" Margin="563,4,11,343" Name="wad7" ScrollViewer.IsDeferredScrollingEnabled="False" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Stretch" Width="120" />
                     <WebBrowser HorizontalAlignment="Center" Margin="8,256,150,35" Name="tipoftheday" ScrollViewer.IsDeferredScrollingEnabled="False" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Stretch" Width="540" />
-                    <Label Content="Your data saved in - C:\myshubhalabha" FontSize="12.5" Height="28" HorizontalAlignment="Left" Margin="140,13,0,0" Name="label17" VerticalAlignment="Top" Width="252" />
+                    <Label Content="Data saved in - C:\myshubhalabha" FontSize="12.5" Height="28" HorizontalAlignment="Left" Margin="8,6,0,0" Name="label17" VerticalAlignment="Top" Width="252" />
                 </Grid>
 
             </TabItem>
 
-            <TabItem Header="     Help     " Name="help" Background="#FFDDDDDD" FontSize="12.5" UseLayoutRounding="True">
+            <TabItem Header="     Help     " Name="help_tab" Background="#FFDDDDDD" FontSize="12.5" UseLayoutRounding="True">
                 <Grid Height="549"  Background="#FFF9FBFC" HorizontalAlignment="Left" Name="grid1" VerticalAlignment="Top" Width="701" >
-                    <Label Content="shubhart.format" Height="28" HorizontalAlignment="Left" Margin="8,90,0,0" Foreground="#FF12128D" />
+                    <Label Content="RT.format" Height="28" HorizontalAlignment="Left" Margin="9,32,0,489" Foreground="#FF12128D" />
                     <Label Content="shubhaxls.format" Height="28" HorizontalAlignment="Left" Margin="8,90,0,0" Name="lbe10" VerticalAlignment="Top" Foreground="#FF12128D" />
 
                     <Label Content="Shubhasharekhan.format" Height="28" HorizontalAlignment="Left" Margin="8,154,0,0" Name="label10" VerticalAlignment="Top" Foreground="#FF12128D" />
@@ -127,9 +126,12 @@
                     <Label Content="Shubhabackfill.format" Foreground="#FF12128D" Height="28" HorizontalAlignment="Left" Margin="7,222,0,0" Name="label6" VerticalAlignment="Top" />
                     <Label Content="FORMAT:- Ticker, Fullname, Date_DMY, Time, Open, High, Low, Close, Volume, OpenInt, Skip, Skip" Height="28" HorizontalAlignment="Left" Margin="6,242,0,0" Name="label16" VerticalAlignment="Top" />
                     <Label Content="SEPARATOR:- ,(comma)" Height="28" HorizontalAlignment="Left" Margin="6,260,0,0" Name="label18" VerticalAlignment="Top" />
-                    <Label Content="shubhanest-now.format" Foreground="#FF12128D" Height="28" HorizontalAlignment="Left" Margin="9,294,0,0" Name="label19" VerticalAlignment="Top" />
-                    <Label Content="FORMAT:- Ticker, Date_DMY, Open, High, Low, Close, Volume" Height="28" HorizontalAlignment="Left" Margin="8,314,0,0" Name="label20" VerticalAlignment="Top" />
-                    <Label Content="SEPARATOR:- ,(comma)" Height="28" HorizontalAlignment="Left" Margin="8,332,0,0" Name="label21" VerticalAlignment="Top" />
+                    <Label Content="shubhanest-now.format" Foreground="#FF12128D" HorizontalAlignment="Left" Margin="7,280,0,0" Name="label19" Height="28" VerticalAlignment="Top" />
+                    <Label Content="FORMAT:- Ticker, Date_DMY, Open, High, Low, Close, Volume" Height="28" HorizontalAlignment="Left" Margin="7,337,0,0" Name="label20" VerticalAlignment="Top" />
+                    <Label Content="SEPARATOR:- ,(comma)" Height="28" HorizontalAlignment="Left" Margin="6,303,0,0" Name="label21" VerticalAlignment="Top" />
+                    <WebBrowser Height="148" LoadCompleted="wb_LoadCompleted"  HorizontalAlignment="Center" Margin="570,311,11,90" Name="wad12" ScrollViewer.IsDeferredScrollingEnabled="False" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Stretch" Width="120" />
+                    <WebBrowser Height="148" LoadCompleted="wb_LoadCompleted"  HorizontalAlignment="Center" Margin="570,160,11,241" Name="wad11" ScrollViewer.IsDeferredScrollingEnabled="False" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Stretch" Width="120" />
+                    <WebBrowser Height="148" LoadCompleted="wb_LoadCompleted"  HorizontalAlignment="Center" Margin="570,6,11,395" Name="wad10" ScrollViewer.IsDeferredScrollingEnabled="False" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Stretch" Width="120" />
                 </Grid>
 
             </TabItem>

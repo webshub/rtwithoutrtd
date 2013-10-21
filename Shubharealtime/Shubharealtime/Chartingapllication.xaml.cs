@@ -81,12 +81,41 @@ namespace Shubharealtime
 
         private void ami_chk_Checked(object sender, RoutedEventArgs e)
         {
-           
+            regKey.SetValue("Chartingapplication", " Amibroker");
                
         }
+        public void savedata()
+        {
+            if (ami_chk.IsChecked == true)
+            {
+                chartingapp = chartingapp + " Amibroker";
+            }
+            if (meta_chk.IsChecked == true)
+            {
+                chartingapp = chartingapp + " Metastock";
 
+            }
+            if (fchart_chk.IsChecked == true)
+            {
+                chartingapp = chartingapp + " Fchart";
+
+            }
+            if (chartingapp == "")
+            {
+                chartingapp = "Amibroker";
+            }
+
+            regKey.SetValue("Amibrokerdatapath", db_path.Text.ToString());
+            regKey.SetValue("Metastockdatapath", meatpath_txt.Text.ToString());
+            regKey.SetValue("Amiexepath", Amiexepath.Text.ToString());
+
+
+
+            regKey.SetValue("Chartingapplication", chartingapp);
+        }
         private void meta_chk_Checked(object sender, RoutedEventArgs e)
         {
+            regKey.SetValue("Chartingapplication", " Metastock");
 
         }
 
@@ -127,7 +156,7 @@ namespace Shubharealtime
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            ami_chk.IsChecked = true;
+            //ami_chk.IsChecked = true;
 
             try
             {
@@ -161,6 +190,12 @@ namespace Shubharealtime
             regKey.SetValue("Amibrokerdatapath", db_path.Text.ToString());
             regKey.SetValue("Metastockdatapath", meatpath_txt.Text.ToString());
             regKey.SetValue("Amiexepath", Amiexepath.Text.ToString());
+        }
+
+        private void fchart_chk_Checked(object sender, RoutedEventArgs e)
+        {
+            regKey.SetValue("Chartingapplication", " Fchart");
+            
         }
     }
 }

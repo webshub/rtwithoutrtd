@@ -453,6 +453,12 @@ namespace Shubharealtime
                         var terminalname = regKey.GetValue("terminal");
                         var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
                         var Chartingapplication = regKey.GetValue("Chartingapplication");
+                        if (Chartingapplication==null )
+                        {
+                            Rsult_lbl.Content = "Please select charting application ";
+                            return;
+                        }
+
                         if (Chartingapplication.ToString().Contains("Amibroker"))
                         {
 

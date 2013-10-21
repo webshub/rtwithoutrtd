@@ -248,7 +248,7 @@ namespace Shubharealtime
                     }
                     else
                     {
-                        System.Windows.Forms.MessageBox.Show("Your trial period will expired on  " + DateTime.Today.Date.AddDays(2).ToShortDateString());
+                        System.Windows.Forms.MessageBox.Show("Your trial period will expired on  " + reg.ToShortDateString());
 
                     }
 
@@ -519,6 +519,10 @@ namespace Shubharealtime
 
                     File.Copy(processtostart, "C:\\myshubhalabha\\sharekhantoami.xlsm", true);
 
+                   
+
+
+
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhaodin.xlsm";
 
 
@@ -554,6 +558,13 @@ namespace Shubharealtime
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "Shubhabackfill.format";
                     File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\Shubhabackfill.format", true);
                     File.Copy(processtostart, programfilepath + "\\AmiBroker\\Formats\\Shubhabackfill.format", true);
+                   
+                    processtostart = filepath.Substring(0, filepath.Length - 18) + "RT.format";
+
+
+                    File.Copy(processtostart,"C:\\myshubhalabha\\amibroker format file\\\\RT.format", true);
+                    File.Copy(processtostart, programfilepath + "\\AmiBroker\\Formats\\RT.format", true);
+
 
                     //samples 
 
@@ -609,6 +620,7 @@ namespace Shubharealtime
                     Uri a3 = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=17&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
                     Uri tradetigerbanner1 = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=17&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
                     Uri tipofday = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=17&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
+                    Uri homepage = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=17&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
                    
                     Uri piwikvisit = new System.Uri("http://list.shubhalabha.in/withoutrtd.html");
 
@@ -626,6 +638,12 @@ namespace Shubharealtime
 
                     wad8.Source = a2;
                     wad9.Source = a3;
+                    wad10.Source = a1;
+
+                    wad11.Source = a2;
+                    wad12.Source = a3;
+
+                    homepageadd.Source = homepage;
                     tradetigerbanner.Source = tradetigerbanner1;
                     tipoftheday.Source = tipofday;
 
@@ -664,10 +682,24 @@ namespace Shubharealtime
 
                 Format_cb.SelectedIndex = 0;
 
-                for (int i = 1; i < 60; i++)
-                {
-                    timetoRT.Items.Add(i);
-                }
+                int i1 = 1;
+                timetoRT.Items.Add(i1 );
+                i1 = 3;
+                timetoRT.Items.Add(i1);
+                i1 = 5;
+                timetoRT.Items.Add(i1);
+
+                i1 = 10;
+                timetoRT.Items.Add(i1);
+
+                i1 = 20;
+                timetoRT.Items.Add(i1);
+                i1 = 30;
+                timetoRT.Items.Add(i1);
+                //for (int i = 1; i < 60; i++)
+                //{
+                //    timetoRT.Items.Add(i);
+                //}
 
                 try
                 {
@@ -1120,6 +1152,8 @@ namespace Shubharealtime
                 stopRefreshControls = false;
               
             }
+            textBox3.Focus();
+
         }
 
         //Editing of symbol name
@@ -1507,11 +1541,14 @@ namespace Shubharealtime
                 stopRefreshControls = false;
 
             }
-
+            textBox3.Focus();
         }
 
         private void googlebackfill_Checked(object sender, RoutedEventArgs e)
         {
+
+            System.Windows.MessageBox.Show("Please refre step for Google backfill ");
+            
             textBox1.Visibility = Visibility.Hidden;
             textBox2.Visibility = Visibility.Visible;
             listView1.Visibility = Visibility.Visible;
@@ -1545,6 +1582,9 @@ namespace Shubharealtime
 
         private void Startrealtimeonly_Click(object sender, RoutedEventArgs e)
         {
+            
+            
+
             savedata();
 
             RegistryKey regKey = Registry.CurrentUser;

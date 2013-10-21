@@ -38,8 +38,8 @@ namespace Endrt
 
             var path = regKey.GetValue("Applicationpath");
             string pathtostartprocess = path.ToString().Substring(0, path.ToString().Length -4);
-            Process[] workers = Process.GetProcessesByName("shubhalabhartx.vshost");
-            Process[] workers1 = Process.GetProcessesByName("shubhalabhartx");
+            Process[] workers = Process.GetProcessesByName("shubhalabharts.vshost");
+            Process[] workers1 = Process.GetProcessesByName("shubhalabharts");
 
             foreach (Process worker in workers)
             {
