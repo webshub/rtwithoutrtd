@@ -108,6 +108,7 @@ namespace Shubharealtime
             regKey.SetValue("Amibrokerdatapath", db_path.Text.ToString());
             regKey.SetValue("Metastockdatapath", meatpath_txt.Text.ToString());
             regKey.SetValue("Amiexepath", Amiexepath.Text.ToString());
+            regKey.SetValue("fchart", fchartpath.Text.ToString());
 
 
 
@@ -148,6 +149,8 @@ namespace Shubharealtime
             regKey.SetValue("Amibrokerdatapath", db_path.Text.ToString());
             regKey.SetValue("Metastockdatapath", meatpath_txt.Text.ToString());
             regKey.SetValue("Amiexepath", Amiexepath .Text.ToString());
+            regKey.SetValue("fchart", fchartpath .Text.ToString());
+
 
 
 
@@ -196,6 +199,19 @@ namespace Shubharealtime
         {
             regKey.SetValue("Chartingapplication", " Fchart");
             
+        }
+
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            var Open_Folder = new System.Windows.Forms.FolderBrowserDialog();
+            if (Open_Folder.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string Target_Folder_Path = Open_Folder.SelectedPath;
+
+                fchartpath.Text = Target_Folder_Path;
+
+
+            }
         }
     }
 }

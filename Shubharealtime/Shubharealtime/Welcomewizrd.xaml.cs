@@ -1,8 +1,4 @@
-﻿//////////////////////////////////////////////////
-//This software (released under GNU GPL V3) and you are welcome to redistribute it under certain conditions as per license 
-///////////////////////////////////////////////////
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,17 +13,18 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
 
-namespace Shubharealtime
+namespace shubhalabharts
 {
     /// <summary>
-    /// Interaction logic for ODIN.xaml
+    /// Interaction logic for Welcomewizrd.xaml
     /// </summary>
-    public partial class ODIN : UserControl
+    public partial class Welcomewizrd : UserControl
     {
-        public ODIN()
+        public Welcomewizrd()
         {
             InitializeComponent();
         }
+
         protected void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));

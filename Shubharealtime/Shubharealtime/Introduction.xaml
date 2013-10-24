@@ -6,20 +6,16 @@
              mc:Ignorable="d" 
              d:DesignHeight="282" d:DesignWidth="518">
     <Grid Margin="0,1,0,0" Height="283" Width="516">
-        <Label Content="• Thank you for selecting Shubha realtime." Height="28" HorizontalAlignment="Left" Name="label2" VerticalAlignment="Top" FontWeight="SemiBold" Margin="2,0,0,0" />
-        <Label Content="Shubha realtime is free for life tool which helps to pull data from terminal to your favorite  " Height="28" HorizontalAlignment="Left" Margin="3,17,0,0" Name="label3" VerticalAlignment="Top" />
-        <Label Content="charting application" Height="28" HorizontalAlignment="Left" Margin="2,36,0,0" Name="label4" VerticalAlignment="Top" />
-        <Label Content="This program comes with absolute no warrenty, please read disclaimer and " Height="28" HorizontalAlignment="Left" Margin="2,55,0,0" Name="label5" VerticalAlignment="Top" Foreground="#FF0066CC" FontWeight="SemiBold" />
-        <Label Content="• This wizard will guide you to setup your terminal and Shubha realtime" Height="28" HorizontalAlignment="Left" Margin="2,81,0,0" Name="label7" VerticalAlignment="Top" FontWeight="SemiBold" FontFamily="Times New Roman" />
-        <Label Content="Before click on Next button, please ensure you have following" Height="28" HorizontalAlignment="Left" Margin="2,101,0,0" Name="label" VerticalAlignment="Top" />
-        <Label Content="1. One of trading terminals: NEST trader, NOW, Sharekhan TT, ODIN." Height="28" HorizontalAlignment="Left" Margin="2,121,0,0" Name="label6" VerticalAlignment="Top" />
-        <Label Content="2. If you are looking for NEST PLUS backfill then NEST PLUS configured for NOW or NEST " Height="28" HorizontalAlignment="Left" Margin="1,142,0,0" Name="label1" VerticalAlignment="Top" />
-        <Label Content="and providing data table." Height="28" HorizontalAlignment="Left" Margin="11,158,0,0" Name="label8" VerticalAlignment="Top" />
-        <Label Content="3. Microsoft dotnet 4.0 framework and client profile." Height="28" HorizontalAlignment="Left" Margin="0,177,0,0" Name="label9" VerticalAlignment="Top" />
-        <Label Content="4. If you are using windows 7,Windows 8 onwards, your account should be admin account." Height="28" HorizontalAlignment="Left" Margin="0,196,0,0" Name="label10" VerticalAlignment="Top" />
-        <Label Content="5. To run NEST or NOW as admin,select NOW or NEST shortcut on desktop, click on " Height="28" HorizontalAlignment="Left" Margin="0,216,0,0" Name="label11" VerticalAlignment="Top" />
-        <Label Content="and select compatabity tab, search for 'Run this program as Administrator' check box " Height="28" HorizontalAlignment="Left" Margin="9,232,0,0" Name="label12" VerticalAlignment="Top" />
-        <Label Content="and select it. Click on apply." Height="28" HorizontalAlignment="Left" Margin="10,248,0,0" Name="label13" VerticalAlignment="Top" />
-        <TextBlock Margin="416,60,25,204"><Hyperlink NavigateUri="http://www.shubhalabha.in/disclaimer/license/" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock Text=" license  " Foreground="#FFF87979" FontWeight="SemiBold" /></Hyperlink></TextBlock>
+        <Label Content="Shubha Realtime Combo is free for life tool which helps to pull data from terminal to your " Height="28" HorizontalAlignment="Left" Margin="3,29,0,0" Name="label3" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+        <Label Content="favourite charting application." Height="28" HorizontalAlignment="Left" Margin="4,49,0,0" Name="label4" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+        <Label Content="Some Important points to be highlighted and ensured before you click on Next button." Height="28" HorizontalAlignment="Left" Margin="2,85,0,0" Name="label" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" FontWeight="Bold" />
+        <Label Content="1.This application works ONLY with any one of the trading terminals  i.e NEST,NOW," Height="28" HorizontalAlignment="Left" Margin="2,108,0,0" Name="label6" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+        <Label Content="2. One needs to have Microsoft.NET 4.0 framework and client profile." Height="28" HorizontalAlignment="Left" Margin="1,147,0,0" Name="label1" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+        <Label Content="3. If you are using Operating system as Windows 7,Windows 8 &amp; onwards " Height="28" HorizontalAlignment="Left" Margin="0,172,0,0" Name="label9" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+        <Label Content="and using NEST/NOW as terminal ,please ensure the terminal is in &quot;RUN AS ADMIN &quot;." Height="28" HorizontalAlignment="Left" Margin="15,192,0,0" Name="label10" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+        <Label Content="4. If you want backfill for NEST PLUS ,then it should be configured for NEST/NOW and " Height="28" HorizontalAlignment="Left" Margin="0,219,0,0" Name="label11" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+        <Label Content="should be providing datatable." Height="28" HorizontalAlignment="Left" Margin="15,237,0,0" Name="label12" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+        <Label Content="Team Shubhalabha extends a warm THANK YOU for selecting our application. " Height="28" HorizontalAlignment="Left" Margin="3,6,0,0" Name="label5" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+        <Label Content="TRADE TIGER,ODIN." FontFamily="Times New Roman" FontSize="13" Height="28" HorizontalAlignment="Left" Margin="10,126,0,0" Name="label2" VerticalAlignment="Top" />
     </Grid>
 </UserControl>

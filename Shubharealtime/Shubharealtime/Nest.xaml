@@ -9,14 +9,15 @@
 
 
             <Grid Margin="0,1,0,-1">
-                <Label Content="• Important steps to be followed for Nest Configuration:" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label2" VerticalAlignment="Top" FontWeight="SemiBold" />
-                <Label Content="1.Please start Nest as Run as Administrator " Height="28" HorizontalAlignment="Left" Margin="41,36,0,0" Name="label3" VerticalAlignment="Top" />
-            <Label Content="2.Please configure/set column profile to show data in following format." Height="28" HorizontalAlignment="Left" Margin="41,55,0,0" Name="label4" VerticalAlignment="Top" />
-                <Label Content="-&gt;Trading symbol , LTT , LUT , LTP , Volume Traded Today ,Open Interest." Height="28" HorizontalAlignment="Left" Margin="36,76,0,0" Name="label5" VerticalAlignment="Top" />
-            <Label Content="3.LTT should be followed by Trading symbol ." Height="28" HorizontalAlignment="Left" Margin="43,98,0,0" Name="label6" VerticalAlignment="Top" />
-            <Label Content="• Click on next if you have successfully configured the NEST terminal." Height="28" HorizontalAlignment="Left" Margin="18,159,0,0" Name="label7" VerticalAlignment="Top" FontWeight="SemiBold" FontFamily="Times New Roman" />
-            <TextBlock Margin="49,141,254,150"><Hyperlink NavigateUri="http://www.youtube.com/watch?v=xyxZAClSmp0" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock Text=" Click here to refer configuration video   " /></Hyperlink></TextBlock>
-            <Label Content="4.First two symbols should have LTT value" Height="28" HorizontalAlignment="Left" Margin="43,115,0,0" Name="label1" VerticalAlignment="Top" />
+                <Label Content="• Important steps to be followed for NEST Configuration:" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label2" VerticalAlignment="Top" FontWeight="SemiBold" FontFamily="Times New Roman" FontSize="13" />
+                <Label Content="1.Start NEST as Run as Administrator ." Height="28" HorizontalAlignment="Left" Margin="41,37,0,0" Name="label3" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+            <Label Content="2.Configure or Set column profile so that the data is seen as in the format shown below" Height="28" HorizontalAlignment="Left" Margin="41,63,0,0" Name="label4" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+                <Label Content="Trading symbol , LTT , LUT , LTP , Volume Traded Today ,Open Interest." Height="28" HorizontalAlignment="Left" Margin="52,84,0,0" Name="label5" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+            <Label Content="3.Important note: LTT should be immediately after Trading symbol ." Height="28" HorizontalAlignment="Left" Margin="43,108,0,0" Name="label6" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+            <Label Content="• Click on Next button if you have successfully configured the NEST terminal." Height="28" HorizontalAlignment="Left" Margin="18,194,0,0" Name="label7" VerticalAlignment="Top" FontWeight="SemiBold" FontFamily="Times New Roman" FontSize="13" />
+            <TextBlock Margin="234,169,0,122" HorizontalAlignment="Left" Width="69"><Hyperlink NavigateUri="http://www.youtube.com/watch?v=xyxZAClSmp0" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock Text=" Click here" FontFamily="Times New Roman" FontSize="14" /></Hyperlink></TextBlock>
+            <Label Content="4.Also note that the first two symbols should have LTT value." Height="28" HorizontalAlignment="Left" Margin="43,136,0,0" Name="label1" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+            <Label Content="•To watch NEST Configuration Video " FontFamily="Times New Roman" FontSize="13" FontWeight="SemiBold" Height="28" HorizontalAlignment="Left" Margin="19,165,0,0" Name="label8" VerticalAlignment="Top" />
         </Grid>
     </Grid>
 </UserControl>

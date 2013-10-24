@@ -34,7 +34,7 @@
     <PublisherName>shubhalabha</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>15</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -60,7 +60,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>logo iconp.ico</ApplicationIcon>
+    <ApplicationIcon>shubhalabha.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>CA317ECFD78312867CF87B42B832AA61DBC211D9</ManifestCertificateThumbprint>
@@ -184,7 +184,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Backfill.cs" />
     <Compile Include="Chartingapllication.xaml.cs">
       <DependentUpon>Chartingapllication.xaml</DependentUpon>
     </Compile>
@@ -227,6 +226,9 @@
     </Compile>
     <Compile Include="Tradetigerinformation .xaml.cs">
       <DependentUpon>Tradetigerinformation .xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Welcomewizrd.xaml.cs">
+      <DependentUpon>Welcomewizrd.xaml</DependentUpon>
     </Compile>
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
@@ -295,6 +297,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Welcomewizrd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Window1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -342,6 +348,9 @@
     <Content Include="ExcelLogin.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="images\Shubhalabha logo.jpg" />
+    <Resource Include="images\Shubhalabha.png" />
+    <Resource Include="images\icon logo.png" />
     <Content Include="Notice.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -354,6 +363,7 @@
     <Content Include="sharekhantoami.xlsm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="shubhalabha.ico" />
     <Content Include="shubhanest-now.format">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

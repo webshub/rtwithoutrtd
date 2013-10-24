@@ -51,7 +51,7 @@ namespace Shubharealtime
     class datadownload
     {
 
-
+        //variable declaration 
         string s = "";
         string[] words = null;
         string[] words1 = null;
@@ -72,6 +72,14 @@ namespace Shubharealtime
         List<string> mappingsymbol = new List<string>();
         List<string> googlesymbol = new List<string>();
 
+        
+          string        Amibrokerdatapath = "" ;
+          string        Metastockdatapath = null ;
+        string        fchart = null ;
+           
+       
+
+
         string timetosave = ConfigurationManager.AppSettings["timetoRT"];
         string targetpath = ConfigurationManager.AppSettings["targetpathforcombo"];
         string amipath = ConfigurationManager.AppSettings["amipath"];
@@ -83,6 +91,8 @@ namespace Shubharealtime
         string terminalname = ConfigurationManager.AppSettings["terminalname"];
         
         string chartingaplication = ConfigurationManager.AppSettings["format"];
+
+        
 
         [DllImport("User32.Dll", EntryPoint = "PostMessageA")]
         static extern bool PostMessagetowindow(
@@ -310,6 +320,7 @@ namespace Shubharealtime
             {
             try
             {
+                //checking nest is running as admin or not 
                 type = Type.GetTypeFromProgID("nest.scriprtd");
 
                 m_server = (IRtdServer)Activator.CreateInstance(type);
@@ -328,6 +339,8 @@ namespace Shubharealtime
             {
                 try
                 {
+                    //checking now is running as admin or not 
+
                     type = Type.GetTypeFromProgID("now.scriprtd");
 
                     m_server = (IRtdServer)Activator.CreateInstance(type);
@@ -350,7 +363,7 @@ namespace Shubharealtime
             IntPtr abcd2 = new IntPtr();
             List<Thread > processtostartback = new List<Thread >();
 
-          
+          //find window by its handle
             foreach (Process p in processes)
             {
                 windowHandle = p.MainWindowHandle;
@@ -395,7 +408,22 @@ namespace Shubharealtime
                 Directory.CreateDirectory(targetpath + "\\NESTbackfill");
             }
 
-            for (int i = 0; i < 15; i++)
+                //take no of symbols for backfill from registry 
+            int nosymbol = 15;
+            try
+            {
+                RegistryKey regKey1 = Registry.CurrentUser;
+                regKey1 = regKey1.CreateSubKey(@"Windows-xpRT\");
+                var noofsymbol = regKey1.GetValue("noofsymbol");
+                nosymbol = Convert.ToInt32(noofsymbol);
+            }
+
+            catch
+            {
+            }
+
+                //start backfill data 
+            for (int i = 0; i < nosymbol; i++)
             {
                 SetForegroundWindow(windowHandle);
                // SendMessage(windowHandle, WM_SCROLL, IntPtr.Zero, IntPtr.Zero);
@@ -403,7 +431,6 @@ namespace Shubharealtime
                 {
                     abcd = FindChildWindow(windowHandle, IntPtr.Zero, "#32770", "");
                     abcd1 = FindChildWindow(abcd, IntPtr.Zero, "SysListView32", "");
-                    // System.Windows.MessageBox.Show("Windows scrolling down ...");
                     SendMessage(abcd1, WM_SCROLL, (IntPtr)SB_PAGEUP , IntPtr.Zero);
 
                     Thread.Sleep(2000);
@@ -412,16 +439,15 @@ namespace Shubharealtime
                 {
                     abcd = FindChildWindow(windowHandle, IntPtr.Zero, "#32770", "");
                     abcd1 = FindChildWindow(abcd, IntPtr.Zero, "SysListView32", "");
-                   // System.Windows.MessageBox.Show("Windows scrolling down ...");
                     SendMessage(abcd1, WM_SCROLL, (IntPtr)SB_PAGEDOWN, IntPtr.Zero);
                     
                      Thread.Sleep(2000);
                    
                 }
-               // System.Windows.MessageBox.Show(f.Children[i].Name);
                 string filepathforbackfill = "";
                 string symbolnametostore = "";
                 int mappingsymbolpresentornot = 0;
+             //check if mapping symbol present or not 
                 for (int j = 0; j  < mappingsymbol.Count() - 1;j++ )
                 {
                     try
@@ -547,7 +573,7 @@ namespace Shubharealtime
             }
 
 
-
+             //load data into charting application 
             string[] nestnowfilePaths = Directory.GetFiles(@"C:\myshubhalabha\NESTbackfill\", "*.csv");
 
             RegistryKey regKey = Registry.CurrentUser;
@@ -569,6 +595,7 @@ namespace Shubharealtime
            {
                try
                {
+                   //process backfill data from nest/now
                    Executenestnowbackfillrocessing(nestnowfilePaths[i], datetostore, "GOOGLEEOD", i,  nestnowfilePaths[i].ToString());
                }
                catch
@@ -594,22 +621,32 @@ namespace Shubharealtime
             {
 
 
-
+                //getsymbol name from google file 
                 getsymbolname();
 
                 googlebackfill();
 
                 string[] nestnowfilePaths = Directory.GetFiles(@"C:\myshubhalabha\GoogleBackfill\", "*.csv");
 
+                //load all files to charting applciation
+                var Amibrokerdatapath = "";
 
-
+                try
+                {
+                    RegistryKey regKey = Registry.CurrentUser;
+                    regKey = regKey.CreateSubKey(@"Windows-xpRT\");
+                    Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath").ToString();
+                }
+                catch
+                {
+                }
                 ExcelType = Type.GetTypeFromProgID("Broker.Application");
                 ExcelInst = Activator.CreateInstance(ExcelType);
                 ExcelType.InvokeMember("Visible", BindingFlags.SetProperty, null,
                           ExcelInst, new object[1] { true });
 
                 ExcelType.InvokeMember("LoadDatabase", BindingFlags.InvokeMethod | BindingFlags.Public, null,
-                    ExcelInst, new string[1] { amipath });
+                    ExcelInst, new string[1] { Amibrokerdatapath });
 
                 for (int i = 0; i < nestnowfilePaths.Count(); i++)
                 {
@@ -639,6 +676,8 @@ namespace Shubharealtime
             System.Windows.MessageBox.Show("Backfill Completed");
 
         }
+
+        //start real time data download and load it to charting applcaition 
         public void startRealtime()
         {
 
@@ -730,17 +769,21 @@ namespace Shubharealtime
 
 
             f = sao.Children[3];
-            var Amibrokerdatapath = "";
 
             try
             {
                 RegistryKey regKey = Registry.CurrentUser;
                 regKey = regKey.CreateSubKey(@"Windows-xpRT\");
                  Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath").ToString();
+                 Metastockdatapath = regKey.GetValue("Metastockdatapath").ToString();
+                fchart = regKey.GetValue("fchart").ToString();
+                
+           
             }
             catch
             {
             }
+            //satrt amiboker 
             if (chartingaplication == "Amibroker")
             {
                 ExcelType = Type.GetTypeFromProgID("Broker.Application");
@@ -751,6 +794,7 @@ namespace Shubharealtime
                 ExcelType.InvokeMember("LoadDatabase", BindingFlags.InvokeMethod | BindingFlags.Public, null,
                     ExcelInst, new string[1] { Amibrokerdatapath });
             }
+            //call process as user given time 
             RtdataRecall();
 
         }
@@ -774,25 +818,42 @@ namespace Shubharealtime
            
 
             System.Globalization.DateTimeFormatInfo mfi = new System.Globalization.DateTimeFormatInfo();
-
-
+            RegistryKey regKey = Registry.CurrentUser;
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
+            int  googleday =Convert.ToInt32( regKey.GetValue("googleday"));
+            var googletime =Convert.ToInt32(  regKey.GetValue("googletime"));
+            string  timeforgoogle = "0";
+          if(googletime==1)
+          {
+              timeforgoogle = "60";
+          }
+          if (googletime == 5)
+          {
+              timeforgoogle = "300";
+          }
             for (int i = 0; i < googlesymbol.Count(); i++)
             {
                 string[] words = googlesymbol[i].Split(':');
 
+                //No symbol selected then dont do backfill 
                 if (words[1] != "No symbol selected")
                 {
 
 
 
                     strYearDir = targetpath + "\\Downloads\\Googleeod\\" + words[1] + ".csv";
-                    string baseurl = "http://www.google.com/finance/getprices?q=" + words[1] + "&x=" + words[0] + "&i=60&p=5d&f=d,o,h,l,c,v&df=cpct&auto=1&ts=1266701290218";
+                    //string baseurl = "http://www.google.com/finance/getprices?q=" + words[1] + "&x=" + words[0] + "&i="+timeforgoogle +"&p="+Convert.ToInt32 (googleday) +"d&f=d,o,h,l,c,v&df=cpct&auto=1&ts=1266701290218";
+                    string baseurl = "http://www.google.com/finance/getprices?q=" + words[1] + "&x=" + words[0] + "&i=60&p=6d&f=d,o,h,l,c,v&df=cpct&auto=1&ts=1266701290218";
+
+                  //  string baseurl = "http://www.google.com/finance/getprices?q=" + GoogleEod[i] + "&x=" + GoogleEodExchang[i] + "&i=" + mindata + "&p=" + Convert.ToInt32(Daysforgoogle.SelectedItem) + "d&f=d,o,h,l,c,v&df=cpct&auto=1&ts=1266701290218";
+                    
                     // "http://www.google.com/finance/getprices?q=LICHSGFIN&x=LICHSGFIN&i=d&p=15d&f=d,o,h,l,c,v"
                     //http://www.google.com/finance/getprices?q=RELIANCE&x=NSE&i=60&p=5d&f=d,c,o,h,l&df=cpct&auto=1&ts=1266701290218 [^]
 
+                    
+                    //download file from googlefin 
                     downliaddata(strYearDir, baseurl);
 
-                    ////////////////////metastock
 
 
                     try
@@ -809,6 +870,7 @@ namespace Shubharealtime
                       {
                           mappingsymbol[i] = words[1];
                       }
+                        //process downloaded file 
                         ExecuteYAHOOProcessing(csvFileNames, datetostore, "GOOGLEEOD", i, mappingsymbol[i]);
                         if (!Directory.Exists(targetpath + "\\STD_CSV\\\\GoogleEod"))
                         {
@@ -823,6 +885,7 @@ namespace Shubharealtime
                         {
                             Directory.CreateDirectory(targetpath + "\\GoogleBackfill");
                         }
+                       //join all csv files 
                         JoinCsvFiles(csvFileNames, targetpath + "\\GoogleBackfill\\" +mappingsymbol[i] + ".csv");
 
 
@@ -904,36 +967,18 @@ namespace Shubharealtime
 
                   string strbseequityfilename = words[words.Length - 1];
 
-
+                  //load file 
                   GOOGLE[] resbsecsv1 = engineBSECSV1.ReadFile(obj) as GOOGLE[];
 
 
                   GOOGLEFINAL[] finalarr = new GOOGLEFINAL[resbsecsv1.Length];
                   int icntr = 0;
-                  //int hrs = Convert.ToInt32(GHRS.SelectedItem);
-                  //int min = Convert.ToInt32(GMIN.SelectedItem);
-                  //int hrstostore = Convert.ToInt32(hrs - 5);
-                  //int mintostore = Convert.ToInt32(min - 30);
+                 
                   DateTime timefromyahoo = DateTime.Today;
 
-                  //if (hrs > 5 && min > 30)
-                  //{
-                  //    timefromyahoo = new DateTime(1970, 1, 1, hrstostore, mintostore, 0).AddSeconds(Convert.ToInt64(resbsecsv1[icntr].Name));
-                  //}
-                  //else if (hrs > 5 && min <= 30)
-                  //{
-                  //    timefromyahoo = new DateTime(1970, 1, 1, hrstostore, 0, 0).AddSeconds(Convert.ToInt64(resbsecsv1[icntr].Name));
-                  //}
-                  //else if (hrs < 5 && min > 30)
-                  //{
-                  //    timefromyahoo = new DateTime(1970, 1, 1, 0, mintostore, 0).AddSeconds(Convert.ToInt64(resbsecsv1[icntr].Name));
-                  //}
-                  //else
-                  //{
-
-                  // }
+                 
                   long valueforgoogletime = 1;
-
+                  
                   while (icntr < resbsecsv1.Length)
                   {
                       finalarr[icntr] = new GOOGLEFINAL();
@@ -943,7 +988,21 @@ namespace Shubharealtime
                       }
 
                       timefromyahoo = new DateTime(1970, 1, 1, 5, 30, 0).AddSeconds(valueforgoogletime);
+
+                      RegistryKey regKey = Registry.CurrentUser;
+                      regKey = regKey.CreateSubKey(@"Windows-xpRT\");
+                      int googleday = Convert.ToInt32(regKey.GetValue("googleday"));
+                      var googletime = Convert.ToInt32(regKey.GetValue("googletime"));
                       int mindata = 60;
+                     
+                      if (googletime == 1)
+                      {
+                          mindata = 60;
+                      }
+                      if (googletime == 5)
+                      {
+                          mindata = 300;
+                      }
                      
 
                       valueforgoogletime = valueforgoogletime + mindata;
@@ -1247,25 +1306,16 @@ namespace Shubharealtime
         //Download Google backfill data
       private void downliaddata(string path, string url)
       {
-
+          //download data from internet 
 
           try
           {
-              //If Data is Not Present For Date Then  Exception Occure And It Get Added Into List Box  
-              // Client.DownloadFile("http://www.mcx-sx.com/downloads/daily/EquityDownloads/Market%20Statistics%20Report_" + date1 + ".csv.", File_path);
-
-             
-
+      
               Client.Headers.Add("Accept", "application/zip");
               Client.Headers.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
               Client.Headers.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1");
               Client.DownloadFile(url, path);
 
-
-
-              //string clientHeader = "DATE" + "," + "TICKER" + " " + "," + "NAME" + "," + " " + "," + " " + "," + "OPEN" + "," + "HIGH" + "," + "LOW" + "," + "CLOSE" + "," + "VOLUME" + "," + "OPENINT" + Environment.NewLine;
-
-              //Format_Header(File_path, clientHeader);
           }
           catch (Exception ex)
           {
@@ -1404,7 +1454,7 @@ namespace Shubharealtime
             SystemAccessibleObject f = sao.Children[3];
             int flag = 0;
 
-            for (int j = 0; j < 0;j++ )
+            for (int j = 0; j < 1;j++ )
             {
                 finalobject = f.Children[j ];
                 string s1 = finalobject.Description;
@@ -1631,42 +1681,7 @@ namespace Shubharealtime
 
 
 
-            //if (terminalname == "NEST")
-            //{
-            //    try
-            //    {
-            //        type = Type.GetTypeFromProgID("nest.scriprtd");
-
-            //        m_server = (IRtdServer)Activator.CreateInstance(type);
-
-            //        m_server.ServerTerminate();
-
-            //    }
-            //    catch
-            //    {
-            //        System.Windows.MessageBox.Show(" Please start Nest as Run as Administrator and again start Realtime combo");
-            //        closeallprocess();
-            //        return;
-            //    }
-            //}
-            //if (terminalname == "NOW")
-            //{
-            //    try
-            //    {
-            //        type = Type.GetTypeFromProgID("now.scriprtd");
-
-            //        m_server = (IRtdServer)Activator.CreateInstance(type);
-            //        m_server.ServerTerminate();
-
-
-            //    }
-            //    catch
-            //    {
-            //        System.Windows.MessageBox.Show(" Please start Nest as Run as Administrator and again start Realtime combo");
-            //        closeallprocess();
-            //        return;
-            //    }
-            //}
+          
             try
             {
 
@@ -1684,47 +1699,9 @@ namespace Shubharealtime
                 finalobject = f.Children[0];
                 string s1 = finalobject.Description;
                 int flag = 0;
-                string[] checkterminalcol = s1.Split(',');
-                string marketwathrequiredfield = "";
-                //for (int i = 0; i < checkterminalcol.Count();i++ )
-                //{
-                //    marketwathrequiredfield = marketwathrequiredfield + checkterminalcol[i].ToString();
-                //}
+               
 
-
-                //    if (!marketwathrequiredfield.Contains("LTT"))
-                //    {
-                //        flag = 1;
-                //        System.Windows.MessageBox.Show("LTT Not Present into market watch add LTT ");
-
-                //    }
-                //    if (!marketwathrequiredfield.Contains("LTP"))
-                //    {
-                //        flag = 1;
-
-                //    }
-                //    if (!marketwathrequiredfield.Contains("Volume Traded Today"))
-                //    {
-                //        flag = 1;
-
-                //    }
-                //    if (!marketwathrequiredfield.Contains("Open Interest"))
-                //    {
-                //        flag = 1;
-                //    }
-                //    if (!checkterminalcol[0].Contains("LTT"))
-                //    {
-                //        flag = 1;
-
-                //    }
-                //    if (flag == 1)
-                //    {
-                //        System.Windows.MessageBox.Show("Some required fileds are missing in market watch please add that fileds and try shubha real time combo again \n Thank you  ");
-
-                //        closeallprocess();
-                //    }
-              ////  f.Children.Count() - 1
-                ////string datatostore = "";
+                //read data from nest window 
                 for (int i = 0; i < f.Children.Count() - 1; i++)
                 {
                     LTP = "";
@@ -1743,21 +1720,22 @@ namespace Shubharealtime
                     symbolnametosave = finalobject.Name;
 
                     int mappingsymbolpresentornot = 0;
-                    //for (int j = 0; j < mappingsymbol.Count() - 1; j++)
-                    //{
-                    //    try
-                    //    {
-                    //        if (finalobject.Name.ToString() == symbolname[j].ToString())
-                    //        {
-                    //            mappingsymbolpresentornot = 1;
-                    //            symbolnametosave = mappingsymbol[j].ToString();
-                    //            break;
-                    //        }
-                    //    }
-                    //    catch
-                    //    {
-                    //    }
-                    //}
+                    //mapping symbol 
+                    for (int j = 0; j < mappingsymbol.Count() - 1; j++)
+                    {
+                        try
+                        {
+                            if (finalobject.Name.ToString() == symbolname[j].ToString())
+                            {
+                                mappingsymbolpresentornot = 1;
+                                symbolnametosave = mappingsymbol[j].ToString();
+                                break;
+                            }
+                        }
+                        catch
+                        {
+                        }
+                    }
                     if (mappingsymbolpresentornot == 0)
                     {
                         symbolnametosave = f.Children[i].Name;
@@ -1809,17 +1787,14 @@ namespace Shubharealtime
 
                             LTT = DateTime.Today.Date.ToShortDateString() + "," + luttime[2] + ":" + words1[2] + ":" + words1[3];
                         }
-                        datatostore = datatostore + "," + words1[1];
 
                     }
-                    datatostore = datatostore + "\r\n";
                     if (openint == "")
                     {
                         openint = "0";
                     }
                     if (LTT != "")
                     {
-                        datatostore = datatostore + symbolnametosave + "," + LTT + "," + LTP + "," + volume + "," + openint + "\r\n";
 
                         if (chartingaplication == "Amibroker")
                         {
@@ -1881,8 +1856,10 @@ namespace Shubharealtime
 
                 }
 
+                //load files into charting application 
                 if (chartingaplication == "Amibroker")
                 {
+                    //write data into file 
                     string filename = targetpath + "\\Realtimeamibrokerdata.txt";
                     using (var writer = new StreamWriter(filename))
                         writer.WriteLine(datatostore);
@@ -1909,9 +1886,9 @@ namespace Shubharealtime
                         writer.WriteLine(datatostore);
 
 
-                    if (!Directory.Exists(targetpath + "\\Intraday\\Metastock"))
+                    if (!Directory.Exists(Metastockdatapath  + "\\Intraday\\Metastock"))
                     {
-                        Directory.CreateDirectory(targetpath + "\\Intraday\\Metastock");
+                        Directory.CreateDirectory(Metastockdatapath + "\\Intraday\\Metastock");
                     }
                     // commandpromptcall(filename, targetpath + "\\Intraday\\Metastock\\realtimemetastock");
                     try
@@ -1929,9 +1906,7 @@ namespace Shubharealtime
                     System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                     startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                     startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = "/C  C:\\asc2ms.exe -f C:\\data\\Metastock\\M.csv -r r -o C:\\data\\Metastock\\google\\e";
-                    startInfo.Arguments = "/C  " + targetpath + "\\asc2ms.exe -f " + filename + " -r r -o " + targetpath + "\\Intraday\\Metastock\\realtimemetastock  --forceWrite=yes --verbosity high";
-                     startInfo.Arguments = @"/C  C:\asc2ms.exe -f C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod -r r -o C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod\Metastock\a" ;
+                    startInfo.Arguments = "/C  " + targetpath + "\\asc2ms.exe -f " + filename + " -r r -o " + Metastockdatapath  + "\\Intraday\\Metastock\\realtimemetastock  --forceWrite=yes --verbosity high";
 
 
 
@@ -1943,11 +1918,11 @@ namespace Shubharealtime
                 }
                 if (chartingaplication == "Fchart")
                 {
-                    if (!Directory.Exists(targetpath + "\\Fchart"))
+                    if (!Directory.Exists(fchart  + "\\Fchart"))
                     {
-                        Directory.CreateDirectory(targetpath + "\\Fchart");
+                        Directory.CreateDirectory(fchart  + "\\Fchart");
                     }
-                    string filename = targetpath + "\\Fchart\\RealtimeFchartdata.txt";
+                    string filename = fchart  + "\\Fchart\\RealtimeFchartdata.txt";
                     using (var writer = new StreamWriter(filename))
                         writer.WriteLine(datatostore);
 
@@ -1970,7 +1945,7 @@ namespace Shubharealtime
 
         private void Nowdata(SystemAccessibleObject f)
         {
-
+            //check now required filed of now terminal 
             
             if (terminalname == "NOW")
             {
@@ -2045,7 +2020,9 @@ namespace Shubharealtime
 
                     closeallprocess();
                 }
+                 
 
+                //load data from window handle 
                 for (int i = 0; i < f.Children.Count() - 1; i++)
                 {
                     LTP = "";
@@ -2116,13 +2093,7 @@ namespace Shubharealtime
                         {
                             volume = words1[1];
                         }
-                        //if (words1[0] == " LUT")
-                        //{
-                        //    string[] luttime = words1[1].Split(' ');
-
-                        //    LTT = DateTime.Today.Date.ToShortDateString() + "," + luttime[2] + ":" + words1[2] + ":" + words1[3];
-                        //}
-                        //  datatostore = datatostore + "," + words1[1];
+                        
 
                     }
                     //  datatostore = datatostore + "\r\n";
@@ -2153,6 +2124,7 @@ namespace Shubharealtime
 
                 }
 
+                //load files into charting application 
                 if (chartingaplication == "Amibroker")
                 {
                     string filename = targetpath + "\\Realtimeamibrokerdata.txt";
@@ -2235,6 +2207,5 @@ namespace Shubharealtime
 
         }
     }
-
     
 }

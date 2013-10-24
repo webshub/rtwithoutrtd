@@ -28,6 +28,8 @@ namespace Shubharealtime
             InitializeComponent();
         }
        int nextcount = 0;
+
+        //run application as admin 
        private bool IsRunAsAdministrator()
        {
            var wi = WindowsIdentity.GetCurrent();
@@ -35,31 +37,15 @@ namespace Shubharealtime
 
            return wp.IsInRole(WindowsBuiltInRole.Administrator);
        }
+       //close application 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
            
         }
 
-        private void nest_Checked(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void now_Checked(object sender, RoutedEventArgs e)
-        {
-            
-           
-        }
-
-        private void tradetiger_Checked(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void odin_Checked(object sender, RoutedEventArgs e)
-        {
-           
-        }
+      
+        //checking os is 32 bit or 64 bit 
         static string ProgramFilesx86()
         {
             if (8 == IntPtr.Size
@@ -70,6 +56,8 @@ namespace Shubharealtime
 
             return Environment.GetEnvironmentVariable("ProgramFiles");
         }
+
+        
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -126,7 +114,7 @@ namespace Shubharealtime
 
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "Notice.txt";
 
-
+                    //copy files into folder 
                     File.Copy(processtostart, "C:\\myshubhalabha\\Notice.txt", true);
 
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhaxls.format";
@@ -166,7 +154,7 @@ namespace Shubharealtime
                     //Shubhalabha123.Regidtartion r = new Shubhalabha123.Regidtartion();
                     //stackcontainer.Children.Add(r);
 
-                    Shubhalabha123.GNUGPL n = new Shubhalabha123.GNUGPL();
+                    shubhalabharts.Welcomewizrd n = new shubhalabharts.Welcomewizrd();
                     stackcontainer.Children.Add(n);
                 }
                 catch
@@ -178,15 +166,40 @@ namespace Shubharealtime
 
         private void nextButtonforterminal_Click(object sender, RoutedEventArgs e)
         {
+
+            //on click of next button checking required things are done or not 
             try
             {
                 Rsult_lbl.Content = "";
-
                 if (nextcount == 0)
+                {
+                    agree.Visibility = Visibility.Visible;
+                    notagree.Visibility = Visibility.Visible;
+
+
+                    try
+                    {
+                        stackcontainer.Children.RemoveAt(0);
+                    }
+                    catch
+                    {
+                    }
+                    Shubhalabha123.GNUGPL c = new Shubhalabha123.GNUGPL();
+                    stackcontainer.Children.Add(c);
+                    nextcount++;
+                    backButton.IsEnabled = true;
+
+
+                    return;
+                   
+                }
+                if (nextcount == 1)
                 {
 
                     if(agree.IsChecked==false )
                     {
+                        Rsult_lbl.Content = "Please accept license agreement else Click  Cancel to exit. ";
+
                         return ;
 
                     }
@@ -211,7 +224,7 @@ namespace Shubharealtime
                     return;
                 }
 
-                if (nextcount == 1)
+                if (nextcount == 2)
                 {
                     try
                     {
@@ -230,14 +243,14 @@ namespace Shubharealtime
 
 
                 }
-                if (nextcount == 2)
+                if (nextcount == 3)
                 {
 
                     RegistryKey regKey = Registry.CurrentUser;
                     regKey = regKey.CreateSubKey(@"Windows-xpRT\");
                     var terminalname = regKey.GetValue("terminal");
                     string terminal = terminalname.ToString();
-
+                    //nest cheking
                     if (terminal == "NEST")
                     {
                         wizartchecking d = new wizartchecking();
@@ -299,7 +312,8 @@ namespace Shubharealtime
 
 
 
-
+                                Rsult_lbl.Foreground = Brushes.Green ;
+                                Rsult_lbl.Content = "Terminal selection done successfully  ";
 
                                 Chartingapllication c = new Chartingapllication();
                                 stackcontainer.Children.Add(c);
@@ -320,8 +334,8 @@ namespace Shubharealtime
                     }
 
 
-
-                    if (terminal == "NOW")
+                    //now checking
+                    else   if (terminal == "NOW")
                     {
                         wizartchecking d = new wizartchecking();
                         string result = d.checknowfiled();
@@ -401,7 +415,7 @@ namespace Shubharealtime
 
                     }
 
-                    if (terminal == "Odin")
+                    else  if (terminal == "Odin")
                     {
                         try
                         {
@@ -417,7 +431,7 @@ namespace Shubharealtime
                         return;
                     }
 
-                    if (terminal == "Tradetiger")
+                    else if (terminal == "Tradetiger")
                     {
                         try
                         {
@@ -433,14 +447,17 @@ namespace Shubharealtime
                         return;
                     }
 
-
+                    else
+                    {
+                        Rsult_lbl.Content = "Error :Please select atleast one terminal ";
+                    }
 
                     return;
 
 
                 }
 
-                if (nextcount == 3)
+                if (nextcount == 4)
                 {
                     ///for checking amibroker database path
                     try
@@ -509,12 +526,14 @@ namespace Shubharealtime
 
 
         }
+        //show previouse window 
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
+            
             Rsult_lbl.Content = "";
             
-            if (nextcount == 4)
+            if (nextcount == 5)
             {
                
                 try
@@ -531,7 +550,7 @@ namespace Shubharealtime
                 nextButtonforterminal.IsEnabled = true;
                 return;
             }
-            if (nextcount == 3)
+            if (nextcount == 4)
             {
                 finish.IsEnabled = false ;
                 nextButtonforterminal.IsEnabled = true;
@@ -547,7 +566,7 @@ namespace Shubharealtime
                 nextcount--;
                 return;
             }
-            if (nextcount == 2)
+            if (nextcount == 3)
             {
                 try
                 {
@@ -564,7 +583,7 @@ namespace Shubharealtime
             }
 
 
-            if (nextcount == 1)
+            if (nextcount == 2)
             {
                 try
                 {
@@ -580,16 +599,37 @@ namespace Shubharealtime
                 nextcount--;
                 return;
             }
+            if (nextcount == 1)
+            {
+                try
+                {
+                    stackcontainer.Children.RemoveAt(0);
+                }
+                catch
+                {
+                }
+                agree.Visibility = Visibility.Hidden;
+                notagree.Visibility = Visibility.Hidden;
+                shubhalabharts.Welcomewizrd n = new shubhalabharts.Welcomewizrd();
+                stackcontainer.Children.Add(n);
+              
+                nextcount--;
+                return;
+              
+
+            }
 
         }
 
+        //finish the wizard 
         private void finish_Click(object sender, RoutedEventArgs e)
         {
-            
+            //save registry entry 
             RegistryKey regKey = Registry.CurrentUser;
             regKey = regKey.CreateSubKey(@"Windows-xpRT\");
             regKey.SetValue("Wizart", "done");
-
+            regKey.SetValue("noofsymbol", "15");
+          
 
           
             try
@@ -638,6 +678,7 @@ namespace Shubharealtime
             //System.Diagnostics.Process.Start(pathtostartprocess + "Shubharealtime.exe");
 
         }
+        //close all process 
         public void closeallprocess()
         {
             Process[] workers = Process.GetProcessesByName("Shubharealtime.vshost");
@@ -681,6 +722,7 @@ namespace Shubharealtime
             }
             Environment.Exit(0);
         }
+        //close this window 
         private void Window_Closed(object sender, EventArgs e)
         {
             closeallprocess();

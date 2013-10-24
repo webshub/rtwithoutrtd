@@ -35,6 +35,7 @@ namespace Shubharealtime
             InitializeComponent();
         }
 
+        //load registartion from 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             string filepath = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
@@ -55,7 +56,7 @@ namespace Shubharealtime
             {
                 System.Net.WebRequest myRequest = System.Net.WebRequest.Create("http://www.Google.co.in");
                 System.Net.WebResponse myResponse = myRequest.GetResponse();
-                Uri a = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=22&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
+                Uri a = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=27&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
                 //  Uri a = new System.Uri(" http://shubhalabha.in/products-2/");
 
                 advertisement.Source = a;
@@ -76,76 +77,10 @@ namespace Shubharealtime
        
 
 
-        private void Login_btn_Click(object sender, RoutedEventArgs e)
-        {
-              //user authentication
-            try
-            {
-                string loginUri = "http://shubhalabha.in/community/wp-login.php";
-
-                string reqString = "log=" + username.Text + "&pwd=" + password.Password ;
-                byte[] requestData = Encoding.UTF8.GetBytes(reqString);
-
-                CookieContainer cc = new CookieContainer();
-                var request = (HttpWebRequest)WebRequest.Create(loginUri);
-                request.Proxy = null;
-                request.AllowAutoRedirect = false;
-                request.CookieContainer = cc;
-                request.Method = "post";
-
-                request.ContentType = "application/x-www-form-urlencoded";
-                request.ContentLength = requestData.Length;
-                using (Stream s = request.GetRequestStream())
-                    s.Write(requestData, 0, requestData.Length);
-
-                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                {
-                    int count = 1;
-                    foreach (Cookie c in response.Cookies)
-                    {
-                        //responce 2 contain loggen in or not 
-                        if (count == 2)
-                        {
-                            if (c.ToString().Contains("wordpress_logged_in_17e90d9fdb1ef2a442ed2d6aeb707f54"))
-                            {
-                                System.Windows.Forms.MessageBox.Show("Thank you for using shubhaRt plugin ");
-                                
-                                try
-                                {
-                                   
-                                    SetRegKey();
-                                     this.Hide();
-                                    Shubharealtime.Window1  s = new Window1();
-                                    s.ShowDialog();
-                                    return;
-
-                                }
-                                catch
-                                {
-
-                                }
-                            }
-                            else
-                            {
-                                System.Windows.Forms.MessageBox.Show("Please Enter Valid UserName & Password ");
-
-                            }
-                        }
-                        else
-                        {
-                            count++;
-                        }
-                    }
-                }
-            }
-            catch
-            {
-
-            }
-            }
+      
         
 
-       
+       //set registry entry 
         public void SetRegKey()
         {
 
@@ -155,7 +90,7 @@ namespace Shubharealtime
 
             RegistryKey regKey = Registry.CurrentUser;
             regKey = regKey.CreateSubKey(@"Windows-xpRT\");
-            regKey.SetValue("sd", DateTime.Today.Date.ToString());
+            regKey.SetValue("sd", DateTime.Today.Day+"-"+DateTime.Today.Month+"-"+DateTime.Today.Year);
             regKey.SetValue("sp", "Key for xp");
             regKey.SetValue("ApplicationID", "1");
             regKey.SetValue("LTT", "0");
@@ -167,6 +102,7 @@ namespace Shubharealtime
             
         }
 
+        //ignor java script error 
         void wb_LoadCompleted(object sender,System.Windows.Navigation. NavigationEventArgs e)
         {
             string script = "document.body.style.overflow ='hidden'";
@@ -174,22 +110,9 @@ namespace Shubharealtime
             wb.InvokeScript("execScript", new Object[] { script, "JavaScript" });
         }
 
-        private void Regiser_btn_Click(object sender, RoutedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("http://shubhalabha.in/community/wp-login.php?action=register");
+       
 
-        }
-
-        private void Cancle_btn_Click(object sender, RoutedEventArgs e)
-        {
-            Environment.Exit(0);
-
-        }
-
-        private void lead_Loaded(object sender, RoutedEventArgs e)
-        {
-           
-        }
+      
 
 
 

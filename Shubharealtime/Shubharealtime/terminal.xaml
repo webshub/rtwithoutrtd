@@ -7,14 +7,14 @@
              d:DesignHeight="302" d:DesignWidth="456" Loaded="UserControl_Loaded">
     <Grid Height="295" Width="455">
         <Grid Margin="0,0,0,232">
-            <RadioButton Content="NEST" Height="16" HorizontalAlignment="Left" Margin="174,12,0,0" Name="nest" VerticalAlignment="Top" Checked="nest_Checked" />
-            <RadioButton Content="NOW" Height="16" HorizontalAlignment="Left" Margin="227,12,0,0" Name="now" VerticalAlignment="Top" Checked="now_Checked" />
-            <Label Content="• Please select your terminal:" Height="28" Margin="6,6,0,0" Name="label1" VerticalAlignment="Top" HorizontalAlignment="Left" Width="165" FontWeight="SemiBold" />
+            <RadioButton Content="NEST" Height="16" HorizontalAlignment="Left" Margin="172,12,0,0" Name="nest" VerticalAlignment="Top" Checked="nest_Checked" FontFamily="Times New Roman" FontSize="13" />
+            <RadioButton Content="NOW" Height="16" HorizontalAlignment="Left" Margin="227,12,0,0" Name="now" VerticalAlignment="Top" Checked="now_Checked" FontFamily="Times New Roman" FontSize="13" />
+            <Label Content="• Please select your terminal:" Height="28" Margin="6,6,0,0" Name="label1" VerticalAlignment="Top" HorizontalAlignment="Left" Width="165" FontWeight="SemiBold" FontFamily="Times New Roman" FontSize="13" />
             <StackPanel Height="235" HorizontalAlignment="Left" Margin="0,60,0,0" Name="stackPanel1" VerticalAlignment="Top" Width="455" />
-            <RadioButton Content="Trade Tiger" Height="16" HorizontalAlignment="Left" Margin="293,12,0,0" Name="tradetiger" VerticalAlignment="Top" Checked="tradetiger_Checked_1" />
-            <RadioButton Content="Odin" Height="16" HorizontalAlignment="Left" Margin="385,12,0,0" Name="odin" VerticalAlignment="Top" Checked="odin_Checked_1" />
-            <CheckBox Content="Nest/Now" Height="16" HorizontalAlignment="Left" Margin="227,38,0,0" Name="plusbackfill" VerticalAlignment="Top" Checked="plusbackfill_Checked" Click="plusbackfill_Click" />
-            <Label Content="Select the Check box for backfill option:" Height="28" HorizontalAlignment="Left" Margin="11,32,0,0" Name="label2" VerticalAlignment="Top" />
+            <RadioButton Content="TRADE TIGER" Height="16" HorizontalAlignment="Left" Margin="285,12,0,0" Name="tradetiger" VerticalAlignment="Top" Checked="tradetiger_Checked_1" FontFamily="Times New Roman" FontSize="13" />
+            <RadioButton Content="ODIN" Height="16" HorizontalAlignment="Left" Margin="394,11,0,0" Name="odin" VerticalAlignment="Top" Checked="odin_Checked_1" FontFamily="Times New Roman" FontSize="13" />
+            <CheckBox Content="Nest/Now" Height="16" HorizontalAlignment="Left" Margin="235,39,0,0" Name="plusbackfill" VerticalAlignment="Top" Checked="plusbackfill_Checked" Click="plusbackfill_Click" FontFamily="Times New Roman" FontSize="13" />
+            <Label Content="Select the Check box for Backfill option:" Height="28" HorizontalAlignment="Left" Margin="11,34,0,0" Name="label2" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
         </Grid>
         <StackPanel Height="226" HorizontalAlignment="Left" Margin="0,69,0,0" Name="stackPanel2" VerticalAlignment="Top" Width="455" Unloaded="stackPanel2_Unloaded"></StackPanel>
         <Border BorderBrush="Silver" BorderThickness="1" Height="0" HorizontalAlignment="Left" Margin="4,60,0,0" Name="border1" VerticalAlignment="Top" Width="451" />

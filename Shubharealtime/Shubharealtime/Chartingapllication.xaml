@@ -6,21 +6,24 @@
              mc:Ignorable="d" 
              d:DesignHeight="326" d:DesignWidth="469" Unloaded="UserControl_Unloaded" Loaded="UserControl_Loaded">
         <Grid Height="318" Width="464">
-            <Button Content="Browse" Height="25" HorizontalAlignment="Left" Margin="360,48,0,0" Name="btnTarget" VerticalAlignment="Top" Width="72" Click="btnTarget_Click" />
+            <Button Content="Browse" Height="25" HorizontalAlignment="Left" Margin="360,48,0,0" Name="btnTarget" VerticalAlignment="Top" Width="72" Click="btnTarget_Click" FontFamily="Times New Roman" FontSize="13" />
             <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="164,48,0,0" Name="db_path" Text="C:\myshubhalabha\amirealtime" VerticalAlignment="Top" Width="186" />
-            <Label Content="Amibroker database path" Height="28" HorizontalAlignment="Left" Margin="13,45,0,0" Name="label8" VerticalAlignment="Top" />
-            <CheckBox Content="Amibroker" Height="16" HorizontalAlignment="Left" Margin="175,10,0,0" Name="ami_chk" VerticalAlignment="Top" Checked="ami_chk_Checked" />
-            <CheckBox Content="Metastock" Height="16" HorizontalAlignment="Right" Margin="0,10,126,0" Name="meta_chk" VerticalAlignment="Top" Checked="meta_chk_Checked" Unloaded="meta_chk_Unloaded" />
-            <CheckBox Content="Fchart" Height="16" HorizontalAlignment="Left" Margin="356,9,0,0" Name="fchart_chk" VerticalAlignment="Top" Width="76" Checked="fchart_chk_Checked" />
-            <Label Content="• Select Charting Application" Height="28" HorizontalAlignment="Left" Margin="6,3,0,0" Name="label9" VerticalAlignment="Top" FontWeight="SemiBold" />
-            <Button Content="Browse" Height="25" HorizontalAlignment="Left" Margin="359,113,0,0" Name="meta_browes" VerticalAlignment="Top" Width="72" Click="meta_browes_Click" />
+            <Label Content="Amibroker database path" Height="28" HorizontalAlignment="Left" Margin="13,45,0,0" Name="label8" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+            <CheckBox Content="Amibroker" Height="16" HorizontalAlignment="Left" Margin="175,10,0,0" Name="ami_chk" VerticalAlignment="Top" Checked="ami_chk_Checked" FontFamily="Times New Roman" FontSize="13" />
+            <CheckBox Content="Metastock" Height="16" HorizontalAlignment="Right" Margin="0,10,126,0" Name="meta_chk" VerticalAlignment="Top" Checked="meta_chk_Checked" Unloaded="meta_chk_Unloaded" FontFamily="Times New Roman" FontSize="13" />
+            <CheckBox Content="Fchart" Height="16" HorizontalAlignment="Left" Margin="356,9,0,0" Name="fchart_chk" VerticalAlignment="Top" Width="76" Checked="fchart_chk_Checked" FontFamily="Times New Roman" FontSize="13" />
+            <Label Content="• Select Charting Application" Height="28" HorizontalAlignment="Left" Margin="6,3,0,0" Name="label9" VerticalAlignment="Top" FontWeight="SemiBold" FontFamily="Times New Roman" FontSize="13" />
+            <Button Content="Browse" Height="25" HorizontalAlignment="Left" Margin="359,113,0,0" Name="meta_browes" VerticalAlignment="Top" Width="72" Click="meta_browes_Click" FontFamily="Times New Roman" FontSize="13" />
             <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="164,115,0,0" Name="meatpath_txt" Text="C:\myshubhalabha\intraday" VerticalAlignment="Top" Width="186" />
-            <Label Content="Metastock database path" Height="28" HorizontalAlignment="Left" Margin="16,111,0,0" Name="label10" VerticalAlignment="Top" />
-        <Button Content="Browse" Height="25" HorizontalAlignment="Right" Margin="0,80,32,0" Name="button1" VerticalAlignment="Top" Width="72" Click="button1_Click" />
+            <Label Content="Metastock database path" Height="28" HorizontalAlignment="Left" Margin="16,111,0,0" Name="label10" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+        <Button Content="Browse" Height="25" HorizontalAlignment="Right" Margin="0,80,32,0" Name="button1" VerticalAlignment="Top" Width="72" Click="button1_Click" FontFamily="Times New Roman" FontSize="13" />
         <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="164,80,0,0" Name="Amiexepath" Text="C:\myshubhalabha\amirealtime" VerticalAlignment="Top" Width="186" />
-        <Label Content="Amibroker Exe path" Height="28" HorizontalAlignment="Left" Margin="43,77,0,0" Name="label1" VerticalAlignment="Top" />
-        <Label Content="• Amibroker users  :Click  on next it will open amibroker  please follow following steps" FontWeight="SemiBold" Height="28" HorizontalAlignment="Left" Margin="5,145,0,0" Name="label7" VerticalAlignment="Top" FontSize="11.5" />
-        <Label Content="1. Go to file click on database setting" Height="28" HorizontalAlignment="Left" Margin="10,167,0,0" Name="label3" VerticalAlignment="Top" />
-        <Label Content="2. Set basetime interval to 1 second " Height="28" HorizontalAlignment="Left" Margin="10,187,0,0" Name="label4" VerticalAlignment="Top" />
+        <Label Content="Amibroker Exe path" Height="28" HorizontalAlignment="Left" Margin="16,80,0,0" Name="label1" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+        <Label Content="•Amibroker users follow the steps given below and then Click on Next button " FontWeight="SemiBold" Height="28" HorizontalAlignment="Left" Margin="5,186,0,0" Name="label7" VerticalAlignment="Top" FontSize="13" FontFamily="Times New Roman" />
+        <Label Content="1. Go to file click on database setting" Height="28" HorizontalAlignment="Left" Margin="10,208,0,0" Name="label3" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+        <Label Content="2. Set basetime interval to 1 second " Height="28" HorizontalAlignment="Left" Margin="10,228,0,0" Name="label4" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+        <Label Content="Fchart database path" Height="28" HorizontalAlignment="Left" Margin="16,144,0,0" Name="label2" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="164,148,0,0" Name="fchartpath" VerticalAlignment="Top" Width="186" Text="C:\myshubhalabha\Fchart" />
+        <Button Content="Browse" Height="23" HorizontalAlignment="Left" Margin="356,148,0,0" Name="button2" VerticalAlignment="Top" Width="75" Click="button2_Click" FontFamily="Times New Roman" FontSize="13" />
     </Grid>
 </UserControl>

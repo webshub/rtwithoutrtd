@@ -4,19 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="320" d:DesignWidth="431">
-    <Grid Height="310" Width="428">
-        <Grid Margin="0,-7,0,0">
-            <Label Content="• Trade Tiger" Height="28" HorizontalAlignment="Left" Margin="16,1,0,0" Name="lae" VerticalAlignment="Top" FontWeight="SemiBold" />
-            <Label Content="Add a trusted location in Microsoft excel sheet steps as given below " Height="28" HorizontalAlignment="Left" Margin="10,19,0,0" Name="label1" VerticalAlignment="Top" />
-            <Label Content="1.Click File &gt; Options." Height="28" HorizontalAlignment="Left" Margin="10,37,0,0" Name="label2" VerticalAlignment="Top" />
-            <Label Content="2.Click Trust Center &gt; Trust Center Settings &gt; Trusted Locations." Height="28" HorizontalAlignment="Left" Margin="10,57,0,0" Name="label3" VerticalAlignment="Top" />
-            <Label Content="3.Click Add new location." Height="28" HorizontalAlignment="Left" Margin="10,77,0,0" Name="label4" VerticalAlignment="Top" />
-            <Label Content="4.Click Browse and find the C:\myshubhalabha folder, select a folder," Height="28" HorizontalAlignment="Left" Margin="10,97,0,0" Name="label5" VerticalAlignment="Top" />
-            <Label Content=" and then click OK." Height="28" HorizontalAlignment="Left" Margin="21,116,0,0" Name="label6" VerticalAlignment="Top" />
-            <Label Content="Configure tradetiger for default settings and save new snap to excel in  " Height="28" HorizontalAlignment="Left" Margin="16,134,0,0" Name="label7" VerticalAlignment="Top" FontWeight="SemiBold" />
-            <Label Content="c:\myshubhalabha folder as shubhasharekhan.xls" Height="28" HorizontalAlignment="Left" Margin="17,151,0,0" Name="label8" VerticalAlignment="Top" FontWeight="SemiBold" />
-            <TextBlock Margin="21,176,170,120"><Hyperlink NavigateUri="http://www.youtube.com/watch?v=PH0ljNFMwA0" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock Text=" Click here to refer configuration video   " /></Hyperlink></TextBlock>
+             d:DesignHeight="312" d:DesignWidth="479">
+    <Grid Height="310" Width="482">
+        <Grid Margin="0,-7,-30,0">
+            <Label Content="• TRADE TIGER " Height="28" HorizontalAlignment="Left" Margin="3,13,0,0" Name="lae" VerticalAlignment="Top" FontWeight="SemiBold" FontFamily="Times New Roman" FontSize="13" />
+            <Label Content="To add a trusted location in MS Excel sheet follow steps as given below " Height="28" HorizontalAlignment="Left" Margin="10,31,0,0" Name="label1" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+            <Label Content="1.Click File &gt; Options." Height="28" HorizontalAlignment="Left" Margin="10,49,0,0" Name="label2" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+            <Label Content="2.Click Trust Center &gt; Trust Center Settings &gt; Trusted Locations." Height="28" HorizontalAlignment="Left" Margin="10,69,0,0" Name="label3" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+            <Label Content="3.Click Add new location." Height="28" HorizontalAlignment="Left" Margin="10,89,0,0" Name="label4" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+            <Label Content="4.Click Browse and find the C:\myshubhalabha folder &gt; Select &gt; OK" Height="28" HorizontalAlignment="Left" Margin="10,109,0,0" Name="label5" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+            <TextBlock Margin="287,137,157,160"><Hyperlink NavigateUri="http://www.youtube.com/watch?v=PH0ljNFMwA0" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock Text=" Click here " FontFamily="Times New Roman" FontSize="14" /></Hyperlink></TextBlock>
+            <Label Content="• To watch TRADE TIGER Configuration Video " FontFamily="Times New Roman" FontSize="13" FontWeight="SemiBold" Height="28" HorizontalAlignment="Left" Margin="8,134,0,0" Name="label9" VerticalAlignment="Top" />
         </Grid>
     </Grid>
 </UserControl>

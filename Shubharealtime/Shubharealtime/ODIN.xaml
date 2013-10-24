@@ -6,12 +6,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="311" d:DesignWidth="450">
     <Grid>
-        <Label Content="ODIN  " Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="lae" VerticalAlignment="Top" FontWeight="SemiBold" />
-        <Label Content="Add a trusted location in Microsoft excel sheet steps as given below " Height="28" HorizontalAlignment="Left" Margin="10,31,0,0" Name="label1" VerticalAlignment="Top" />
-        <Label Content="1.Click File &gt; Options." Height="28" HorizontalAlignment="Left" Margin="10,60,0,0" Name="label2" VerticalAlignment="Top" />
-        <Label Content="2.Click Trust Center &gt; Trust Center Settings &gt; Trusted Locations." Height="28" HorizontalAlignment="Left" Margin="10,81,0,0" Name="label3" VerticalAlignment="Top" />
-        <Label Content="3.Click Add new location." Height="28" HorizontalAlignment="Left" Margin="10,103,0,0" Name="label4" VerticalAlignment="Top" />
-        <Label Content="4.Click Browse and find the C:\myshubhalabha folder, select a folder," Height="28" HorizontalAlignment="Left" Margin="10,127,0,0" Name="label5" VerticalAlignment="Top" />
-        <Label Content=" and then click OK." Height="28" HorizontalAlignment="Left" Margin="21,146,0,0" Name="label6" VerticalAlignment="Top" />
+        <Label Content="• ODIN" FontFamily="Times New Roman" FontSize="13" FontWeight="SemiBold" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="lae" VerticalAlignment="Top" />
+        <Label Content="To add a trusted location in MS Excel sheet follow steps as given below " FontFamily="Times New Roman" FontSize="13" Height="28" HorizontalAlignment="Left" Margin="17,28,0,0" Name="label1" VerticalAlignment="Top" />
+        <Label Content="1.Click File &gt; Options." FontFamily="Times New Roman" FontSize="13" Height="28" HorizontalAlignment="Left" Margin="17,46,0,0" Name="label2" VerticalAlignment="Top" />
+        <Label Content="2.Click Trust Center &gt; Trust Center Settings &gt; Trusted Locations." FontFamily="Times New Roman" FontSize="13" Height="28" HorizontalAlignment="Left" Margin="17,66,0,0" Name="label3" VerticalAlignment="Top" />
+        <Label Content="3.Click Add new location." FontFamily="Times New Roman" FontSize="13" Height="28" HorizontalAlignment="Left" Margin="17,86,0,0" Name="label4" VerticalAlignment="Top" />
+        <Label Content="4.Click Browse and find the C:\myshubhalabha folder &gt; Select &gt; OK" FontFamily="Times New Roman" FontSize="13" Height="28" HorizontalAlignment="Left" Margin="17,106,0,0" Name="label5" VerticalAlignment="Top" />
+        <TextBlock Margin="241,133,141,158"><Hyperlink NavigateUri="http://www.youtube.com/watch?v=PH0ljNFMwA0" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock FontFamily="Times New Roman" FontSize="14" Text=" Click here " /></Hyperlink></TextBlock>
+        <Label Content="• To watch ODIN Configuration Video " FontFamily="Times New Roman" FontSize="13" FontWeight="SemiBold" Height="28" HorizontalAlignment="Left" Margin="15,131,0,0" Name="label9" VerticalAlignment="Top" />
     </Grid>
 </UserControl>

@@ -35,6 +35,8 @@ namespace Shubharealtime
         private void now_Checked(object sender, RoutedEventArgs e)
         {
             w.Rsult_lbl.Content = "";
+            plusbackfill.Visibility = Visibility.Visible;
+            label2.Visibility = Visibility.Visible;
 
             try
             {
@@ -87,6 +89,8 @@ namespace Shubharealtime
         private void nest_Checked(object sender, RoutedEventArgs e)
         {
             w.Rsult_lbl.Content = "";
+            plusbackfill.Visibility = Visibility.Visible;
+            label2.Visibility = Visibility.Visible;
 
             try
             {
@@ -109,6 +113,8 @@ namespace Shubharealtime
         {
             w.Rsult_lbl.Content = "";
             plusbackfill.IsChecked = false;
+            plusbackfill.Visibility = Visibility.Hidden;
+            label2.Visibility = Visibility.Hidden;
             try
             {
                 stackPanel2.Children.RemoveAt(0);
@@ -131,6 +137,9 @@ namespace Shubharealtime
         {
             w.Rsult_lbl.Content = "";
             plusbackfill.IsChecked = false;
+            plusbackfill.Visibility = Visibility.Hidden;
+            label2.Visibility = Visibility.Hidden;
+
 
             try
             {

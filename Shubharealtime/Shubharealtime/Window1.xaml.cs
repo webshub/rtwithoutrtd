@@ -152,20 +152,16 @@ namespace Shubharealtime
 
                   
                     regKey.SetValue("Wizart", "done");
+
                    
 
 
-
-
-
-
-
-                  
+                   
 
                     DateTime reg = Convert.ToDateTime(registerdate);
+                    
                     reg = reg.AddDays(2);
-
-
+                    //its checking trail period expired or not 
                     if (reg < DateTime.Today.Date)
                     {
                         Uri a = new System.Uri("http://besttester.com/lic/lic.txt");
@@ -181,7 +177,7 @@ namespace Shubharealtime
 
                         ////////////////////////////////////////////
 
-
+                        //checking file which is store  on server 
                         string [] serverdata = reader.ReadToEnd().Split(',');
                         string [] serverdata1=null;
                         int flagforuserpresentonserver = 0;
@@ -198,7 +194,7 @@ namespace Shubharealtime
                                 flagforuserpresentonserver = 1;
                             if (dateonserver<DateTime.Today.Date )
                             {
-                                System.Windows.Forms.MessageBox.Show("Trial version expired please contact to sales@shubhalabha.in ");
+                                System.Windows.Forms.MessageBox.Show("Trial version expire please contact to sales@shubhalabha.in ");
                                 closeallprocess();
 
                             }
@@ -207,93 +203,66 @@ namespace Shubharealtime
 
                         if (flagforuserpresentonserver==0)
                         {
-                            System.Windows.Forms.MessageBox.Show("Trial version expired please contact to sales@shubhalabha.in ");
+                            System.Windows.Forms.MessageBox.Show("Trial version expire please contact to sales@shubhalabha.in ");
                             closeallprocess();
                         }
                         ///////////////////////////////////////////
 
 
-                        //string a1 = reader.ReadToEnd();
-                        ////  System.Windows.MessageBox.Show(a1);
-                        ////ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
-                        ////ManagementObjectCollection moc = mos.Get();
-                        //string motherBoard = "";
-                        ////foreach (ManagementObject mo in moc)
-                        ////{
-                        ////  motherBoard = (string)mo["SerialNumber"];
-                        //// //  motherBoard = (string)mo["VolumeSerialNumber"];
-
-
-                        ////}
-                        //System.Windows.MessageBox.Show("Cheking Trail ");
-                        //ManagementObject dsk = new ManagementObject(@"win32_logicaldisk.deviceid=""c:""");
-                        //dsk.Get();
-                        //string id = dsk["VolumeSerialNumber"].ToString();
-                        //motherBoard = id;
-                        //System.Windows.MessageBox.Show("Cheking done ");
-
-                        //if (a1.Contains(motherBoard))
-                        //{
-
-
-                        //    //if motherboard id is not present then it is paid user continue 
-                        //}
-                        //else
-                        //{
-                        //    //if motherboard id is not present on server then close all process 
-                        //    System.Windows.Forms.MessageBox.Show("Trial version expired please contact to sales@shubhalabha.in ");
-                        //    closeallprocess();
-                        //}
-
                     }
                     else
                     {
-                        System.Windows.Forms.MessageBox.Show("Your trial period will expired on  " + reg.ToShortDateString());
+                        System.Windows.Forms.MessageBox.Show("Your trial period will expire on  " + reg.ToShortDateString());
 
                     }
 
 
-                    //if (paidornot.ToString() == "Key for xp")
-                    //{
-                    //    if (reg < DateTime.Today.Date)
-                    //    {
-                    //     System.Windows.Forms.   MessageBox.Show("Trial version expired please contact to sales@shubhalabha.in ");
-                    //        this.Close();
-                    //        Environment.Exit(0);
-                    //        return;
-                    //    }
-                    //    else
-                    //    {
-
-                    //    }
-
-                    //}
-                    //else
-                    //{
-                    //    if (paidornot.ToString() == "1001")
-                    //    {
-                    //    }
-                    //    else
-                    //    {
-                    //        System.Windows.Forms.MessageBox.Show("Trial version expired please contact to sales@shubhalabha.in ");
-                    //        this.Close();
-                    //        return;
-                    //    }
-
-                    //}
                 }
-                catch
+                catch(Exception ex)
                 {
-                    //  System.Windows.MessageBox.Show(ex.Message );
-                    System.Windows.MessageBox.Show("Please check internet connection we cant check registraion as your trail period expired ");
-                    // closeallprocess();
+                    System.Windows.MessageBox.Show("Please check internet connection we cant check registraion as your trail period expire ");
+
                 }
 
 
 
+                ////show google symbol file in listview
 
 
-                /////////////////////////////
+            try
+            {
+                using (var reader = new StreamReader("C:\\myshubhalabha\\Symbolname.csv"))
+                {
+                    string line = null;
+
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        string[] name = line.Split(',');
+
+                        listView1.Items.Add(new ListViewData(name[0], name[1], name[2]));
+
+
+                       
+                    }
+                }
+            }
+            catch
+            {
+            }
+
+
+
+            for (int i = 1; i < 11;i++ )
+            {
+                googledays.Items.Add(i );
+            }
+            googletime.Items.Add(1);
+            googletime.Items.Add(5);
+
+            googletime.SelectedIndex = 0;
+            googledays.SelectedIndex = 5;
+
+                /////take all save data 
                 string targetpath = ConfigurationManager.AppSettings["targetpathforcombo"];
                 string amipath = ConfigurationManager.AppSettings["amipath"];
                 string terminalname = ConfigurationManager.AppSettings["terminalname"];
@@ -335,13 +304,13 @@ namespace Shubharealtime
 
                 try
                 {
-
+                    //taking registry values 
                     var terminalname1 = regKey.GetValue("terminal");
                     var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
                     var Metastockdatapath = regKey.GetValue("Metastockdatapath");
                     var Chartingapplication = regKey.GetValue("Chartingapplication");
-
-
+                      
+                    
                     var Amiexepath = regKey.GetValue("Amiexepath");
                     var backfill1 = regKey.GetValue("backfill");
                     string backfill = "Not present";
@@ -395,61 +364,14 @@ namespace Shubharealtime
                 catch
                 {
                 }
-
-
-
-                //string targetpath = ConfigurationManager.AppSettings["targetpathforcombo"];
-                //string amipath = ConfigurationManager.AppSettings["amipath"];
-                //string terminalname=ConfigurationManager.AppSettings["terminalname"];
-                //string chartingapp = ConfigurationManager.AppSettings["chartingapp"];
-                //string timetosave = ConfigurationManager.AppSettings["timetoRT"];
-
-                //string googleday = ConfigurationManager.AppSettings["Daysforgoogle"];
-
-                //string google_time = ConfigurationManager.AppSettings["google_time_frame"];
-                //string nestback = ConfigurationManager.AppSettings["nestbackfill"];
-                //string tradetiger1 = ConfigurationManager.AppSettings["tradetiger"];
-
-                //string googleback = ConfigurationManager.AppSettings["googlebackfill"];
-                //string withoutback = ConfigurationManager.AppSettings["withoutbackfill"];
-
-
-                ///////////////////////
-
-
-                ////////////////////
-
-
-
-                try
+               try
                 {
-                    //ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
-                    //ManagementObjectCollection moc = mos.Get();
-                    //string motherBoard = "";
-                    //ManagementObjectCollection mbsList = null;
-                    //foreach (ManagementObject mo in moc)
-                    //{
-                    //    motherBoard = (string)mo["SerialNumber"];
-                    //}
-
-                    //ManagementObjectSearcher mbs = new ManagementObjectSearcher("Select * From Win32_processor");
-                    //mbsList = mbs.Get();
-                    //string id = "";
-                    //foreach (ManagementObject mo in mbsList)
-                    //{
-                    //    id = mo["ProcessorID"].ToString();
-                    //}
-
+                   
+                   //Get motherboard id
                     ManagementObject dsk = new ManagementObject(@"win32_logicaldisk.deviceid=""c:""");
                     dsk.Get();
                     string id = dsk["VolumeSerialNumber"].ToString();
                     moterboard.Text = id;
-
-
-
-
-
-
 
                     var terminalfromwizart1 = regKey.GetValue("terminal");
                     var Chartingappfromwizart1 = regKey.GetValue("chart");
@@ -498,7 +420,7 @@ namespace Shubharealtime
 
 
 
-
+                //copy files into folder 
                 try
                 {
 
@@ -591,8 +513,9 @@ namespace Shubharealtime
 
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "Shubhasharekhan.txt";
                     File.Copy(processtostart, "C:\\myshubhalabha\\samples\\Shubhasharekhan.txt", true);
-
-
+                    processtostart = filepath.Substring(0, filepath.Length - 18) + "Notice.txt";
+                    File.Copy(processtostart, "C:\\myshubhalabha\\samples\\Notice.txt", true);
+                    
 
 
                 }
@@ -604,10 +527,7 @@ namespace Shubharealtime
 
 
 
-                //if (targetpath != null)
-                //{
-                //    txtTargetFolder.Text = targetpath;
-                //}
+                //load banner form server 
                 try
                 {
                     System.Net.WebRequest myRequest = System.Net.WebRequest.Create("http://www.Google.co.in");
@@ -618,9 +538,9 @@ namespace Shubharealtime
                     Uri a1 = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=17&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
                     Uri a2 = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=17&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
                     Uri a3 = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=17&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
-                    Uri tradetigerbanner1 = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=17&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
-                    Uri tipofday = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=17&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
-                    Uri homepage = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=17&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
+                    Uri tradetigerbanner1 = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=25&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
+                    Uri tipofday = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=26&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
+                    Uri homepage = new System.Uri("http://shubhalabha.in/eng/ads/www/delivery/afr.php?zoneid=24&amp;target=_blank&amp;cb=INSERT_RANDOM_NUMBER_HERE");
                    
                     Uri piwikvisit = new System.Uri("http://list.shubhalabha.in/withoutrtd.html");
 
@@ -668,7 +588,7 @@ namespace Shubharealtime
 
                 }
 
-                System.IO.StreamReader objReader = new StreamReader("C:\\myshubhalabha\\Notice.txt");
+             //   System.IO.StreamReader objReader = new StreamReader("C:\\myshubhalabha\\Notice.txt");
 
 
 
@@ -696,11 +616,10 @@ namespace Shubharealtime
                 timetoRT.Items.Add(i1);
                 i1 = 30;
                 timetoRT.Items.Add(i1);
-                //for (int i = 1; i < 60; i++)
-                //{
-                //    timetoRT.Items.Add(i);
-                //}
+                var timesec = regKey.GetValue("timesec");
 
+                timetoRT.SelectedIndex  =Convert.ToInt32( timesec);
+                //copy files into system32 folder
                 try
                 {
 
@@ -765,10 +684,6 @@ namespace Shubharealtime
             System.Windows.Controls.WebBrowser wb = (System.Windows.Controls.WebBrowser)sender;
             wb.InvokeScript("execScript", new Object[] { script, "JavaScript" });
         }
-
-       
-      
-
         //starting real time data feed 
         private void StartRT_Click(object sender, RoutedEventArgs e)
         {
@@ -808,6 +723,7 @@ namespace Shubharealtime
             List<Thread> processtostartback = new List<Thread>();
 
             SystemAccessibleObject sao;
+            //taking nest process and finds window handle for that 
             foreach (Process p in processes)
             {
                 windowHandle = p.MainWindowHandle;
@@ -818,13 +734,14 @@ namespace Shubharealtime
                 abcd1 = FindChildWindow(abcd, IntPtr.Zero, "SysListView32", "");
 
 
-                // do something with windowHandle
+               
             }
 
 
             SystemWindow a = new SystemWindow(abcd1);
             try
             {
+                //checking marketwatch present or not 
                 string marketwatch = abcd1.ToString();
                 if (marketwatch == "0")
                 {
@@ -854,7 +771,7 @@ namespace Shubharealtime
                 marketwathrequiredfield = marketwathrequiredfield + checkterminalcol[i].ToString();
             }
 
-
+            //checking all required fileds of nest terminal 
             if (!marketwathrequiredfield.Contains("LTT"))
             {
                 flag = 1;
@@ -892,6 +809,7 @@ namespace Shubharealtime
         //Close all running process of the application 
         public void closeallprocess()
         {
+
             Process[] workers = Process.GetProcessesByName("Shubharealtime.vshost");
             Process[] workers1 = Process.GetProcessesByName("Shubharealtime");
             Process[] workers2 = Process.GetProcessesByName("Endrt.vshost");
@@ -1018,16 +936,14 @@ namespace Shubharealtime
             
             
             
-            
-            //dataGrid3.Items.Add(new DataItem { Column0 = "abcd", Column1 = "dasdasdas" });
-            //dataGrid3.Items.Add(new DataItem { Column0 = "abcasdsasdd", Column1 = "das1111111111111dasdas" });
+        
             string terminalname = ConfigurationManager.AppSettings["terminalname"];
             Process[] processes = null;
 
 
             if (nestbackfill.IsChecked == true)
             {
-               
+               //checking nest running as admin or not 
                 if (terminalname == "NEST")
                 {
                     try
@@ -1075,7 +991,6 @@ namespace Shubharealtime
                 {
                     windowHandle = p.MainWindowHandle;
 
-                    //System.Windows.Forms.MessageBox.Show(p.HandleCount.ToString());
 
                     abcd = FindChildWindow(windowHandle, IntPtr.Zero, "#32770", "");
                     abcd1 = FindChildWindow(abcd, IntPtr.Zero, "SysListView32", "");
@@ -1108,10 +1023,10 @@ namespace Shubharealtime
 
 
                 f = sao.Children[3];
-
+                //add symbols into listview 
                 for (int i = 0; i < f.Children.Count() - 1; i++)
                 {
-                    listView2.Items.Add(new ListViewData(f.Children[i].Name, "NOTBACKFILL", f.Children[i].Name));
+                    listView2.Items.Add(new ListViewData(f.Children[i].Name, ":No symbol selected", f.Children[i].Name));
               
                 }
 
@@ -1120,7 +1035,9 @@ namespace Shubharealtime
             }
             else if (googlebackfill.IsChecked == true)
             {
-                for (int i = 0; i < 15; i++)
+                //add symbols into listview 
+
+                for (int i = 0; i < 50; i++)
                 {
                     listView1.Items.Add(new ListViewData("NOTNEEDED", ":No symbol selected", "NO"));
 
@@ -1142,6 +1059,7 @@ namespace Shubharealtime
         //Selected listview symbol name Editing 
         private void listView1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //edit data in listview 
             ListViewData lvc = (ListViewData)listView1.SelectedItem;
             if (lvc != null)
             {
@@ -1159,6 +1077,7 @@ namespace Shubharealtime
         //Editing of symbol name
         private void textBox3_TextChanged(object sender, TextChangedEventArgs e)
         {
+            //save data into listview 
             RefreshListView(textBox1.Text, textBox2.Text,textBox3.Text );
         }
         private void setDataChanged(bool value)
@@ -1167,6 +1086,7 @@ namespace Shubharealtime
         }
         private void RefreshListView(string value1, string value2, string value3)
         {
+            //add editaed data into listview 
             ListViewData lvc = (ListViewData)listView1.SelectedItem; //new ListViewClass(value1, value2);
             if (lvc != null && !stopRefreshControls)
             {
@@ -1199,6 +1119,7 @@ namespace Shubharealtime
         //Save symbol into File 
         private void sav_symbolfile_Click(object sender, RoutedEventArgs e)
         {
+            //save data into txt file 
             if(nestbackfill.IsChecked==true )
             {
            
@@ -1245,9 +1166,6 @@ namespace Shubharealtime
             config.Save(ConfigurationSaveMode.Full);
         }
 
-       
-       
-        //
         private void withoutbackfill_Checked(object sender, RoutedEventArgs e)
         {
             saveradiobuttn();
@@ -1294,14 +1212,11 @@ namespace Shubharealtime
 
         }
 
-       
-
         private void tradetiger_Checked(object sender, RoutedEventArgs e)
         {
             saveradiobuttn();
         }
 
-       
         //Load all current setting of the user 
         private void Current_Setting_Loaded(object sender, RoutedEventArgs e)
         {
@@ -1336,13 +1251,19 @@ namespace Shubharealtime
             }
         }
 
+        //start realtime data 
         private void StartRT_Click_1(object sender, RoutedEventArgs e)
         {
             savedata();
+
             RegistryKey regKey = Registry.CurrentUser;
             regKey = regKey.CreateSubKey(@"Windows-xpRT\");
             var terminalname = regKey.GetValue("terminal");
             var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
+            regKey.SetValue("googleday", googledays.SelectedItem.ToString());
+            regKey.SetValue("googletime", googletime .SelectedItem.ToString());
+
+
             //if trade tiger backfill 
             if (tradetiger.IsChecked == true)
             {
@@ -1473,27 +1394,14 @@ namespace Shubharealtime
             }
 
             string terminal = ConfigurationManager.AppSettings["terminal"];
-            /////////////////////////////
-            //servaer checking now/nest
-
-
-            /////////////////////////////
-            //Advancesetting.IsEnabled = false;
-            //contactus.IsEnabled = false;
-            //help.IsEnabled = false;
-            //Format_cb.IsEnabled = false;
-            //RTD_server_name.IsEnabled = false;
-            //timetoRT.IsEnabled = false;
-            //StartRT.IsEnabled = false;
-
-
-
-
+          
+           
             string path = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
             string pathtostartprocess = path.Substring(0, path.Length - 18);
            // System.Diagnostics.Process.Start(pathtostartprocess + "Endrt.exe");
             Shubharealtime.datadownload s = new datadownload();
 
+            //check required field from nest or now terminal 
             if(nestbackfill.IsChecked==true )
             {
             if (RTD_server_name.SelectedItem == "NEST")
@@ -1522,15 +1430,12 @@ namespace Shubharealtime
             System.Windows.Forms.Application.Restart();
             System.Windows.Application.Current.Shutdown();
 
-            //this.Close();
-            //string path = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
-            //string pathtostartprocess = path.Substring(0, path.Length - 18);
-            //System.Diagnostics.Process.Start(pathtostartprocess + "Shubharealtime.exe");
+           
         }
 
         private void listView2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            //edit list view data
             ListViewData lvc = (ListViewData)listView2.SelectedItem;
             if (lvc != null)
             {
@@ -1547,8 +1452,10 @@ namespace Shubharealtime
         private void googlebackfill_Checked(object sender, RoutedEventArgs e)
         {
 
-            System.Windows.MessageBox.Show("Please refre step for Google backfill ");
-            
+            lblgooggleday.Visibility = Visibility.Visible;
+            lblgoogletime.Visibility = Visibility.Visible;
+            googletime.Visibility = Visibility.Visible;
+            googledays.Visibility = Visibility.Visible;
             textBox1.Visibility = Visibility.Hidden;
             textBox2.Visibility = Visibility.Visible;
             listView1.Visibility = Visibility.Visible;
@@ -1561,6 +1468,11 @@ namespace Shubharealtime
 
         private void nestbackfill_Checked(object sender, RoutedEventArgs e)
         {
+
+            lblgooggleday.Visibility = Visibility.Hidden;
+            lblgoogletime.Visibility = Visibility.Hidden;
+            googletime.Visibility = Visibility.Hidden;
+            googledays.Visibility = Visibility.Hidden;
             textBox1.Visibility = Visibility.Visible;
             textBox2.Visibility = Visibility.Hidden;
             listView1.Visibility = Visibility.Hidden;
@@ -1574,12 +1486,19 @@ namespace Shubharealtime
 
         private void tradetiger_Checked_1(object sender, RoutedEventArgs e)
         {
+
+            lblgooggleday.Visibility = Visibility.Hidden;
+            lblgoogletime.Visibility = Visibility.Hidden;
+            googletime.Visibility = Visibility.Hidden;
+            googledays.Visibility = Visibility.Hidden;
+            //add user control 
             tradetigerbanner.Visibility = Visibility.Visible;
             Shubhalabha123.Tradetigerinformation t=new Shubhalabha123.Tradetigerinformation();
             tradetigerinfo.Children.Add(t);
             tradetigerinfo.Visibility = Visibility.Visible;
         }
 
+        //start realtime data feed
         private void Startrealtimeonly_Click(object sender, RoutedEventArgs e)
         {
             
@@ -1589,7 +1508,7 @@ namespace Shubharealtime
 
             RegistryKey regKey = Registry.CurrentUser;
             regKey = regKey.CreateSubKey(@"Windows-xpRT\");
-            regKey.SetValue("timesec", timetoRT.SelectedItem.ToString());
+            regKey.SetValue("timesec", timetoRT.SelectedIndex .ToString());
             var ApplicationID = regKey.GetValue("sd");
 
             Shubharealtime.datadownload s1 = new datadownload();
@@ -1635,20 +1554,10 @@ namespace Shubharealtime
             }
 
 
-
-         
-
-
-
-
             CommandManager.InvalidateRequerySuggested();
 
             try
             {
-
-
-                //   type = Type.GetTypeFromProgID("nest.scriprtd");
-
 
 
                 config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -1687,22 +1596,7 @@ namespace Shubharealtime
             }
 
             string terminal = ConfigurationManager.AppSettings["terminal"];
-            /////////////////////////////
-            //servaer checking now/nest
-
-
-            /////////////////////////////
-            //Advancesetting.IsEnabled = false;
-            //contactus.IsEnabled = false;
-            //help.IsEnabled = false;
-            //Format_cb.IsEnabled = false;
-            //RTD_server_name.IsEnabled = false;
-            //timetoRT.IsEnabled = false;
-            //StartRT.IsEnabled = false;
-
-
-
-
+         //it start another window and hide this window 
             string path = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
             string pathtostartprocess = path.Substring(0, path.Length - 18);
             System.Diagnostics.Process.Start(pathtostartprocess + "Endrt.exe");
@@ -1720,33 +1614,5 @@ namespace Shubharealtime
             this.Hide();
         }
 
-      
-      
-
-       
-       
-       
-       
-       
-       
-        
-       
-
-       
-
-
-      
-
-       
-       
-
-       
-       
-
-       
-       
-       
-
-        
     }
 }

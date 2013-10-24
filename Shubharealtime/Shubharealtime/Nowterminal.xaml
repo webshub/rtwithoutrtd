@@ -4,19 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="311" d:DesignWidth="461">
-    <Grid Height="315" Width="463">
+             d:DesignHeight="308" d:DesignWidth="498">
+    <Grid Height="315" Width="498">
 
 
-        <Grid Margin="0,1,0,0">
-            <Label Content="• Important steps to be followed for Now Configuration:" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label2" VerticalAlignment="Top" FontWeight="SemiBold" />
-            <Label Content="1.Please start Now as Run as Administrator " Height="28" HorizontalAlignment="Left" Margin="41,36,0,0" Name="label3" VerticalAlignment="Top" />
-            <Label Content="2.Please configure/set column profile to show data in following format." Height="28" HorizontalAlignment="Left" Margin="41,55,0,0" Name="label4" VerticalAlignment="Top" />
-            <Label Content="-&gt;Trading symbol , Last Traded Time  , Last Traded Price , Volume Traded " Height="28" HorizontalAlignment="Left" Margin="36,76,0,0" Name="label5" VerticalAlignment="Top" />
-            <Label Content="3.Symbol name has should be followed by LTT field ." Height="28" HorizontalAlignment="Left" Margin="43,116,0,0" Name="label6" VerticalAlignment="Top" />
-            <TextBlock Margin="52,146,183,143"><Hyperlink NavigateUri="http://www.youtube.com/watch?v=dKSKXA5KxJg" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock Text=" Click here to refer configuration video   " /></Hyperlink></TextBlock>
-            <Label Content="• Click on next if you have successfully configured the NOWterminal." FontFamily="Times New Roman" FontWeight="SemiBold" Height="28" HorizontalAlignment="Left" Margin="11,175,0,0" Name="label1" VerticalAlignment="Top" />
-            <Label Content="Today ,Open Interest" Height="28" HorizontalAlignment="Left" Margin="51,94,0,0" Name="label7" VerticalAlignment="Top" />
+        <Grid Margin="0,1,-25,1">
+            <Label Content="Trading symbol , Last Traded Time  , Last Traded Price , Volume Traded " Height="28" HorizontalAlignment="Left" Margin="35,85,0,0" Name="label5" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+            <Label Content="• Important steps to be followed for NOW Configuration:" FontFamily="Times New Roman" FontSize="13" FontWeight="SemiBold" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label2" VerticalAlignment="Top" />
+            <Label Content="1.Start NEST as Run as Administrator ." FontFamily="Times New Roman" FontSize="13" Height="28" HorizontalAlignment="Left" Margin="21,37,0,0" Name="label3" VerticalAlignment="Top" />
+            <Label Content="2.Configure or Set column profile so that the data is seen as in the format shown below" FontFamily="Times New Roman" FontSize="13" Height="28" HorizontalAlignment="Left" Margin="21,63,0,0" Name="label4" VerticalAlignment="Top" />
+            <Label Content="3.Important note: LTT should be immediately after Trading symbol ." FontFamily="Times New Roman" FontSize="13" Height="28" HorizontalAlignment="Left" Margin="23,108,0,0" Name="label6" VerticalAlignment="Top" />
+            <Label Content="• Click on Next button if you have successfully configured the NOW terminal." FontFamily="Times New Roman" FontSize="13" FontWeight="SemiBold" Height="28" HorizontalAlignment="Left" Margin="18,194,0,0" Name="label7" VerticalAlignment="Top" />
+            <TextBlock HorizontalAlignment="Left" Margin="234,169,0,125" Width="70"><Hyperlink NavigateUri="http://www.youtube.com/watch?v=xyxZAClSmp0" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock FontFamily="Times New Roman" FontSize="14" Text=" Click here" /></Hyperlink></TextBlock>
+            <Label Content="4.Also note that the first two symbols should have LTT value." FontFamily="Times New Roman" FontSize="13" Height="28" HorizontalAlignment="Left" Margin="23,136,0,0" Name="label8" VerticalAlignment="Top" />
+            <Label Content="• To watch NOW Configuration Video " FontFamily="Times New Roman" FontSize="13" FontWeight="SemiBold" Height="28" HorizontalAlignment="Left" Margin="19,165,0,0" Name="label9" VerticalAlignment="Top" />
         </Grid>
     </Grid>
 </UserControl>
