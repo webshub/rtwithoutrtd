@@ -48,7 +48,7 @@
             </Grid.RowDefinitions>
             <Image Name="imageIcon" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Left" Stretch="Fill" Margin="20,5,5,5" Opacity="128" />
             <Label FontSize="24" Name="headingLabel" FontWeight="Bold" Margin="150,16,-10,14" Content=" Shubha Realtime Combo Wizard" Foreground="Black" Grid.Column="1" Grid.RowSpan="2" FontFamily="Times New Roman"></Label>
-            <Image Height="46" Margin="6,15,579,14" Name="image2" Source="/shubhalabharts;component/images/icon%20logo.png" Stretch="Fill" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+            <Image Height="46" HorizontalAlignment="Left" Margin="6,15,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="184" Source="/shubhalabharts;component/images/Shubhalabha.png" Grid.ColumnSpan="2" Grid.RowSpan="2" />
         </Grid>
         <Border Name="keyBorder" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Background="WhiteSmoke" BorderThickness="0,2,0,0" BorderBrush="White">
             <Grid>
@@ -63,7 +63,7 @@
 
                 <StackPanel Orientation="Vertical" Width="195" Grid.RowSpan="2" Background="#FFB3B8F2" Margin="0,3,0,-3">
                     <Grid Height="374" Name="grid1" Width="190">
-                        <Image Height="46" HorizontalAlignment="Left" Margin="3,152,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="184" Source="/shubhalabharts;component/images/Shubhalabha.png" />
+                        <Image Height="46" Margin="29,156,41,172" Name="image2" Source="/shubhalabharts;component/images/icon%20logo.png" Stretch="Fill" />
                     </Grid>
                 </StackPanel>
             </Grid>

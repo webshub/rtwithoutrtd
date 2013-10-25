@@ -39,6 +39,8 @@ namespace Shubharealtime
                 var terminalname = regKey.GetValue("terminal");
                 var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
                 var Metastockdatapath = regKey.GetValue("Metastockdatapath");
+                var Fchartdatapath = regKey.GetValue("fchart");
+
                 var Chartingapplication = regKey.GetValue("Chartingapplication");
 
 
@@ -55,6 +57,8 @@ namespace Shubharealtime
                 result_chart.Content = Chartingapplication.ToString();
                 result_terminal.Content = terminalname.ToString();
                 result_metapath.Content = Metastockdatapath.ToString();
+                result_fchartpath .Content = Fchartdatapath.ToString();
+
                 nestnowbackfill.Content = backfill;
 
             }

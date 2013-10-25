@@ -6,12 +6,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="482" Loaded="UserControl_Loaded">
     <Grid Height="276" Width="486">
-        <RichTextBox Height="151" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="6,100,0,0" Name="richTextBox1" VerticalAlignment="Top" Width="464" IsReadOnly="False" IsHitTestVisible="True" />
+        <RichTextBox Height="159" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="6,92,0,0" Name="richTextBox1" VerticalAlignment="Top" Width="464" IsReadOnly="False" IsHitTestVisible="True" />
         <Label Content="Please read the following LICENSE AGREEMENT.You must accept the terms of this " Height="28" HorizontalAlignment="Left" Margin="4,-1,0,0" Name="label3" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
-        <Label Content="agreement before continuing with the wizard." Height="28" HorizontalAlignment="Left" Margin="5,15,0,0" Name="label" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
-        <Label Content="Information provided by Shubhalabha MUST be ONLY used as guideline." Height="28" HorizontalAlignment="Left" Margin="6,36,0,0" Name="label1" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
-        <Label Content=" All the invesment decisions MUST be taken at your own risk ,Shubhalabha will not be " Height="28" HorizontalAlignment="Left" Margin="3,52,0,0" Name="label2" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
-        <Label Content="liable for the same.Please refer to our disclaimer" Height="28" HorizontalAlignment="Left" Margin="7,70,0,0" Name="label4" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
-        <TextBlock Margin="270,74,22,177"><Hyperlink NavigateUri="http://shubhalabha.in/disclaimer/license/" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock Text="http://shubhalabha.in/disclaimer-2/  " FontFamily="Times New Roman" FontSize="13" /></Hyperlink></TextBlock>
+        <Label Content="agreement before continuing with the wizard." Height="28" HorizontalAlignment="Left" Margin="4,15,0,0" Name="label" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+        <Label Content="For more details refer to our disclaimer" Height="28" HorizontalAlignment="Left" Margin="5,57,0,0" Name="label4" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+        <TextBlock Margin="222,61,70,190"><Hyperlink NavigateUri="http://shubhalabha.in/disclaimer/license/" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock Text="http://shubhalabha.in/disclaimer-2/  " FontFamily="Times New Roman" FontSize="13" /></Hyperlink></TextBlock>
+        <Label Content="Please note this product comes with absolute NO Warranty / Guarantee ." FontFamily="Times New Roman" FontSize="13" Height="28" HorizontalAlignment="Left" Margin="4,36,0,0" Name="label1" VerticalAlignment="Top" />
     </Grid>
 </UserControl>

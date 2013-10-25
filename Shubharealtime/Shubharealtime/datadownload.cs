@@ -74,8 +74,8 @@ namespace Shubharealtime
 
         
           string        Amibrokerdatapath = "" ;
-          string        Metastockdatapath = null ;
-        string        fchart = null ;
+          string        Metastockdatapath = "" ;
+        string        fchart = "" ;
            
        
 
@@ -160,8 +160,12 @@ namespace Shubharealtime
 
             FileHelperEngine engineBSECSV1 = new FileHelperEngine(typeof(nestnow));
 
-
-
+            RegistryKey regKey = Registry.CurrentUser;
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
+            var chartforbackfill = regKey.GetValue("chartingappforbackfill");
+          
+            Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath").ToString();
+            Metastockdatapath = regKey.GetValue("Metastockdatapath").ToString();
 
 
             //Get BSE Equity Filename day, month, year
@@ -195,12 +199,12 @@ namespace Shubharealtime
                 finalarr[icntr].close = resbsecsv1[icntr].CLOSE_PRICE;
                 finalarr[icntr].volume = resbsecsv1[icntr].volume;
                 finalarr[icntr].time = timetostore;
-                if (chartingaplication == "Fchart")
+                if (chartforbackfill.ToString() == "Fchart")
                 {
                     finalarr[icntr].time = timetostore.Substring(0,timetostore.Length-3);
 
                 }
-                if (chartingaplication == "Metastock")
+                if (chartforbackfill.ToString() == "Metastock")
                 {
                     //add PER column befor date column 
                     finalarr[icntr].date ="I,"+ finalarr[icntr].date;
@@ -211,25 +215,25 @@ namespace Shubharealtime
             }
 
             FileHelperEngine engineBSECSVFINAL = new FileHelperEngine(typeof(nestnowfinal));
-             if (chartingaplication == "Metastock")
+            if (chartforbackfill.ToString() == "Metastock")
                 {
                     engineBSECSVFINAL.HeaderText = "<TICKER>,<PER>,<DATE>,<TIME>,<OPEN>,<HIGH>,<LOW>,<CLOSE>,<VOLUME>";
                  //set file path as metastock backfill 
                 
             }
-
+            
             engineBSECSVFINAL.WriteFile(strBSECSVArr, finalarr);
 
 
 
 
-            if (chartingaplication == "Metastock")
+            if (chartforbackfill.ToString() == "Metastock")
             {
 
 
-                if (!Directory.Exists(targetpath + "\\Intraday\\Metastock"))
+                if (!Directory.Exists(Metastockdatapath  + "\\Intraday\\Metastock"))
                 {
-                    Directory.CreateDirectory(targetpath + "\\Intraday\\Metastock");
+                    Directory.CreateDirectory(Metastockdatapath + "\\Intraday\\Metastock");
                 }
                 // commandpromptcall(filename, targetpath + "\\Intraday\\Metastock\\realtimemetastock");
                 try
@@ -238,7 +242,7 @@ namespace Shubharealtime
                     string filepath = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
                     string processtostart = filepath.Substring(0, filepath.Length - 18) + "asc2ms.exe";
 
-                    File.Copy(processtostart, targetpath + "\\asc2ms.exe", true);
+                    File.Copy(processtostart, Metastockdatapath + "\\asc2ms.exe", true);
                 }
                 catch
                 {
@@ -248,7 +252,7 @@ namespace Shubharealtime
                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                 startInfo.FileName = "cmd.exe";
                 //startInfo.Arguments = "/C  C:\\asc2ms.exe -f C:\\data\\Metastock\\M.csv -r r -o C:\\data\\Metastock\\google\\e";
-                startInfo.Arguments = "/C  " + targetpath + "\\asc2ms.exe -f " + strBSECSVArr + " -r r -o " + targetpath + "\\Intraday\\Metastock\\" + finalarr[0].ticker ;
+                startInfo.Arguments = "/C  " + Metastockdatapath + "\\asc2ms.exe -f " + strBSECSVArr + " -r r -o " + Metastockdatapath + "\\Intraday\\Metastock\\" + finalarr[0].ticker;
                 // startInfo.Arguments = @"/C  C:\asc2ms.exe -f C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod -r r -o C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod\Metastock\a" ;
 
 
@@ -309,6 +313,7 @@ namespace Shubharealtime
         {
 
 
+          
 
 
             if (nestback == "True")
@@ -579,8 +584,9 @@ namespace Shubharealtime
             RegistryKey regKey = Registry.CurrentUser;
             regKey = regKey.CreateSubKey(@"Windows-xpRT\");
             var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
+            var chartforbackfill = regKey.GetValue("chartingappforbackfill");
 
-            if (chartingaplication == "Amibroker")
+            if (chartforbackfill.ToString() == "Amibroker")
             {
                 ExcelType = Type.GetTypeFromProgID("Broker.Application");
                 ExcelInst = Activator.CreateInstance(ExcelType);
@@ -595,14 +601,21 @@ namespace Shubharealtime
            {
                try
                {
+                  
                    //process backfill data from nest/now
-                   Executenestnowbackfillrocessing(nestnowfilePaths[i], datetostore, "GOOGLEEOD", i,  nestnowfilePaths[i].ToString());
+                   if (chartforbackfill.ToString() == "Fchart")
+                   {
+                       fchart = regKey.GetValue("fchart").ToString();
+                   }
+                   Executenestnowbackfillrocessing(nestnowfilePaths[i], datetostore, "GOOGLEEOD", i, nestnowfilePaths[i].ToString());
+                  
+                 
                }
                catch
                {
                }
            }
-           if (chartingaplication == "Amibroker")
+           if (chartforbackfill.ToString() == "Amibroker")
            {
                for (int i = 0; i < nestnowfilePaths.Count(); i++)
                {
@@ -673,7 +686,7 @@ namespace Shubharealtime
                     ExcelInst, new string[1] { amipath });
             }
 
-            System.Windows.MessageBox.Show("Backfill Completed");
+            System.Windows.MessageBox.Show("Backfill completed");
 
         }
 
@@ -1353,7 +1366,33 @@ namespace Shubharealtime
             regKey = regKey.CreateSubKey(@"Windows-xpRT\");
             var timesec = regKey.GetValue("timesec");
 
+          
+
             int sec = Convert.ToInt32(timesec);
+            if (sec==0)
+            {
+                sec = 1;
+            }
+            else if (sec == 1)
+            {
+                sec = 3;
+            }
+            else if (sec == 2)
+            {
+                sec = 5;
+            }
+            else if (sec == 3)
+            {
+                sec = 10;
+            }
+            else if (sec == 4)
+            {
+                sec = 20;
+            }
+            else if (sec == 5)
+            {
+                sec = 30;
+            }
             DispatcherTimer1.Tick += new EventHandler(dispatcherTimerForRT_Tick);
             DispatcherTimer1.Interval = new TimeSpan(0, 0, sec);
             DispatcherTimer1.Start();
@@ -1681,9 +1720,27 @@ namespace Shubharealtime
 
 
 
-          
+
+
+            if (terminalname == "NEST")
+            {
+                try
+                {
+                    type = Type.GetTypeFromProgID("nest.scriprtd");
+
+                    m_server = (IRtdServer)Activator.CreateInstance(type);
+
+                }
+                catch
+                {
+                    System.Windows.MessageBox.Show(" Please start NEST as Run as Administrator and again start Realtime combo");
+                    closeallprocess();
+                    return;
+                }
+            }
             try
             {
+                CommandManager.InvalidateRequerySuggested();
 
 
 
@@ -1699,6 +1756,46 @@ namespace Shubharealtime
                 finalobject = f.Children[0];
                 string s1 = finalobject.Description;
                 int flag = 0;
+                string[] checkterminalcol = s1.Split(',');
+                string marketwathrequiredfield = "";
+                for (int i = 0; i < checkterminalcol.Count(); i++)
+                {
+                    marketwathrequiredfield = marketwathrequiredfield + checkterminalcol[i].ToString();
+                }
+
+
+                if (!marketwathrequiredfield.Contains("LTT"))
+                {
+                    flag = 1;
+
+                }
+                if (!marketwathrequiredfield.Contains("LTP"))
+                {
+                    flag = 1;
+
+                }
+                if (!marketwathrequiredfield.Contains("Volume Traded Today"))
+                {
+                    flag = 1;
+
+                }
+                if (!marketwathrequiredfield.Contains("Open Interest"))
+                {
+                    flag = 1;
+
+                }
+                if (!checkterminalcol[0].Contains("LTT"))
+                {
+                    flag = 1;
+
+                }
+                if (flag == 1)
+                {
+                    System.Windows.MessageBox.Show("Some required fileds are missing in market watch please add that fileds Otherwise it wil give wrong data  ");
+
+                   // closeallprocess();
+                }
+                 
                
 
                 //read data from nest window 
@@ -1958,7 +2055,7 @@ namespace Shubharealtime
                 }
                 catch
                 {
-                    System.Windows.MessageBox.Show(" Please start Nest as Run as Administrator and again start Realtime combo");
+                    System.Windows.MessageBox.Show(" Please start NOW as Run as Administrator and again start Realtime combo");
                     closeallprocess();
                     return;
                 }

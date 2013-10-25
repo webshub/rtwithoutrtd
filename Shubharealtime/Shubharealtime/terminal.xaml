@@ -13,7 +13,7 @@
             <StackPanel Height="235" HorizontalAlignment="Left" Margin="0,60,0,0" Name="stackPanel1" VerticalAlignment="Top" Width="455" />
             <RadioButton Content="TRADE TIGER" Height="16" HorizontalAlignment="Left" Margin="285,12,0,0" Name="tradetiger" VerticalAlignment="Top" Checked="tradetiger_Checked_1" FontFamily="Times New Roman" FontSize="13" />
             <RadioButton Content="ODIN" Height="16" HorizontalAlignment="Left" Margin="394,11,0,0" Name="odin" VerticalAlignment="Top" Checked="odin_Checked_1" FontFamily="Times New Roman" FontSize="13" />
-            <CheckBox Content="Nest/Now" Height="16" HorizontalAlignment="Left" Margin="235,39,0,0" Name="plusbackfill" VerticalAlignment="Top" Checked="plusbackfill_Checked" Click="plusbackfill_Click" FontFamily="Times New Roman" FontSize="13" />
+            <CheckBox Content="NEST/NOW" Height="16" HorizontalAlignment="Left" Margin="235,39,0,0" Name="plusbackfill" VerticalAlignment="Top" Checked="plusbackfill_Checked" Click="plusbackfill_Click" FontFamily="Times New Roman" FontSize="13" />
             <Label Content="Select the Check box for Backfill option:" Height="28" HorizontalAlignment="Left" Margin="11,34,0,0" Name="label2" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
         </Grid>
         <StackPanel Height="226" HorizontalAlignment="Left" Margin="0,69,0,0" Name="stackPanel2" VerticalAlignment="Top" Width="455" Unloaded="stackPanel2_Unloaded"></StackPanel>

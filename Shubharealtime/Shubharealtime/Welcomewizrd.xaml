@@ -6,9 +6,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="338" d:DesignWidth="493">
     <Grid>
-        <Label Content="This wizard will help you to install Shubha Realtime Combo  version 1.0.1 on your computer." Height="28" HorizontalAlignment="Left" Margin="-2,58,0,0" Name="label3" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
+        <Label Content="This wizard will help you to install Shubha Realtime Combo  on your computer." Height="28" HorizontalAlignment="Left" Margin="-2,58,0,0" Name="label3" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
         <Label Content="It is  recommended that you close all other applications before continuing ." Height="28" HorizontalAlignment="Left" Margin="0,92,0,0" Name="label4" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
         <Label Content="Click Next to continue,  or Cancel to exit wizard." Height="28" HorizontalAlignment="Left" Margin="0,128,0,0" Name="label" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
-        <Label Content="Welcome to Shubha Realtime Combo Wizard!" FontFamily="Times New Roman" FontSize="15" Height="28" HorizontalAlignment="Left" Margin="1,14,0,0" Name="label1" VerticalAlignment="Top" />
+        <Label Content="Welcome to Shubha Realtime Combo Wizard!" FontFamily="Times New Roman" FontSize="16" Height="28" HorizontalAlignment="Left" Margin="1,14,0,0" Name="label1" VerticalAlignment="Top" FontWeight="Bold" />
     </Grid>
 </UserControl>

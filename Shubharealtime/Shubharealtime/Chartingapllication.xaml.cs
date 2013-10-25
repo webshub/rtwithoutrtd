@@ -143,7 +143,7 @@ namespace Shubharealtime
             }
             if (chartingapp == "")
             {
-                chartingapp = "Amibroker";
+                //chartingapp = "Amibroker";
             }
 
             regKey.SetValue("Amibrokerdatapath", db_path.Text.ToString());

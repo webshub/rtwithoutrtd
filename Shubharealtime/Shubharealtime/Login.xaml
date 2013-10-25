@@ -14,7 +14,7 @@
         <PasswordBox Height="23" HorizontalAlignment="Left" Margin="106,124,0,0" Name="password" TabIndex="2" VerticalAlignment="Top" Width="180" Visibility="Hidden" />
         <Border BorderBrush="Silver" BorderThickness="2" Height="17" HorizontalAlignment="Left" Margin="10,44,0,0" Name="border1" VerticalAlignment="Top" Width="308" Visibility="Hidden"></Border>
         <WebBrowser Name="lead" LoadCompleted="wb_LoadCompleted" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.IsDeferredScrollingEnabled="False" Width="693" VerticalAlignment="Stretch" HorizontalAlignment="Center" Margin="0,1,0,307"  Navigated="lead_Navigated" IsHitTestVisible="False"></WebBrowser>
-        <WebBrowser Name="advertisement"  LoadCompleted="wb_LoadCompleted" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.IsDeferredScrollingEnabled="False" Width="693" HorizontalAlignment="Right" Margin="0,263,0,0"></WebBrowser>
+        <WebBrowser Name="advertisement"  LoadCompleted="wb_LoadCompleted" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.IsDeferredScrollingEnabled="False" Width="693" HorizontalAlignment="Right" Margin="0,263,2,0"></WebBrowser>
 
     </Grid>
 </Window>

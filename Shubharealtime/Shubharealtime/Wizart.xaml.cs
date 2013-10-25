@@ -271,7 +271,6 @@ namespace Shubharealtime
                                 int resultforbackfill = d.checkbackfill();
                                 if (resultforbackfill == 1)
                                 {
-                                    MessageBox.Show("Backfill chacking done");
 
                                     try
                                     {
@@ -470,7 +469,7 @@ namespace Shubharealtime
                         var terminalname = regKey.GetValue("terminal");
                         var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
                         var Chartingapplication = regKey.GetValue("Chartingapplication");
-                        if (Chartingapplication==null )
+                        if (Chartingapplication == null || Chartingapplication=="")
                         {
                             Rsult_lbl.Content = "Please select charting application ";
                             return;
@@ -505,10 +504,12 @@ namespace Shubharealtime
                     catch
                     {
                     }
+
                     Result r = new Result();
                     stackcontainer.Children.Add(r);
 
                     finish.IsEnabled = true;
+                    cancelButton.IsEnabled = false;
                     nextButtonforterminal.IsEnabled = false;
                     nextcount++;
                 }
@@ -530,6 +531,7 @@ namespace Shubharealtime
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
+            cancelButton.IsEnabled = true ;
             
             Rsult_lbl.Content = "";
             

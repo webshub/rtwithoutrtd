@@ -108,7 +108,8 @@ namespace Shubharealtime
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+            nestbackfill.IsChecked = false;
+            googlebackfill.IsChecked = false;
 
             if (!IsRunAsAdministrator())
             {
@@ -132,7 +133,9 @@ namespace Shubharealtime
                 }
 
                 // Shut down the current process
+                Environment.Exit(0);
                 System.Windows.Application.Current.Shutdown();
+
             }
             else
             {
@@ -228,7 +231,6 @@ namespace Shubharealtime
 
                 ////show google symbol file in listview
 
-
             try
             {
                 using (var reader = new StreamReader("C:\\myshubhalabha\\Symbolname.csv"))
@@ -279,28 +281,28 @@ namespace Shubharealtime
                 string withoutback = ConfigurationManager.AppSettings["withoutbackfill"];
                 withoutbackfill.IsChecked = true;
 
-                if (nestback == "True")
-                {
+                //if (nestback == "True")
+                //{
 
-                    nestbackfill.IsChecked = true;
-                    listView1.Visibility = Visibility.Hidden;
-                    listView2.Visibility = Visibility.Visible;
-                }
-                if (tradetiger1 == "True")
-                {
-                    tradetiger.IsChecked = true;
-                }
-                if (googleback == "True")
-                {
-                    googlebackfill.IsChecked = true;
+                //    nestbackfill.IsChecked = true;
+                //    listView1.Visibility = Visibility.Hidden;
+                //    listView2.Visibility = Visibility.Visible;
+                //}
+                //if (tradetiger1 == "True")
+                //{
+                //    tradetiger.IsChecked = true;
+                //}
+                //if (googleback == "True")
+                //{
+                //    googlebackfill.IsChecked = true;
 
-                    listView1.Visibility = Visibility.Visible;
-                    listView2.Visibility = Visibility.Hidden;
-                }
-                if (withoutback == "True")
-                {
-                    withoutbackfill.IsChecked = true;
-                }
+                //    listView1.Visibility = Visibility.Visible;
+                //    listView2.Visibility = Visibility.Hidden;
+                //}
+                //if (withoutback == "True")
+                //{
+                //    withoutbackfill.IsChecked = true;
+                //}
 
                 try
                 {
@@ -355,8 +357,8 @@ namespace Shubharealtime
                     }
                     if (backfill != "yes")
                     {
-                        nestbackfill.IsChecked = false;
-                        nestbackfill.IsEnabled = false;
+                        //nestbackfill.IsChecked = false;
+                        //nestbackfill.IsEnabled = false;
                     }
 
 
@@ -564,7 +566,6 @@ namespace Shubharealtime
                     wad12.Source = a3;
 
                     homepageadd.Source = homepage;
-                    tradetigerbanner.Source = tradetigerbanner1;
                     tipoftheday.Source = tipofday;
 
                     piwik.Source = piwikvisit;
@@ -601,6 +602,11 @@ namespace Shubharealtime
                 Format_cb.Items.Add("Fchart");
 
                 Format_cb.SelectedIndex = 0;
+                chartonbackfill.Items.Add("Amibroker");
+                chartonbackfill.Items.Add("Metastock");
+                chartonbackfill.Items.Add("Fchart");
+
+                chartonbackfill.SelectedIndex = 0;
 
                 int i1 = 1;
                 timetoRT.Items.Add(i1 );
@@ -617,8 +623,12 @@ namespace Shubharealtime
                 i1 = 30;
                 timetoRT.Items.Add(i1);
                 var timesec = regKey.GetValue("timesec");
-
+                if (timesec==null )
+                {
+                    timetoRT.SelectedIndex = 2;
+                }
                 timetoRT.SelectedIndex  =Convert.ToInt32( timesec);
+
                 //copy files into system32 folder
                 try
                 {
@@ -657,15 +667,7 @@ namespace Shubharealtime
                     {
                         Format_cb.SelectedItem = chartingapp;
                     }
-                    if (timetosave == null)
-                    {
-                        timetoRT.SelectedIndex = 0;
-
-                    }
-                    else
-                    {
-                        timetoRT.SelectedIndex = Convert.ToInt32(timetosave) - 1;
-                    }
+                   
 
                 }
                 catch
@@ -930,7 +932,7 @@ namespace Shubharealtime
         }
 
         //Import symbol from NEST or NOW terminal
-        private void Import_symbol_Click(object sender, RoutedEventArgs e)
+        private void importsymbol()
         {
             
             
@@ -958,7 +960,7 @@ namespace Shubharealtime
                     catch
                     {
                         System.Windows.MessageBox.Show(" Please start Nest as Run as Administrator and again start Realtime combo");
-                        closeallprocess();
+                        nestbackfill.IsChecked = false;
                         return;
                     }
                 }
@@ -975,7 +977,8 @@ namespace Shubharealtime
                     catch
                     {
                         System.Windows.MessageBox.Show(" Please start Nest as Run as Administrator and again start Realtime combo");
-                        closeallprocess();
+                        nestbackfill.IsChecked = false;
+                        
                         return;
                     }
                 } IntPtr abcd = new IntPtr();
@@ -1228,7 +1231,8 @@ namespace Shubharealtime
                 var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
                 var Metastockdatapath = regKey.GetValue("Metastockdatapath");
                 var Chartingapplication = regKey.GetValue("Chartingapplication");
-
+                var Fchartdatapath = regKey.GetValue("fchart");
+               
 
                 var Amiexepath = regKey.GetValue("Amiexepath");
                 var backfill1 = regKey.GetValue("backfill");
@@ -1243,6 +1247,7 @@ namespace Shubharealtime
                 result_chart.Content = Chartingapplication.ToString();
                 result_terminal.Content = terminalname.ToString();
                 result_metapath.Content = Metastockdatapath.ToString();
+                fchartpath.Content = Fchartdatapath.ToString();
                 nestnowbackfill.Content = backfill;
 
             }
@@ -1460,10 +1465,11 @@ namespace Shubharealtime
             textBox2.Visibility = Visibility.Visible;
             listView1.Visibility = Visibility.Visible;
             listView2.Visibility = Visibility.Hidden;
-            tradetigerbanner.Visibility = Visibility.Hidden;
-
-            tradetigerinfo.Visibility = Visibility.Hidden;
+            Shubhalabha123.Tradetigerinformation t = new Shubhalabha123.Tradetigerinformation();
+            tradetigerinfo.Children.Add(t);
+            tradetigerinfo.Visibility = Visibility.Visible;
             saveradiobuttn();
+            importsymbol();
         }
 
         private void nestbackfill_Checked(object sender, RoutedEventArgs e)
@@ -1478,10 +1484,11 @@ namespace Shubharealtime
             listView1.Visibility = Visibility.Hidden;
             listView2.Visibility = Visibility.Visible;
 
-            tradetigerbanner.Visibility = Visibility.Hidden;
             
             tradetigerinfo.Visibility = Visibility.Hidden;
             saveradiobuttn();
+            importsymbol();
+
         }
 
         private void tradetiger_Checked_1(object sender, RoutedEventArgs e)
@@ -1492,7 +1499,6 @@ namespace Shubharealtime
             googletime.Visibility = Visibility.Hidden;
             googledays.Visibility = Visibility.Hidden;
             //add user control 
-            tradetigerbanner.Visibility = Visibility.Visible;
             Shubhalabha123.Tradetigerinformation t=new Shubhalabha123.Tradetigerinformation();
             tradetigerinfo.Children.Add(t);
             tradetigerinfo.Visibility = Visibility.Visible;
@@ -1508,7 +1514,7 @@ namespace Shubharealtime
 
             RegistryKey regKey = Registry.CurrentUser;
             regKey = regKey.CreateSubKey(@"Windows-xpRT\");
-            regKey.SetValue("timesec", timetoRT.SelectedIndex .ToString());
+            regKey.SetValue("timesec", timetoRT.SelectedIndex  .ToString());
             var ApplicationID = regKey.GetValue("sd");
 
             Shubharealtime.datadownload s1 = new datadownload();
@@ -1612,6 +1618,13 @@ namespace Shubharealtime
             }
             Task.Factory.StartNew(s.startRealtime);
             this.Hide();
+        }
+
+        private void chartonbackfill_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RegistryKey regKey = Registry.CurrentUser;
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
+            regKey.SetValue("chartingappforbackfill", chartonbackfill.SelectedItem.ToString());
         }
 
     }
