@@ -12,7 +12,7 @@
         <Label Content="3. If you wish to change to a different " FontSize="11.5" Height="28" HorizontalAlignment="Left" Margin="3,116,0,0" Name="label25" VerticalAlignment="Top" Width="213" FontFamily="Times New Roman" />
         <Label Content="symbol name enter it in Textbox" FontSize="11.5" Height="28" HorizontalAlignment="Left" Margin="16,136,0,0" Name="label26" VerticalAlignment="Top" Width="189" FontFamily="Times New Roman" />
         <Label Content="below Mapping symbol." FontSize="11.5" Height="28" HorizontalAlignment="Left" Margin="17,154,0,0" Name="label2" VerticalAlignment="Top" Width="176" FontFamily="Times New Roman" />
-        <Label Content="4. After step 1 and 2 ,click on " FontSize="11.5" Height="28" HorizontalAlignment="Left" Margin="3,173,0,0" Name="label3" VerticalAlignment="Top" Width="193" FontFamily="Times New Roman" />
+        <Label Content="4. After step 2 and 3 ,click on " FontSize="11.5" Height="28" HorizontalAlignment="Left" Margin="3,173,0,0" Name="label3" VerticalAlignment="Top" Width="193" FontFamily="Times New Roman" />
         <Label Content="save button and you will get" FontSize="11.5" Height="28" HorizontalAlignment="Left" Margin="15,189,0,0" Name="label27" VerticalAlignment="Top" Width="176" FontFamily="Times New Roman" />
         <Label Content="confirmation  message ." FontSize="11.5" Height="28" HorizontalAlignment="Left" Margin="16,206,0,0" Name="label28" VerticalAlignment="Top" Width="176" FontFamily="Times New Roman" />
         <Label Content="Steps for Backfill and Mapping symbol" FontSize="11.5" FontStyle="Normal" FontWeight="Bold" Height="28" HorizontalAlignment="Left" Margin="2,8,0,0" Name="label31" VerticalAlignment="Top" Width="220" FontFamily="Times New Roman" />

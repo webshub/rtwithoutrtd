@@ -34,7 +34,7 @@
     <PublisherName>shubhalabha</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>14</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -148,6 +148,9 @@
   <ItemGroup>
     <Reference Include="FileHelpers">
       <HintPath>..\..\work\Shubha RT\bin\Debug\FileHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\work\Shubha RT\bin\Debug\log4net.dll</HintPath>
     </Reference>
     <Reference Include="ManagedWinapi">
       <HintPath>..\..\work\Shubha RT\bin\Debug\ManagedWinapi.dll</HintPath>

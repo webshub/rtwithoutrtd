@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using System.Diagnostics;
+using System.Threading;
 namespace Endrt
 {
     /// <summary>
@@ -24,14 +25,19 @@ namespace Endrt
         {
             InitializeComponent();
         }
-
+     
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+
+
+           
             
         }
 
         private void EndRT_Click(object sender, RoutedEventArgs e)
         {
+           
+            
             RegistryKey regKey = Registry.CurrentUser;
             regKey = regKey.CreateSubKey(@"Windows-xpRT\");
             

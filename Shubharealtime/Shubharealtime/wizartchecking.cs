@@ -312,7 +312,9 @@ namespace Shubharealtime
                 }
                 catch
                 {
-                    System.Windows.MessageBox.Show(" Please start Nest as Run as Administrator and again start Realtime combo");
+                  
+                    System.Windows.MessageBox.Show("Please start NEST as Run as Administrator ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                     closeallprocess();
                     return;
                 }
@@ -329,7 +331,9 @@ namespace Shubharealtime
                 }
                 catch
                 {
-                    System.Windows.MessageBox.Show(" Please start NOW  as Run as Administrator and again start Realtime combo");
+                    
+                    System.Windows.MessageBox.Show("Please start NOW as Run as Administrator ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                     closeallprocess();
                     return;
                 }
@@ -366,7 +370,8 @@ namespace Shubharealtime
                 string marketwatch = abcd1.ToString();
                 if (marketwatch == "0")
                 {
-                    System.Windows.MessageBox.Show("Nest or now  is not running or Market Watch not present check out and run real time combo again \n     thank you  ");
+                    System.Windows.MessageBox.Show("Your NEST/NOW is not running or Market Watch is not found ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+                   
                     closeallprocess();
 
                 }
@@ -374,7 +379,8 @@ namespace Shubharealtime
             }
             catch
             {
-                System.Windows.MessageBox.Show("Market Watch not found ");
+                System.Windows.MessageBox.Show("Market Watch not found ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                 return;
             }
             SystemAccessibleObject datatable;
@@ -636,8 +642,9 @@ namespace Shubharealtime
                     ExcelInst, new string[1] { amipath });
             }
 
-            System.Windows.MessageBox.Show("Backfill Completed ....");
-            RtdataRecall();
+            System.Windows.MessageBox.Show("Backfill completed", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+
+           
 
         }
 
@@ -1518,7 +1525,8 @@ namespace Shubharealtime
                 string marketwatch = abcd1.ToString();
                 if (marketwatch == "0")
                 {
-                    System.Windows.MessageBox.Show("Nest or now  is not running or Market Watch not present check out and run real time combo again \n     thank you  ");
+                    System.Windows.MessageBox.Show("Your NEST/NOW is not running or Market Watch not found", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+                   
                     closeallprocess();
 
                 }
@@ -1734,7 +1742,8 @@ namespace Shubharealtime
                 }
                 catch
                 {
-                    System.Windows.MessageBox.Show(" Please start Nest as Run as Administrator and again start Realtime combo");
+                    System.Windows.MessageBox.Show(" Please start NEST as 'Run as Administrator'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                     closeallprocess();
                     return;
                 }
@@ -1750,7 +1759,8 @@ namespace Shubharealtime
                 }
                 catch
                 {
-                    System.Windows.MessageBox.Show(" Please start Nest as Run as Administrator and again start Realtime combo");
+                    System.Windows.MessageBox.Show(" Please start NOW as 'Run as Administrator'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                     closeallprocess();
                     return;
                 }
@@ -1784,7 +1794,7 @@ namespace Shubharealtime
                 if (!marketwathrequiredfield.Contains("LTT"))
                 {
                     flag = 1;
-                    System.Windows.MessageBox.Show("LTT Not Present into market watch add LTT ");
+                   
 
                 }
                 if (!marketwathrequiredfield.Contains("LTP"))
@@ -1808,7 +1818,8 @@ namespace Shubharealtime
                 }
                 if (flag == 1)
                 {
-                    System.Windows.MessageBox.Show("Some required fileds are missing in market watch please add that fileds and try shubha real time combo again \n Thank you  ");
+                    System.Windows.MessageBox.Show("One or more columns are missing in the order as below!\n Trading symbol , LTT , LUT , LTP , Volume Traded Today ,Open Interest. ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
 
                     closeallprocess();
                 }
@@ -2003,7 +2014,10 @@ namespace Shubharealtime
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(ex.Message);
+
+
+                System.Windows.MessageBox.Show(ex.Message, "Error  Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+
             }
 
 
@@ -2023,7 +2037,9 @@ namespace Shubharealtime
                 }
                 catch
                 {
-                    System.Windows.MessageBox.Show(" Please start Nest as Run as Administrator and again start Realtime combo");
+                    
+                    System.Windows.MessageBox.Show(" Please start NEST as 'Run as Administrator'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                     closeallprocess();
                     return;
                 }
@@ -2081,7 +2097,8 @@ namespace Shubharealtime
                 }
                 if (flag == 1)
                 {
-                    System.Windows.MessageBox.Show("Some required fileds are missing in market watch please add that fileds and try shubha real time combo again \n Thank you  ");
+                    System.Windows.MessageBox.Show("One or more columns are missing in the order as below!\n Trading symbol , LTT , LUT , LTP , Volume Traded Today ,Open Interest. ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
 
                     closeallprocess();
                 }
@@ -2269,7 +2286,9 @@ namespace Shubharealtime
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(ex.Message);
+                
+                System.Windows.MessageBox.Show(ex.Message, "Error Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error );
+
             }
 
 

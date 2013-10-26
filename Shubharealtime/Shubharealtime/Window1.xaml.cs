@@ -47,6 +47,8 @@ using System.Data.OleDb;
 
 using Microsoft.Win32;
 using System.Security.Principal;
+using log4net;
+using log4net.Config;
 namespace Shubharealtime
 {
     /// <summary>
@@ -129,7 +131,8 @@ namespace Shubharealtime
                 catch (Exception)
                 {
                     // The user did not allow the application to run as administrator
-                    System.Windows.MessageBox.Show("Sorry, this application must be run as Administrator.");
+                    System.Windows.MessageBox.Show("Unable to Run program as Administrator,please ensure that you have admin privileges'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning );
+
                 }
 
                 // Shut down the current process
@@ -156,13 +159,18 @@ namespace Shubharealtime
                   
                     regKey.SetValue("Wizart", "done");
 
-                   
 
 
-                   
 
-                    DateTime reg = Convert.ToDateTime(registerdate);
-                    
+                    string[] datefromreg = registerdate.ToString().Split('-');
+
+
+
+                    DateTime reg=new DateTime(Convert.ToInt32(datefromreg[2]),Convert.ToInt32(datefromreg[1]),Convert.ToInt32(datefromreg[0]));
+                  
+
+
+                  
                     reg = reg.AddDays(2);
                     //its checking trail period expired or not 
                     if (reg < DateTime.Today.Date)
@@ -197,7 +205,8 @@ namespace Shubharealtime
                                 flagforuserpresentonserver = 1;
                             if (dateonserver<DateTime.Today.Date )
                             {
-                                System.Windows.Forms.MessageBox.Show("Trial version expire please contact to sales@shubhalabha.in ");
+                                System.Windows.MessageBox.Show("Your Trial version is expired, please contact sales@shubhalabha.in'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                                 closeallprocess();
 
                             }
@@ -206,7 +215,8 @@ namespace Shubharealtime
 
                         if (flagforuserpresentonserver==0)
                         {
-                            System.Windows.Forms.MessageBox.Show("Trial version expire please contact to sales@shubhalabha.in ");
+                            System.Windows.MessageBox.Show("Your Trial version is expired, please contact sales@shubhalabha.in'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                             closeallprocess();
                         }
                         ///////////////////////////////////////////
@@ -215,7 +225,8 @@ namespace Shubharealtime
                     }
                     else
                     {
-                        System.Windows.Forms.MessageBox.Show("Your trial period will expire on  " + reg.ToShortDateString());
+                        
+                        System.Windows.MessageBox.Show("Your trial period will expire on " + reg.ToShortDateString(), "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
 
                     }
 
@@ -223,7 +234,8 @@ namespace Shubharealtime
                 }
                 catch(Exception ex)
                 {
-                    System.Windows.MessageBox.Show("Please check internet connection we cant check registraion as your trail period expire ");
+                   
+                    System.Windows.MessageBox.Show(ex.Message, "Error Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error );
 
                 }
 
@@ -269,6 +281,8 @@ namespace Shubharealtime
                 string amipath = ConfigurationManager.AppSettings["amipath"];
                 string terminalname = ConfigurationManager.AppSettings["terminalname"];
                 string chartingapp = ConfigurationManager.AppSettings["chartingapp"];
+                string chartingappbackfill = ConfigurationManager.AppSettings["chartingappbackfill"];
+
                 string timetosave = ConfigurationManager.AppSettings["timetoRT"];
 
                 string googleday = ConfigurationManager.AppSettings["Daysforgoogle"];
@@ -357,8 +371,17 @@ namespace Shubharealtime
                     }
                     if (backfill != "yes")
                     {
-                        //nestbackfill.IsChecked = false;
-                        //nestbackfill.IsEnabled = false;
+                        nestbackfill.IsChecked = false;
+                        nestbackfill.IsEnabled = false;
+                        nestbackfill.Visibility = Visibility.Hidden;
+
+                        RTmapsymbol.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        nestbackfill.Visibility = Visibility.Visible;
+
+                        RTmapsymbol.Visibility = Visibility.Hidden;
                     }
 
 
@@ -400,19 +423,19 @@ namespace Shubharealtime
                     }
                    
 
-                    if (!Directory.Exists(targetpath + "\\sharekhan"))
-                    {
-                        Directory.CreateDirectory(targetpath + "\\sharekhan");
-                    }
+                    //if (!Directory.Exists(targetpath + "\\sharekhan"))
+                    //{
+                    //    Directory.CreateDirectory(targetpath + "\\sharekhan");
+                    //}
 
-                    if (!Directory.Exists(targetpath + "\\odin"))
-                    {
-                        Directory.CreateDirectory(targetpath + "\\odin");
-                    }
-                    if (!Directory.Exists(targetpath + "\\nest-now"))
-                    {
-                        Directory.CreateDirectory(targetpath + "\\nest-now");
-                    }
+                    //if (!Directory.Exists(targetpath + "\\odin"))
+                    //{
+                    //    Directory.CreateDirectory(targetpath + "\\odin");
+                    //}
+                    //if (!Directory.Exists(targetpath + "\\nest-now"))
+                    //{
+                    //    Directory.CreateDirectory(targetpath + "\\nest-now");
+                    //}
 
 
                 }
@@ -606,7 +629,42 @@ namespace Shubharealtime
                 chartonbackfill.Items.Add("Metastock");
                 chartonbackfill.Items.Add("Fchart");
 
+
+
+
                 chartonbackfill.SelectedIndex = 0;
+                if (chartingapp == "Amibroker")
+                {
+                    Format_cb.SelectedIndex = 0;
+
+                }
+                else if (chartingapp == "Metastock")
+                {
+                    Format_cb.SelectedIndex = 1;
+
+                }
+                else if (chartingapp == "Fchart")
+                {
+                    Format_cb.SelectedIndex = 2;
+
+                }
+
+                if (chartingappbackfill  == "Amibroker")
+                {
+                    chartonbackfill.SelectedIndex = 0;
+
+                }
+                else if (chartingappbackfill  == "Metastock")
+                {
+                    chartonbackfill.SelectedIndex = 1;
+
+                }
+                else if (chartingappbackfill  == "Fchart")
+                {
+                    chartonbackfill.SelectedIndex = 2;
+
+                }
+
 
                 int i1 = 1;
                 timetoRT.Items.Add(i1 );
@@ -747,7 +805,9 @@ namespace Shubharealtime
                 string marketwatch = abcd1.ToString();
                 if (marketwatch == "0")
                 {
-                    System.Windows.MessageBox.Show("Nest is not running or Market Watch not present check out and run real time combo again \n     thank you  ");
+                   
+                    System.Windows.MessageBox.Show("Please check either your NEST is not running or Market Watch is not present", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
 
                 }
                 sao = SystemAccessibleObject.FromWindow(a, AccessibleObjectID.OBJID_WINDOW);
@@ -756,7 +816,9 @@ namespace Shubharealtime
 }
             catch
             {
-                System.Windows.MessageBox.Show("Market Watch not found ");
+                
+                System.Windows.MessageBox.Show("Market Watch not found in your trading terminal", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                 return;
             }
 
@@ -777,7 +839,6 @@ namespace Shubharealtime
             if (!marketwathrequiredfield.Contains("LTT"))
             {
                 flag = 1;
-                System.Windows.MessageBox.Show("LTT Not Present into market watch add LTT ");
 
             }
             if (!marketwathrequiredfield.Contains("LTP"))
@@ -802,7 +863,8 @@ namespace Shubharealtime
             }
             if (flag == 1)
             {
-                System.Windows.MessageBox.Show("Some required fileds are missing in market watch please add that fileds and try shubha real time combo again \n Thank you  ");
+                System.Windows.MessageBox.Show("One or more columns are missing in the order as below!\n Trading symbol , LTT , LUT , LTP , Volume Traded Today ,Open Interest. ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+               
                 closeallprocess();
             }
         }
@@ -858,12 +920,25 @@ namespace Shubharealtime
         public void savedata()
         {
 
+
             config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             config.AppSettings.Settings.Remove("timesec");
 
             config.AppSettings.Settings.Add("timesec", timetoRT.SelectedItem.ToString());
             config.Save(ConfigurationSaveMode.Full);
 
+
+            config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings.Remove("chartingapp");
+
+            config.AppSettings.Settings.Add("chartingapp", Format_cb .SelectedItem.ToString());
+            config.Save(ConfigurationSaveMode.Full);
+
+            config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings.Remove("chartingappbackfill");
+
+            config.AppSettings.Settings.Add("chartingappbackfill", chartonbackfill.SelectedItem.ToString());
+            config.Save(ConfigurationSaveMode.Full);
 
             config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             config.AppSettings.Settings.Remove("nestbackfill");
@@ -903,7 +978,9 @@ namespace Shubharealtime
 
         private void Window_Closed(object sender, EventArgs e)
         {
-
+            log4net.Config.XmlConfigurator.Configure();
+            ILog log = LogManager.GetLogger(typeof(Window1  ));
+            log.Debug("Application Close  ");
             savedata();
 
            // closeallprocess();
@@ -943,7 +1020,7 @@ namespace Shubharealtime
             Process[] processes = null;
 
 
-            if (nestbackfill.IsChecked == true)
+            if (nestbackfill.IsChecked == true || RTmapsymbol.IsChecked==true )
             {
                //checking nest running as admin or not 
                 if (terminalname == "NEST")
@@ -959,8 +1036,10 @@ namespace Shubharealtime
                     }
                     catch
                     {
-                        System.Windows.MessageBox.Show(" Please start Nest as Run as Administrator and again start Realtime combo");
+                        System.Windows.MessageBox.Show(" Please start Nest as 'Run as Administrator'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                         nestbackfill.IsChecked = false;
+                        RTmapsymbol.IsChecked = false; 
                         return;
                     }
                 }
@@ -976,7 +1055,8 @@ namespace Shubharealtime
                     }
                     catch
                     {
-                        System.Windows.MessageBox.Show(" Please start Nest as Run as Administrator and again start Realtime combo");
+                        System.Windows.MessageBox.Show(" Please start Nest as 'Run as Administrator'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                         nestbackfill.IsChecked = false;
                         
                         return;
@@ -1011,7 +1091,8 @@ namespace Shubharealtime
                     string marketwatch = abcd1.ToString();
                     if (marketwatch == "0")
                     {
-                        System.Windows.MessageBox.Show("Nest is not running or Market Watch not present check out and run real time combo again \n     thank you  ");
+                        System.Windows.MessageBox.Show("Either your NEST is not running or Market Watch is not found ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                         closeallprocess();
 
                     }
@@ -1019,7 +1100,8 @@ namespace Shubharealtime
                 }
                 catch
                 {
-                    System.Windows.MessageBox.Show("Market Watch not found ");
+                    System.Windows.MessageBox.Show("Market Watch is not found in your trading terminal", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                     return;
                 }
 
@@ -1052,7 +1134,8 @@ namespace Shubharealtime
             }
             else
             {
-                System.Windows.MessageBox.Show("Please select atleast one checkbox option  form backfill ");
+                System.Windows.MessageBox.Show("Please select atleast one checkbox option from backfill ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
             }
 
 
@@ -1295,52 +1378,40 @@ namespace Shubharealtime
                               ExcelInst, args);
                 }
 
-                System.Windows.MessageBox.Show("Backfill For Trade Tiger Completed .... ");
+               
                 return;
 
             }
 
             if (nestbackfill.IsChecked == true)
             {
+
+
+                Shubharealtime.datadownload s = new datadownload();
+               
+                    
+                
                 Shubharealtime.datadownload s1 = new datadownload();
-                if (RTD_server_name.SelectedItem == "NEST")
-                {
-                    try
-                    {
-                        type = Type.GetTypeFromProgID("nest.scriprtd");
-
-                        m_server = (IRtdServer)Activator.CreateInstance(type);
-                        m_server.ServerTerminate();
-                    }
-                    catch
-                    {
-                        System.Windows.MessageBox.Show("Please start Nest as Run as Administrator and again start Realtime combo");
-                        s1.closeallprocess();
-
-                        return;
-                    }
-                }
-                if (RTD_server_name.SelectedItem == "NOW")
-                {
-                    try
-                    {
-                        type = Type.GetTypeFromProgID("now.scriprtd");
-
-                        m_server = (IRtdServer)Activator.CreateInstance(type);
-                        m_server.ServerTerminate();
-                    }
-                    catch
-                    {
-                        System.Windows.MessageBox.Show("Please start Nest as 'Run as Administrator' and again start Realtime combo");
-                        s1.closeallprocess();
-
-                        return;
-                    }
-                }
+                //if (RTD_server_name.SelectedItem == "NEST")
+                //{
+                //    int result = s.checknestfiled();
+                //    if (result == 0)
+                //    {
+                //        return;
+                //    }
+                //}
+                //if (RTD_server_name.SelectedItem == "NOW")
+                //{
+                //    int result = s.checknowfiled ();
+                //    if (result == 0)
+                //    {
+                //        return;
+                //    }
+                //}
 
                 if (txtTargetFolder.Text == "")
                 {
-                    System.Windows.MessageBox.Show("Set Target Path.");
+                   
                     txtTargetFolder.Focus();
                     return;
 
@@ -1348,8 +1419,8 @@ namespace Shubharealtime
 
 
 
-                System.Windows.MessageBox.Show(System.Windows.Application.Current.MainWindow, "Application is pulling backfill data and processing files,please wait for some time.");
 
+                System.Windows.MessageBox.Show("Please DO NOT USE YOUR COMPUTER for few minutes .\n As application is pulling backfill data and processing files.", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
 
 
 
@@ -1404,21 +1475,21 @@ namespace Shubharealtime
             string path = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
             string pathtostartprocess = path.Substring(0, path.Length - 18);
            // System.Diagnostics.Process.Start(pathtostartprocess + "Endrt.exe");
-            Shubharealtime.datadownload s = new datadownload();
+            Shubharealtime.datadownload s2 = new datadownload();
 
             //check required field from nest or now terminal 
-            if(nestbackfill.IsChecked==true )
-            {
-            if (RTD_server_name.SelectedItem == "NEST")
-            {
-                s.checknestfiled();
-            }
-            if (RTD_server_name.SelectedItem == "NOW")
-            {
-                s.checknowfiled();
-            }
-            }
-            Task.Factory.StartNew(s.startdownload);
+            //if(nestbackfill.IsChecked==true )
+            //{
+            //if (RTD_server_name.SelectedItem == "NEST")
+            //{
+            //    s2.checknestfiled();
+            //}
+            //if (RTD_server_name.SelectedItem == "NOW")
+            //{
+            //    s2.checknowfiled();
+            //}
+            //}
+            Task.Factory.StartNew(s2.startdownload);
            // this.Hide();
 
 
@@ -1507,8 +1578,8 @@ namespace Shubharealtime
         //start realtime data feed
         private void Startrealtimeonly_Click(object sender, RoutedEventArgs e)
         {
-            
-            
+
+           
 
             savedata();
 
@@ -1529,7 +1600,8 @@ namespace Shubharealtime
                 }
                 catch
                 {
-                    System.Windows.MessageBox.Show("Please start Nest as Run as Administrator and again start Realtime combo");
+
+                    System.Windows.MessageBox.Show("Please start NEST as 'Run as Administrator'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
 
                     return;
                 }
@@ -1545,7 +1617,8 @@ namespace Shubharealtime
                 }
                 catch
                 {
-                    System.Windows.MessageBox.Show("Please start Now as 'Run as Administrator' and again start Realtime combo");
+                    System.Windows.MessageBox.Show("Please start NOW as 'Run as Administrator'", "Important Note", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
 
                     return;
                 }
@@ -1553,7 +1626,7 @@ namespace Shubharealtime
 
             if (txtTargetFolder.Text == "")
             {
-                System.Windows.MessageBox.Show("Set Target Path.");
+                
                 txtTargetFolder.Focus();
                 return;
 
@@ -1601,21 +1674,31 @@ namespace Shubharealtime
 
             }
 
-            string terminal = ConfigurationManager.AppSettings["terminal"];
-         //it start another window and hide this window 
-            string path = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
-            string pathtostartprocess = path.Substring(0, path.Length - 18);
-            System.Diagnostics.Process.Start(pathtostartprocess + "Endrt.exe");
+           
 
             Shubharealtime.datadownload s = new datadownload();
             if (RTD_server_name.SelectedItem == "NEST")
             {
-                s.checknestfiled();
+              int result=  s.checknestfiled();
+                if(result==0)
+                {
+                    return;
+                }
             }
             if (RTD_server_name.SelectedItem == "NOW")
             {
+                int result = s.checknestfiled();
+                if (result == 0)
+                {
+                    return;
+                }
                 s.checknowfiled();
             }
+            string terminal = ConfigurationManager.AppSettings["terminal"];
+            //it start another window and hide this window 
+            string path = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
+            string pathtostartprocess = path.Substring(0, path.Length - 18);
+            System.Diagnostics.Process.Start(pathtostartprocess + "Endrt.exe");
             Task.Factory.StartNew(s.startRealtime);
             this.Hide();
         }
@@ -1627,5 +1710,57 @@ namespace Shubharealtime
             regKey.SetValue("chartingappforbackfill", chartonbackfill.SelectedItem.ToString());
         }
 
+        private void RTmapsymbol_Checked(object sender, RoutedEventArgs e)
+        {
+            lblgooggleday.Visibility = Visibility.Hidden;
+            lblgoogletime.Visibility = Visibility.Hidden;
+            googletime.Visibility = Visibility.Hidden;
+            googledays.Visibility = Visibility.Hidden;
+            textBox1.Visibility = Visibility.Visible;
+            textBox2.Visibility = Visibility.Hidden;
+            listView1.Visibility = Visibility.Hidden;
+            listView2.Visibility = Visibility.Visible;
+
+
+            tradetigerinfo.Visibility = Visibility.Hidden;
+            saveradiobuttn();
+            importsymbol();
+        }
+
+        private void googletime_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            googledays.Items.Clear();
+            if (googletime.SelectedIndex == 0)
+            {
+                for (int i = 1; i < 11;i++ )
+                {
+                    googledays.Items.Add(i );
+                }
+
+                googledays.SelectedIndex = 5;
+
+            }
+            else if (googletime.SelectedIndex == 1)
+            {
+                for (int i = 1; i < 51; i++)
+                {
+                    googledays.Items.Add(i);
+                }
+                googledays.SelectedIndex = 4;
+
+            }
+
+        }
+
+        private void log_Checked(object sender, RoutedEventArgs e)
+        {
+            config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings.Remove("logcheck");
+
+            config.AppSettings.Settings.Add("logcheck", log.IsChecked.Value.ToString());
+            config.Save(ConfigurationSaveMode.Full);
+        }
+
+      
     }
 }

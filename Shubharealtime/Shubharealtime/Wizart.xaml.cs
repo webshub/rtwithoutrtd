@@ -81,7 +81,8 @@ namespace Shubharealtime
                 catch (Exception)
                 {
                     // The user did not allow the application to run as administrator
-                    MessageBox.Show("Sorry, this application must be run as Administrator.");
+                    System.Windows.MessageBox.Show("Unable to Run program as Administrator,please ensure that you have admin privileges'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                 }
 
                 // Shut down the current process
@@ -266,7 +267,7 @@ namespace Shubharealtime
                             }
                             if (backfill == "yes")
                             {
-                                MessageBox.Show("Please stay idle for 2 min we are checking your PLUS configaration please wait till you get responce message ");
+                                System.Windows.MessageBox.Show("Please DO NOT USE YOUR COMPUTER for few minutes .\n As application is checking for PLUS configuration", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
                                
                                 int resultforbackfill = d.checkbackfill();
                                 if (resultforbackfill == 1)
@@ -281,8 +282,8 @@ namespace Shubharealtime
                                     }
 
 
-
-                                    Rsult_lbl.Content = "Nest pluse is working fine  ";
+                                    Rsult_lbl.Foreground = Brushes.Green;
+                                    Rsult_lbl.Content = "NEST PLUS is working fine  ";
 
 
 
@@ -294,6 +295,8 @@ namespace Shubharealtime
                                 }
                                 else
                                 {
+                                    Rsult_lbl.Foreground = Brushes.Red ;
+                                   
                                     Rsult_lbl.Content = "Backfill cannot be done ";
                                     return;
                                 }
@@ -349,13 +352,14 @@ namespace Shubharealtime
                             }
                             if (backfill == "yes")
                             {
-                                MessageBox.Show("Please stay idle for 1 min its cheking backfill option");
+                               
+                                System.Windows.MessageBox.Show("Please DO NOT USE YOUR COMPUTER for few minutes .\n As application is checking for backfill option.", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
 
                                 int resultforbackfill = d.checkbackfill();
                                 if (resultforbackfill == 1)
                                 {
 
-                                    MessageBox.Show("Backfill chacking done");
+                                    
 
                                     try
                                     {

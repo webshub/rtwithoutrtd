@@ -21,6 +21,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using Microsoft.Office.Interop.Excel;
+using log4net;
+using log4net.Config;
 
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -76,9 +78,11 @@ namespace Shubharealtime
           string        Amibrokerdatapath = "" ;
           string        Metastockdatapath = "" ;
         string        fchart = "" ;
-           
-       
 
+
+
+
+        string logcheck = ConfigurationManager.AppSettings["logcheck"];
 
         string timetosave = ConfigurationManager.AppSettings["timetoRT"];
         string targetpath = ConfigurationManager.AppSettings["targetpathforcombo"];
@@ -246,13 +250,14 @@ namespace Shubharealtime
                 }
                 catch
                 {
+
                 }
                 System.Diagnostics.Process process = new System.Diagnostics.Process();
                 System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                 startInfo.FileName = "cmd.exe";
                 //startInfo.Arguments = "/C  C:\\asc2ms.exe -f C:\\data\\Metastock\\M.csv -r r -o C:\\data\\Metastock\\google\\e";
-                startInfo.Arguments = "/C  " + Metastockdatapath + "\\asc2ms.exe -f " + strBSECSVArr + " -r r -o " + Metastockdatapath + "\\Intraday\\Metastock\\" + finalarr[0].ticker;
+                startInfo.Arguments = "/C  " + Metastockdatapath + "\\asc2ms.exe -f " + strBSECSVArr + " -r r -o " + Metastockdatapath + "\\Metastock";
                 // startInfo.Arguments = @"/C  C:\asc2ms.exe -f C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod -r r -o C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod\Metastock\a" ;
 
 
@@ -312,7 +317,9 @@ namespace Shubharealtime
         public  void startdownload()
         {
 
-
+            log4net.Config.XmlConfigurator.Configure();
+            ILog log = LogManager.GetLogger(typeof(Window1));
+           
           
 
 
@@ -335,8 +342,8 @@ namespace Shubharealtime
             }
             catch
             {
-                System.Windows.MessageBox.Show(" Please start Nest as Run as Administrator and again start Realtime combo");
-                closeallprocess();
+                System.Windows.MessageBox.Show("Please start NEST as Run as Administrator ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                 return;
             }
             }
@@ -354,8 +361,8 @@ namespace Shubharealtime
                 }
                 catch
                 {
-                    System.Windows.MessageBox.Show(" Please start NOW  as Run as Administrator and again start Realtime combo");
-                    closeallprocess();
+                    System.Windows.MessageBox.Show("Please start NOW as Run as Administrator ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                     return;
                 }
             }
@@ -391,7 +398,8 @@ namespace Shubharealtime
                 string marketwatch=abcd1.ToString();
                 if (marketwatch=="0")
                 {
-                    System.Windows.MessageBox.Show("Nest or now  is not running or Market Watch not present check out and run real time combo again \n     thank you  ");
+                    System.Windows.MessageBox.Show("Your NEST/NOW is not running or Market Watch is not found ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                  //   closeallprocess();
                     return;
                 }
@@ -399,7 +407,9 @@ namespace Shubharealtime
             }
             catch
             {
-                System.Windows.MessageBox.Show("Market Watch not found ");
+                
+                System.Windows.MessageBox.Show("Market Watch not found ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                 return;
             }
             SystemAccessibleObject datatable;
@@ -423,13 +433,22 @@ namespace Shubharealtime
                 nosymbol = Convert.ToInt32(noofsymbol);
             }
 
-            catch
+            catch(Exception ex)
             {
+                if (logcheck == "True")
+                {
+
+                    log.Debug("No of symbol  " + ex.Message);
+                }
             }
 
                 //start backfill data 
+            DateTime currenttime = DateTime.Now;
+            DateTime timeforstopfunction = currenttime.AddMinutes  (10);
             for (int i = 0; i < nosymbol; i++)
             {
+               
+
                 SetForegroundWindow(windowHandle);
                // SendMessage(windowHandle, WM_SCROLL, IntPtr.Zero, IntPtr.Zero);
                 if (i == 0)
@@ -464,8 +483,13 @@ namespace Shubharealtime
                             break;
                         }
                     }
-                    catch
+                    catch(Exception ex)
                     {
+                        if (logcheck == "True")
+                        {
+
+                            log.Debug("Mapping symbol " + ex.Message);
+                        }
                     }
                 }
                 if(mappingsymbolpresentornot==0)
@@ -559,21 +583,32 @@ namespace Shubharealtime
                                 }
                             }
                         }
-                        catch
+                        catch(Exception ex)
                         {
+                            if (logcheck == "True")
+                            {
 
+                                log.Debug("Datatable " + ex.Message);
+                            }
                         }
 
                     }
 
                 }
-                catch
+                catch(Exception ex)
                 {
+                    if (logcheck == "True")
+                    {
 
+                        log.Debug("Main function " + ex.Message);
+                    }
                 }
-                
-                
-                    
+
+
+                if (DateTime.Now > timeforstopfunction)
+                {
+                    i = nosymbol + 10;
+                }    
                     
             }
 
@@ -686,7 +721,8 @@ namespace Shubharealtime
                     ExcelInst, new string[1] { amipath });
             }
 
-            System.Windows.MessageBox.Show("Backfill completed");
+            System.Windows.MessageBox.Show("Backfill completed", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information );
+
 
         }
 
@@ -715,7 +751,8 @@ namespace Shubharealtime
                 }
                 catch
                 {
-                    System.Windows.MessageBox.Show(" Please start Nest as Run as Administrator and again start Realtime combo");
+                    System.Windows.MessageBox.Show("Please start NEST as Run as Administrator", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                     closeallprocess();
                     return;
                 }
@@ -732,7 +769,9 @@ namespace Shubharealtime
                 }
                 catch
                 {
-                    System.Windows.MessageBox.Show(" Please start NOW  as Run as Administrator and again start Realtime combo");
+                    
+                    System.Windows.MessageBox.Show("Please start NOW as Run as Administrator", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                     closeallprocess();
                     return;
                 }
@@ -768,7 +807,9 @@ namespace Shubharealtime
                 string marketwatch = abcd1.ToString();
                 if (marketwatch == "0")
                 {
-                    System.Windows.MessageBox.Show("Nest or now  is not running or Market Watch not present check out and run real time combo again \n     thank you  ");
+                   
+                    System.Windows.MessageBox.Show("Your NEST/NOW is not running or Market Watch not found", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+                    
                     closeallprocess();
 
                 }
@@ -776,7 +817,9 @@ namespace Shubharealtime
             }
             catch
             {
-                System.Windows.MessageBox.Show("Market Watch not found ");
+                System.Windows.MessageBox.Show("Market Watch not found ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
+                
                 return;
             }
 
@@ -855,8 +898,8 @@ namespace Shubharealtime
 
 
                     strYearDir = targetpath + "\\Downloads\\Googleeod\\" + words[1] + ".csv";
-                    //string baseurl = "http://www.google.com/finance/getprices?q=" + words[1] + "&x=" + words[0] + "&i="+timeforgoogle +"&p="+Convert.ToInt32 (googleday) +"d&f=d,o,h,l,c,v&df=cpct&auto=1&ts=1266701290218";
-                    string baseurl = "http://www.google.com/finance/getprices?q=" + words[1] + "&x=" + words[0] + "&i=60&p=6d&f=d,o,h,l,c,v&df=cpct&auto=1&ts=1266701290218";
+                    string baseurl = "http://www.google.com/finance/getprices?q=" + words[1] + "&x=" + words[0] + "&i="+timeforgoogle +"&p="+Convert.ToInt32 (googleday) +"d&f=d,o,h,l,c,v&df=cpct&auto=1&ts=1266701290218";
+                    //string baseurl = "http://www.google.com/finance/getprices?q=" + words[1] + "&x=" + words[0] + "&i=60&p=6d&f=d,o,h,l,c,v&df=cpct&auto=1&ts=1266701290218";
 
                   //  string baseurl = "http://www.google.com/finance/getprices?q=" + GoogleEod[i] + "&x=" + GoogleEodExchang[i] + "&i=" + mindata + "&p=" + Convert.ToInt32(Daysforgoogle.SelectedItem) + "d&f=d,o,h,l,c,v&df=cpct&auto=1&ts=1266701290218";
                     
@@ -1445,7 +1488,9 @@ namespace Shubharealtime
                 }
                 catch
                 {
-                    System.Windows.MessageBox.Show(" Please start Nest as Run as Administrator and again start Realtime combo");
+                    
+                    System.Windows.MessageBox.Show(" Please start NEST as 'Run as Administrator'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                     return 0;
                 }
             
@@ -1476,8 +1521,10 @@ namespace Shubharealtime
                 string marketwatch = abcd1.ToString();
                 if (marketwatch == "0")
                 {
-                    System.Windows.MessageBox.Show("Nest is not running or Market Watch not present check out and run real time combo again \n     thank you  ");
+                    
+                    System.Windows.MessageBox.Show("NEST is not running or Market Watch not present ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
 
+                    return 0;
                 }
                 sao = SystemAccessibleObject.FromWindow(a, AccessibleObjectID.OBJID_WINDOW);
 
@@ -1485,7 +1532,9 @@ namespace Shubharealtime
             }
             catch
             {
-                System.Windows.MessageBox.Show("Market Watch not found ");
+                System.Windows.MessageBox.Show("Market Watch not found ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
+               
                 return 0;
             }
 
@@ -1555,7 +1604,8 @@ namespace Shubharealtime
             }
             if (flag == 1)
             {
-                System.Windows.MessageBox.Show("Mandatory fields are missing or value LTT not present   in nest Terminal please set mandatory fields as below \nTrading symbol | LTT | LUT | LTP | Volume Traded Today | Open Interest  \n Note- Please set LTT adjacent to symbol name  ");
+                System.Windows.MessageBox.Show("One or more columns are missing in the order as below!\n Trading symbol , LTT , LUT , LTP , Volume Traded Today ,Open Interest. ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+                
                 return 0;
             }
 
@@ -1563,7 +1613,7 @@ namespace Shubharealtime
         }
         //Checking all require fieldes from NOW terminal 
 
-        public void checknowfiled()
+        public int  checknowfiled()
         {
             Process[] processes = null;
 
@@ -1580,9 +1630,10 @@ namespace Shubharealtime
                 }
                 catch
                 {
-                    System.Windows.MessageBox.Show(" Please start NOW as Run as Administrator and again start Realtime combo");
-                    closeallprocess();
-                    return;
+                    
+                    System.Windows.MessageBox.Show(" Please start NOW as 'Run as Administrator'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
+                    return 0;
                 }
             }
             IntPtr abcd = new IntPtr();
@@ -1611,8 +1662,9 @@ namespace Shubharealtime
                 string marketwatch = abcd1.ToString();
                 if (marketwatch == "0")
                 {
-                    System.Windows.MessageBox.Show("Nest is not running or Market Watch not present check out and run real time combo again \n     thank you  ");
-
+                    System.Windows.MessageBox.Show("Either your NEST is not running or Market Watch is not found ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+                   
+                    return 0;
                 }
                 sao = SystemAccessibleObject.FromWindow(a, AccessibleObjectID.OBJID_WINDOW);
 
@@ -1620,8 +1672,9 @@ namespace Shubharealtime
             }
             catch
             {
-                System.Windows.MessageBox.Show("Market Watch not found ");
-                return;
+                System.Windows.MessageBox.Show("Market Watch is not found in your trading terminal", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
+                return 0;
             }
 
             SystemAccessibleObject finalobject;
@@ -1666,9 +1719,11 @@ namespace Shubharealtime
             }
             if (flag == 1)
             {
-                System.Windows.MessageBox.Show("Mandatory fields are missing in now Terminal please set mandatory fields as below \nTrading symbol | LTT | LUT | LTP | Volume Traded Today | Open Interest  \n Note- Please set LTT adjacent to symbol name  ");
-                closeallprocess();
+                System.Windows.MessageBox.Show("One or more columns are missing in the order as below!\n Trading symbol , LTT , LUT , LTP , Volume Traded Today ,Open Interest. ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
+                return 0;
             }
+            return 1;
         }
         //Close all running process of our application 
         public void closeallprocess()
@@ -1719,6 +1774,8 @@ namespace Shubharealtime
         {
 
 
+            log4net.Config.XmlConfigurator.Configure();
+            ILog log = LogManager.GetLogger(typeof(Window1));
 
 
 
@@ -1733,7 +1790,9 @@ namespace Shubharealtime
                 }
                 catch
                 {
-                    System.Windows.MessageBox.Show(" Please start NEST as Run as Administrator and again start Realtime combo");
+                    
+                    System.Windows.MessageBox.Show("Please start NEST as 'Run as Administrator'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                     closeallprocess();
                     return;
                 }
@@ -1753,51 +1812,50 @@ namespace Shubharealtime
                 string openint = "";
                 string symbolnametosave = "";
 
-                finalobject = f.Children[0];
-                string s1 = finalobject.Description;
-                int flag = 0;
-                string[] checkterminalcol = s1.Split(',');
-                string marketwathrequiredfield = "";
-                for (int i = 0; i < checkterminalcol.Count(); i++)
-                {
-                    marketwathrequiredfield = marketwathrequiredfield + checkterminalcol[i].ToString();
-                }
+                //finalobject = f.Children[0];
+                //string s1 = finalobject.Description;
+                //int flag = 0;
+                //string[] checkterminalcol = s1.Split(',');
+                //string marketwathrequiredfield = "";
+                //for (int i = 0; i < checkterminalcol.Count(); i++)
+                //{
+                //    marketwathrequiredfield = marketwathrequiredfield + checkterminalcol[i].ToString();
+                //}
 
 
-                if (!marketwathrequiredfield.Contains("LTT"))
-                {
-                    flag = 1;
+                //if (!marketwathrequiredfield.Contains("LTT"))
+                //{
+                //    flag = 1;
 
-                }
-                if (!marketwathrequiredfield.Contains("LTP"))
-                {
-                    flag = 1;
+                //}
+                //if (!marketwathrequiredfield.Contains("LTP"))
+                //{
+                //    flag = 1;
 
-                }
-                if (!marketwathrequiredfield.Contains("Volume Traded Today"))
-                {
-                    flag = 1;
+                //}
+                //if (!marketwathrequiredfield.Contains("Volume Traded Today"))
+                //{
+                //    flag = 1;
 
-                }
-                if (!marketwathrequiredfield.Contains("Open Interest"))
-                {
-                    flag = 1;
+                //}
+                //if (!marketwathrequiredfield.Contains("Open Interest"))
+                //{
+                //    flag = 1;
 
-                }
-                if (!checkterminalcol[0].Contains("LTT"))
-                {
-                    flag = 1;
+                //}
+                //if (!checkterminalcol[0].Contains("LTT"))
+                //{
+                //    flag = 1;
 
-                }
-                if (flag == 1)
-                {
-                    System.Windows.MessageBox.Show("Some required fileds are missing in market watch please add that fileds Otherwise it wil give wrong data  ");
+                //}
+                //if (flag == 1)
+                //{
+                //    System.Windows.MessageBox.Show("Some required fileds are missing in market watch ");
 
-                   // closeallprocess();
-                }
-                 
+                //   // closeallprocess();
+                //}
                
-
+                
                 //read data from nest window 
                 for (int i = 0; i < f.Children.Count() - 1; i++)
                 {
@@ -1829,8 +1887,13 @@ namespace Shubharealtime
                                 break;
                             }
                         }
-                        catch
+                        catch(Exception ex)
                         {
+                            if (logcheck == "True")
+                            {
+
+                                log.Debug("Mapping symbol-  "+ex.Message);
+                            }
                         }
                     }
                     if (mappingsymbolpresentornot == 0)
@@ -1859,7 +1922,7 @@ namespace Shubharealtime
                         {
                             if (words1[1] != "")
                             {
-                                LTT = DateTime.Today.Date.ToShortDateString() + "," + words1[1] + ":" + words1[2] + ":" + words1[3];
+                                LTT = datetimetostore + "," + words1[1] + ":" + words1[2] + ":" + words1[3];
                                 
                                 LTT = datetimetostore  + "," + words1[1] + ":" + words1[2] + ":" + words1[3];
                                 if (chartingaplication == "Fchart")
@@ -1882,7 +1945,7 @@ namespace Shubharealtime
                         {
                              luttime = words1[1].Split(' ');
 
-                            LTT = DateTime.Today.Date.ToShortDateString() + "," + luttime[2] + ":" + words1[2] + ":" + words1[3];
+                             LTT = datetimetostore + "," + luttime[2] + ":" + words1[2] + ":" + words1[3];
                         }
 
                     }
@@ -1910,43 +1973,7 @@ namespace Shubharealtime
                     }
                     else
                     {
-                        try
-                        {
-                            RegistryKey regKey = Registry.CurrentUser;
-                            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
-                            var lttreg = regKey.GetValue("LTT");
-                            string lttreg1 = "";
-                            if (lttreg!=null )
-                            {
-                             lttreg1 = lttreg.ToString();
-                            }
-
-                            if (lttreg1=="1")
-                            {
-                                LTT = DateTime.Today.Date.ToShortDateString() + "," + DateTime.Today.TimeOfDay.Hours + ":" + DateTime.Today.TimeOfDay.Minutes + ":" + DateTime.Today.TimeOfDay.Seconds ;
-                                
-                            datatostore = datatostore + symbolnametosave + "," + LTT + "," + LTP + "," + volume + "," + openint + "\r\n";
-
-                            if (chartingaplication == "Amibroker")
-                            {
-                                datatostore = datatostore + symbolnametosave + "," + LTT + "," + LTP + "," + volume + "," + openint + "\r\n";
-                            }
-                            if (chartingaplication == "Metastock")
-                            {
-                                // "<TICKER>,<NAME>,<PER>,<DATE>,<TIME>,<OPEN>,<HIGH>,<LOW>,<CLOSE>,<VOLUME>\r\n"
-                                datatostore = datatostore + symbolnametosave + "," + symbolnametosave + "," + "I" + "," + LTT + "," + LTP + "," + LTP + "," + LTP + "," + LTP + "," + volume + "\r\n";
-                            }
-                            if (chartingaplication == "Fchart")
-                            {
-                                datatostore = datatostore + symbolnametosave + "," + LTT + "," + LTP + "," + LTP + "," + LTP + "," + LTP + "," + volume + "\r\n";
-
-                            }
-                            }
-                        }
-                        catch
-                        {
-
-                        }
+                       
                        
                     }
 
@@ -1996,14 +2023,19 @@ namespace Shubharealtime
 
                         File.Copy(processtostart, targetpath + "\\asc2ms.exe", true);
                     }
-                    catch
+                    catch(Exception ex)
                     {
+                        if (logcheck == "True")
+                        {
+
+                            log.Debug("MEtastock data writing --"+ex.Message );
+                        }
                     }
                     System.Diagnostics.Process process = new System.Diagnostics.Process();
                     System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                     startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                     startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = "/C  " + targetpath + "\\asc2ms.exe -f " + filename + " -r r -o " + Metastockdatapath  + "\\Intraday\\Metastock\\realtimemetastock  --forceWrite=yes --verbosity high";
+                    startInfo.Arguments = "/C  " + targetpath + "\\asc2ms.exe -f " + filename + " -r r -o " + Metastockdatapath  + "\\Metastock  --forceWrite=yes --verbosity high";
 
 
 
@@ -2033,7 +2065,11 @@ namespace Shubharealtime
             }
             catch (Exception ex)
             {
-                //System.Windows.MessageBox.Show(ex.Message );
+                if (logcheck == "True")
+                {
+
+                    log.Debug("Main function --"+ex.Message);
+                }
             }
          //   Thread.Sleep(100);
          //  System.GC.Collect();
@@ -2043,7 +2079,8 @@ namespace Shubharealtime
         private void Nowdata(SystemAccessibleObject f)
         {
             //check now required filed of now terminal 
-            
+            log4net.Config.XmlConfigurator.Configure();
+            ILog log = LogManager.GetLogger(typeof(Window1));
             if (terminalname == "NOW")
             {
                 try
@@ -2055,7 +2092,9 @@ namespace Shubharealtime
                 }
                 catch
                 {
-                    System.Windows.MessageBox.Show(" Please start NOW as Run as Administrator and again start Realtime combo");
+                    
+                    System.Windows.MessageBox.Show("Please start NOW as 'Run as Administrator'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
                     closeallprocess();
                     return;
                 }
@@ -2113,7 +2152,8 @@ namespace Shubharealtime
                 }
                 if (flag == 1)
                 {
-                    System.Windows.MessageBox.Show("Some required fileds are missing in market watch please add that fileds and try shubha real time combo again \n Thank you  ");
+                    System.Windows.MessageBox.Show("One or more columns are missing in the order as below!\n Trading symbol , LTT , LUT , LTP , Volume Traded Today ,Open Interest. ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
 
                     closeallprocess();
                 }
@@ -2146,8 +2186,13 @@ namespace Shubharealtime
                                 break;
                             }
                         }
-                        catch
+                        catch (Exception ex)
                         {
+                            if (logcheck == "True")
+                            {
+
+                                log.Debug("Mapping sysmol--" + ex.Message);
+                            }
                         }
                     }
                     if (mappingsymbolpresentornot == 0)
@@ -2264,17 +2309,21 @@ namespace Shubharealtime
 
                         File.Copy(processtostart, targetpath + "\\asc2ms.exe", true);
                     }
-                    catch
+                    catch(Exception ex)
                     {
+                        if (logcheck == "True")
+                        {
+
+                            log.Debug("Metastock data" + ex.Message);
+                        }
                     }
                     System.Diagnostics.Process process = new System.Diagnostics.Process();
                     System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                     startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                     startInfo.FileName = "cmd.exe";
                     //startInfo.Arguments = "/C  C:\\asc2ms.exe -f C:\\data\\Metastock\\M.csv -r r -o C:\\data\\Metastock\\google\\e";
-                    startInfo.Arguments = "/C  " + targetpath + "\\asc2ms.exe -f " + filename + " -r r -o " + targetpath + "\\Intraday\\Metastock\\realtimemetastock";
                     // startInfo.Arguments = @"/C  C:\asc2ms.exe -f C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod -r r -o C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod\Metastock\a" ;
-
+                    startInfo.Arguments = "/C  " + targetpath + "\\asc2ms.exe -f " + filename + " -r r -o " + Metastockdatapath + "\\Metastock  --forceWrite=yes --verbosity high";
 
 
                     process.StartInfo = startInfo;
@@ -2298,7 +2347,11 @@ namespace Shubharealtime
             }
             catch (Exception ex)
             {
-               // System.Windows.MessageBox.Show(ex.Message);
+                if (logcheck == "True")
+                {
+
+                    log.Debug("Main function --" + ex.Message);
+                }
             }
 
 

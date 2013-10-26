@@ -36,7 +36,9 @@ namespace Shubharealtime
                 writer.WriteLine(datatostore);
 
             }
-            System.Windows.MessageBox.Show("Symbol file saved ");
+            
+            System.Windows.MessageBox.Show("Symbol file saved ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information );
+
         }
 
         /// <summary>
