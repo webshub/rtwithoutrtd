@@ -707,9 +707,29 @@ namespace Shubharealtime
             else if(googleback=="True")
             {
 
+                try
+                {
+                    foreach (var file in Directory.GetFiles("C:\\myshubhalabha\\GoogleBackfill"))
+                        File.Delete(file);
+
+                }
+                catch
+                {
+                }
 
                 //getsymbol name from google file 
                 getgooglesymbolname();
+
+                try
+                {
+                    System.Net.WebRequest myRequest = System.Net.WebRequest.Create("http://www.Google.co.in");
+                    System.Net.WebResponse myResponse = myRequest.GetResponse();
+                }
+                catch
+                {
+                    System.Windows.MessageBox.Show("Google is not reachable check your internet connection ", "Error Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                    return;
+                }
 
                 googlebackfill();
 
@@ -1690,47 +1710,32 @@ namespace Shubharealtime
                     flag = 1;
 
                 }
-                else
-                {
-                    flag = 0;
-                }
+               
                 if (!marketwathrequiredfield.Contains("LTP"))
                 {
                     flag = 1;
 
                 }
-                else
-                {
-                    flag = 0;
-                }
+               
                 if (!marketwathrequiredfield.Contains("Volume Traded Today"))
                 {
                     flag = 1;
 
                 }
-                else
-                {
-                    flag = 0;
-                }
+               
                 if (!marketwathrequiredfield.Contains("Open Interest"))
                 {
                     flag = 1;
 
                 }
-                else
-                {
-                    flag = 0;
-                }
+               
                 if (!checkterminalcol[0].Contains("LTT"))
                 {
                     flag = 1;
                     // System.Windows.MessageBox.Show("LTT Should be at second position in the market watch (Trading symbol ,LTT and so on ...)");
 
                 }
-                else
-                {
-                    flag = 0;
-                }
+               
             }
             if (flag == 1)
             {

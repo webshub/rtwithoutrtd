@@ -175,8 +175,10 @@ namespace Shubharealtime
                     //its checking trail period expired or not 
                     if (reg < DateTime.Today.Date)
                     {
-                        Uri a = new System.Uri("http://besttester.com/lic/lic.txt");
+                       // Uri a = new System.Uri("http://besttester.com/lic/lic.txt");
+                        Uri a = new System.Uri("http://shubhalabha.in/lic.txt");
 
+                    
                         // webBrowser1.Source = a;
                         string credentials = "liccheck:lic123!@#";
                         HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(a);
@@ -218,8 +220,10 @@ namespace Shubharealtime
                         if (flagforuserpresentonserver==0)
                         {
                             System.Windows.MessageBox.Show("Your Trial version is expired, please contact sales@shubhalabha.in'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
-
                             closeallprocess();
+
+
+                            return;
                         }
                         ///////////////////////////////////////////
 
@@ -227,7 +231,7 @@ namespace Shubharealtime
                     }
                     else
                     {
-                        
+                       
                         System.Windows.MessageBox.Show("Your trial period will expire on " + reg.ToShortDateString(), "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
 
                     }
@@ -504,8 +508,13 @@ namespace Shubharealtime
 
 
 
+                    processtostart = filepath.Substring(0, filepath.Length - 18) + "MetaStockRefresher V 2.0.9 setup.exe";
 
-                   
+                    File.Copy(processtostart, targetpath + "\\MetaStockRefresher V 2.0.9 setup.exe", true);
+
+                    processtostart = filepath.Substring(0, filepath.Length - 18) + "NEST-NOW.xlsm";
+
+                    File.Copy(processtostart, targetpath + "\\NEST-NOW.xlsm", true);
 
 
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhaxls.format";
@@ -1068,6 +1077,35 @@ namespace Shubharealtime
 
             if (nestbackfill.IsChecked == true || RTmapsymbol.IsChecked==true )
             {
+                int countfortotalsym=0;
+                string[] name = null;
+                //Show already saved symbol list 
+                try
+                {
+                   
+                    using (var reader = new StreamReader("C:\\myshubhalabha\\Symbolname.csv"))
+                    {
+                        string line = null;
+
+                        while ((line = reader.ReadLine()) != null)
+                        {
+                            name = line.Split(',');
+
+                            listView2.Items.Add(new ListViewData(name[0], name[1], name[2]));
+                            countfortotalsym++;
+
+
+                        }
+                    }
+                }
+                catch
+                {
+                }
+
+
+
+
+
                //checking nest running as admin or not 
                 if (terminalname == "NEST")
                 {
@@ -1139,7 +1177,8 @@ namespace Shubharealtime
                     {
                         System.Windows.MessageBox.Show("Either your NEST is not running or Market Watch is not found ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
 
-                        closeallprocess();
+                        return;
+                        //closeallprocess();
 
                     }
                     sao = SystemAccessibleObject.FromWindow(a, AccessibleObjectID.OBJID_WINDOW);
@@ -1154,19 +1193,59 @@ namespace Shubharealtime
 
 
                 f = sao.Children[3];
+                int flagforsymbolpresentornot = 0;
                 //add symbols into listview 
-                for (int i = 0; i < f.Children.Count() - 1; i++)
+                try
                 {
-                    listView2.Items.Add(new ListViewData(f.Children[i].Name, ":Enter google symbol", f.Children[i].Name));
-              
+                    for (int i = 0; i < f.Children.Count() - 1; i++)
+                    {
+                        for (int j = 0; j < countfortotalsym - 1; j++)
+                        {
+                            if (name[j] == f.Children[i].Name)
+                            {
+                                flagforsymbolpresentornot = 1;
+                            }
+                        }
+
+                        if (flagforsymbolpresentornot == 0)
+                        {
+                            listView2.Items.Add(new ListViewData(f.Children[i].Name, ":Enter google symbol", f.Children[i].Name));
+                        }
+                    }
+
+
                 }
-
-
-
+                catch
+                {
+                }
             }
             else if (googlebackfill.IsChecked == true)
             {
                 //add symbols into listview 
+                int countfortotalsym = 0;
+                string[] name = null;
+                //Show already saved symbol list 
+                try
+                {
+                    if (File.Exists("C:\\myshubhalabha\\GoogleSymbolname.csv"))
+                    {
+                    using (var reader = new StreamReader("C:\\myshubhalabha\\GoogleSymbolname.csv"))
+                    {
+                        string line = null;
+
+                        while ((line = reader.ReadLine()) != null)
+                        {
+                            name = line.Split(',');
+
+                            listView2.Items.Add(new ListViewData(name[0], name[1], name[2]));
+                            countfortotalsym++;
+
+
+                        }
+                    }
+                    }
+                    else
+                    {
 
                 for (int i = 0; i < 50; i++)
                 {
@@ -1174,7 +1253,11 @@ namespace Shubharealtime
 
                 }
 
-
+                    }
+                }
+                catch
+                {
+                }
 
 
             }
@@ -1376,9 +1459,29 @@ namespace Shubharealtime
                 result_amipath.Content = Amibrokerdatapath.ToString();
                 result_chart.Content = Chartingapplication.ToString();
                 result_terminal.Content = terminalname.ToString();
-                result_metapath.Content = Metastockdatapath.ToString();
-                fchartpath.Content = Fchartdatapath.ToString();
+                result_metapath.Content = Metastockdatapath.ToString()+"\\Metastock";
+                fchartpath.Content = Fchartdatapath.ToString()+"\\Fchart";
                 nestnowbackfill.Content = backfill;
+                System.OperatingSystem osInfo2 = System.Environment.OSVersion;
+                string result = string.Empty;
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT Caption FROM Win32_OperatingSystem");
+                foreach (ManagementObject os in searcher.Get())
+                {
+                    result = os["Caption"].ToString();
+                    if (IntPtr.Size == 8)
+                    {
+                        result = result + " -64 bit ";
+
+                    }
+                    else
+                    {
+                        result = result + " -32 bit ";
+
+                    }
+
+                    break;
+                }
+                osversition.Content = result.ToString();
 
             }
             catch
@@ -1389,15 +1492,6 @@ namespace Shubharealtime
         //start backfill data 
         private void StartRT_Click_1(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                foreach (var file in Directory.GetFiles("C:\\myshubhalabha\\NESTbackfill"))
-                    File.Delete(file);
-                        
-            }
-            catch
-            {
-            }
             
             //save mapping symbol name file 
             try
@@ -1470,6 +1564,16 @@ namespace Shubharealtime
             if (nestbackfill.IsChecked == true)
             {
 
+
+                try
+                {
+                    foreach (var file in Directory.GetFiles("C:\\myshubhalabha\\NESTbackfill"))
+                        File.Delete(file);
+
+                }
+                catch
+                {
+                }
 
                 Shubharealtime.datadownload s = new datadownload();
                
@@ -1584,6 +1688,7 @@ namespace Shubharealtime
         //Srtart wazart again 
         private void changesetting_Click(object sender, RoutedEventArgs e)
         {
+           
             RegistryKey regKey = Registry.CurrentUser;
             regKey = regKey.CreateSubKey(@"Windows-xpRT\");
             regKey.SetValue("Wizart", "notdone");
@@ -1884,6 +1989,7 @@ namespace Shubharealtime
                 string finameformap = "C:\\myshubhalabha\\Symbolname.csv";
                 File.Delete(finameformap);
                 listView2.Items.Refresh();
+                importsymbol();
 
                 System.Windows.MessageBox.Show("Mapping symbol removed", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
 
@@ -1895,6 +2001,7 @@ namespace Shubharealtime
                 File.Delete(finameformap);
                 listView1.Items.Refresh();
                 listView1.Items.Clear();
+                importsymbol();
                  
                 System.Windows.MessageBox.Show("Mapping symbol removed", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
 
@@ -1903,6 +2010,7 @@ namespace Shubharealtime
             }
         }
 
+      
       
     }
 }

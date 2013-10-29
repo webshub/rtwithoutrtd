@@ -147,6 +147,8 @@ namespace Shubharealtime
                 //chartingapp = "Amibroker";
             }
 
+          
+
             regKey.SetValue("Amibrokerdatapath", db_path.Text.ToString());
             regKey.SetValue("Metastockdatapath", meatpath_txt.Text.ToString());
             regKey.SetValue("Amiexepath", Amiexepath .Text.ToString());
@@ -201,6 +203,10 @@ namespace Shubharealtime
                 Amiexepath.Text = Amiexepath1.ToString();
                 meatpath_txt.Text = Metastockdatapath.ToString();
                 fchartpath.Text=fchartdatapath.ToString();
+
+                //if user comes back on that page remove save value
+                regKey.SetValue("Chartingapplication", null );
+
             }
             catch
             {

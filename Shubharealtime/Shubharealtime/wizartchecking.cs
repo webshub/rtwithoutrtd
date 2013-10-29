@@ -101,6 +101,8 @@ namespace Shubharealtime
         public const int WM_SYSCOMMAND = 0x0112;
         public const int SC_CLOSE = 0xF060;
         private const int SW_SHOWMAXIMIZED = 3;
+        private const int SW_SHOWMINIIMIZED = 6;
+
         private const UInt32 WM_CLOSE = 0x0010;
         public const UInt32 WM_SCROLL = 277; // Horizontal scroll
         private const UInt32 SB_LINEDOWN = 1; // Scrolls one line down
@@ -525,6 +527,7 @@ namespace Shubharealtime
                                         CloseWindow(abcd1);
 
                                         Thread.Sleep(3000);
+
                                     }
                                 }
                             }
