@@ -361,7 +361,20 @@ namespace Shubharealtime
 
                     amipath = Amibrokerdatapath.ToString();
                     terminalname = terminalname1.ToString();
+                    if (backfill != "yes")
+                    {
+                        nestbackfill.IsChecked = false;
+                        nestbackfill.IsEnabled = false;
+                        nestbackfill.Visibility = Visibility.Hidden;
 
+                        // RTmapsymbol.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        nestbackfill.Visibility = Visibility.Visible;
+
+                        RTmapsymbol.Visibility = Visibility.Hidden;
+                    }
                     if (terminalname=="NEST")
                     {
                         textBlock4.Visibility = Visibility.Hidden;
@@ -392,21 +405,11 @@ namespace Shubharealtime
                         RTmapsymbol.Visibility = Visibility.Hidden;
                         nestbackfill.Visibility = Visibility.Hidden;
                         textBlock4.Visibility = Visibility.Visible;
-                    }
-                    if (backfill != "yes")
-                    {
-                        nestbackfill.IsChecked = false;
-                        nestbackfill.IsEnabled = false;
                         nestbackfill.Visibility = Visibility.Hidden;
-
-                       // RTmapsymbol.Visibility = Visibility.Visible;
+                        listView2.Visibility = Visibility.Hidden;
+                        tradetigerinfo.Visibility = Visibility.Hidden;
                     }
-                    else
-                    {
-                        nestbackfill.Visibility = Visibility.Visible;
-
-                        RTmapsymbol.Visibility = Visibility.Hidden;
-                    }
+                   
 
 
                 }
@@ -512,9 +515,9 @@ namespace Shubharealtime
 
                     File.Copy(processtostart, targetpath + "\\MetaStockRefresher V 2.0.9 setup.exe", true);
 
-                    processtostart = filepath.Substring(0, filepath.Length - 18) + "NEST-NOW.xlsm";
+                    processtostart = filepath.Substring(0, filepath.Length - 18) + "ShubhaNest-Now.xlsm";
 
-                    File.Copy(processtostart, targetpath + "\\NEST-NOW.xlsm", true);
+                    File.Copy(processtostart, targetpath + "\\ShubhaNest-Now.xlsm", true);
 
 
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhaxls.format";
@@ -1080,28 +1083,7 @@ namespace Shubharealtime
                 int countfortotalsym=0;
                 string[] name = null;
                 //Show already saved symbol list 
-                try
-                {
-                   
-                    using (var reader = new StreamReader("C:\\myshubhalabha\\Symbolname.csv"))
-                    {
-                        string line = null;
-
-                        while ((line = reader.ReadLine()) != null)
-                        {
-                            name = line.Split(',');
-
-                            listView2.Items.Add(new ListViewData(name[0], name[1], name[2]));
-                            countfortotalsym++;
-
-
-                        }
-                    }
-                }
-                catch
-                {
-                }
-
+                
 
 
 
@@ -1199,18 +1181,41 @@ namespace Shubharealtime
                 {
                     for (int i = 0; i < f.Children.Count() - 1; i++)
                     {
-                        for (int j = 0; j < countfortotalsym - 1; j++)
+                        flagforsymbolpresentornot = 0;
+                        try
                         {
-                            if (name[j] == f.Children[i].Name)
+
+                            using (var reader = new StreamReader("C:\\myshubhalabha\\Symbolname.csv"))
                             {
-                                flagforsymbolpresentornot = 1;
+                                string line = null;
+
+                                while ((line = reader.ReadLine()) != null)
+                                {
+                                    name = line.Split(',');
+
+                                    if (f.Children[i].Name == name[0])
+                                   {
+                                       listView2.Items.Add(new ListViewData(name[0], name[1], name[2]));
+                                       flagforsymbolpresentornot = 1;
+                                       break;
+                                   }
+                                    
+
+
+                                }
                             }
                         }
-
-                        if (flagforsymbolpresentornot == 0)
+                        catch
                         {
-                            listView2.Items.Add(new ListViewData(f.Children[i].Name, ":Enter google symbol", f.Children[i].Name));
                         }
+
+                                if (flagforsymbolpresentornot == 0)
+                                {
+                                    listView2.Items.Add(new ListViewData(f.Children[i].Name, ":Enter google symbol", f.Children[i].Name));
+                                }
+                       
+
+                       
                     }
 
 

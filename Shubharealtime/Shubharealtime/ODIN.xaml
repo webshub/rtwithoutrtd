@@ -12,7 +12,7 @@
         <Label Content="2.Click Trust Center &gt; Trust Center Settings &gt; Trusted Locations." FontFamily="Times New Roman" FontSize="13" Height="28" HorizontalAlignment="Left" Margin="17,66,0,0" Name="label3" VerticalAlignment="Top" />
         <Label Content="3.Click Add new location." FontFamily="Times New Roman" FontSize="13" Height="28" HorizontalAlignment="Left" Margin="17,86,0,0" Name="label4" VerticalAlignment="Top" />
         <Label Content="4.Click Browse and find the C:\myshubhalabha folder &gt; Select &gt; OK" FontFamily="Times New Roman" FontSize="13" Height="28" HorizontalAlignment="Left" Margin="17,106,0,0" Name="label5" VerticalAlignment="Top" />
-        <TextBlock Margin="241,133,141,158"><Hyperlink NavigateUri="http://www.youtube.com/watch?v=PH0ljNFMwA0" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock FontFamily="Times New Roman" FontSize="14" Text=" Click here " /></Hyperlink></TextBlock>
+        <TextBlock Margin="241,133,141,158"><Hyperlink NavigateUri="http://youtu.be/oDpZYaCD0PM" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock FontFamily="Times New Roman" FontSize="14" Text=" Click here " /></Hyperlink></TextBlock>
         <Label Content="• To watch ODIN Configuration Video " FontFamily="Times New Roman" FontSize="13" FontWeight="SemiBold" Height="28" HorizontalAlignment="Left" Margin="15,131,0,0" Name="label9" VerticalAlignment="Top" />
     </Grid>
 </UserControl>

@@ -13,7 +13,7 @@
             <Label Content="2.Click Trust Center &gt; Trust Center Settings &gt; Trusted Locations." Height="28" HorizontalAlignment="Left" Margin="10,69,0,0" Name="label3" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
             <Label Content="3.Click Add new location." Height="28" HorizontalAlignment="Left" Margin="10,89,0,0" Name="label4" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
             <Label Content="4.Click Browse and find the C:\myshubhalabha folder &gt; Select &gt; OK" Height="28" HorizontalAlignment="Left" Margin="10,109,0,0" Name="label5" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
-            <TextBlock Margin="287,137,157,160"><Hyperlink NavigateUri="http://www.youtube.com/watch?v=PH0ljNFMwA0" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock Text=" Click here " FontFamily="Times New Roman" FontSize="14" /></Hyperlink></TextBlock>
+            <TextBlock Margin="287,137,157,160"><Hyperlink NavigateUri="http://youtu.be/oDpZYaCD0PM" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock Text=" Click here " FontFamily="Times New Roman" FontSize="14" /></Hyperlink></TextBlock>
             <Label Content="• To watch TRADE TIGER Configuration Video " FontFamily="Times New Roman" FontSize="13" FontWeight="SemiBold" Height="28" HorizontalAlignment="Left" Margin="8,134,0,0" Name="label9" VerticalAlignment="Top" />
         </Grid>
     </Grid>

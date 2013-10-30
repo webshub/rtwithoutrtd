@@ -77,7 +77,7 @@ namespace Shubharealtime
         public class GOOGLEFINAL
         {
             public string ticker;
-            public string name;
+          //  public string name;
             public string date;
             public string time;
            

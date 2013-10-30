@@ -34,7 +34,7 @@
     <PublisherName>shubhalabha</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>32</ApplicationRevision>
+    <ApplicationRevision>40</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -339,9 +339,6 @@
     <Content Include="MetaStockRefresher V 2.0.9 setup.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="NEST-NOW.xlsm">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Nest-NowBackfil.xlsm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -355,6 +352,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Endrt.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="shubhaxls.format">
+      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="images\Shubhalabha logo.jpg" />
@@ -382,13 +383,16 @@
     <Content Include="RT.format">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="ShubhaNest-Now.xlsm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Shubhabackfill.format">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sharekhantoami.xlsm">
+    <Content Include="shubhaodin.xlsm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="shubhaodin.xlsm">
+    <Content Include="sharekhantoami.xlsm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Shubharealtime_1_TemporaryKey.pfx" />
@@ -398,9 +402,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Shubhasharekhan.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="shubhaxls.format">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ShubhaRt.format">

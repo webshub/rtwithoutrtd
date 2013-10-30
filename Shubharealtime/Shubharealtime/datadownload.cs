@@ -1012,6 +1012,48 @@ namespace Shubharealtime
                         JoinCsvFiles(csvFileNames, targetpath + "\\GoogleBackfill\\" +mappingsymbol[i] + ".csv");
                         var chartforbackfill = regKey.GetValue("chartingappforbackfill");
 
+
+                        if (chartforbackfill.ToString() == "Metastock")
+                        {
+
+
+                            if (!Directory.Exists(Metastockdatapath + "\\Metastock"))
+                            {
+                                Directory.CreateDirectory(Metastockdatapath + "\\Metastock");
+                            }
+                            // commandpromptcall(filename, targetpath + "\\Intraday\\Metastock\\realtimemetastock");
+
+                            foreach (var file in Directory.GetFiles("C:\\myshubhalabha\\GoogleBackfill"))
+                            {
+                                try
+                                {
+
+                                    string filepath = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
+                                    string processtostart = filepath.Substring(0, filepath.Length - 18) + "asc2ms.exe";
+
+                                    File.Copy(processtostart, Metastockdatapath + "\\asc2ms.exe", true);
+                                }
+                                catch
+                                {
+
+                                }
+                                System.Diagnostics.Process process = new System.Diagnostics.Process();
+                                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                                startInfo.FileName = "cmd.exe";
+                                //startInfo.Arguments = "/C  C:\\asc2ms.exe -f C:\\data\\Metastock\\M.csv -r r -o C:\\data\\Metastock\\google\\e";
+                                startInfo.Arguments = "/C  " + Metastockdatapath + "\\asc2ms.exe -f " + file + " -r r -o " + Metastockdatapath + "\\Metastock  --forceWrite=yes ";
+                                // startInfo.Arguments = @"/C  C:\asc2ms.exe -f C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod -r r -o C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod\Metastock\a" ;
+
+
+
+                                process.StartInfo = startInfo;
+                                process.Start();
+
+
+                            }
+                        }
+
                         if (chartforbackfill.ToString() == "Fchart")
                         {
 
@@ -1156,16 +1198,32 @@ namespace Shubharealtime
 
                       string timetostore = timefromyahoo.Hour.ToString() + ":" + timefromyahoo.Minute.ToString() + ":" + timefromyahoo.Millisecond.ToString();
 
-                      string[] yahoodate = timefromyahoo.ToString().Split('-');
+                      string[] yahoodate = null;
 
-                      datetostore = yahoodate[0] + yahoodate[1] + yahoodate[2].Substring(0, 2);
+                      try
+                      {
+                          yahoodate = timefromyahoo.ToString().Split('-');
+                          datetostore = yahoodate[0] + yahoodate[1] + yahoodate[2].Substring(0, 2);
+
+                      }
+                      catch
+                      {
+                          yahoodate = timefromyahoo.ToString().Split('/');
+                          datetostore = yahoodate[0] + yahoodate[1] + yahoodate[2].Substring(0, 4);
+
+                      }
 
                       //finalarr[icntr].ticker = strbseequityfilename.Substring(0, strbseequityfilename.Length - 4);
                       //finalarr[icntr].name = strbseequityfilename.Substring(0, strbseequityfilename.Length - 4); ;
 
                       finalarr[icntr].ticker = mappingsymbol;
-                    finalarr[icntr].name = mappingsymbol;
 
+                    //finalarr[icntr].name = mappingsymbol;
+                    //if (chartforbackfill.ToString() == "Metastock")
+                    //{
+                    //    finalarr[icntr].name =null ;
+                    
+                    //}
                      
                       finalarr[icntr].date = datetostore; // String.Format("{0:yyyyMMdd}", myDate);
                       finalarr[icntr].open = resbsecsv1[icntr].OPEN_PRICE;
@@ -1205,42 +1263,7 @@ namespace Shubharealtime
                   engineBSECSVFINAL.WriteFile(obj, finalarr);
 
 
-                  if (chartforbackfill.ToString() == "Metastock")
-                  {
-
-
-                      if (!Directory.Exists(Metastockdatapath + "\\Metastock"))
-                      {
-                          Directory.CreateDirectory(Metastockdatapath + "\\Metastock");
-                      }
-                      // commandpromptcall(filename, targetpath + "\\Intraday\\Metastock\\realtimemetastock");
-                      try
-                      {
-
-                          string filepath = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
-                          string processtostart = filepath.Substring(0, filepath.Length - 18) + "asc2ms.exe";
-
-                          File.Copy(processtostart, Metastockdatapath + "\\asc2ms.exe", true);
-                      }
-                      catch
-                      {
-
-                      }
-                      System.Diagnostics.Process process = new System.Diagnostics.Process();
-                      System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-                      startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                      startInfo.FileName = "cmd.exe";
-                      //startInfo.Arguments = "/C  C:\\asc2ms.exe -f C:\\data\\Metastock\\M.csv -r r -o C:\\data\\Metastock\\google\\e";
-                      startInfo.Arguments = "/C  " + Metastockdatapath + "asc2ms.exe -f " + obj + " -r r -o " + Metastockdatapath + "Metastock  --forceWrite=yes ";
-                      // startInfo.Arguments = @"/C  C:\asc2ms.exe -f C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod -r r -o C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod\Metastock\a" ;
-
-
-
-                      process.StartInfo = startInfo;
-                      process.Start();
-
-
-                  }
+     
 
 
                  
@@ -2230,7 +2253,6 @@ namespace Shubharealtime
                     
                     System.Windows.MessageBox.Show("Please start NOW as 'Run as Administrator'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
 
-                    closeallprocess();
                     return;
                 }
             }
@@ -2254,45 +2276,7 @@ namespace Shubharealtime
                 int flag = 0;
                 string[] checkterminalcol = s1.Split(',');
                 string marketwathrequiredfield = "";
-                for (int i = 0; i < checkterminalcol.Count(); i++)
-                {
-                    marketwathrequiredfield = marketwathrequiredfield + checkterminalcol[i].ToString();
-                }
 
-
-                if (!marketwathrequiredfield.Contains("Last Trade Time"))
-                {
-                    flag = 1;
-
-                }
-                if (!marketwathrequiredfield.Contains("Last Traded Price"))
-                {
-                    flag = 1;
-
-                }
-                if (!marketwathrequiredfield.Contains("Volume Traded Today"))
-                {
-                    flag = 1;
-
-                }
-                if (!marketwathrequiredfield.Contains("Open Interest"))
-                {
-                    flag = 1;
-
-                }
-                if (!checkterminalcol[0].Contains("Last Trade Time"))
-                {
-                    flag = 1;
-
-                }
-                if (flag == 1)
-                {
-                    System.Windows.MessageBox.Show("One or more columns are missing in the order as below!\n Trading symbol , LTT , LUT , LTP , Volume Traded Today ,Open Interest. ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
-
-
-                    closeallprocess();
-                }
-                 
 
                 //load data from window handle 
                 for (int i = 0; i < f.Children.Count() - 1; i++)
