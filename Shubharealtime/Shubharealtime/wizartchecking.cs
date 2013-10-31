@@ -670,7 +670,7 @@ namespace Shubharealtime
 
             for (int i = 0; i < googlesymbol.Count(); i++)
             {
-                if (googlesymbol[i] != "No symbol selected")
+                if (googlesymbol[i] != "Enter google symbol")
                 {
 
 
@@ -841,7 +841,7 @@ namespace Shubharealtime
                         //finalarr[icntr].name = strbseequityfilename.Substring(0, strbseequityfilename.Length - 4); ;
 
                         finalarr[icntr].ticker = mappingsymbol;
-                        finalarr[icntr].name = mappingsymbol;
+                        //finalarr[icntr].name = mappingsymbol;
 
 
                         finalarr[icntr].date = datetostore; // String.Format("{0:yyyyMMdd}", myDate);
@@ -852,7 +852,7 @@ namespace Shubharealtime
                         finalarr[icntr].volume = resbsecsv1[icntr].volume;
                         finalarr[icntr].time = timetostore;
 
-                        finalarr[icntr].openint = 0;  //enint;
+                        //finalarr[icntr].openint = 0;  //enint;
 
 
                         icntr++;
@@ -1290,47 +1290,37 @@ namespace Shubharealtime
                     flag = 1;
 
                 }
-                else
-                {
-                    flag = 0;
-                }
+               
                 if (!marketwathrequiredfield.Contains("LTP"))
                 {
                     flag = 1;
 
                 }
-                else
-                {
-                    flag = 0;
-                }
+               
                 if (!marketwathrequiredfield.Contains("Volume Traded Today"))
                 {
                     flag = 1;
 
                 }
-                else
+                if (!marketwathrequiredfield.Contains("LUT"))
                 {
-                    flag = 0;
+                    flag = 1;
+
                 }
+                
                 if (!marketwathrequiredfield.Contains("Open Interest"))
                 {
                     flag = 1;
 
                 }
-                else
-                {
-                    flag = 0;
-                }
+               
                 if (!checkterminalcol[0].Contains("LTT"))
                 {
                     flag = 1;
                     // System.Windows.MessageBox.Show("LTT Should be at second position in the market watch (Trading symbol ,LTT and so on ...)");
 
                 }
-                else
-                {
-                    flag = 0;
-                }
+               
             }
             if (flag == 1)
             {
@@ -1626,7 +1616,7 @@ namespace Shubharealtime
                                         VirtualMouse.LeftClick();
 
                                         SendKeys.SendWait("Shift+E");
-                                        filepathforbackfill = "  C:\\" + symbolnametostore + ".csv";
+                                        filepathforbackfill = "  C:\\myshubhalabha\\" + symbolnametostore + ".csv";
 
                                         //  filepathforbackfill = symbolnametostore + ".csv";
 

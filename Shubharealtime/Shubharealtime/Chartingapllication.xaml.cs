@@ -82,6 +82,7 @@ namespace Shubharealtime
         private void ami_chk_Checked(object sender, RoutedEventArgs e)
         {
             regKey.SetValue("Chartingapplication", " Amibroker");
+            
                
         }
         public void savedata()
@@ -117,7 +118,7 @@ namespace Shubharealtime
         private void meta_chk_Checked(object sender, RoutedEventArgs e)
         {
             regKey.SetValue("Chartingapplication", " Metastock");
-
+            
         }
 
         private void meta_chk_Unloaded(object sender, RoutedEventArgs e)
@@ -167,7 +168,25 @@ namespace Shubharealtime
                 var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
                 var Metastockdatapath = regKey.GetValue("Metastockdatapath");
                 var Chartingapplication = regKey.GetValue("Chartingapplication");
+                var fchartdatapath = regKey.GetValue("fchart");
 
+               
+                if (Chartingapplication.ToString().Contains("Amibroker"))
+                {
+
+                    ami_chk.IsChecked = true;
+                }
+
+                if (Chartingapplication.ToString().Contains("Metastock"))
+                {
+
+                    meta_chk.IsChecked = true;
+                }
+                if (Chartingapplication.ToString().Contains("Fchart"))
+                {
+
+                    fchart_chk.IsChecked = true;
+                }
 
                 var Amiexepath1 = regKey.GetValue("Amiexepath");
                 var backfill1 = regKey.GetValue("backfill");
@@ -181,6 +200,7 @@ namespace Shubharealtime
                 db_path.Text = Amibrokerdatapath.ToString();
                 Amiexepath.Text = Amiexepath1.ToString();
                 meatpath_txt.Text = Metastockdatapath.ToString();
+                fchartpath.Text=fchartdatapath.ToString();
             }
             catch
             {

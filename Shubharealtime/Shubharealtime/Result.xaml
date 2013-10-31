@@ -14,13 +14,13 @@
         <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="159,86,0,0" Name="result_chart" VerticalAlignment="Top" FontWeight="Medium" FontFamily="Times New Roman" FontSize="13" />
         <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="189,111,0,0" Name="result_amipath" VerticalAlignment="Top" FontWeight="Medium" FontFamily="Times New Roman" FontSize="13" />
         <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="184,136,0,0" Name="result_metapath" VerticalAlignment="Top" FontWeight="Medium" FontFamily="Times New Roman" FontSize="13" />
-        <Label Content="• Nest/Now backfill -" Height="28" HorizontalAlignment="Left" Margin="26,182,0,0" Name="label1" VerticalAlignment="Top" FontWeight="Medium" FontFamily="Times New Roman" FontSize="13" />
-        <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="143,182,0,0" Name="nestnowbackfill" VerticalAlignment="Top" FontWeight="Medium" FontFamily="Times New Roman" FontSize="13" />
+        <Label Content="• NEST/NOW backfill -" Height="28" HorizontalAlignment="Left" Margin="26,182,0,0" Name="label1" VerticalAlignment="Top" FontWeight="Medium" FontFamily="Times New Roman" FontSize="13" />
+        <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="154,182,0,0" Name="nestnowbackfill" VerticalAlignment="Top" FontWeight="Medium" FontFamily="Times New Roman" FontSize="13" />
         <Label Content="The summary of your selection is as follows :" FontWeight="Bold" Height="28" HorizontalAlignment="Left" Margin="73,12,0,0" Name="label2" VerticalAlignment="Top" FontSize="14" FontFamily="Times New Roman" />
-        <Border BorderBrush="Silver" BorderThickness="1" Height="175" HorizontalAlignment="Left" Margin="12,46,0,0" Name="border1" VerticalAlignment="Top" Width="416" />
+        <Border BorderBrush="Silver" BorderThickness="1" Height="175" HorizontalAlignment="Left" Margin="20,46,0,0" Name="border1" VerticalAlignment="Top" Width="416" />
         <Label Content="Click Back if you want to review or change any settings ." FontFamily="Times New Roman" FontSize="13" FontWeight="Medium" Height="28" HorizontalAlignment="Left" Margin="20,224,0,0" Name="label3" VerticalAlignment="Top" />
         <Label Content="Click on Finish to start our application." FontFamily="Times New Roman" FontSize="13" FontWeight="Medium" Height="28" HorizontalAlignment="Left" Margin="20,246,0,0" Name="label4" VerticalAlignment="Top" />
-        <Label Content="•Fchart database path is -" FontFamily="Times New Roman" FontSize="13" FontWeight="Medium" Height="28" HorizontalAlignment="Left" Margin="25,158,0,0" Name="label5" VerticalAlignment="Top" />
-        <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="164,158,0,0" Name="result_fchartpath" VerticalAlignment="Top" />
+        <Label Content="• Fchart database path is -" FontFamily="Times New Roman" FontSize="13" FontWeight="Medium" Height="28" HorizontalAlignment="Left" Margin="25,158,0,0" Name="label5" VerticalAlignment="Top" />
+        <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="163,158,0,0" Name="result_fchartpath" VerticalAlignment="Top" />
     </Grid>
 </UserControl>

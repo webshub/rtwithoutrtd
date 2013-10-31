@@ -87,8 +87,8 @@ namespace Shubharealtime
             public string low;
             public string close;
             public string volume;
-            [FieldNullValue(typeof(long), "0")]
-            public Nullable<long> openint;
+            //[FieldNullValue(typeof(long), "0")]
+            //public Nullable<long> openint;
         }
         [DelimitedRecord(","), IgnoreFirst(1)]
         public class nestnowfinal

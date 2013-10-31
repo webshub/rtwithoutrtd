@@ -10,14 +10,14 @@
             <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="164,48,0,0" Name="db_path" Text="C:\myshubhalabha\amirealtime" VerticalAlignment="Top" Width="186" />
             <Label Content="Amibroker database path" Height="28" HorizontalAlignment="Left" Margin="13,47,0,0" Name="label8" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
             <CheckBox Content="Amibroker" Height="16" HorizontalAlignment="Left" Margin="180,10,0,0" Name="ami_chk" VerticalAlignment="Top" Checked="ami_chk_Checked" FontFamily="Times New Roman" FontSize="13" />
-            <CheckBox Content="Metastock" Height="16" HorizontalAlignment="Right" Margin="0,10,126,0" Name="meta_chk" VerticalAlignment="Top" Checked="meta_chk_Checked" Unloaded="meta_chk_Unloaded" FontFamily="Times New Roman" FontSize="13" />
+            <CheckBox Content="Metastock" Height="16" HorizontalAlignment="Left" Margin="264,10,0,0" Name="meta_chk" VerticalAlignment="Top" Checked="meta_chk_Checked" Unloaded="meta_chk_Unloaded" FontFamily="Times New Roman" FontSize="13" />
             <CheckBox Content="Fchart" Height="16" HorizontalAlignment="Left" Margin="348,10,0,0" Name="fchart_chk" VerticalAlignment="Top" Width="76" Checked="fchart_chk_Checked" FontFamily="Times New Roman" FontSize="13" />
             <Label Content="• Select Charting Application" Height="28" HorizontalAlignment="Left" Margin="6,5,0,0" Name="label9" VerticalAlignment="Top" FontWeight="SemiBold" FontFamily="Times New Roman" FontSize="13" />
             <Button Content="Browse" Height="25" HorizontalAlignment="Left" Margin="360,113,0,0" Name="meta_browes" VerticalAlignment="Top" Width="73" Click="meta_browes_Click" FontFamily="Times New Roman" FontSize="13" />
             <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="164,115,0,0" Name="meatpath_txt" Text="C:\myshubhalabha" VerticalAlignment="Top" Width="186" />
             <Label Content="Metastock database path" Height="28" HorizontalAlignment="Left" Margin="16,111,0,0" Name="label10" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
         <Button Content="Browse" Height="25" HorizontalAlignment="Right" Margin="0,80,32,0" Name="button1" VerticalAlignment="Top" Width="72" Click="button1_Click" FontFamily="Times New Roman" FontSize="13" />
-        <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="164,80,0,0" Name="Amiexepath" Text="C:\myshubhalabha\amirealtime" VerticalAlignment="Top" Width="186" />
+        <TextBox Height="23" HorizontalAlignment="Left" IsReadOnly="True" Margin="164,80,0,0" Name="Amiexepath" Text="C:\Program Files (x86)\AmiBroker" VerticalAlignment="Top" Width="186" />
         <Label Content="Amibroker exe path" Height="28" HorizontalAlignment="Left" Margin="18,78,0,0" Name="label1" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
         <Label Content="•Amibroker users follow the steps given below and then Click on Next button " FontWeight="SemiBold" Height="28" HorizontalAlignment="Left" Margin="5,190,0,0" Name="label7" VerticalAlignment="Top" FontSize="13" FontFamily="Times New Roman" />
         <Label Content="1. Go to file click on database setting" Height="28" HorizontalAlignment="Left" Margin="10,212,0,0" Name="label3" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
@@ -25,6 +25,6 @@
         <Label Content="Fchart database path" Height="28" HorizontalAlignment="Left" Margin="16,144,0,0" Name="label2" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" />
         <TextBox Height="23" HorizontalAlignment="Left" Margin="164,148,0,0" Name="fchartpath" VerticalAlignment="Top" Width="186" Text="C:\myshubhalabha" />
         <Button Content="Browse" Height="23" HorizontalAlignment="Left" Margin="360,148,0,0" Name="button2" VerticalAlignment="Top" Width="75" Click="button2_Click" FontFamily="Times New Roman" FontSize="13" />
-        <Border BorderBrush="Silver" BorderThickness="1" Height="142" HorizontalAlignment="Left" Margin="12,39,0,0" Name="border1" VerticalAlignment="Top" Width="431" />
+        <Border BorderBrush="Silver" BorderThickness="1" Height="142" HorizontalAlignment="Left" Margin="14,39,0,0" Name="border1" VerticalAlignment="Top" Width="431" />
     </Grid>
 </UserControl>

@@ -235,9 +235,9 @@ namespace Shubharealtime
             {
 
 
-                if (!Directory.Exists(Metastockdatapath  + "\\Intraday\\Metastock"))
+                if (!Directory.Exists(Metastockdatapath  + "\\Metastock"))
                 {
-                    Directory.CreateDirectory(Metastockdatapath + "\\Intraday\\Metastock");
+                    Directory.CreateDirectory(Metastockdatapath + "\\Metastock");
                 }
                 // commandpromptcall(filename, targetpath + "\\Intraday\\Metastock\\realtimemetastock");
                 try
@@ -257,7 +257,7 @@ namespace Shubharealtime
                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                 startInfo.FileName = "cmd.exe";
                 //startInfo.Arguments = "/C  C:\\asc2ms.exe -f C:\\data\\Metastock\\M.csv -r r -o C:\\data\\Metastock\\google\\e";
-                startInfo.Arguments = "/C  " + Metastockdatapath + "\\asc2ms.exe -f " + strBSECSVArr + " -r r -o " + Metastockdatapath + "\\Metastock";
+                startInfo.Arguments = "/C  " + Metastockdatapath + "\\asc2ms.exe -f " + strBSECSVArr + " -r r -o " + Metastockdatapath + "\\Metastock  --forceWrite=yes ";
                 // startInfo.Arguments = @"/C  C:\asc2ms.exe -f C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod -r r -o C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod\Metastock\a" ;
 
 
@@ -295,6 +295,29 @@ namespace Shubharealtime
             try
             {
                 using (var reader = new StreamReader("C:\\myshubhalabha\\Symbolname.csv"))
+                {
+                    string line = null;
+
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        string[] name = line.Split(',');
+                        symbolname.Add(name[0]);
+                        googlesymbol.Add(name[1]);
+                        mappingsymbol.Add(name[2]);
+                    }
+                }
+            }
+            catch
+            {
+            }
+
+        }
+        public void getgooglesymbolname()
+        {
+
+            try
+            {
+                using (var reader = new StreamReader("C:\\myshubhalabha\\GoogleSymbolname.csv"))
                 {
                     string line = null;
 
@@ -643,13 +666,29 @@ namespace Shubharealtime
                        fchart = regKey.GetValue("fchart").ToString();
                    }
                    Executenestnowbackfillrocessing(nestnowfilePaths[i], datetostore, "GOOGLEEOD", i, nestnowfilePaths[i].ToString());
+
                   
-                 
                }
                catch
                {
                }
            }
+
+           if (chartforbackfill.ToString() == "Fchart")
+           {
+              
+                   fchart = regKey.GetValue("fchart").ToString();
+
+                   if (!Directory.Exists(fchart + "\\Fchart"))
+                   {
+                       Directory.CreateDirectory(fchart + "\\Fchart");
+                   }
+                   foreach (var file in Directory.GetFiles("C:\\myshubhalabha\\NESTbackfill"))
+                       File.Copy(file, System.IO.Path.Combine(fchart + "\\Fchart", System.IO.Path.GetFileName(file)));
+               
+           }
+          
+
            if (chartforbackfill.ToString() == "Amibroker")
            {
                for (int i = 0; i < nestnowfilePaths.Count(); i++)
@@ -670,7 +709,7 @@ namespace Shubharealtime
 
 
                 //getsymbol name from google file 
-                getsymbolname();
+                getgooglesymbolname();
 
                 googlebackfill();
 
@@ -678,16 +717,22 @@ namespace Shubharealtime
 
                 //load all files to charting applciation
                 var Amibrokerdatapath = "";
-
+                RegistryKey regKey = Registry.CurrentUser;
+                regKey = regKey.CreateSubKey(@"Windows-xpRT\");
                 try
                 {
-                    RegistryKey regKey = Registry.CurrentUser;
-                    regKey = regKey.CreateSubKey(@"Windows-xpRT\");
+                   
                     Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath").ToString();
                 }
                 catch
                 {
                 }
+
+                var chartforbackfill = regKey.GetValue("chartingappforbackfill");
+                
+            if (chartforbackfill.ToString() == "Amibroker")
+            {
+                
                 ExcelType = Type.GetTypeFromProgID("Broker.Application");
                 ExcelInst = Activator.CreateInstance(ExcelType);
                 ExcelType.InvokeMember("Visible", BindingFlags.SetProperty, null,
@@ -708,7 +753,7 @@ namespace Shubharealtime
                               ExcelInst, args);
                 }
              
-
+             }
             }
             else if (withoutback=="True")
             {
@@ -721,7 +766,7 @@ namespace Shubharealtime
                     ExcelInst, new string[1] { amipath });
             }
 
-            System.Windows.MessageBox.Show("Backfill completed", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information );
+            System.Windows.MessageBox.Show("Backfill completed", "Success Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information );
 
 
         }
@@ -889,10 +934,12 @@ namespace Shubharealtime
           }
             for (int i = 0; i < googlesymbol.Count(); i++)
             {
+                try
+                {
                 string[] words = googlesymbol[i].Split(':');
 
-                //No symbol selected then dont do backfill 
-                if (words[1] != "No symbol selected")
+                //Enter google symbol then dont do backfill 
+                if (words[1] != "Enter google symbol")
                 {
 
 
@@ -943,8 +990,22 @@ namespace Shubharealtime
                         }
                        //join all csv files 
                         JoinCsvFiles(csvFileNames, targetpath + "\\GoogleBackfill\\" +mappingsymbol[i] + ".csv");
+                        var chartforbackfill = regKey.GetValue("chartingappforbackfill");
 
+                        if (chartforbackfill.ToString() == "Fchart")
+                        {
 
+                            fchart = regKey.GetValue("fchart").ToString();
+
+                            if (!Directory.Exists(fchart + "\\Fchart"))
+                            {
+                                Directory.CreateDirectory(fchart + "\\Fchart");
+                            }
+                            foreach (var file in Directory.GetFiles("C:\\myshubhalabha\\GoogleBackfill"))
+                                File.Copy(file, System.IO.Path.Combine(fchart + "\\Fchart", System.IO.Path.GetFileName(file)));
+
+                        }
+          
 
 
 
@@ -962,6 +1023,11 @@ namespace Shubharealtime
                         
                     }
                 }
+                 }
+                    catch 
+                    {
+                        
+                    }
             }
                    
 
@@ -1007,6 +1073,12 @@ namespace Shubharealtime
         //Processing of google backfill file
       public void ExecuteYAHOOProcessing(string[] strBSECSVArr, string datetostore, string name, int count, string mappingsymbol)
       {
+          RegistryKey regKey = Registry.CurrentUser;
+          regKey = regKey.CreateSubKey(@"Windows-xpRT\");
+          var chartforbackfill = regKey.GetValue("chartingappforbackfill");
+
+          Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath").ToString();
+          Metastockdatapath = regKey.GetValue("Metastockdatapath").ToString();
 
           if (name == "GOOGLEEOD")
           {
@@ -1045,8 +1117,7 @@ namespace Shubharealtime
 
                       timefromyahoo = new DateTime(1970, 1, 1, 5, 30, 0).AddSeconds(valueforgoogletime);
 
-                      RegistryKey regKey = Registry.CurrentUser;
-                      regKey = regKey.CreateSubKey(@"Windows-xpRT\");
+                     
                       int googleday = Convert.ToInt32(regKey.GetValue("googleday"));
                       var googletime = Convert.ToInt32(regKey.GetValue("googletime"));
                       int mindata = 60;
@@ -1065,14 +1136,15 @@ namespace Shubharealtime
 
                       string timetostore = timefromyahoo.Hour.ToString() + ":" + timefromyahoo.Minute.ToString() + ":" + timefromyahoo.Millisecond.ToString();
 
+                      string[] yahoodate = timefromyahoo.ToString().Split('-');
 
+                      datetostore = yahoodate[0] + yahoodate[1] + yahoodate[2].Substring(0, 2);
 
-                      datetostore =DateTime.Today.Day+"-"+DateTime.Today.Month+"-"+DateTime.Today.Year  ;
                       //finalarr[icntr].ticker = strbseequityfilename.Substring(0, strbseequityfilename.Length - 4);
                       //finalarr[icntr].name = strbseequityfilename.Substring(0, strbseequityfilename.Length - 4); ;
 
                       finalarr[icntr].ticker = mappingsymbol;
-                      finalarr[icntr].name = mappingsymbol;
+                    finalarr[icntr].name = mappingsymbol;
 
                      
                       finalarr[icntr].date = datetostore; // String.Format("{0:yyyyMMdd}", myDate);
@@ -1083,16 +1155,74 @@ namespace Shubharealtime
                       finalarr[icntr].volume = resbsecsv1[icntr].volume;
                       finalarr[icntr].time = timetostore;
 
-                      finalarr[icntr].openint = 0;  //enint;
+                     // finalarr[icntr].openint = 0;  //enint;
+
+
+                      if (chartforbackfill.ToString() == "Fchart")
+                      {
+                          finalarr[icntr].time = timetostore.Substring(0, timetostore.Length - 2);
+
+                      }
+                      if (chartforbackfill.ToString() == "Metastock")
+                      {
+                          //add PER column befor date column 
+                          finalarr[icntr].date = "I," + finalarr[icntr].date;
+
+                      }
 
 
                       icntr++;
                   }
 
                   FileHelperEngine engineBSECSVFINAL = new FileHelperEngine(typeof(GOOGLEFINAL));
-                 
+                  if (chartforbackfill.ToString() == "Metastock")
+                  {
+                      engineBSECSVFINAL.HeaderText = "<TICKER>,<PER>,<DATE>,<TIME>,<OPEN>,<HIGH>,<LOW>,<CLOSE>,<VOLUME>";
+                      //set file path as metastock backfill 
+
+                  }
 
                   engineBSECSVFINAL.WriteFile(obj, finalarr);
+
+
+                  if (chartforbackfill.ToString() == "Metastock")
+                  {
+
+
+                      if (!Directory.Exists(Metastockdatapath + "\\Metastock"))
+                      {
+                          Directory.CreateDirectory(Metastockdatapath + "\\Metastock");
+                      }
+                      // commandpromptcall(filename, targetpath + "\\Intraday\\Metastock\\realtimemetastock");
+                      try
+                      {
+
+                          string filepath = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
+                          string processtostart = filepath.Substring(0, filepath.Length - 18) + "asc2ms.exe";
+
+                          File.Copy(processtostart, Metastockdatapath + "\\asc2ms.exe", true);
+                      }
+                      catch
+                      {
+
+                      }
+                      System.Diagnostics.Process process = new System.Diagnostics.Process();
+                      System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                      startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                      startInfo.FileName = "cmd.exe";
+                      //startInfo.Arguments = "/C  C:\\asc2ms.exe -f C:\\data\\Metastock\\M.csv -r r -o C:\\data\\Metastock\\google\\e";
+                      startInfo.Arguments = "/C  " + Metastockdatapath + "asc2ms.exe -f " + obj + " -r r -o " + Metastockdatapath + "Metastock  --forceWrite=yes ";
+                      // startInfo.Arguments = @"/C  C:\asc2ms.exe -f C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod -r r -o C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod\Metastock\a" ;
+
+
+
+                      process.StartInfo = startInfo;
+                      process.Start();
+
+
+                  }
+
+
                  
               }
               return;
@@ -2010,9 +2140,9 @@ namespace Shubharealtime
                         writer.WriteLine(datatostore);
 
 
-                    if (!Directory.Exists(Metastockdatapath  + "\\Intraday\\Metastock"))
+                    if (!Directory.Exists(Metastockdatapath  + "\\Metastock"))
                     {
-                        Directory.CreateDirectory(Metastockdatapath + "\\Intraday\\Metastock");
+                        Directory.CreateDirectory(Metastockdatapath + "\\Metastock");
                     }
                     // commandpromptcall(filename, targetpath + "\\Intraday\\Metastock\\realtimemetastock");
                     try
@@ -2323,7 +2453,7 @@ namespace Shubharealtime
                     startInfo.FileName = "cmd.exe";
                     //startInfo.Arguments = "/C  C:\\asc2ms.exe -f C:\\data\\Metastock\\M.csv -r r -o C:\\data\\Metastock\\google\\e";
                     // startInfo.Arguments = @"/C  C:\asc2ms.exe -f C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod -r r -o C:\Documents and Settings\maheshwar\My Documents\BSe\Downloads\Googleeod\Metastock\a" ;
-                    startInfo.Arguments = "/C  " + targetpath + "\\asc2ms.exe -f " + filename + " -r r -o " + Metastockdatapath + "\\Metastock  --forceWrite=yes --verbosity high";
+                    startInfo.Arguments = "/C  " + Metastockdatapath + "\\asc2ms.exe -f " + filename + " -r r -o " + Metastockdatapath + "\\Metastock  --forceWrite=yes --verbosity high";
 
 
                     process.StartInfo = startInfo;
@@ -2334,13 +2464,14 @@ namespace Shubharealtime
                 }
                 if (chartingaplication == "Fchart")
                 {
-                    if (!Directory.Exists(targetpath + "\\Fchart"))
+                    if (!Directory.Exists(fchart + "\\Fchart"))
                     {
-                        Directory.CreateDirectory(targetpath + "\\Fchart");
+                        Directory.CreateDirectory(fchart + "\\Fchart");
                     }
-                    string filename = targetpath + "\\Fchart\\RealtimeFchartdata.txt";
+                    string filename = fchart + "\\Fchart\\RealtimeFchartdata.txt";
                     using (var writer = new StreamWriter(filename))
                         writer.WriteLine(datatostore);
+
                 }
 
 

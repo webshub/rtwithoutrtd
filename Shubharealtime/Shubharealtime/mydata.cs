@@ -17,9 +17,9 @@ namespace Shubharealtime
         /// Saves items to Symbolfile.txt file in bin folder.
         /// </summary>
         /// <param name="items"></param>
-        public void Save(System.Windows.Data.CollectionView items)
+        public void Save(System.Windows.Data.CollectionView items,string filename)
         {
-            string filename = "C:\\myshubhalabha\\Symbolname.csv";
+           
 
            if(File.Exists(filename ))
            {

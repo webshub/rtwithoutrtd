@@ -115,6 +115,11 @@ namespace Shubharealtime
 
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "Notice.txt";
 
+                    RegistryKey regKey = Registry.CurrentUser;
+                    regKey = regKey.CreateSubKey(@"Windows-xpRT\");
+                    var Amiexepath = regKey.GetValue("Amiexepath");
+
+                   
                     //copy files into folder 
                     File.Copy(processtostart, "C:\\myshubhalabha\\Notice.txt", true);
 
@@ -122,28 +127,28 @@ namespace Shubharealtime
 
                     
                     File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\shubhaxls.format", true);
-                    File.Copy(processtostart, programfilepath + "\\AmiBroker\\Formats\\shubhaxls.format", true);
+                    File.Copy(processtostart, Amiexepath + "\\Formats\\shubhaxls.format", true);
 
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "Shubhasharekhan.format";
 
 
                     File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\Shubhasharekhan.format", true);
-                    File.Copy(processtostart, programfilepath + "\\AmiBroker\\Formats\\Shubhasharekhan.format", true);
+                    File.Copy(processtostart, Amiexepath + "\\Formats\\Shubhasharekhan.format", true);
 
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhanest-now.format";
                     File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\shubhanest-now.format", true);
-                    File.Copy(processtostart, programfilepath + "\\AmiBroker\\Formats\\shubhanest-now.format", true);
+                    File.Copy(processtostart, Amiexepath + "\\Formats\\shubhanest-now.format", true);
 
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "ShubhaRt.format";
                     File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\ShubhaRt.format", true);
-                    File.Copy(processtostart, programfilepath + "\\AmiBroker\\Formats\\ShubhaRt.format", true);
+                    File.Copy(processtostart, Amiexepath + "\\Formats\\ShubhaRt.format", true);
 
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "Shubhabackfill.format";
                     File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\Shubhabackfill.format", true);
-                    File.Copy(processtostart, programfilepath + "\\AmiBroker\\Formats\\Shubhabackfill.format", true);
+                    File.Copy(processtostart, Amiexepath + "\\Formats\\Shubhabackfill.format", true);
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "RT.format";
                     File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\RT.format", true);
-                    File.Copy(processtostart, programfilepath + "\\AmiBroker\\Formats\\RT.format", true);
+                    File.Copy(processtostart, Amiexepath + "\\Formats\\RT.format", true);
                 }
                 catch
                 {
@@ -199,6 +204,7 @@ namespace Shubharealtime
 
                     if(agree.IsChecked==false )
                     {
+                        Rsult_lbl.Foreground = Brushes.Red;
                         Rsult_lbl.Content = "Please accept license agreement else Click  Cancel to exit. ";
 
                         return ;
@@ -250,7 +256,16 @@ namespace Shubharealtime
                     RegistryKey regKey = Registry.CurrentUser;
                     regKey = regKey.CreateSubKey(@"Windows-xpRT\");
                     var terminalname = regKey.GetValue("terminal");
-                    string terminal = terminalname.ToString();
+                    string terminal = "";
+                    try
+                    {
+                        terminal = terminalname.ToString();
+                    }
+                    catch
+                    {
+                        Rsult_lbl.Content = "Error :Please select atleast one terminal ";
+
+                    }
                     //nest cheking
                     if (terminal == "NEST")
                     {
@@ -283,7 +298,7 @@ namespace Shubharealtime
 
 
                                     Rsult_lbl.Foreground = Brushes.Green;
-                                    Rsult_lbl.Content = "NEST PLUS is working fine  ";
+                                    Rsult_lbl.Content = "NEST Plus is configured successfully for backfill ";
 
 
 
@@ -327,6 +342,8 @@ namespace Shubharealtime
                         }
                         else
                         {
+                            Rsult_lbl.Foreground = Brushes.Red;
+
                             Rsult_lbl.Content = result;
                             return;
                         }
@@ -373,7 +390,8 @@ namespace Shubharealtime
 
 
 
-
+                                    Rsult_lbl.Foreground = Brushes.Green;
+                                    Rsult_lbl.Content = "Terminal selection done successfully  ";
                                     Chartingapllication c = new Chartingapllication();
                                     stackcontainer.Children.Add(c);
                                     nextcount++;
@@ -382,6 +400,8 @@ namespace Shubharealtime
                                 }
                                 else
                                 {
+                                    Rsult_lbl.Foreground = Brushes.Red;
+
                                     Rsult_lbl.Content = "Backfill cannot be done ";
                                     return;
                                 }
@@ -411,6 +431,8 @@ namespace Shubharealtime
                         }
                         else
                         {
+                            Rsult_lbl.Foreground = Brushes.Red;
+
                             Rsult_lbl.Content = result;
                             return;
                         }
@@ -427,6 +449,8 @@ namespace Shubharealtime
                         catch
                         {
                         }
+                        Rsult_lbl.Foreground = Brushes.Green;
+                        Rsult_lbl.Content = "Terminal selection done successfully  ";
                         Chartingapllication c = new Chartingapllication();
                         stackcontainer.Children.Add(c);
                         nextcount++;
@@ -443,6 +467,8 @@ namespace Shubharealtime
                         catch
                         {
                         }
+                        Rsult_lbl.Foreground = Brushes.Green;
+                        Rsult_lbl.Content = "Terminal selection done successfully  ";
                         Chartingapllication c = new Chartingapllication();
                         stackcontainer.Children.Add(c);
                         nextcount++;
@@ -452,6 +478,8 @@ namespace Shubharealtime
 
                     else
                     {
+                        Rsult_lbl.Foreground = Brushes.Red;
+
                         Rsult_lbl.Content = "Error :Please select atleast one terminal ";
                     }
 
@@ -463,44 +491,19 @@ namespace Shubharealtime
                 if (nextcount == 4)
                 {
                     ///for checking amibroker database path
-                    try
+
+                    RegistryKey regKey = Registry.CurrentUser;
+                    regKey = regKey.CreateSubKey(@"Windows-xpRT\");
+                    var terminalname = regKey.GetValue("terminal");
+                    var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
+                    var Chartingapplication = regKey.GetValue("Chartingapplication");
+                    if (Chartingapplication == null || Chartingapplication == "")
                     {
-                        Type ExcelType;
-                        object ExcelInst;
-                        object[] args = new object[3];
-                        RegistryKey regKey = Registry.CurrentUser;
-                        regKey = regKey.CreateSubKey(@"Windows-xpRT\");
-                        var terminalname = regKey.GetValue("terminal");
-                        var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
-                        var Chartingapplication = regKey.GetValue("Chartingapplication");
-                        if (Chartingapplication == null || Chartingapplication=="")
-                        {
-                            Rsult_lbl.Content = "Please select charting application ";
-                            return;
-                        }
+                        Rsult_lbl.Foreground = Brushes.Red;
 
-                        if (Chartingapplication.ToString().Contains("Amibroker"))
-                        {
-
-                        ExcelType = Type.GetTypeFromProgID("Broker.Application");
-                        ExcelInst = Activator.CreateInstance(ExcelType);
-                        ExcelType.InvokeMember("Visible", BindingFlags.SetProperty, null,
-                                  ExcelInst, new object[1] { true });
-
-                        ExcelType.InvokeMember("LoadDatabase", BindingFlags.InvokeMethod | BindingFlags.Public, null,
-                            ExcelInst, new string[1] { Amibrokerdatapath.ToString() });
-
-
-
-                        args[0] = Convert.ToInt16(0);
-                        args[1] = "C:\\myshubhalabha\\Realtimeamibrokerdata.txt";
-                        args[2] = "RT.format";
-                        ExcelType.InvokeMember("Import", BindingFlags.InvokeMethod | BindingFlags.Public, null,
-                             ExcelInst, args);
-                        }
-                    }catch
-                    {
-                        }
+                        Rsult_lbl.Content = "Please select charting application ";
+                        return;
+                    }
                     try
                     {
                         stackcontainer.Children.RemoveAt(0);

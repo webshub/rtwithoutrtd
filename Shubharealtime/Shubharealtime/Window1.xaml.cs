@@ -112,7 +112,7 @@ namespace Shubharealtime
         {
             nestbackfill.IsChecked = false;
             googlebackfill.IsChecked = false;
-
+            string amiexeoath1 = "";
             if (!IsRunAsAdministrator())
             {
                 // It is not possible to launch a ClickOnce app as administrator directly, so instead we launch the
@@ -195,7 +195,9 @@ namespace Shubharealtime
                         for (int i = 0; i < serverdata.Count(); i++)
                          {
                              serverdata1 = serverdata[i].Split(' ');
-                            DateTime dateonserver=Convert.ToDateTime(serverdata1[1]);
+                             string[] datefromserver = serverdata1[1].ToString().Split('-');
+                           // DateTime dateonserver=Convert.ToDateTime(serverdata1[1]);
+                             DateTime dateonserver = new DateTime(Convert.ToInt32(datefromserver[2]), Convert.ToInt32(datefromserver[1]), Convert.ToInt32(datefromserver[0]));
 
                             ManagementObject dsk1 = new ManagementObject(@"win32_logicaldisk.deviceid=""c:""");
                             dsk1.Get();
@@ -245,7 +247,7 @@ namespace Shubharealtime
 
             try
             {
-                using (var reader = new StreamReader("C:\\myshubhalabha\\Symbolname.csv"))
+                using (var reader = new StreamReader("C:\\myshubhalabha\\GoogleSymbolname.csv"))
                 {
                     string line = null;
 
@@ -257,6 +259,20 @@ namespace Shubharealtime
 
 
                        
+                    }
+                }
+                using (var reader = new StreamReader("C:\\myshubhalabha\\Symbolname.csv"))
+                {
+                    string line = null;
+
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        string[] name = line.Split(',');
+
+                        listView2.Items.Add(new ListViewData(name[0], name[1], name[2]));
+
+
+
                     }
                 }
             }
@@ -285,15 +301,17 @@ namespace Shubharealtime
 
                 string timetosave = ConfigurationManager.AppSettings["timetoRT"];
 
-                string googleday = ConfigurationManager.AppSettings["Daysforgoogle"];
+                string googleday = ConfigurationManager.AppSettings["googleday"];
 
-                string google_time = ConfigurationManager.AppSettings["google_time_frame"];
+                string google_time = ConfigurationManager.AppSettings["googlemin"];
                 string nestback = ConfigurationManager.AppSettings["nestbackfill"];
                 string tradetiger1 = ConfigurationManager.AppSettings["tradetiger"];
 
                 string googleback = ConfigurationManager.AppSettings["googlebackfill"];
                 string withoutback = ConfigurationManager.AppSettings["withoutbackfill"];
                 withoutbackfill.IsChecked = true;
+                googletime.SelectedIndex = Convert.ToInt32(google_time);
+                googledays.SelectedIndex = Convert.ToInt32(googleday);
 
                 //if (nestback == "True")
                 //{
@@ -328,6 +346,7 @@ namespace Shubharealtime
                       
                     
                     var Amiexepath = regKey.GetValue("Amiexepath");
+                    amiexeoath1 = Amiexepath.ToString();
                     var backfill1 = regKey.GetValue("backfill");
                     string backfill = "Not present";
                     if (backfill1 != null)
@@ -366,7 +385,8 @@ namespace Shubharealtime
                         textBlock1.Visibility = Visibility.Visible;
 
                         textBlock3.Visibility = Visibility.Visible;
-
+                        RTmapsymbol.Visibility = Visibility.Hidden;
+                        nestbackfill.Visibility = Visibility.Hidden;
                         textBlock4.Visibility = Visibility.Visible;
                     }
                     if (backfill != "yes")
@@ -375,7 +395,7 @@ namespace Shubharealtime
                         nestbackfill.IsEnabled = false;
                         nestbackfill.Visibility = Visibility.Hidden;
 
-                        RTmapsymbol.Visibility = Visibility.Visible;
+                       // RTmapsymbol.Visibility = Visibility.Visible;
                     }
                     else
                     {
@@ -397,7 +417,7 @@ namespace Shubharealtime
                     dsk.Get();
                     string id = dsk["VolumeSerialNumber"].ToString();
                     moterboard.Text = id;
-
+                    regiID.Content = id;
                     var terminalfromwizart1 = regKey.GetValue("terminal");
                     var Chartingappfromwizart1 = regKey.GetValue("chart");
                     string Chartingappfromwizart = "";
@@ -482,21 +502,27 @@ namespace Shubharealtime
                     File.Copy(processtostart, "C:\\ExcelLogin.exe", true);
                     File.Copy(processtostart, "C:\\myshubhalabha\\ExcelLogin.exe", true);
 
+
+
+
+                   
+
+
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhaxls.format";
 
 
                     File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\shubhaxls.format", true);
-                    File.Copy(processtostart, programfilepath + "\\AmiBroker\\Formats\\shubhaxls.format", true);
+                    File.Copy(processtostart, amiexeoath1 + "\\Formats\\shubhaxls.format", true);
 
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "Shubhasharekhan.format";
 
 
                     File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\Shubhasharekhan.format", true);
-                    File.Copy(processtostart, programfilepath + "\\AmiBroker\\Formats\\Shubhasharekhan.format", true);
+                    File.Copy(processtostart, amiexeoath1 + "\\Formats\\Shubhasharekhan.format", true);
 
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhanest-now.format";
                     File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\shubhanest-now.format", true);
-                    File.Copy(processtostart, programfilepath + "\\AmiBroker\\Formats\\shubhanest-now.format", true);
+                    File.Copy(processtostart, amiexeoath1 + "\\Formats\\shubhanest-now.format", true);
 
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "ShubhaRt.format";
                     File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\ShubhaRt.format", true);
@@ -504,13 +530,13 @@ namespace Shubharealtime
 
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "Shubhabackfill.format";
                     File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\Shubhabackfill.format", true);
-                    File.Copy(processtostart, programfilepath + "\\AmiBroker\\Formats\\Shubhabackfill.format", true);
+                    File.Copy(processtostart, amiexeoath1 + "\\Formats\\Shubhabackfill.format", true);
                    
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "RT.format";
 
 
                     File.Copy(processtostart,"C:\\myshubhalabha\\amibroker format file\\\\RT.format", true);
-                    File.Copy(processtostart, programfilepath + "\\AmiBroker\\Formats\\RT.format", true);
+                    File.Copy(processtostart, amiexeoath1 + "\\Formats\\RT.format", true);
 
 
                     //samples 
@@ -681,12 +707,14 @@ namespace Shubharealtime
                 i1 = 30;
                 timetoRT.Items.Add(i1);
                 var timesec = regKey.GetValue("timesec");
-                if (timesec==null )
+                if (timesec == null || timesec == "")
                 {
                     timetoRT.SelectedIndex = 2;
                 }
-                timetoRT.SelectedIndex  =Convert.ToInt32( timesec);
-
+                else
+                {
+                    timetoRT.SelectedIndex = Convert.ToInt32(timesec);
+                }
                 //copy files into system32 folder
                 try
                 {
@@ -919,7 +947,11 @@ namespace Shubharealtime
         //Save data 
         public void savedata()
         {
-
+            RegistryKey regKey = Registry.CurrentUser;
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
+            regKey.SetValue("timesec", timetoRT.SelectedIndex.ToString());
+            regKey.SetValue("googleday", googledays.SelectedItem.ToString());
+            regKey.SetValue("googletime", googletime.SelectedItem.ToString());
 
             config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             config.AppSettings.Settings.Remove("timesec");
@@ -974,6 +1006,20 @@ namespace Shubharealtime
             config.AppSettings.Settings.Add("terminalname", RTD_server_name.SelectedItem.ToString());
             config.Save(ConfigurationSaveMode.Full);
             ConfigurationManager.RefreshSection("appSettings");
+
+
+            config.AppSettings.Settings.Remove("googlemin");
+
+            config.AppSettings.Settings.Add("googlemin", googletime.SelectedIndex.ToString());
+            config.Save(ConfigurationSaveMode.Full);
+            ConfigurationManager.RefreshSection("appSettings");
+
+            config.AppSettings.Settings.Remove("googleday");
+
+            config.AppSettings.Settings.Add("googleday", googledays.SelectedIndex.ToString());
+            config.Save(ConfigurationSaveMode.Full);
+            ConfigurationManager.RefreshSection("appSettings");
+
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -1011,9 +1057,9 @@ namespace Shubharealtime
         //Import symbol from NEST or NOW terminal
         private void importsymbol()
         {
-            
-            
-            
+
+
+            listView2.Items.Clear();
             
         
             string terminalname = ConfigurationManager.AppSettings["terminalname"];
@@ -1111,7 +1157,7 @@ namespace Shubharealtime
                 //add symbols into listview 
                 for (int i = 0; i < f.Children.Count() - 1; i++)
                 {
-                    listView2.Items.Add(new ListViewData(f.Children[i].Name, ":No symbol selected", f.Children[i].Name));
+                    listView2.Items.Add(new ListViewData(f.Children[i].Name, ":Enter google symbol", f.Children[i].Name));
               
                 }
 
@@ -1124,7 +1170,7 @@ namespace Shubharealtime
 
                 for (int i = 0; i < 50; i++)
                 {
-                    listView1.Items.Add(new ListViewData("NOTNEEDED", ":No symbol selected", "NO"));
+                    listView1.Items.Add(new ListViewData("NOTNEEDED", ":Enter google symbol", "NO"));
 
                 }
 
@@ -1206,19 +1252,20 @@ namespace Shubharealtime
         private void sav_symbolfile_Click(object sender, RoutedEventArgs e)
         {
             //save data into txt file 
-            if(nestbackfill.IsChecked==true )
+            if (nestbackfill.IsChecked == true || RTmapsymbol.IsChecked == true)
             {
-           
+                string finameformap = "C:\\myshubhalabha\\Symbolname.csv";
                 MyData md = new MyData();
-                md.Save(listView2.Items);
+                md.Save(listView2.Items, finameformap);
                 setDataChanged(false);
            
             }
             if (googlebackfill .IsChecked == true)
             {
+                string finameformap = "C:\\myshubhalabha\\GoogleSymbolname.csv";
 
                 MyData md = new MyData();
-                md.Save(listView1.Items);
+                md.Save(listView1.Items, finameformap);
                 setDataChanged(false);
 
             }
@@ -1339,9 +1386,46 @@ namespace Shubharealtime
             }
         }
 
-        //start realtime data 
+        //start backfill data 
         private void StartRT_Click_1(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                foreach (var file in Directory.GetFiles("C:\\myshubhalabha\\NESTbackfill"))
+                    File.Delete(file);
+                        
+            }
+            catch
+            {
+            }
+            
+            //save mapping symbol name file 
+            try
+            {
+                if (nestbackfill.IsChecked == true || RTmapsymbol.IsChecked==true )
+                {
+                    string finameformap = "C:\\myshubhalabha\\Symbolname.csv";
+                    MyData md = new MyData();
+                    md.Save(listView2.Items, finameformap);
+                    setDataChanged(false);
+
+                }
+                if (googlebackfill.IsChecked == true)
+                {
+                    string finameformap = "C:\\myshubhalabha\\GoogleSymbolname.csv";
+
+                    MyData md = new MyData();
+                    md.Save(listView1.Items, finameformap);
+                    setDataChanged(false);
+
+                }
+            }
+            catch
+            {
+
+            }
+
+
             savedata();
 
             RegistryKey regKey = Registry.CurrentUser;
@@ -1527,6 +1611,9 @@ namespace Shubharealtime
 
         private void googlebackfill_Checked(object sender, RoutedEventArgs e)
         {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
 
             lblgooggleday.Visibility = Visibility.Visible;
             lblgoogletime.Visibility = Visibility.Visible;
@@ -1539,13 +1626,19 @@ namespace Shubharealtime
             Shubhalabha123.Tradetigerinformation t = new Shubhalabha123.Tradetigerinformation();
             tradetigerinfo.Children.Add(t);
             tradetigerinfo.Visibility = Visibility.Visible;
+            chartonbackfill.Visibility = Visibility.Visible;
+            label1.Visibility = Visibility.Visible;
+            StartRT.Visibility = Visibility.Visible;
+
             saveradiobuttn();
             importsymbol();
         }
 
         private void nestbackfill_Checked(object sender, RoutedEventArgs e)
         {
-
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
             lblgooggleday.Visibility = Visibility.Hidden;
             lblgoogletime.Visibility = Visibility.Hidden;
             googletime.Visibility = Visibility.Hidden;
@@ -1665,6 +1758,22 @@ namespace Shubharealtime
                 config.AppSettings.Settings.Add("interval", timetoRT.SelectedItem.ToString());
                 config.Save(ConfigurationSaveMode.Full);
                 ConfigurationManager.RefreshSection("appSettings");
+
+
+                config.AppSettings.Settings.Remove("googlemin");
+
+                config.AppSettings.Settings.Add("googlemin", googletime.SelectedIndex .ToString());
+                config.Save(ConfigurationSaveMode.Full);
+                ConfigurationManager.RefreshSection("appSettings");
+
+                config.AppSettings.Settings.Remove("googleday");
+
+                config.AppSettings.Settings.Add("googleday", googledays.SelectedIndex.ToString());
+                config.Save(ConfigurationSaveMode.Full);
+                ConfigurationManager.RefreshSection("appSettings");
+
+
+
                 //SystemAccessibleObject sao = SystemAccessibleObject.FromPoint(4, 200);
                 // LoadTree(sao);
             }
@@ -1687,12 +1796,12 @@ namespace Shubharealtime
             }
             if (RTD_server_name.SelectedItem == "NOW")
             {
-                int result = s.checknestfiled();
+                int result = s.checknowfiled();
                 if (result == 0)
                 {
                     return;
                 }
-                s.checknowfiled();
+              
             }
             string terminal = ConfigurationManager.AppSettings["terminal"];
             //it start another window and hide this window 
@@ -1712,6 +1821,10 @@ namespace Shubharealtime
 
         private void RTmapsymbol_Checked(object sender, RoutedEventArgs e)
         {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            
             lblgooggleday.Visibility = Visibility.Hidden;
             lblgoogletime.Visibility = Visibility.Hidden;
             googletime.Visibility = Visibility.Hidden;
@@ -1720,8 +1833,9 @@ namespace Shubharealtime
             textBox2.Visibility = Visibility.Hidden;
             listView1.Visibility = Visibility.Hidden;
             listView2.Visibility = Visibility.Visible;
-
-
+            chartonbackfill.Visibility = Visibility.Hidden;
+            label1.Visibility = Visibility.Hidden;
+            StartRT.Visibility = Visibility.Hidden;
             tradetigerinfo.Visibility = Visibility.Hidden;
             saveradiobuttn();
             importsymbol();
@@ -1759,6 +1873,34 @@ namespace Shubharealtime
 
             config.AppSettings.Settings.Add("logcheck", log.IsChecked.Value.ToString());
             config.Save(ConfigurationSaveMode.Full);
+        }
+
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            if (nestbackfill.IsChecked == true || RTmapsymbol.IsChecked == true)
+            {
+                listView2.Items.Clear();
+
+                string finameformap = "C:\\myshubhalabha\\Symbolname.csv";
+                File.Delete(finameformap);
+                listView2.Items.Refresh();
+
+                System.Windows.MessageBox.Show("Mapping symbol removed", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
+
+            }
+            if (googlebackfill.IsChecked == true)
+            {
+                string finameformap = "C:\\myshubhalabha\\GoogleSymbolname.csv";
+                File.Delete(finameformap);
+                listView1.Items.Refresh();
+                listView1.Items.Clear();
+                 
+                System.Windows.MessageBox.Show("Mapping symbol removed", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
+              
+
+            }
         }
 
       
