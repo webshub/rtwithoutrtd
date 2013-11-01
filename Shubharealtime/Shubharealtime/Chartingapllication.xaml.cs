@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using System.Management;
 
 namespace Shubharealtime
 {
@@ -166,6 +167,29 @@ namespace Shubharealtime
 
             try
             {
+                System.OperatingSystem osInfo2 = System.Environment.OSVersion;
+                string result = string.Empty;
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT Caption FROM Win32_OperatingSystem");
+                foreach (ManagementObject os in searcher.Get())
+                {
+                    result = os["Caption"].ToString();
+                    if (IntPtr.Size == 8)
+                    {
+                        Amiexepath.Text ="C:\\Program Files (x86)\\AmiBroker";
+
+
+                    }
+                    else
+                    {
+                        Amiexepath.Text = "C:\\Program Files\\AmiBroker";
+
+                    }
+
+                    break;
+                }
+
+
+
                 var terminalname = regKey.GetValue("terminal");
                 var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
                 var Metastockdatapath = regKey.GetValue("Metastockdatapath");
@@ -201,6 +225,10 @@ namespace Shubharealtime
 
                 db_path.Text = Amibrokerdatapath.ToString();
                 Amiexepath.Text = Amiexepath1.ToString();
+
+
+                
+
                 meatpath_txt.Text = Metastockdatapath.ToString();
                 fchartpath.Text=fchartdatapath.ToString();
 

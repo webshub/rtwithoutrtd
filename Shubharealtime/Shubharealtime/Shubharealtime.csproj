@@ -8,8 +8,8 @@
     <ProjectGuid>{6A1491AF-0DAD-4342-9DC9-36B2D4085CCB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>shubhalabharts</RootNamespace>
-    <AssemblyName>shubhalabharts</AssemblyName>
+    <RootNamespace>shubhalabhartx</RootNamespace>
+    <AssemblyName>shubhalabhartx</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -17,7 +17,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>ftp://www.shubhalabha.in/dev2/</PublishUrl>
+    <PublishUrl>ftp://www.shubhalabha.in/rtx/release/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -27,14 +27,14 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://shubhalabha.in/dev2/</InstallUrl>
-    <UpdateUrl>http://shubhalabha.in/dev2/</UpdateUrl>
+    <InstallUrl>http://shubhalabha.in/rtx/release/</InstallUrl>
+    <UpdateUrl>http://shubhalabha.in/rtx/release/</UpdateUrl>
     <SupportUrl>http://shubhalabha.in/</SupportUrl>
     <ProductName>shubha real time</ProductName>
     <PublisherName>shubhalabha</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>40</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -63,23 +63,21 @@
     <ApplicationIcon>shubhalabha.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>CA317ECFD78312867CF87B42B832AA61DBC211D9</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>9859373B7F074C24390100525F85CA6DA7FA5A94</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Shubharealtime_2_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>Shubharealtime_4_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
-  </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
@@ -143,7 +141,11 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Shubharealtime_1_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>shubharealtimecombo.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FileHelpers">
@@ -342,6 +344,9 @@
     <None Include="Nest-NowBackfil.xlsm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="nestbackfill.format">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -355,7 +360,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="shubhaxls.format">
-      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="images\Shubhalabha logo.jpg" />
@@ -386,17 +390,20 @@
     <Content Include="ShubhaNest-Now.xlsm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Shubhabackfill.format">
+    <Content Include="sharekhantoami.xlsm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="shubhaodin.xlsm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sharekhantoami.xlsm">
+    <Content Include="Shubhabackfill.format">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="shubharealtimecombo.pfx" />
     <None Include="Shubharealtime_1_TemporaryKey.pfx" />
     <None Include="Shubharealtime_2_TemporaryKey.pfx" />
+    <None Include="Shubharealtime_3_TemporaryKey.pfx" />
+    <None Include="Shubharealtime_4_TemporaryKey.pfx" />
     <None Include="Shubharealtime_TemporaryKey.pfx" />
     <Content Include="Shubhasharekhan.format">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

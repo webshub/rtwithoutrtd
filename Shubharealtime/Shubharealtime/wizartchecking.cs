@@ -317,7 +317,6 @@ namespace Shubharealtime
                   
                     System.Windows.MessageBox.Show("Please start NEST as Run as Administrator ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
 
-                    closeallprocess();
                     return;
                 }
             }
@@ -336,7 +335,6 @@ namespace Shubharealtime
                     
                     System.Windows.MessageBox.Show("Please start NOW as Run as Administrator ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
 
-                    closeallprocess();
                     return;
                 }
             }
@@ -374,7 +372,6 @@ namespace Shubharealtime
                 {
                     System.Windows.MessageBox.Show("Your NEST/NOW is not running or Market Watch is not found ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
                    
-                    closeallprocess();
 
                 }
                 sao = SystemAccessibleObject.FromWindow(a, AccessibleObjectID.OBJID_WINDOW);
@@ -1520,7 +1517,6 @@ namespace Shubharealtime
                 {
                     System.Windows.MessageBox.Show("Your NEST/NOW is not running or Market Watch not found", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
                    
-                    closeallprocess();
 
                 }
                 sao = SystemAccessibleObject.FromWindow(a, AccessibleObjectID.OBJID_WINDOW);
@@ -1737,7 +1733,6 @@ namespace Shubharealtime
                 {
                     System.Windows.MessageBox.Show(" Please start NEST as 'Run as Administrator'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
 
-                    closeallprocess();
                     return;
                 }
             }
@@ -1754,7 +1749,6 @@ namespace Shubharealtime
                 {
                     System.Windows.MessageBox.Show(" Please start NOW as 'Run as Administrator'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
 
-                    closeallprocess();
                     return;
                 }
             }
@@ -1814,7 +1808,6 @@ namespace Shubharealtime
                     System.Windows.MessageBox.Show("One or more columns are missing in the order as below!\n Trading symbol , LTT , LUT , LTP , Volume Traded Today ,Open Interest. ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
 
 
-                    closeallprocess();
                 }
 
                 for (int i = 0; i < f.Children.Count() - 1; i++)
@@ -2033,7 +2026,6 @@ namespace Shubharealtime
                     
                     System.Windows.MessageBox.Show(" Please start NEST as 'Run as Administrator'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
 
-                    closeallprocess();
                     return;
                 }
             }
@@ -2093,7 +2085,6 @@ namespace Shubharealtime
                     System.Windows.MessageBox.Show("One or more columns are missing in the order as below!\n Trading symbol , LTT , LUT , LTP , Volume Traded Today ,Open Interest. ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
 
 
-                    closeallprocess();
                 }
 
                 for (int i = 0; i < f.Children.Count() - 1; i++)

@@ -454,6 +454,13 @@ namespace Shubharealtime
                 regKey1 = regKey1.CreateSubKey(@"Windows-xpRT\");
                 var noofsymbol = regKey1.GetValue("noofsymbol");
                 nosymbol = Convert.ToInt32(noofsymbol);
+
+                //if user given symbol is greater then set noofsymbol to total count 
+                if (nosymbol>f.Children.Count())
+                {
+                    nosymbol = f.Children.Count();
+                }
+
             }
 
             catch(Exception ex)
@@ -720,16 +727,16 @@ namespace Shubharealtime
                 //getsymbol name from google file 
                 getgooglesymbolname();
 
-                try
-                {
-                    System.Net.WebRequest myRequest = System.Net.WebRequest.Create("http://www.Google.co.in");
-                    System.Net.WebResponse myResponse = myRequest.GetResponse();
-                }
-                catch
-                {
-                    System.Windows.MessageBox.Show("Google is not reachable check your internet connection ", "Error Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
-                    return;
-                }
+                //try
+                //{
+                //    System.Net.WebRequest myRequest = System.Net.WebRequest.Create("http://www.Google.co.in");
+                //    System.Net.WebResponse myResponse = myRequest.GetResponse();
+                //}
+                //catch
+                //{
+                //    System.Windows.MessageBox.Show("Google is not reachable check your internet connection ", "Error Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                //    return;
+                //}
 
                 googlebackfill();
 
@@ -818,7 +825,6 @@ namespace Shubharealtime
                 {
                     System.Windows.MessageBox.Show("Please start NEST as Run as Administrator", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
 
-                    closeallprocess();
                     return;
                 }
             }
@@ -837,7 +843,6 @@ namespace Shubharealtime
                     
                     System.Windows.MessageBox.Show("Please start NOW as Run as Administrator", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
 
-                    closeallprocess();
                     return;
                 }
             }
@@ -874,9 +879,8 @@ namespace Shubharealtime
                 {
                    
                     System.Windows.MessageBox.Show("Your NEST/NOW is not running or Market Watch not found", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
-                    
-                    closeallprocess();
 
+                    return;
                 }
                 sao = SystemAccessibleObject.FromWindow(a, AccessibleObjectID.OBJID_WINDOW);
             }
@@ -1023,7 +1027,9 @@ namespace Shubharealtime
                             }
                             // commandpromptcall(filename, targetpath + "\\Intraday\\Metastock\\realtimemetastock");
 
+                            string[] googlemeta = Directory.GetFiles(@"C:\myshubhalabha\GoogleBackfill\", "*.csv");
                             foreach (var file in Directory.GetFiles("C:\\myshubhalabha\\GoogleBackfill"))
+                          
                             {
                                 try
                                 {
@@ -1091,7 +1097,8 @@ namespace Shubharealtime
                         
                     }
             }
-                   
+
+          
 
                 
 
@@ -1209,8 +1216,15 @@ namespace Shubharealtime
                       catch
                       {
                           yahoodate = timefromyahoo.ToString().Split('/');
-                          datetostore = yahoodate[0] + yahoodate[1] + yahoodate[2].Substring(0, 4);
+                          try
+                          {
+                              datetostore = yahoodate[0] + yahoodate[1] + yahoodate[2].Substring(0, 4);
+                          }
+                          catch
+                          {
+                              datetostore = yahoodate[0] + yahoodate[1] + yahoodate[2].Substring(0, 2);
 
+                          }
                       }
 
                       //finalarr[icntr].ticker = strbseequityfilename.Substring(0, strbseequityfilename.Length - 4);
@@ -1951,7 +1965,6 @@ namespace Shubharealtime
                     
                     System.Windows.MessageBox.Show("Please start NEST as 'Run as Administrator'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
 
-                    closeallprocess();
                     return;
                 }
             }
@@ -2138,6 +2151,7 @@ namespace Shubharealtime
 
                 }
 
+                
                 //load files into charting application 
                 if (chartingaplication == "Amibroker")
                 {

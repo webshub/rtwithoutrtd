@@ -171,7 +171,7 @@ namespace Shubharealtime
 
 
                   
-                    reg = reg.AddDays(2);
+                    reg = reg.AddDays(9);
                     //its checking trail period expired or not 
                     if (reg < DateTime.Today.Date)
                     {
@@ -194,6 +194,7 @@ namespace Shubharealtime
                         string [] serverdata = reader.ReadToEnd().Split(',');
                         string [] serverdata1=null;
                         int flagforuserpresentonserver = 0;
+                        string id1 = "";
                         for (int i = 0; i < serverdata.Count(); i++)
                          {
                              serverdata1 = serverdata[i].Split(' ');
@@ -203,13 +204,13 @@ namespace Shubharealtime
 
                             ManagementObject dsk1 = new ManagementObject(@"win32_logicaldisk.deviceid=""c:""");
                             dsk1.Get();
-                            string id1 = dsk1["VolumeSerialNumber"].ToString();
+                             id1 = dsk1["VolumeSerialNumber"].ToString();
                             if (id1 == serverdata1[0] )
                             {
                                 flagforuserpresentonserver = 1;
                             if (dateonserver<DateTime.Today.Date )
                             {
-                                System.Windows.MessageBox.Show("Your Trial version is expired, please contact sales@shubhalabha.in'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+                                System.Windows.MessageBox.Show("Your Trial version is expired, please contact sales@shubhalabha.in \n Your registration ID is -" + id1 + "'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
 
                                 closeallprocess();
 
@@ -219,7 +220,7 @@ namespace Shubharealtime
 
                         if (flagforuserpresentonserver==0)
                         {
-                            System.Windows.MessageBox.Show("Your Trial version is expired, please contact sales@shubhalabha.in'", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+                            System.Windows.MessageBox.Show("Your Trial version is expired, please contact sales@shubhalabha.in \n Your registration ID is -" + id1 + "", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
                             closeallprocess();
 
 
@@ -519,6 +520,9 @@ namespace Shubharealtime
 
                     File.Copy(processtostart, targetpath + "\\ShubhaNest-Now.xlsm", true);
 
+                  
+
+
 
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhaxls.format";
 
@@ -531,6 +535,14 @@ namespace Shubharealtime
 
                     File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\Shubhasharekhan.format", true);
                     File.Copy(processtostart, amiexeoath1 + "\\Formats\\Shubhasharekhan.format", true);
+
+
+
+                    processtostart = filepath.Substring(0, filepath.Length - 18) + "nestbackfill.format";
+
+                    File.Copy(processtostart, amiexeoath1 + "\\Formats\\nestbackfill.format", true);
+
+
 
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhanest-now.format";
                     File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\shubhanest-now.format", true);
@@ -965,11 +977,14 @@ namespace Shubharealtime
             regKey.SetValue("googleday", googledays.SelectedItem.ToString());
             regKey.SetValue("googletime", googletime.SelectedItem.ToString());
 
-            config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings.Remove("timesec");
 
-            config.AppSettings.Settings.Add("timesec", timetoRT.SelectedItem.ToString());
+            config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings.Remove("terminalname");
+            config.AppSettings.Settings.Add("terminalname", RTD_server_name.SelectedItem.ToString());
             config.Save(ConfigurationSaveMode.Full);
+            ConfigurationManager.RefreshSection("appSettings");
+
+          
 
 
             config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -1031,6 +1046,8 @@ namespace Shubharealtime
             config.AppSettings.Settings.Add("googleday", googledays.SelectedIndex.ToString());
             config.Save(ConfigurationSaveMode.Full);
             ConfigurationManager.RefreshSection("appSettings");
+
+           
 
         }
 
@@ -1497,198 +1514,199 @@ namespace Shubharealtime
         //start backfill data 
         private void StartRT_Click_1(object sender, RoutedEventArgs e)
         {
-            
-            //save mapping symbol name file 
-            try
-            {
-                if (nestbackfill.IsChecked == true || RTmapsymbol.IsChecked==true )
-                {
-                    string finameformap = "C:\\myshubhalabha\\Symbolname.csv";
-                    MyData md = new MyData();
-                    md.Save(listView2.Items, finameformap);
-                    setDataChanged(false);
-
-                }
-                if (googlebackfill.IsChecked == true)
-                {
-                    string finameformap = "C:\\myshubhalabha\\GoogleSymbolname.csv";
-
-                    MyData md = new MyData();
-                    md.Save(listView1.Items, finameformap);
-                    setDataChanged(false);
-
-                }
-            }
-            catch
-            {
-
-            }
-
-
-            savedata();
-
-            RegistryKey regKey = Registry.CurrentUser;
-            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
-            var terminalname = regKey.GetValue("terminal");
-            var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
-            regKey.SetValue("googleday", googledays.SelectedItem.ToString());
-            regKey.SetValue("googletime", googletime .SelectedItem.ToString());
-
-
-            //if trade tiger backfill 
-            if (tradetiger.IsChecked == true)
-            {
-                Type ExcelType;
-                object ExcelInst;
-                object[] args = new object[3];
-
-                string[] sharekhanfilePaths = Directory.GetFiles("C:\\myshubhalabha\\sharekhan", "*.csv", SearchOption.TopDirectoryOnly);
-                ExcelType = Type.GetTypeFromProgID("Broker.Application");
-                ExcelInst = Activator.CreateInstance(ExcelType);
-                ExcelType.InvokeMember("Visible", BindingFlags.SetProperty, null,
-                          ExcelInst, new object[1] { true });
-                ExcelType.InvokeMember("LoadDatabase", BindingFlags.InvokeMethod | BindingFlags.Public, null,
-                     ExcelInst, new string[1] { Amibrokerdatapath.ToString() });
-
-                for (int i = 0; i < sharekhanfilePaths.Count(); i++)
-                {
-                    args[0] = Convert.ToInt16(0);
-                    args[1] = sharekhanfilePaths[i];
-                    args[2] = "Shubhasharekhan.format";
-
-
-                    ExcelType.InvokeMember("Import", BindingFlags.InvokeMethod | BindingFlags.Public, null,
-                              ExcelInst, args);
-                }
-
-               
-                return;
-
-            }
-
-            if (nestbackfill.IsChecked == true)
-            {
-
-
+           
+                //save mapping symbol name file 
                 try
                 {
-                    foreach (var file in Directory.GetFiles("C:\\myshubhalabha\\NESTbackfill"))
-                        File.Delete(file);
+                    if (nestbackfill.IsChecked == true || RTmapsymbol.IsChecked == true)
+                    {
+                        string finameformap = "C:\\myshubhalabha\\Symbolname.csv";
+                        MyData md = new MyData();
+                        md.Save(listView2.Items, finameformap);
+                        setDataChanged(false);
 
+                    }
+                    if (googlebackfill.IsChecked == true)
+                    {
+                        string finameformap = "C:\\myshubhalabha\\GoogleSymbolname.csv";
+
+                        MyData md = new MyData();
+                        md.Save(listView1.Items, finameformap);
+                        setDataChanged(false);
+
+                    }
                 }
                 catch
                 {
+
                 }
 
-                Shubharealtime.datadownload s = new datadownload();
-               
-                    
-                
-                Shubharealtime.datadownload s1 = new datadownload();
-                //if (RTD_server_name.SelectedItem == "NEST")
-                //{
-                //    int result = s.checknestfiled();
-                //    if (result == 0)
-                //    {
-                //        return;
-                //    }
-                //}
-                //if (RTD_server_name.SelectedItem == "NOW")
-                //{
-                //    int result = s.checknowfiled ();
-                //    if (result == 0)
-                //    {
-                //        return;
-                //    }
-                //}
 
-                if (txtTargetFolder.Text == "")
+                savedata();
+
+                RegistryKey regKey = Registry.CurrentUser;
+                regKey = regKey.CreateSubKey(@"Windows-xpRT\");
+                var terminalname = regKey.GetValue("terminal");
+                var Amibrokerdatapath = regKey.GetValue("Amibrokerdatapath");
+                regKey.SetValue("googleday", googledays.SelectedItem.ToString());
+                regKey.SetValue("googletime", googletime.SelectedItem.ToString());
+
+
+                //if trade tiger backfill 
+                if (tradetiger.IsChecked == true)
                 {
-                   
-                    txtTargetFolder.Focus();
+                    Type ExcelType;
+                    object ExcelInst;
+                    object[] args = new object[3];
+
+                    string[] sharekhanfilePaths = Directory.GetFiles("C:\\myshubhalabha\\sharekhan", "*.csv", SearchOption.TopDirectoryOnly);
+                    ExcelType = Type.GetTypeFromProgID("Broker.Application");
+                    ExcelInst = Activator.CreateInstance(ExcelType);
+                    ExcelType.InvokeMember("Visible", BindingFlags.SetProperty, null,
+                              ExcelInst, new object[1] { true });
+                    ExcelType.InvokeMember("LoadDatabase", BindingFlags.InvokeMethod | BindingFlags.Public, null,
+                         ExcelInst, new string[1] { Amibrokerdatapath.ToString() });
+
+                    for (int i = 0; i < sharekhanfilePaths.Count(); i++)
+                    {
+                        args[0] = Convert.ToInt16(0);
+                        args[1] = sharekhanfilePaths[i];
+                        args[2] = "Shubhasharekhan.format";
+
+
+                        ExcelType.InvokeMember("Import", BindingFlags.InvokeMethod | BindingFlags.Public, null,
+                                  ExcelInst, args);
+                    }
+
+
                     return;
 
                 }
 
+                if (nestbackfill.IsChecked == true)
+                {
+
+
+                    try
+                    {
+                        foreach (var file in Directory.GetFiles("C:\\myshubhalabha\\NESTbackfill"))
+                            File.Delete(file);
+
+                    }
+                    catch
+                    {
+                    }
+
+                    Shubharealtime.datadownload s = new datadownload();
 
 
 
-                System.Windows.MessageBox.Show("Please DO NOT USE YOUR COMPUTER for few minutes .\n As application is pulling backfill data and processing files.", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+                    Shubharealtime.datadownload s1 = new datadownload();
+                    //if (RTD_server_name.SelectedItem == "NEST")
+                    //{
+                    //    int result = s.checknestfiled();
+                    //    if (result == 0)
+                    //    {
+                    //        return;
+                    //    }
+                    //}
+                    //if (RTD_server_name.SelectedItem == "NOW")
+                    //{
+                    //    int result = s.checknowfiled ();
+                    //    if (result == 0)
+                    //    {
+                    //        return;
+                    //    }
+                    //}
+
+                    if (txtTargetFolder.Text == "")
+                    {
+
+                        txtTargetFolder.Focus();
+                        return;
+
+                    }
+
+
+
+
+                    System.Windows.MessageBox.Show("Please DO NOT USE YOUR COMPUTER for few minutes .\n As application is pulling backfill data and processing files.", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
+
+
+                    CommandManager.InvalidateRequerySuggested();
+                }
+                try
+                {
+
+
+                    //   type = Type.GetTypeFromProgID("nest.scriprtd");
+
+
+
+                    config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+
+                    config.AppSettings.Settings.Remove("targetpathforcombo");
+
+                    config.AppSettings.Settings.Add("targetpathforcombo", txtTargetFolder.Text);
+                    config.Save(ConfigurationSaveMode.Full);
+                    ConfigurationManager.RefreshSection("appSettings");
+
+                    config.AppSettings.Settings.Remove("format");
+
+                    config.AppSettings.Settings.Add("format", Format_cb.SelectedItem.ToString());
+                    config.Save(ConfigurationSaveMode.Full);
+                    ConfigurationManager.RefreshSection("appSettings");
+
+                    config.AppSettings.Settings.Remove("terminal");
+
+                    config.AppSettings.Settings.Add("terminal", RTD_server_name.SelectedItem.ToString());
+                    config.Save(ConfigurationSaveMode.Full);
+                    ConfigurationManager.RefreshSection("appSettings");
+
+                    config.AppSettings.Settings.Remove("interval");
+
+                    config.AppSettings.Settings.Add("interval", timetoRT.SelectedItem.ToString());
+                    config.Save(ConfigurationSaveMode.Full);
+                    ConfigurationManager.RefreshSection("appSettings");
+                    //SystemAccessibleObject sao = SystemAccessibleObject.FromPoint(4, 200);
+                    // LoadTree(sao);
+                }
+                catch
+                {
+
+
+                }
+
+                string terminal = ConfigurationManager.AppSettings["terminal"];
+
+
+                string path = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
+                string pathtostartprocess = path.Substring(0, path.Length - 18);
+                // System.Diagnostics.Process.Start(pathtostartprocess + "Endrt.exe");
+                Shubharealtime.datadownload s2 = new datadownload();
+
+                //check required field from nest or now terminal 
+                //if(nestbackfill.IsChecked==true )
+                //{
+                //if (RTD_server_name.SelectedItem == "NEST")
+                //{
+                //    s2.checknestfiled();
+                //}
+                //if (RTD_server_name.SelectedItem == "NOW")
+                //{
+                //    s2.checknowfiled();
+                //}
+                //}
+                Task.Factory.StartNew(s2.startdownload);
+                // this.Hide();
+
 
 
 
                 CommandManager.InvalidateRequerySuggested();
-            }
-            try
-            {
-
-
-                //   type = Type.GetTypeFromProgID("nest.scriprtd");
-
-
-
-                config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-
-                config.AppSettings.Settings.Remove("targetpathforcombo");
-
-                config.AppSettings.Settings.Add("targetpathforcombo", txtTargetFolder.Text);
-                config.Save(ConfigurationSaveMode.Full);
-                ConfigurationManager.RefreshSection("appSettings");
-
-                config.AppSettings.Settings.Remove("format");
-
-                config.AppSettings.Settings.Add("format", Format_cb.SelectedItem.ToString());
-                config.Save(ConfigurationSaveMode.Full);
-                ConfigurationManager.RefreshSection("appSettings");
-
-                config.AppSettings.Settings.Remove("terminal");
-
-                config.AppSettings.Settings.Add("terminal", RTD_server_name.SelectedItem.ToString());
-                config.Save(ConfigurationSaveMode.Full);
-                ConfigurationManager.RefreshSection("appSettings");
-
-                config.AppSettings.Settings.Remove("interval");
-
-                config.AppSettings.Settings.Add("interval", timetoRT.SelectedItem.ToString());
-                config.Save(ConfigurationSaveMode.Full);
-                ConfigurationManager.RefreshSection("appSettings");
-                //SystemAccessibleObject sao = SystemAccessibleObject.FromPoint(4, 200);
-                // LoadTree(sao);
-            }
-            catch
-            {
-
-
-            }
-
-            string terminal = ConfigurationManager.AppSettings["terminal"];
-          
-           
-            string path = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
-            string pathtostartprocess = path.Substring(0, path.Length - 18);
-           // System.Diagnostics.Process.Start(pathtostartprocess + "Endrt.exe");
-            Shubharealtime.datadownload s2 = new datadownload();
-
-            //check required field from nest or now terminal 
-            //if(nestbackfill.IsChecked==true )
-            //{
-            //if (RTD_server_name.SelectedItem == "NEST")
-            //{
-            //    s2.checknestfiled();
-            //}
-            //if (RTD_server_name.SelectedItem == "NOW")
-            //{
-            //    s2.checknowfiled();
-            //}
-            //}
-            Task.Factory.StartNew(s2.startdownload);
-           // this.Hide();
-
-
-
-
-            CommandManager.InvalidateRequerySuggested();
+            
         }
         //Srtart wazart again 
         private void changesetting_Click(object sender, RoutedEventArgs e)
@@ -1721,47 +1739,51 @@ namespace Shubharealtime
 
         private void googlebackfill_Checked(object sender, RoutedEventArgs e)
         {
-            textBox1.Text = "";
-            textBox2.Text = "";
-            textBox3.Text = "";
+           
+                textBox1.Text = "";
+                textBox2.Text = "";
+                textBox3.Text = "";
 
-            lblgooggleday.Visibility = Visibility.Visible;
-            lblgoogletime.Visibility = Visibility.Visible;
-            googletime.Visibility = Visibility.Visible;
-            googledays.Visibility = Visibility.Visible;
-            textBox1.Visibility = Visibility.Hidden;
-            textBox2.Visibility = Visibility.Visible;
-            listView1.Visibility = Visibility.Visible;
-            listView2.Visibility = Visibility.Hidden;
-            Shubhalabha123.Tradetigerinformation t = new Shubhalabha123.Tradetigerinformation();
-            tradetigerinfo.Children.Add(t);
-            tradetigerinfo.Visibility = Visibility.Visible;
-            chartonbackfill.Visibility = Visibility.Visible;
-            label1.Visibility = Visibility.Visible;
-            StartRT.Visibility = Visibility.Visible;
+                lblgooggleday.Visibility = Visibility.Visible;
+                lblgoogletime.Visibility = Visibility.Visible;
+                googletime.Visibility = Visibility.Visible;
+                googledays.Visibility = Visibility.Visible;
+                textBox1.Visibility = Visibility.Hidden;
+                textBox2.Visibility = Visibility.Visible;
+                listView1.Visibility = Visibility.Visible;
+                listView2.Visibility = Visibility.Hidden;
+                Shubhalabha123.Tradetigerinformation t = new Shubhalabha123.Tradetigerinformation();
+                tradetigerinfo.Children.Add(t);
+                tradetigerinfo.Visibility = Visibility.Visible;
+                chartonbackfill.Visibility = Visibility.Visible;
+                label1.Visibility = Visibility.Visible;
+                StartRT.Visibility = Visibility.Visible;
 
-            saveradiobuttn();
-            importsymbol();
+                saveradiobuttn();
+                importsymbol();
+           
         }
 
         private void nestbackfill_Checked(object sender, RoutedEventArgs e)
         {
-            textBox1.Text = "";
-            textBox2.Text = "";
-            textBox3.Text = "";
-            lblgooggleday.Visibility = Visibility.Hidden;
-            lblgoogletime.Visibility = Visibility.Hidden;
-            googletime.Visibility = Visibility.Hidden;
-            googledays.Visibility = Visibility.Hidden;
-            textBox1.Visibility = Visibility.Visible;
-            textBox2.Visibility = Visibility.Hidden;
-            listView1.Visibility = Visibility.Hidden;
-            listView2.Visibility = Visibility.Visible;
 
+                textBox1.Text = "";
+                textBox2.Text = "";
+                textBox3.Text = "";
+                lblgooggleday.Visibility = Visibility.Hidden;
+                lblgoogletime.Visibility = Visibility.Hidden;
+                googletime.Visibility = Visibility.Hidden;
+                googledays.Visibility = Visibility.Hidden;
+                textBox1.Visibility = Visibility.Visible;
+                textBox2.Visibility = Visibility.Hidden;
+                listView1.Visibility = Visibility.Hidden;
+                listView2.Visibility = Visibility.Visible;
+
+
+                tradetigerinfo.Visibility = Visibility.Hidden;
+                saveradiobuttn();
+                importsymbol();
             
-            tradetigerinfo.Visibility = Visibility.Hidden;
-            saveradiobuttn();
-            importsymbol();
 
         }
 
