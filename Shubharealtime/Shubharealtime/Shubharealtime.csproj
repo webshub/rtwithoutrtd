@@ -17,7 +17,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>ftp://www.shubhalabha.in/rtx/release/</PublishUrl>
+    <PublishUrl>ftp://www.shubhalabha.in/dev2/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -27,14 +27,14 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://shubhalabha.in/rtx/release/</InstallUrl>
-    <UpdateUrl>http://shubhalabha.in/rtx/release/</UpdateUrl>
+    <InstallUrl>http://shubhalabha.in/dev2/</InstallUrl>
+    <UpdateUrl>http://shubhalabha.in/dev2/</UpdateUrl>
     <SupportUrl>http://shubhalabha.in/</SupportUrl>
     <ProductName>shubha real time</ProductName>
     <PublisherName>shubhalabha</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>15</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -72,7 +72,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -335,6 +335,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="app.config" />
+    <Content Include="Endrt.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="ExcelLogin.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -356,10 +359,13 @@
     <Content Include="AmibrokerRTdata.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Endrt.exe">
+    <Content Include="shubhaxls.format">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="shubhaxls.format">
+    <Content Include="shubhasharekhan.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shubhasharekhan.format">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="images\Shubhalabha logo.jpg" />
@@ -387,16 +393,16 @@
     <Content Include="RT.format">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ShubhaNest-Now.xlsm">
+    <Content Include="Shubhabackfill.format">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sharekhantoami.xlsm">
+    <Content Include="ShubhaNest-Now.xlsm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="shubhaodin.xlsm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Shubhabackfill.format">
+    <Content Include="sharekhantoami.xlsm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="shubharealtimecombo.pfx" />
@@ -405,9 +411,6 @@
     <None Include="Shubharealtime_3_TemporaryKey.pfx" />
     <None Include="Shubharealtime_4_TemporaryKey.pfx" />
     <None Include="Shubharealtime_TemporaryKey.pfx" />
-    <Content Include="Shubhasharekhan.format">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Shubhasharekhan.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

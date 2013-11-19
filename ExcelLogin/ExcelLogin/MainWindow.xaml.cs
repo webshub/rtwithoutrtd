@@ -89,7 +89,7 @@ namespace ExcelLogin
 
 
 
-                reg = reg.AddDays(2);
+                reg = reg.AddDays(9);
                 //its checking trail period expired or not 
                 if (reg < DateTime.Today.Date)
                 {

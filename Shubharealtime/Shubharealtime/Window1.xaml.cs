@@ -110,6 +110,8 @@ namespace Shubharealtime
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+           
+
             nestbackfill.IsChecked = false;
             googlebackfill.IsChecked = false;
             string amiexeoath1 = "";
@@ -472,14 +474,20 @@ namespace Shubharealtime
                 }
 
 
+              
 
+               var versionno = regKey.GetValue("version");
+
+
+               if (versionno == null || versionno.ToString() != System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString())
+                {
                 //copy files into folder 
                 try
                 {
-
                     string filepath = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
                     string processtostart = filepath.Substring(0, filepath.Length - 18) + "sharekhantoami.xlsm";
 
+                   
                     File.Copy(processtostart, targetpath + "\\sharekhantoami.xlsm", true);
                     if (!Directory.Exists("C:\\myshubhalabha\\amirealtime"))
                     {
@@ -502,12 +510,10 @@ namespace Shubharealtime
 
 
                     File.Copy(processtostart, targetpath + "\\shubhaodin.xlsm", true);
-                    File.Copy(processtostart, "C:\\shubhaodin.xlsm", true);
 
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "ExcelLogin.exe";
 
                     File.Copy(processtostart, targetpath + "\\ExcelLogin.exe", true);
-                    File.Copy(processtostart, "C:\\ExcelLogin.exe", true);
                     File.Copy(processtostart, "C:\\myshubhalabha\\ExcelLogin.exe", true);
 
 
@@ -590,7 +596,11 @@ namespace Shubharealtime
                     File.Copy(processtostart, "C:\\myshubhalabha\\samples\\Shubhasharekhan.txt", true);
                     processtostart = filepath.Substring(0, filepath.Length - 18) + "Notice.txt";
                     File.Copy(processtostart, "C:\\myshubhalabha\\samples\\Notice.txt", true);
-                    
+
+                    regKey.SetValue("version", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
+
+                    savedata();
+                    Environment.Exit(0);
 
 
                 }
@@ -599,9 +609,42 @@ namespace Shubharealtime
                 }
 
 
+            }
+
+                //copy xls file every time in sample folder 
+               try
+               {
+                   string filepath = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
+                   string processtostart = filepath.Substring(0, filepath.Length - 18) + "sharekhantoami.xlsm";
+                   File.Copy(processtostart, "C:\\myshubhalabha\\samples\\sharekhantoami.xlsm", true);
 
 
 
+                   processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhaodin.xlsm";
+
+
+                   File.Copy(processtostart, "C:\\myshubhalabha\\samples\\\\shubhaodin.xlsm", true);
+
+                   processtostart = filepath.Substring(0, filepath.Length - 18) + "ExcelLogin.exe";
+
+                   File.Copy(processtostart, "C:\\myshubhalabha\\samples\\\\ExcelLogin.exe", true);
+                   File.Copy(processtostart, "C:\\myshubhalabha\\ExcelLogin.exe", true);
+
+
+
+                   processtostart = filepath.Substring(0, filepath.Length - 18) + "MetaStockRefresher V 2.0.9 setup.exe";
+
+                   File.Copy(processtostart, "C:\\myshubhalabha\\samples\\\\MetaStockRefresher V 2.0.9 setup.exe", true);
+
+                   processtostart = filepath.Substring(0, filepath.Length - 18) + "ShubhaNest-Now.xlsm";
+
+                   File.Copy(processtostart, "C:\\myshubhalabha\\samples\\\\ShubhaNest-Now.xlsm", true);
+               }
+
+               catch
+               {
+
+               }
                 //load banner form server 
                 try
                 {
@@ -926,12 +969,12 @@ namespace Shubharealtime
         public void closeallprocess()
         {
 
-            Process[] workers = Process.GetProcessesByName("Shubharealtime.vshost");
-            Process[] workers1 = Process.GetProcessesByName("Shubharealtime");
+            Process[] workers = Process.GetProcessesByName("shubhalabhartx.vshost");
+            Process[] workers1 = Process.GetProcessesByName("shubhalabhartx");
             Process[] workers2 = Process.GetProcessesByName("Endrt.vshost");
             Process[] workers3 = Process.GetProcessesByName("Endrt");
             Process[] workers4 = Process.GetProcessesByName("Broker");
-            Process[] workers5 = Process.GetProcessesByName("Shubharealtime123");
+           
 
 
 
@@ -1057,7 +1100,7 @@ namespace Shubharealtime
             ILog log = LogManager.GetLogger(typeof(Window1  ));
             log.Debug("Application Close  ");
             savedata();
-
+            
            // closeallprocess();
             Environment.Exit(0);
         }
@@ -1363,6 +1406,8 @@ namespace Shubharealtime
                 MyData md = new MyData();
                 md.Save(listView2.Items, finameformap);
                 setDataChanged(false);
+                System.Windows.MessageBox.Show("Symbol file saved ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+
            
             }
             if (googlebackfill .IsChecked == true)
@@ -1372,6 +1417,8 @@ namespace Shubharealtime
                 MyData md = new MyData();
                 md.Save(listView1.Items, finameformap);
                 setDataChanged(false);
+                System.Windows.MessageBox.Show("Symbol file saved ", "Warning Message", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+
 
             }
 
@@ -1514,7 +1561,31 @@ namespace Shubharealtime
         //start backfill data 
         private void StartRT_Click_1(object sender, RoutedEventArgs e)
         {
-           
+
+            Process[] workers = Process.GetProcessesByName("Broker");
+            Process[] workers1 = Process.GetProcessesByName("shubhalabhartx");
+
+
+            if (workers.Count() >= 1)
+            {
+
+                System.Windows.MessageBox.Show("Amibroker instance is already running please close it", "Important Note", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
+
+                return;
+            }
+
+            if (workers1.Count() >1)
+            {
+
+                System.Windows.MessageBox.Show("One or more Shubha Real Time Combo instance is already running please close it", "Important Note", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
+
+                return;
+            }
+
+
+
                 //save mapping symbol name file 
                 try
                 {
@@ -1800,11 +1871,36 @@ namespace Shubharealtime
             tradetigerinfo.Visibility = Visibility.Visible;
         }
 
+
+
+
         //start realtime data feed
         private void Startrealtimeonly_Click(object sender, RoutedEventArgs e)
         {
+            //check if any other instance is running 
+            Process[] workers = Process.GetProcessesByName("Broker");
+            Process[] workers1 = Process.GetProcessesByName("shubhalabhartx");
 
-           
+
+            if(workers.Count()>=1)
+            {
+
+                System.Windows.MessageBox.Show("Amibroker instance is already running please close it", "Important Note", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
+
+                return;
+            }
+
+            if (workers1.Count() > 1)
+            {
+
+                System.Windows.MessageBox.Show("One or more Shubha Real Time Conmbo instance is already running please close it", "Important Note", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+
+
+                return;
+            }
+
+
 
             savedata();
 

@@ -11,7 +11,7 @@
         <Grid Margin="0,1,-25,1">
             <Label Content="Trading symbol , Last Traded Time  , Last Traded Price , Volume Traded Today," Height="28" HorizontalAlignment="Left" Margin="36,85,0,0" Name="label5" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="13" Width="461" />
             <Label Content="• Important steps to be followed for NOW Configuration:" FontFamily="Times New Roman" FontSize="13" FontWeight="SemiBold" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" Name="label2" VerticalAlignment="Top" />
-            <Label Content="1.Start NEST as Run as Administrator ." FontFamily="Times New Roman" FontSize="13" Height="28" HorizontalAlignment="Left" Margin="21,37,0,0" Name="label3" VerticalAlignment="Top" />
+            <Label Content="1.Start NOW as Run as Administrator ." FontFamily="Times New Roman" FontSize="13" Height="28" HorizontalAlignment="Left" Margin="21,37,0,0" Name="label3" VerticalAlignment="Top" />
             <Label Content="2.Configure or Set column profile so that the data is seen as in the format shown below" FontFamily="Times New Roman" FontSize="13" Height="28" HorizontalAlignment="Left" Margin="21,63,0,0" Name="label4" VerticalAlignment="Top" />
             <Label Content="3.Important note: LTT should be immediately after Trading symbol ." FontFamily="Times New Roman" FontSize="13" Height="28" HorizontalAlignment="Left" Margin="23,123,0,0" Name="label6" VerticalAlignment="Top" />
             <Label Content="• Click on Next button if you have successfully configured the NOW terminal." FontFamily="Times New Roman" FontSize="13" FontWeight="SemiBold" Height="28" HorizontalAlignment="Left" Margin="18,202,0,0" Name="label7" VerticalAlignment="Top" />

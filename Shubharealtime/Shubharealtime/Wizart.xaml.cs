@@ -15,6 +15,8 @@ using System.Reflection;
 using System.IO;
 using System.Security.Principal;
 using System.Diagnostics;
+using log4net;
+using log4net.Config;
 
 namespace Shubharealtime
 {
@@ -150,9 +152,11 @@ namespace Shubharealtime
                     File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\RT.format", true);
                     File.Copy(processtostart, Amiexepath + "\\Formats\\RT.format", true);
                 }
-                catch
+                catch(Exception ex)
                 {
-
+                    log4net.Config.XmlConfigurator.Configure();
+                    ILog log = LogManager.GetLogger(typeof(Window1));
+                    log.Debug(ex.Message );
                 }
                 try
                 {
@@ -163,8 +167,11 @@ namespace Shubharealtime
                     shubhalabharts.Welcomewizrd n = new shubhalabharts.Welcomewizrd();
                     stackcontainer.Children.Add(n);
                 }
-                catch
+                catch(Exception ex)
                 {
+                    log4net.Config.XmlConfigurator.Configure();
+                    ILog log = LogManager.GetLogger(typeof(Window1));
+                    log.Debug(ex.Message);
                 }
 
             }
@@ -187,8 +194,11 @@ namespace Shubharealtime
                     {
                         stackcontainer.Children.RemoveAt(0);
                     }
-                    catch
+                    catch(Exception ex)
                     {
+                        log4net.Config.XmlConfigurator.Configure();
+                        ILog log = LogManager.GetLogger(typeof(Window1));
+                        log.Debug(ex.Message);
                     }
                     Shubhalabha123.GNUGPL c = new Shubhalabha123.GNUGPL();
                     stackcontainer.Children.Add(c);
@@ -219,8 +229,11 @@ namespace Shubharealtime
                     {
                         stackcontainer.Children.RemoveAt(0);
                     }
-                    catch
+                    catch (Exception ex)
                     {
+                        log4net.Config.XmlConfigurator.Configure();
+                        ILog log = LogManager.GetLogger(typeof(Window1));
+                        log.Debug(ex.Message);
                     }
                     Introduction n = new Introduction();
                     stackcontainer.Children.Add(n);
@@ -237,8 +250,11 @@ namespace Shubharealtime
                     {
                         stackcontainer.Children.RemoveAt(0);
                     }
-                    catch
+                    catch (Exception ex)
                     {
+                        log4net.Config.XmlConfigurator.Configure();
+                        ILog log = LogManager.GetLogger(typeof(Window1));
+                        log.Debug(ex.Message);
                     }
                     terminal t = new terminal();
                     stackcontainer.Children.Add(t);
@@ -292,10 +308,12 @@ namespace Shubharealtime
                                     {
                                         stackcontainer.Children.RemoveAt(0);
                                     }
-                                    catch
+                                    catch (Exception ex)
                                     {
+                                        log4net.Config.XmlConfigurator.Configure();
+                                        ILog log = LogManager.GetLogger(typeof(Window1));
+                                        log.Debug(ex.Message);
                                     }
-
 
                                     Rsult_lbl.Foreground = Brushes.Green;
                                     Rsult_lbl.Content = "NEST Plus is configured successfully for backfill ";
@@ -322,8 +340,11 @@ namespace Shubharealtime
                                 {
                                     stackcontainer.Children.RemoveAt(0);
                                 }
-                                catch
+                                catch (Exception ex)
                                 {
+                                    log4net.Config.XmlConfigurator.Configure();
+                                    ILog log = LogManager.GetLogger(typeof(Window1));
+                                    log.Debug(ex.Message);
                                 }
 
 
@@ -382,8 +403,11 @@ namespace Shubharealtime
                                     {
                                         stackcontainer.Children.RemoveAt(0);
                                     }
-                                    catch
+                                    catch (Exception ex)
                                     {
+                                        log4net.Config.XmlConfigurator.Configure();
+                                        ILog log = LogManager.GetLogger(typeof(Window1));
+                                        log.Debug(ex.Message);
                                     }
 
 
@@ -412,8 +436,11 @@ namespace Shubharealtime
                                 {
                                     stackcontainer.Children.RemoveAt(0);
                                 }
-                                catch
+                                catch (Exception ex)
                                 {
+                                    log4net.Config.XmlConfigurator.Configure();
+                                    ILog log = LogManager.GetLogger(typeof(Window1));
+                                    log.Debug(ex.Message);
                                 }
 
 
@@ -446,8 +473,11 @@ namespace Shubharealtime
                         {
                             stackcontainer.Children.RemoveAt(0);
                         }
-                        catch
+                        catch (Exception ex)
                         {
+                            log4net.Config.XmlConfigurator.Configure();
+                            ILog log = LogManager.GetLogger(typeof(Window1));
+                            log.Debug(ex.Message);
                         }
                         Rsult_lbl.Foreground = Brushes.Green;
                         Rsult_lbl.Content = "Terminal selection done successfully  ";
@@ -464,8 +494,11 @@ namespace Shubharealtime
                         {
                             stackcontainer.Children.RemoveAt(0);
                         }
-                        catch
+                        catch (Exception ex)
                         {
+                            log4net.Config.XmlConfigurator.Configure();
+                            ILog log = LogManager.GetLogger(typeof(Window1));
+                            log.Debug(ex.Message);
                         }
                         Rsult_lbl.Foreground = Brushes.Green;
                         Rsult_lbl.Content = "Terminal selection done successfully  ";
@@ -504,12 +537,70 @@ namespace Shubharealtime
                         Rsult_lbl.Content = "Please select charting application ";
                         return;
                     }
+                    
+
+////////////////////////////////////////checking format folder of amibroker 
+                    if (Chartingapplication.ToString().Contains("Amibroker"))
+                    {
+                        try
+                        {
+                            string filepath = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
+                            string processtostart = "";
+                            string programfilepath = ProgramFilesx86();
+
+
+                            processtostart = filepath.Substring(0, filepath.Length - 18) + "Notice.txt";
+
+                           
+                            var Amiexepath = regKey.GetValue("Amiexepath");
+
+
+                         
+
+
+                            File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\shubhaxls.format", true);
+                            File.Copy(processtostart, Amiexepath + "\\Formats\\shubhaxls.format", true);
+
+                            processtostart = filepath.Substring(0, filepath.Length - 18) + "Shubhasharekhan.format";
+
+
+                            File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\Shubhasharekhan.format", true);
+                            File.Copy(processtostart, Amiexepath + "\\Formats\\Shubhasharekhan.format", true);
+
+                            processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhanest-now.format";
+                            File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\shubhanest-now.format", true);
+                            File.Copy(processtostart, Amiexepath + "\\Formats\\shubhanest-now.format", true);
+
+                            processtostart = filepath.Substring(0, filepath.Length - 18) + "ShubhaRt.format";
+                            File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\ShubhaRt.format", true);
+                            File.Copy(processtostart, Amiexepath + "\\Formats\\ShubhaRt.format", true);
+
+                            processtostart = filepath.Substring(0, filepath.Length - 18) + "Shubhabackfill.format";
+                            File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\Shubhabackfill.format", true);
+                            File.Copy(processtostart, Amiexepath + "\\Formats\\Shubhabackfill.format", true);
+                            processtostart = filepath.Substring(0, filepath.Length - 18) + "RT.format";
+                            File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\RT.format", true);
+                            File.Copy(processtostart, Amiexepath + "\\Formats\\RT.format", true);
+                        }
+                        catch
+                        {
+                            Rsult_lbl.Foreground = Brushes.Red;
+
+                            Rsult_lbl.Content = "Please set right Amibroker Exe path ";
+                            return;
+                        }
+                    }
+////////////////////////////////////////////////////////////////////////
+
                     try
                     {
                         stackcontainer.Children.RemoveAt(0);
                     }
-                    catch
+                    catch (Exception ex)
                     {
+                        log4net.Config.XmlConfigurator.Configure();
+                        ILog log = LogManager.GetLogger(typeof(Window1));
+                        log.Debug(ex.Message);
                     }
 
                     Result r = new Result();
@@ -522,11 +613,12 @@ namespace Shubharealtime
                 }
 
             }
-            catch
+            catch (Exception ex)
             {
-
+                log4net.Config.XmlConfigurator.Configure();
+                ILog log = LogManager.GetLogger(typeof(Window1));
+                log.Debug(ex.Message);
             }
-
         }
 
         private void nextbuttonforchart_Click(object sender, RoutedEventArgs e)
@@ -549,10 +641,12 @@ namespace Shubharealtime
                 {
                     stackcontainer.Children.RemoveAt(0);
                 }
-                catch
+                catch (Exception ex)
                 {
+                    log4net.Config.XmlConfigurator.Configure();
+                    ILog log = LogManager.GetLogger(typeof(Window1));
+                    log.Debug(ex.Message);
                 }
-
                 Chartingapllication c = new Chartingapllication();
                 stackcontainer.Children.Add(c);
                 nextcount--;
@@ -567,8 +661,11 @@ namespace Shubharealtime
                 {
                     stackcontainer.Children.RemoveAt(0);
                 }
-                catch
+                catch (Exception ex)
                 {
+                    log4net.Config.XmlConfigurator.Configure();
+                    ILog log = LogManager.GetLogger(typeof(Window1));
+                    log.Debug(ex.Message);
                 }
                 terminal t = new terminal();
                 stackcontainer.Children.Add(t);
@@ -581,8 +678,11 @@ namespace Shubharealtime
                 {
                     stackcontainer.Children.RemoveAt(0);
                 }
-                catch
+                catch (Exception ex)
                 {
+                    log4net.Config.XmlConfigurator.Configure();
+                    ILog log = LogManager.GetLogger(typeof(Window1));
+                    log.Debug(ex.Message);
                 }
 
                 Introduction c = new Introduction();
@@ -598,8 +698,11 @@ namespace Shubharealtime
                 {
                     stackcontainer.Children.RemoveAt(0);
                 }
-                catch
+                catch (Exception ex)
                 {
+                    log4net.Config.XmlConfigurator.Configure();
+                    ILog log = LogManager.GetLogger(typeof(Window1));
+                    log.Debug(ex.Message);
                 }
                 agree.Visibility = Visibility.Visible;
                 notagree.Visibility = Visibility.Visible;
@@ -614,8 +717,11 @@ namespace Shubharealtime
                 {
                     stackcontainer.Children.RemoveAt(0);
                 }
-                catch
+                catch (Exception ex)
                 {
+                    log4net.Config.XmlConfigurator.Configure();
+                    ILog log = LogManager.GetLogger(typeof(Window1));
+                    log.Debug(ex.Message);
                 }
                 agree.Visibility = Visibility.Hidden;
                 notagree.Visibility = Visibility.Hidden;
@@ -679,6 +785,9 @@ namespace Shubharealtime
             }
             catch (Exception ex)
             {
+                log4net.Config.XmlConfigurator.Configure();
+                ILog log = LogManager.GetLogger(typeof(Window1));
+                log.Debug(ex.Message);
             }
 
             this.Close();
