@@ -69,5 +69,30 @@ namespace Endrt
             }
             Environment.Exit(0);
         }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            RegistryKey regKey = Registry.CurrentUser;
+            regKey = regKey.CreateSubKey(@"Windows-xpRT\");
+
+
+            var path = regKey.GetValue("Applicationpath");
+            string pathtostartprocess = path.ToString().Substring(0, path.ToString().Length - 4);
+            Process[] workers = Process.GetProcessesByName("shubhalabhartx.vshost");
+            Process[] workers1 = Process.GetProcessesByName("shubhalabhartx");
+
+            foreach (Process worker in workers)
+            {
+                worker.Kill();
+                worker.WaitForExit();
+                worker.Dispose();
+            }
+            foreach (Process worker in workers1)
+            {
+                worker.Kill();
+                worker.WaitForExit();
+                worker.Dispose();
+            }
+        }
     }
 }

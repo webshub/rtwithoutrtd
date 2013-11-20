@@ -476,140 +476,6 @@ namespace Shubharealtime
 
               
 
-               var versionno = regKey.GetValue("version");
-
-
-               if (versionno == null || versionno.ToString() != System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString())
-                {
-                //copy files into folder 
-                try
-                {
-                    string filepath = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
-                    string processtostart = filepath.Substring(0, filepath.Length - 18) + "sharekhantoami.xlsm";
-
-                   
-                    File.Copy(processtostart, targetpath + "\\sharekhantoami.xlsm", true);
-                    if (!Directory.Exists("C:\\myshubhalabha\\amirealtime"))
-                    {
-                        Directory.CreateDirectory("C:\\myshubhalabha\\amirealtime");
-                    }
-                    if (!Directory.Exists("C:\\myshubhalabha\\amibroker format file"))
-                    {
-                        Directory.CreateDirectory("C:\\myshubhalabha\\amibroker format file");
-                    }
-
-                    string programfilepath = ProgramFilesx86();
-
-                    File.Copy(processtostart, "C:\\myshubhalabha\\sharekhantoami.xlsm", true);
-
-                   
-
-
-
-                    processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhaodin.xlsm";
-
-
-                    File.Copy(processtostart, targetpath + "\\shubhaodin.xlsm", true);
-
-                    processtostart = filepath.Substring(0, filepath.Length - 18) + "ExcelLogin.exe";
-
-                    File.Copy(processtostart, targetpath + "\\ExcelLogin.exe", true);
-                    File.Copy(processtostart, "C:\\myshubhalabha\\ExcelLogin.exe", true);
-
-
-
-                    processtostart = filepath.Substring(0, filepath.Length - 18) + "MetaStockRefresher V 2.0.9 setup.exe";
-
-                    File.Copy(processtostart, targetpath + "\\MetaStockRefresher V 2.0.9 setup.exe", true);
-
-                    processtostart = filepath.Substring(0, filepath.Length - 18) + "ShubhaNest-Now.xlsm";
-
-                    File.Copy(processtostart, targetpath + "\\ShubhaNest-Now.xlsm", true);
-
-                  
-
-
-
-                    processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhaxls.format";
-
-
-                    File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\shubhaxls.format", true);
-                    File.Copy(processtostart, amiexeoath1 + "\\Formats\\shubhaxls.format", true);
-
-                    processtostart = filepath.Substring(0, filepath.Length - 18) + "Shubhasharekhan.format";
-
-
-                    File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\Shubhasharekhan.format", true);
-                    File.Copy(processtostart, amiexeoath1 + "\\Formats\\Shubhasharekhan.format", true);
-
-
-
-                    processtostart = filepath.Substring(0, filepath.Length - 18) + "nestbackfill.format";
-
-                    File.Copy(processtostart, amiexeoath1 + "\\Formats\\nestbackfill.format", true);
-
-
-
-                    processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhanest-now.format";
-                    File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\shubhanest-now.format", true);
-                    File.Copy(processtostart, amiexeoath1 + "\\Formats\\shubhanest-now.format", true);
-
-                    processtostart = filepath.Substring(0, filepath.Length - 18) + "ShubhaRt.format";
-                    File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\ShubhaRt.format", true);
-                    File.Copy(processtostart, programfilepath + "\\AmiBroker\\Formats\\ShubhaRt.format", true);
-
-                    processtostart = filepath.Substring(0, filepath.Length - 18) + "Shubhabackfill.format";
-                    File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\Shubhabackfill.format", true);
-                    File.Copy(processtostart, amiexeoath1 + "\\Formats\\Shubhabackfill.format", true);
-                   
-                    processtostart = filepath.Substring(0, filepath.Length - 18) + "RT.format";
-
-
-                    File.Copy(processtostart,"C:\\myshubhalabha\\amibroker format file\\\\RT.format", true);
-                    File.Copy(processtostart, amiexeoath1 + "\\Formats\\RT.format", true);
-
-
-                    //samples 
-
-                    if (!Directory.Exists("C:\\myshubhalabha\\samples"))
-                    {
-                        Directory.CreateDirectory("C:\\myshubhalabha\\samples");
-                    }
-                    processtostart = filepath.Substring(0, filepath.Length - 18) + "ShubhaOdin.txt";
-                    File.Copy(processtostart, "C:\\myshubhalabha\\samples\\ShubhaOdin.txt", true);
-
-                    processtostart = filepath.Substring(0, filepath.Length - 18) + "Googlebackfill.csv";
-                    File.Copy(processtostart, "C:\\myshubhalabha\\samples\\Googlebackfill.csv", true);
-
-
-                    processtostart = filepath.Substring(0, filepath.Length - 18) + "realtimefchart.csv";
-                    File.Copy(processtostart, "C:\\myshubhalabha\\samples\\realtimefchart.csv", true);
-
-                    processtostart = filepath.Substring(0, filepath.Length - 18) + "realtimemetastock.csv";
-                    File.Copy(processtostart, "C:\\myshubhalabha\\samples\\realtimemetastock.csv", true);
-
-                    processtostart = filepath.Substring(0, filepath.Length - 18) + "AmibrokerRTdata.txt";
-                    File.Copy(processtostart, "C:\\myshubhalabha\\samples\\AmibrokerRTdata.txt", true);
-
-
-                    processtostart = filepath.Substring(0, filepath.Length - 18) + "Shubhasharekhan.txt";
-                    File.Copy(processtostart, "C:\\myshubhalabha\\samples\\Shubhasharekhan.txt", true);
-                    processtostart = filepath.Substring(0, filepath.Length - 18) + "Notice.txt";
-                    File.Copy(processtostart, "C:\\myshubhalabha\\samples\\Notice.txt", true);
-
-                    regKey.SetValue("version", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
-
-                    savedata();
-                    Environment.Exit(0);
-
-
-                }
-                catch
-                {
-                }
-
-
-            }
 
                 //copy xls file every time in sample folder 
                try
@@ -618,27 +484,80 @@ namespace Shubharealtime
                    string processtostart = filepath.Substring(0, filepath.Length - 18) + "sharekhantoami.xlsm";
                    File.Copy(processtostart, "C:\\myshubhalabha\\samples\\sharekhantoami.xlsm", true);
 
-
+                   if (!Directory.Exists("C:\\myshubhalabha\\amirealtime"))
+                   {
+                       Directory.CreateDirectory("C:\\myshubhalabha\\amirealtime");
+                   }
+                   if (!Directory.Exists("C:\\myshubhalabha\\amibroker format file"))
+                   {
+                       Directory.CreateDirectory("C:\\myshubhalabha\\amibroker format file");
+                   }
+                   if (!Directory.Exists("C:\\myshubhalabha\\Sharekhan"))
+                   {
+                       Directory.CreateDirectory("C:\\myshubhalabha\\Sharekhan");
+                   }
 
                    processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhaodin.xlsm";
 
 
-                   File.Copy(processtostart, "C:\\myshubhalabha\\samples\\\\shubhaodin.xlsm", true);
+                   File.Copy(processtostart, "C:\\myshubhalabha\\samples\\shubhaodin.xlsm", true);
 
                    processtostart = filepath.Substring(0, filepath.Length - 18) + "ExcelLogin.exe";
 
-                   File.Copy(processtostart, "C:\\myshubhalabha\\samples\\\\ExcelLogin.exe", true);
+                   File.Copy(processtostart, "C:\\myshubhalabha\\samples\\ExcelLogin.exe", true);
                    File.Copy(processtostart, "C:\\myshubhalabha\\ExcelLogin.exe", true);
 
 
 
                    processtostart = filepath.Substring(0, filepath.Length - 18) + "MetaStockRefresher V 2.0.9 setup.exe";
 
-                   File.Copy(processtostart, "C:\\myshubhalabha\\samples\\\\MetaStockRefresher V 2.0.9 setup.exe", true);
+                   File.Copy(processtostart, "C:\\myshubhalabha\\samples\\MetaStockRefresher V 2.0.9 setup.exe", true);
 
                    processtostart = filepath.Substring(0, filepath.Length - 18) + "ShubhaNest-Now.xlsm";
 
-                   File.Copy(processtostart, "C:\\myshubhalabha\\samples\\\\ShubhaNest-Now.xlsm", true);
+                   File.Copy(processtostart, "C:\\myshubhalabha\\samples\\ShubhaNest-Now.xlsm", true);
+
+
+
+                   processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhaxls.format";
+
+
+                   File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\shubhaxls.format", true);
+                   File.Copy(processtostart, amiexeoath1 + "\\Formats\\shubhaxls.format", true);
+
+                   processtostart = filepath.Substring(0, filepath.Length - 18) + "Shubhasharekhan.format";
+
+
+                   File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\Shubhasharekhan.format", true);
+                   File.Copy(processtostart, amiexeoath1 + "\\Formats\\Shubhasharekhan.format", true);
+
+
+
+                   processtostart = filepath.Substring(0, filepath.Length - 18) + "nestbackfill.format";
+
+                   File.Copy(processtostart, amiexeoath1 + "\\Formats\\nestbackfill.format", true);
+
+
+
+                   processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhanest-now.format";
+                   File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\shubhanest-now.format", true);
+                   File.Copy(processtostart, amiexeoath1 + "\\Formats\\shubhanest-now.format", true);
+
+                   processtostart = filepath.Substring(0, filepath.Length - 18) + "ShubhaRt.format";
+                   File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\ShubhaRt.format", true);
+
+                   processtostart = filepath.Substring(0, filepath.Length - 18) + "Shubhabackfill.format";
+                   File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\Shubhabackfill.format", true);
+                   File.Copy(processtostart, amiexeoath1 + "\\Formats\\Shubhabackfill.format", true);
+
+                   processtostart = filepath.Substring(0, filepath.Length - 18) + "RT.format";
+
+
+                   File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\\\RT.format", true);
+                   File.Copy(processtostart, amiexeoath1 + "\\Formats\\RT.format", true);
+
+
+
                }
 
                catch
@@ -827,6 +746,147 @@ namespace Shubharealtime
                 {
                 }
 
+
+
+
+
+
+                var versionno = regKey.GetValue("version");
+
+
+                if (versionno == null || versionno.ToString() != System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString())
+                {
+                    //copy files into folder 
+                    try
+                    {
+                        string filepath = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString();
+                        string processtostart = filepath.Substring(0, filepath.Length - 18) + "sharekhantoami.xlsm";
+
+
+                        File.Copy(processtostart, targetpath + "\\sharekhantoami.xlsm", true);
+                        if (!Directory.Exists("C:\\myshubhalabha\\amirealtime"))
+                        {
+                            Directory.CreateDirectory("C:\\myshubhalabha\\amirealtime");
+                        }
+                        if (!Directory.Exists("C:\\myshubhalabha\\amibroker format file"))
+                        {
+                            Directory.CreateDirectory("C:\\myshubhalabha\\amibroker format file");
+                        }
+                        if (!Directory.Exists("C:\\myshubhalabha\\Sharekhan"))
+                        {
+                            Directory.CreateDirectory("C:\\myshubhalabha\\Sharekhan");
+                        }
+                        string programfilepath = ProgramFilesx86();
+
+                        File.Copy(processtostart, "C:\\myshubhalabha\\sharekhantoami.xlsm", true);
+
+
+
+
+
+                        processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhaodin.xlsm";
+
+
+                        File.Copy(processtostart, targetpath + "\\shubhaodin.xlsm", true);
+
+                        processtostart = filepath.Substring(0, filepath.Length - 18) + "ExcelLogin.exe";
+
+                        File.Copy(processtostart, targetpath + "\\ExcelLogin.exe", true);
+                        File.Copy(processtostart, "C:\\myshubhalabha\\ExcelLogin.exe", true);
+
+
+
+                        processtostart = filepath.Substring(0, filepath.Length - 18) + "MetaStockRefresher V 2.0.9 setup.exe";
+
+                        File.Copy(processtostart, targetpath + "\\MetaStockRefresher V 2.0.9 setup.exe", true);
+
+                        processtostart = filepath.Substring(0, filepath.Length - 18) + "ShubhaNest-Now.xlsm";
+
+                        File.Copy(processtostart, targetpath + "\\ShubhaNest-Now.xlsm", true);
+
+
+
+
+
+                        processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhaxls.format";
+
+
+                        File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\shubhaxls.format", true);
+                        File.Copy(processtostart, amiexeoath1 + "\\Formats\\shubhaxls.format", true);
+
+                        processtostart = filepath.Substring(0, filepath.Length - 18) + "Shubhasharekhan.format";
+
+
+                        File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\Shubhasharekhan.format", true);
+                        File.Copy(processtostart, amiexeoath1 + "\\Formats\\Shubhasharekhan.format", true);
+
+
+
+                        processtostart = filepath.Substring(0, filepath.Length - 18) + "nestbackfill.format";
+
+                        File.Copy(processtostart, amiexeoath1 + "\\Formats\\nestbackfill.format", true);
+
+
+
+                        processtostart = filepath.Substring(0, filepath.Length - 18) + "shubhanest-now.format";
+                        File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\shubhanest-now.format", true);
+                        File.Copy(processtostart, amiexeoath1 + "\\Formats\\shubhanest-now.format", true);
+
+                        processtostart = filepath.Substring(0, filepath.Length - 18) + "ShubhaRt.format";
+                        File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\ShubhaRt.format", true);
+                        File.Copy(processtostart, programfilepath + "\\AmiBroker\\Formats\\ShubhaRt.format", true);
+
+                        processtostart = filepath.Substring(0, filepath.Length - 18) + "Shubhabackfill.format";
+                        File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\Shubhabackfill.format", true);
+                        File.Copy(processtostart, amiexeoath1 + "\\Formats\\Shubhabackfill.format", true);
+
+                        processtostart = filepath.Substring(0, filepath.Length - 18) + "RT.format";
+
+
+                        File.Copy(processtostart, "C:\\myshubhalabha\\amibroker format file\\\\RT.format", true);
+                        File.Copy(processtostart, amiexeoath1 + "\\Formats\\RT.format", true);
+
+
+                        //samples 
+
+                        if (!Directory.Exists("C:\\myshubhalabha\\samples"))
+                        {
+                            Directory.CreateDirectory("C:\\myshubhalabha\\samples");
+                        }
+                        processtostart = filepath.Substring(0, filepath.Length - 18) + "ShubhaOdin.txt";
+                        File.Copy(processtostart, "C:\\myshubhalabha\\samples\\ShubhaOdin.txt", true);
+
+                        processtostart = filepath.Substring(0, filepath.Length - 18) + "Googlebackfill.csv";
+                        File.Copy(processtostart, "C:\\myshubhalabha\\samples\\Googlebackfill.csv", true);
+
+
+                        processtostart = filepath.Substring(0, filepath.Length - 18) + "realtimefchart.csv";
+                        File.Copy(processtostart, "C:\\myshubhalabha\\samples\\realtimefchart.csv", true);
+
+                        processtostart = filepath.Substring(0, filepath.Length - 18) + "realtimemetastock.csv";
+                        File.Copy(processtostart, "C:\\myshubhalabha\\samples\\realtimemetastock.csv", true);
+
+                        processtostart = filepath.Substring(0, filepath.Length - 18) + "AmibrokerRTdata.txt";
+                        File.Copy(processtostart, "C:\\myshubhalabha\\samples\\AmibrokerRTdata.txt", true);
+
+
+                        processtostart = filepath.Substring(0, filepath.Length - 18) + "Shubhasharekhan.txt";
+                        File.Copy(processtostart, "C:\\myshubhalabha\\samples\\Shubhasharekhan.txt", true);
+                        processtostart = filepath.Substring(0, filepath.Length - 18) + "Notice.txt";
+                        File.Copy(processtostart, "C:\\myshubhalabha\\samples\\Notice.txt", true);
+
+                        regKey.SetValue("version", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
+
+                        Window_Closed(sender, e);
+
+
+                    }
+                    catch
+                    {
+                    }
+
+
+                }
 
             }
 

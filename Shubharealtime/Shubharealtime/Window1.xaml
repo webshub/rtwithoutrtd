@@ -95,6 +95,7 @@
                         </StackPanel>
                         <Border BorderBrush="Silver" BorderThickness="1" Name="border1" Margin="6,7,141,366" />
                         <Button Content="Remove All symbol" Height="23" HorizontalAlignment="Left" Margin="410,420,0,0" Name="Removemap" VerticalAlignment="Top" Width="140" Click="button2_Click" />
+                        <Label Content="Note:Please set Date formate as DD-MM-YY" Height="28" HorizontalAlignment="Left" Margin="2,452,0,0" Name="label36" VerticalAlignment="Top" FontWeight="Bold" />
                     </Grid> 
                     </TabItem>
            
@@ -164,14 +165,14 @@
                         <Border BorderBrush="Silver" BorderThickness="1" Height="2" HorizontalAlignment="Left" Margin="9,284,0,0" Name="border15" VerticalAlignment="Top" Width="553">
                             <Border BorderBrush="Silver" BorderThickness="1" Height="2" Name="border17" Width="553" />
                         </Border>
-                        <TextBlock Margin="18,356,368,173"><Hyperlink NavigateUri="http://youtu.be/DWRMfpC7OVY " RequestNavigate="Hyperlink_RequestNavigate"><TextBlock FontFamily="Times New Roman" FontSize="14" Text="How to configure NEST and NEST Plus for columns" /></Hyperlink></TextBlock>
-                        <TextBlock Margin="17,383,369,146"><Hyperlink NavigateUri="http://youtu.be/_TGlc03ir3s" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock FontFamily="Times New Roman" FontSize="14" Text="How to configure NEST and see charts in Amibroker" /></Hyperlink></TextBlock>
-                        <TextBlock Margin="18,407,368,122"><Hyperlink NavigateUri="http://youtu.be/Ehl1s44-T9o" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock FontFamily="Times New Roman" FontSize="14" Text="How to see charts in Metastock" /></Hyperlink></TextBlock>
-                        <TextBlock Margin="18,432,368,97"><Hyperlink NavigateUri="http://youtu.be/al9ntlEGnyk" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock FontFamily="Times New Roman" FontSize="14" Text="How to see charts in Amibroker" /></Hyperlink></TextBlock>
-                        <TextBlock Margin="17,457,369,72"><Hyperlink NavigateUri="http://youtu.be/lwNuWEE0JW4" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock FontFamily="Times New Roman" FontSize="14" Text="How to Backfill from Google" /></Hyperlink></TextBlock>
+                        <TextBlock Margin="18,375,368,154"><Hyperlink NavigateUri="http://youtu.be/DWRMfpC7OVY " RequestNavigate="Hyperlink_RequestNavigate"><TextBlock FontFamily="Times New Roman" FontSize="14" Text="How to configure NEST and NEST Plus for columns" /></Hyperlink></TextBlock>
+                        <TextBlock Margin="17,402,369,127"><Hyperlink NavigateUri="http://youtu.be/_TGlc03ir3s" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock FontFamily="Times New Roman" FontSize="14" Text="How to configure NEST and see charts in Amibroker" /></Hyperlink></TextBlock>
+                        <TextBlock Margin="18,426,368,103"><Hyperlink NavigateUri="http://youtu.be/Ehl1s44-T9o" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock FontFamily="Times New Roman" FontSize="14" Text="How to see charts in Metastock" /></Hyperlink></TextBlock>
+                        <TextBlock Margin="18,451,368,78"><Hyperlink NavigateUri="http://youtu.be/al9ntlEGnyk" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock FontFamily="Times New Roman" FontSize="14" Text="How to see charts in Amibroker" /></Hyperlink></TextBlock>
+                        <TextBlock Margin="17,476,369,53"><Hyperlink NavigateUri="http://youtu.be/lwNuWEE0JW4" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock FontFamily="Times New Roman" FontSize="14" Text="How to Backfill from Google" /></Hyperlink></TextBlock>
                         <Border BorderBrush="Silver" BorderThickness="1" Height="2" Margin="10,350,138,197" Name="border18" Width="553" />
-                        <Border BorderBrush="Silver" BorderThickness="1" Height="475" HorizontalAlignment="Left" Margin="7,26,0,0" Name="border5" VerticalAlignment="Top" Width="557"></Border>
-                        <TextBlock Margin="16,480,370,49"><Hyperlink NavigateUri="http://www.youtube.com/user/myshubhalabha" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock FontFamily="Times New Roman" FontSize="14" Text="All Videos" /></Hyperlink></TextBlock>
+                        <TextBlock Margin="16,353,370,176"><Hyperlink NavigateUri="http://www.youtube.com/user/myshubhalabha" RequestNavigate="Hyperlink_RequestNavigate"><TextBlock FontFamily="Times New Roman" FontSize="14" Text="All Videos" /></Hyperlink></TextBlock>
+                        <Border BorderBrush="Silver" BorderThickness="1" Height="475" HorizontalAlignment="Left" Margin="9,28,0,0" Name="border5" VerticalAlignment="Top" Width="557"></Border>
                     </Grid>
 
             </TabItem>

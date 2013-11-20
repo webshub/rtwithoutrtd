@@ -62,6 +62,7 @@ namespace Shubharealtime
 
                
             }
+            regKey.SetValue("Amiexepath", Amiexepath.Text.ToString());
             
         }
 
